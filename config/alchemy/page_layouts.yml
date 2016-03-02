@@ -6,3 +6,7 @@
   unique: true
   elements: [article]
   autogenerate: [article]
+
+- name: page
+  unique: true
+  elements: [text]

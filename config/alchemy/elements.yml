@@ -17,3 +17,9 @@
     type: EssenceRichtext
     default: :article_text
     hint: true
+- name: text
+  hint: false
+  unique: false
+  contents:
+  - name: body
+    type: EssenceRichtext
