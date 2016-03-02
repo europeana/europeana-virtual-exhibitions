@@ -45,7 +45,10 @@ group :development do
   gem 'spring'
 end
 
-
 gem 'alchemy_cms', github: 'AlchemyCMS/alchemy_cms', branch: '3.2-stable'
 gem 'alchemy-devise', github: 'AlchemyCMS/alchemy-devise', branch: '3.2-stable'
 gem 'capistrano-alchemy', github: 'AlchemyCMS/capistrano-alchemy', branch: 'master', group: 'development'
+
+# European styleguide
+gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', ref: 'bcde8287046b6ba8a4f5f749e7b9874f8382b540'
+gem 'stache', github: 'europeana/stache', branch: 'europeana-styleguide' # until upstream merges our pull requests
