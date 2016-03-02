@@ -1,11 +1,17 @@
 module Alchemy::Pages
   class Show < Europeana::Styleguide::View
-    def title
-      @page.title
-    end
+    include MustacheHelper
 
     def elements
-      @page.elements.all
+      {
+        present: @page.elements.count >= 1,
+        items: @page.elements.map do |element|
+          {
+            body: element.essences.first.body,
+            is_text: true
+          }
+        end
+      }
     end
 
     def json
