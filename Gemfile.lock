@@ -161,6 +161,9 @@ GEM
       responders
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
+    dotenv (2.0.1)
+    dotenv-rails (2.0.1)
+      dotenv (= 2.0.1)
     dragonfly (1.0.12)
       addressable (~> 2.3)
       multi_json (~> 1.0)
@@ -299,6 +302,7 @@ DEPENDENCIES
   byebug
   capistrano-alchemy!
   coffee-rails (~> 4.1.0)
+  dotenv-rails (~> 2.0)
   europeana-styleguide!
   jbuilder (~> 2.0)
   jquery-rails
