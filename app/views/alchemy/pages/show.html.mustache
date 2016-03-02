@@ -1,9 +1,13 @@
-{{#elements}}
-    {{#is_hero}}
-        {{>/atoms/title}}
+{{>atoms/meta/_head}}
 
-        {{>/atoms/background_image}}
-    {{/is_hero}}
-{{/elements}}
+{{#elements.present}}
+    {{#elements.items}}
+        {{#is_text}}
+            {{{body}}}
+        {{/is_text}}
+    {{/elements.items}}
+{{/elements.present}}
+<pre>{{json}}</pre>
 
-<pre>{{{json}}}</pre>
+
+{{>atoms/meta/_foot}}
