@@ -3,7 +3,8 @@
 ## Setup for development
 
 * Clone the repository
-* Copy .env-example to .env
+* RUn `bundle install`
+* Copy .env to .env.development
 * Alter where needed
 * Run `rake db:create` and `rake db:migrate`
 * `rails s`
