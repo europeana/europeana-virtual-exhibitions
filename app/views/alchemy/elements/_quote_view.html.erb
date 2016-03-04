@@ -1,0 +1,10 @@
+<%- cache(element) do -%>
+  <%= element_view_for(element) do |el| -%>
+    <div class="quote">
+      <%= el.render :quote %>
+    </div>
+    <div class="quotee">
+      <%= el.render :quotee %>
+    </div>
+  <%- end -%>
+<%- end -%>

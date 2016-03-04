@@ -2,24 +2,44 @@
 #
 # For further informations please see http://guides.alchemy-cms.com/create_elements.html
 
-- name: article
-  hint: true
-  unique: true
-  contents:
-  - name: headline
-    type: EssenceText
-    default: :article_headline
-    hint: true
-  - name: picture
-    type: EssencePicture
-    hint: true
-  - name: text
-    type: EssenceRichtext
-    default: :article_text
-    hint: true
 - name: text
   hint: false
   unique: false
   contents:
   - name: body
     type: EssenceRichtext
+- name: intro
+  hint: false
+  unique: true
+  contents:
+  - name: background_image
+    type: EssencePicture
+  - name: background_image_credit
+    type: EssenceText
+  - name: title
+    type: EssenceText
+  - name: sub_title
+    type: EssenceText
+- name: image
+  hint: false
+  unique: false
+  contents:
+  - name: image
+    type: EssencePicture
+  - name: title
+    type: EssenceText
+  - name: link
+    type: EssenceLink
+- name: quote
+  hint: false
+  unique: false
+  contents:
+  - name: quote
+    type: EssenceRichtext
+  - name: quotee
+    type: EssenceText
+- name: image_with_quote
+  hint: false
+  unique: false
+  contents:
+

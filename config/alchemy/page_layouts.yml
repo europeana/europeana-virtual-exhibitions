@@ -2,11 +2,11 @@
 #
 # For further informations please see http://guides.alchemy-cms.com/create_page_layouts.html
 
-- name: index
-  unique: true
-  elements: [article]
-  autogenerate: [article]
-
 - name: page
   unique: true
   elements: [text]
+
+
+- name: exhibition_intro
+  unique: false
+  elements: [text, intro, image, quote]
