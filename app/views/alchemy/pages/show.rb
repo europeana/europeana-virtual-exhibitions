@@ -6,12 +6,13 @@ module Alchemy::Pages
       {
         present: @page.elements.count >= 1,
         items: @page.elements.map do |element|
-          {
-            body: element.essences.first.body,
-            is_text: true
-          }
+          Europeana::Elements::Base.build(element).to_hash
         end
       }
+    end
+
+    def elements_as_json
+      JSON.pretty_generate(elements)
     end
 
     def json
