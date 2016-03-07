@@ -4,19 +4,28 @@ module Alchemy::Pages
 
     def elements
       {
-        present: @page.elements.count >= 1,
-        items: @page.elements.map do |element|
-          Europeana::Elements::Base.build(element).to_hash
+        present: @page.elements.published.count >= 1,
+        items: @page.elements.published.map.with_index do |element, index|
+          {
+            is_last: index == (@page.elements.published.count - 1),
+            is_first: index == 0
+          }.merge(Europeana::Elements::Base.build(element).to_hash)
         end
       }
     end
 
-    def elements_as_json
-      JSON.pretty_generate(elements)
-    end
-
     def json
-      JSON.pretty_generate(JSON.parse @page.to_json(include: { elements: { include: :essences }}))
+      JSON.pretty_generate({
+        js_files: js_files,
+        head_links: head_links,
+        css_files: nil,
+        page:
+        {
+          title: @page.title,
+          url: show_page_url(nil, @page.urlname),
+          elements: elements
+        }
+      })
     end
   end
 end
