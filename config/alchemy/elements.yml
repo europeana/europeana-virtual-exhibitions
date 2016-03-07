@@ -14,7 +14,7 @@
   contents:
   - name: background_image
     type: EssencePicture
-  - name: background_image_credit
+  - name: background_image_caption
     type: EssenceText
   - name: title
     type: EssenceText
@@ -26,7 +26,7 @@
   contents:
   - name: image
     type: EssencePicture
-  - name: title
+  - name: caption
     type: EssenceText
   - name: link
     type: EssenceLink
@@ -38,8 +38,21 @@
     type: EssenceRichtext
   - name: quotee
     type: EssenceText
-- name: image_with_quote
+- name: rich_image
   hint: false
   unique: false
   contents:
-
+  - name: title
+    type: EssenceText
+  - name: sub_title
+    type: EssenceText
+  - name: image
+    type: EssencePicture
+  - name: caption
+    type: EssenceText
+  - name: quote
+    type: EssenceRichtext
+  - name: quotee
+    type: EssenceText
+  - name: body
+    type: EssenceRichtext

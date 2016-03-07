@@ -2,10 +2,10 @@ module Europeana
   module Elements
     class Base
 
-      TYPES = %w(text image)
+      TYPES = %w(text image rich_image)
 
       def self.build(element)
-        Module.const_get("Europeana::Elements::#{element.name.capitalize}").new(element)
+        Module.const_get("Europeana::Elements::#{element.name.camelcase}").new(element)
       end
 
       def initialize(element)
@@ -25,7 +25,7 @@ module Europeana
 
 
       def type
-        self.class.name.demodulize.downcase
+        self.class.name.demodulize.tableize.singularize
       end
 
       def to_hash
@@ -36,6 +36,10 @@ module Europeana
         end
         d[:type] = type
         data.merge(d)
+      end
+
+      def data
+        {}
       end
     end
   end
