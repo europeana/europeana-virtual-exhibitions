@@ -23,19 +23,12 @@ module Europeana
         end
       end
 
-
       def type
         self.class.name.demodulize.tableize.singularize
       end
 
       def to_hash
-        data
-        d = {}
-        @attributes.each do |attribute|
-          d[attribute.to_sym] = self.send(attribute)
-        end
-        d[:type] = type
-        data.merge(d)
+        data.merge(Hash[@attributes.map {|attribute| [attribute, self.send(attribute)]}]).merge({type: type})
       end
 
       def data

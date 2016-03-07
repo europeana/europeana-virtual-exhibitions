@@ -11,14 +11,10 @@ module Europeana
         smallx2: '800x800',
         thumbnail: '400x400',
         thumbnailx2: '800x800'
-        }
+      }
       def versions
         image = @element.content_by_name('image').essence
-        c = {}
-        VERSIONS.each do |version, size|
-          c[version] = {url: image.picture_url(image_size: size)}
-        end
-        c
+        Hash[VERSIONS.map {|version,size| [version, {url: image.picture_url(image_size: size)}]}]
       end
 
       def caption
