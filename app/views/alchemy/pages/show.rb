@@ -14,17 +14,20 @@ module Alchemy::Pages
       }
     end
 
+    def page_data
+      {
+        elements: elements,
+        title: @page.title,
+        url: show_page_url(nil, @page.urlname)
+      }
+    end
+
     def json
       JSON.pretty_generate({
         js_files: js_files,
         head_links: head_links,
         css_files: nil,
-        page:
-        {
-          title: @page.title,
-          url: show_page_url(nil, @page.urlname),
-          elements: elements
-        }
+        page: page_data
       })
     end
   end
