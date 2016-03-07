@@ -56,3 +56,9 @@
     type: EssenceText
   - name: body
     type: EssenceRichtext
+- name: section
+  hint: false
+  unique: false
+  contents:
+  - name: title
+    type: EssenceText

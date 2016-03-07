@@ -9,4 +9,4 @@
 
 - name: exhibition_intro
   unique: false
-  elements: [text, image, rich_image]
+  elements: [text, image, rich_image, section, quote]
