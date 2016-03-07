@@ -18,6 +18,15 @@ module Europeana
         @element.content_by_name('sub_title').essence.body
       end
 
+      def body
+        @element.content_by_name('body').essence.body
+      end
+
+      def stripped_body
+        @element.content_by_name('body').essence.stripped_body
+      end
+
+
       protected
       def data
         {
@@ -26,7 +35,9 @@ module Europeana
           image: versions,
           caption: caption,
           quote: quote,
-          quotee: quotee
+          quotee: quotee,
+          body: body,
+          stripped_body: stripped_body
         }
       end
     end
