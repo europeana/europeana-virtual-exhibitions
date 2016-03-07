@@ -2,10 +2,10 @@ module Europeana
   module Elements
     class Base
 
-      TYPES = %w(text image rich_image)
+      TYPES = %w(text image rich_image section quote)
 
       def self.build(element)
-        Module.const_get("Europeana::Elements::#{element.name.camelcase}").new(element)
+        Module.const_get("Europeana::Elements::#{element.name.camelcase}").new(element) rescue Europeana::Elements::Base.new(element)
       end
 
       def initialize(element)
