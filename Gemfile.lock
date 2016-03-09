@@ -47,6 +47,14 @@ GIT
       capistrano-rails (~> 1.1)
 
 GIT
+  remote: git://github.com/dennisvdvliet/dragonfly-swift-data-store.git
+  revision: 3463c1e58dae678363dcea9984e891b76aa2c985
+  specs:
+    dragonfly-swift_data_store (0.1)
+      dragonfly (~> 1.0)
+      fog-openstack
+
+GIT
   remote: git://github.com/europeana/europeana-styleguide-ruby.git
   revision: 9dca9dafa03a791d3c0acc74d2f74b0a38268612
   branch: develop
@@ -62,13 +70,6 @@ GIT
   branch: europeana-styleguide
   specs:
     stache (1.1.1)
-
-PATH
-  remote: ~/projects/dvdv/europeana/dragonfly-swift-data-store
-  specs:
-    dragonfly-swift_data_store (0.1)
-      dragonfly (~> 1.0)
-      fog-openstack
 
 GEM
   remote: https://rubygems.org/
