@@ -30,5 +30,9 @@ module Alchemy::Pages
         page: page_data
       })
     end
+
+    def debug_mode
+      params.include?(:debug)
+    end
   end
 end

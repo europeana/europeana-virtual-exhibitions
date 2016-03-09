@@ -28,7 +28,7 @@ module Europeana
       end
 
       def to_hash
-        data.merge(Hash[@attributes.map {|attribute| [attribute, self.send(attribute)]}]).merge({type: type, id: "#{@element.name}_#{@element.id}"})
+        data.merge(Hash[@attributes.map {|attribute| [attribute, self.send(attribute)]}]).merge({type: type, element_id: @element.id, id: "#{@element.name}_#{@element.id}"})
       end
 
       def data

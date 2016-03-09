@@ -2,11 +2,6 @@
 #
 # For further informations please see http://guides.alchemy-cms.com/create_page_layouts.html
 
-- name: page
-  unique: true
-  elements: [text]
-
-
-- name: exhibition_intro
+- name: exhibition_theme_page
   unique: false
   elements: [text, image, rich_image, section, quote]
