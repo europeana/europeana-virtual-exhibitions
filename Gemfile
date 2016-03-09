@@ -4,6 +4,10 @@ ruby '2.2.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5.2'
+
+# Use puma webserver
+gem 'puma', '~> 2.13'
+
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.15'
 # Use SCSS for stylesheets
@@ -54,6 +58,8 @@ gem 'capistrano-alchemy', github: 'AlchemyCMS/capistrano-alchemy', branch: 'mast
 # European styleguide
 gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', branch: 'develop'
 gem 'stache', github: 'europeana/stache', branch: 'europeana-styleguide' # until upstream merges our pull requests
+
+gem 'dragonfly-swift_data_store', path: '~/projects/dvdv/europeana/dragonfly-swift-data-store'
 
 group :localeapp do
   gem 'localeapp', '~> 1.0'
