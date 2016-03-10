@@ -1,5 +1,7 @@
 # Europeana Virtual Exhibitions
 
+
+
 ## Setup for development
 
 * Clone the repository
