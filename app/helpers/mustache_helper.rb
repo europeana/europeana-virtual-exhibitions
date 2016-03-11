@@ -28,6 +28,32 @@ module MustacheHelper
       data_main: styleguide_url('/js/dist/main/main-virtual-exhibitions') }]
   end
 
+  def bg_px
+    {
+      "img":{
+        "show_thumbnail": "1px",
+        "show_small": "200px",
+        "show_half":  "400px",
+        "show_full":  "800px"
+      },
+      "bg":{
+        "show_thumbnail": "1px",
+        "show_small": "200px",
+        "show_half":  "400px",
+        "show_full":  "800px"
+      },
+      "bg-hr":{
+        "dpr": "2",
+        "dpr_fraction": "2/1",
+        "show_thumbnail": "1",
+        "show_small": "400px",
+        "show_half":  "800px",
+        "show_full":  "1600px"
+      }
+    }
+  end
+
+
   def mustache
     @mustache ||= {}
   end
