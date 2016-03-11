@@ -12,14 +12,16 @@
   hint: false
   unique: true
   contents:
-  - name: background_image
+  - name: image
     type: EssencePicture
-  - name: background_image_caption
+  - name: image_credit
     type: EssenceText
   - name: title
     type: EssenceText
   - name: sub_title
     type: EssenceText
+  - name: body
+    type: EssenceRichtext
 - name: image
   hint: false
   unique: false

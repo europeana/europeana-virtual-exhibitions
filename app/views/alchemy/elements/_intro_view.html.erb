@@ -1,16 +1,19 @@
 <%- cache(element) do -%>
   <%= element_view_for(element) do |el| -%>
-    <div class="background_image">
-      <%= el.render :background_image %>
+    <div class="image">
+      <%= el.render :image %>
     </div>
-    <div class="background_image_caption">
-      <%= el.render :background_image_caption %>
+    <div class="image_credit">
+      <%= el.render :image_credit %>
     </div>
     <div class="title">
       <%= el.render :title %>
     </div>
     <div class="sub_title">
       <%= el.render :sub_title %>
+    </div>
+    <div class="body">
+      <%= el.render :body %>
     </div>
   <%- end -%>
 <%- end -%>

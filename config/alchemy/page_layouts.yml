@@ -4,4 +4,4 @@
 
 - name: exhibition_theme_page
   unique: false
-  elements: [text, image, rich_image, section, quote]
+  elements: [text, image, rich_image, section, quote, intro]
