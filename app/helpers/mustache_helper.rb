@@ -28,7 +28,7 @@ module MustacheHelper
       data_main: styleguide_url('/js/dist/main/main-virtual-exhibitions') }]
   end
 
-  def bg_px
+  def bp_px
     {
       "img":{
         "show_thumbnail": "1px",
