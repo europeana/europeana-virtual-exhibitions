@@ -1,0 +1,41 @@
+<%#
+  Available locals:
+  * content (The object the essence is linked to the element)
+  * html_options
+
+  Please consult Alchemy::Content.rb docs for further methods on the content object
+%>
+<% cache(content) do %>
+<div class="content_editor essence_credit" id="<%= content.dom_id %>" data-content-id="<%= content.id %>">
+  <%= label_and_remove_link(content) %>
+  <%= text_field_tag(
+    content.form_field_name,
+    content.ingredient,
+    :id => content.form_field_id
+  ) %>
+
+  <label>Author</label>
+  <%= text_field_tag(
+    content.form_field_name(:author),
+    content.essence.author
+  ) %>
+
+  <label>Institution</label>
+  <%= text_field_tag(
+    content.form_field_name(:institution),
+    content.essence.institution
+  ) %>
+
+  <label>Link</label>
+  <%= text_field_tag(
+    content.form_field_name(:url),
+    content.essence.url
+  ) %>
+
+  <label>License</label>
+  <%= select_tag(
+    content.form_field_name(:institution),
+    options_for_select(['license', 'wiki', 'secret'])
+  ) %>
+</div>
+<% end %>

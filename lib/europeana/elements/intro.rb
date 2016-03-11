@@ -2,6 +2,7 @@ module Europeana
   module Elements
     class Intro < Europeana::Elements::Base
       include Europeana::Mixins::ImageVersion
+      include Europeana::Mixins::ImageCredit
 
       def body
         @element.content_by_name("body").essence.body
@@ -19,14 +20,8 @@ module Europeana
           image: versions,
           title: @element.content_by_name("title").essence.body,
           sub_title: @element.content_by_name("sub_title").essence.body,
-          image_credit: 
-            {
-              attribution_title: @element.content_by_name('image_credit').essence.body,
-              attribution_creator: 'HARDCODED',
-              attribution_institution: 'HARDCODED',
-              attribution_url: 'http://HARDCODED.EU',
-              license_public: true
-            }
+          image_credit: image_credit
+            
         }
       end
     end

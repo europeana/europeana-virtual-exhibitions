@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160302102636) do
+ActiveRecord::Schema.define(version: 20160311153431) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,6 +83,16 @@ ActiveRecord::Schema.define(version: 20160302102636) do
   end
 
   add_index "alchemy_essence_booleans", ["value"], name: "index_alchemy_essence_booleans_on_value", using: :btree
+
+  create_table "alchemy_essence_credits", force: :cascade do |t|
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "title"
+    t.string   "author"
+    t.string   "institution"
+    t.string   "url"
+    t.string   "license"
+  end
 
   create_table "alchemy_essence_dates", force: :cascade do |t|
     t.datetime "date"

@@ -15,7 +15,7 @@
   - name: image
     type: EssencePicture
   - name: image_credit
-    type: EssenceText
+    type: EssenceCredit
   - name: title
     type: EssenceText
   - name: sub_title
