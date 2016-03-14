@@ -26,7 +26,7 @@ module Alchemy::Pages
       JSON.pretty_generate({
         js_files: js_files,
         head_links: head_links,
-        bp_px: bp_px,
+        breakpoint_pixels: breakpoint_pixels,
         css_files: nil,
         page: page_data
       })
