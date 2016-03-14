@@ -7,7 +7,7 @@ module Europeana
           attribution_creator: @element.content_by_name(name).essence.author,
           attribution_institution: @element.content_by_name(name).essence.institution,
           attribution_url: @element.content_by_name(name).essence.url,
-          license_public: true
+          license_public: @element.content_by_name(name).essence.license
         }
       end
     end
