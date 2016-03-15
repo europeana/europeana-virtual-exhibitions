@@ -30,14 +30,16 @@ module Europeana
       protected
       def data
         {
-          title: title,
-          sub_title: sub_title,
+          title: title.present? ? title : false,
+          sub_title: sub_title.present? ? sub_title : false,
           image: versions,
-          caption: caption,
-          quote: quote,
-          quotee: quotee,
-          body: body,
-          stripped_body: stripped_body
+          align_image_right: @element.content_by_name('image_alignment').essence.value.downcase == 'right',
+          align_image_left: @element.content_by_name('image_alignment').essence.value.downcase == 'left',
+          caption: caption.present? ? caption : false,
+          quote: quote.present? ? quotee : false,
+          quotee: quotee.present? ? quotee : false,
+          body: body.present? ? body : false,
+          stripped_body: stripped_body.present? ? stripped_body : false
         }
       end
     end

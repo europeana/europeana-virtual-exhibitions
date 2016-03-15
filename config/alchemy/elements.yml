@@ -52,6 +52,10 @@
     type: EssenceText
   - name: image
     type: EssencePicture
+  - name: image_alignment
+    type: EssenceSelect
+    settings:
+      select_values: [Left, Right]
   - name: caption
     type: EssenceText
   - name: quote
