@@ -54,6 +54,7 @@
     type: EssencePicture
   - name: image_alignment
     type: EssenceSelect
+    default: Left
     settings:
       select_values: [Left, Right]
   - name: caption
