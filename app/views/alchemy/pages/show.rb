@@ -46,6 +46,10 @@ module Alchemy::Pages
       end
     end
 
+    def exhibition
+      @exhibition ||= @page.self_and_ancestors.where(depth: 2).first
+    end
+
     def debug_mode
       params.include?(:debug)
     end
