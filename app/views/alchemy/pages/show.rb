@@ -9,7 +9,7 @@ module Alchemy::Pages
           {
             is_last: index == (@page.elements.published.count - 1),
             is_first: index == 0,
-            full_section_element: element_sections[element.id] == 1
+            is_full_section_element: element_sections[element.id] == 1
           }.merge(Europeana::Elements::Base.build(element).to_hash)
         end
       }
