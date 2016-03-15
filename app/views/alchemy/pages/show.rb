@@ -21,7 +21,8 @@ module Alchemy::Pages
       {
         elements: elements,
         title: @page.title,
-        url: show_page_url(nil, @page.urlname)
+        url: show_page_url(locale, @page.urlname),
+        breadcrumbs: breadcrumbs
       }
     end
 
@@ -35,12 +36,33 @@ module Alchemy::Pages
       })
     end
 
+
+    def breadcrumbs
+      base_crumbs + @page.self_and_ancestors.where('depth >= 2').map do | ancestor |
+        {
+          url: show_page_url(locale, ancestor.urlname),
+          title: ancestor.title
+        }
+      end
+    end
+
     def debug_mode
       params.include?(:debug)
     end
 
 
     private
+    def locale
+      @locale ||= @page.language.language_code
+    end
+    def base_crumbs
+      [
+        {
+          url: show_page_url(locale, 'start'),
+          title: 'Home'
+        }
+      ]
+    end
     def element_sections
       if @elements_sections.nil?
         @sections = []
