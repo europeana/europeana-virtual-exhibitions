@@ -1,0 +1,31 @@
+<%- cache(element) do -%>
+  <%= element_view_for(element) do |el| -%>
+    <div class="url">
+      <%= el.render :url %>
+    </div>
+    <div class="state_1_label">
+      <%= el.render :state_1_label %>
+    </div>
+    <div class="state_1_title">
+      <%= el.render :state_1_title %>
+    </div>
+    <div class="state_1_image">
+      <%= el.render :state_1_image %>
+    </div>
+    <div class="state_2_title">
+      <%= el.render :state_2_title %>
+    </div>
+    <div class="state_2_body">
+      <%= el.render :state_2_body %>
+    </div>
+    <div class="state_2_image">
+      <%= el.render :state_2_image %>
+    </div>
+    <div class="state_3_logo">
+      <%= el.render :state_3_logo %>
+    </div>
+    <div class="state_3_image">
+      <%= el.render :state_3_image %>
+    </div>
+  <%- end -%>
+<%- end -%>

@@ -70,3 +70,25 @@
   contents:
   - name: title
     type: EssenceText
+- name: foyer_card
+  hint: false
+  unique: false
+  contents:
+  - name: url
+    type: EssenceLink
+  - name: state_1_label
+    type: EssenceText
+  - name: state_1_title
+    type: EssenceText
+  - name: state_1_image
+    type: EssencePicture
+  - name: state_2_title
+    type: EssenceText
+  - name: state_2_body
+    type: EssenceRichtext
+  - name: state_2_image
+    type: EssencePicture
+  - name: state_3_logo
+    type: EssencePicture
+  - name: state_3_image
+    type: EssencePicture

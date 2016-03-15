@@ -5,3 +5,6 @@
 - name: exhibition_theme_page
   unique: false
   elements: [text, image, rich_image, section, quote, intro]
+- name: exhibition_index_page
+  unique: false
+  elements: [foyer_card]
