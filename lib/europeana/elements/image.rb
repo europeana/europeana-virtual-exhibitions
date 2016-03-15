@@ -16,8 +16,8 @@ module Europeana
           caption: caption,
           image_credit: image_credit
         }.merge({
-          is_portrait: image.portrait_format?,
-          is_landscape: image.landscape_format?
+          is_portrait: image.image_size[:height] >= image.image_size[:width],
+          is_landscape: image.image_size[:height] < image.image_size[:width]
         })
       end
     end
