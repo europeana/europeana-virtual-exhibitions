@@ -15,11 +15,11 @@ module Europeana
 
       def versions(name = 'image')
         image = @element.content_by_name(name).essence
-        Hash[VERSIONS.map {|version,size| [version, {url: image.picture_url(image_size: size)}]}]
-      end
-
-      def ele
-        @element
+        Hash[VERSIONS.map {|version,size| [version, 
+          {
+            url: image.picture_url(image_size: size)
+          }
+        ]}]
       end
     end
   end

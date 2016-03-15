@@ -10,11 +10,15 @@ module Europeana
 
       protected
       def data
+        image = @element.content_by_name('image').essence
         {
           image: versions,
           caption: caption,
           image_credit: image_credit
-        }
+        }.merge({
+          is_portrait: image.portrait_format?,
+          is_landscape: image.landscape_format?
+        })
       end
     end
   end
