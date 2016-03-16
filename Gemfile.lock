@@ -1,11 +1,11 @@
 GIT
   remote: git://github.com/AlchemyCMS/alchemy-devise.git
-  revision: bd10fe9745a6e738e61eff5e9befb43712f96014
-  branch: 3.2-stable
+  revision: 511534b5378b684b9b3fd4132f98d62166869011
+  branch: master
   specs:
-    alchemy-devise (3.2.0)
-      alchemy_cms (>= 3.2.0.beta, < 4.0)
-      devise (~> 3.4)
+    alchemy-devise (4.0.0.beta)
+      alchemy_cms (>= 4.0.0.beta, < 5.0)
+      devise (>= 3.5.4, < 4.0)
 
 GIT
   remote: git://github.com/AlchemyCMS/alchemy_cms.git
@@ -121,7 +121,7 @@ GEM
     arel (6.0.3)
     awesome_nested_set (3.0.3)
       activerecord (>= 4.0.0, < 5)
-    bcrypt (3.1.10)
+    bcrypt (3.1.11)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
