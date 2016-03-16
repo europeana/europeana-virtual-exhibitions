@@ -93,3 +93,7 @@
     type: EssencePicture
   - name: state_3_image
     type: EssencePicture
+- name: embed
+  contents:
+  - name: embed
+    type: EssenceHtml
