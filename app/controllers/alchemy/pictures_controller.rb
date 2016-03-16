@@ -10,7 +10,7 @@ module Alchemy
 
     def show
       @size = params[:size]
-      expires_in 24.month, public: !@picture.restricted?
+      expires_in 12.month, public: !@picture.restricted?
 
       respond_to { |format| send_image(processed_image, format) }
     end
@@ -25,10 +25,12 @@ module Alchemy
         @size = params[:size]
       end
 
+      expires_in 12.month, public: !@picture.restricted?
       respond_to { |format| send_image(processed_image, format) }
     end
 
     def zoom
+      expires_in 24.month, public: !@picture.restricted?
       respond_to { |format| send_image(@picture.image_file, format) }
     end
 
