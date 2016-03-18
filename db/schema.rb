@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160316083817) do
+ActiveRecord::Schema.define(version: 20160318125841) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,6 +74,18 @@ ActiveRecord::Schema.define(version: 20160316083817) do
   create_table "alchemy_elements_alchemy_pages", id: false, force: :cascade do |t|
     t.integer "element_id"
     t.integer "page_id"
+  end
+
+  create_table "alchemy_essence_audios", force: :cascade do |t|
+    t.integer  "attachment_id"
+    t.boolean  "controls",      default: true
+    t.integer  "creator_id"
+    t.integer  "updater_id"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.boolean  "autoplay",      default: false
+    t.boolean  "loop",          default: false
+    t.boolean  "muted",         default: false
   end
 
   create_table "alchemy_essence_booleans", force: :cascade do |t|
@@ -186,6 +198,21 @@ ActiveRecord::Schema.define(version: 20160316083817) do
     t.datetime "updated_at",                      null: false
   end
 
+  create_table "alchemy_essence_videos", force: :cascade do |t|
+    t.integer  "attachment_id"
+    t.string   "width"
+    t.string   "height"
+    t.boolean  "allow_fullscreen", default: true
+    t.boolean  "autoplay",         default: false
+    t.boolean  "controls",         default: true
+    t.integer  "creator_id"
+    t.integer  "updater_id"
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.boolean  "loop",             default: false
+    t.boolean  "muted",            default: false
+  end
+
   create_table "alchemy_folded_pages", force: :cascade do |t|
     t.integer "page_id"
     t.integer "user_id"
@@ -254,6 +281,16 @@ ActiveRecord::Schema.define(version: 20160316083817) do
   add_index "alchemy_pages", ["language_id"], name: "index_pages_on_language_id", using: :btree
   add_index "alchemy_pages", ["parent_id", "lft"], name: "index_pages_on_parent_id_and_lft", using: :btree
   add_index "alchemy_pages", ["urlname"], name: "index_pages_on_urlname", using: :btree
+
+  create_table "alchemy_picture_versions", force: :cascade do |t|
+    t.integer  "picture_id"
+    t.string   "signature",  null: false
+    t.string   "file_uuid",  null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "alchemy_picture_versions", ["signature"], name: "index_alchemy_picture_versions_on_signature", unique: true, using: :btree
 
   create_table "alchemy_pictures", force: :cascade do |t|
     t.string   "name"

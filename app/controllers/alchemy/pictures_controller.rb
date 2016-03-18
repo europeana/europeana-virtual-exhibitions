@@ -60,6 +60,13 @@ module Alchemy
           if type != "gif" && image.ext == 'gif'
             options << "-flatten"
           end
+          # Flatten animated gifs, only if converting to a different format.
+          # if type != "gif" && image.ext == 'gif'
+          #   options << "-flatten"
+          # end
+          image = image.encode(type, options.join(' '))
+          render text: Alchemy::PictureVersion.from_cache(image).data
+
           render text: image.encode(type, options.join(' ')).data
         end
       end
