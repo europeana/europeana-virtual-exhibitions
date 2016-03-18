@@ -162,6 +162,11 @@ GEM
       sass-rails (< 5.1)
       sprockets (< 2.13)
     debug_inspector (0.0.2)
+    delayed_job (4.1.1)
+      activesupport (>= 3.0, < 5.0)
+    delayed_job_active_record (4.1.0)
+      activerecord (>= 3.0, < 5)
+      delayed_job (>= 3.0, < 5)
     devise (3.5.6)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -370,6 +375,7 @@ DEPENDENCIES
   byebug
   capistrano-alchemy!
   coffee-rails (~> 4.1.0)
+  delayed_job_active_record
   dotenv-rails (~> 2.0)
   dragonfly-swift_data_store!
   europeana-styleguide!

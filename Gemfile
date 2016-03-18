@@ -71,3 +71,6 @@ gem 'dragonfly-swift_data_store', github: 'dennisvdvliet/dragonfly-swift-data-st
 group :localeapp do
   gem 'localeapp', '~> 1.0'
 end
+
+gem 'delayed_job_active_record'
+
