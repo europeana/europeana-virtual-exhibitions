@@ -57,10 +57,6 @@ module Alchemy
             options << "-quality #{quality}"
           end
           # Flatten animated gifs, only if converting to a different format.
-          if type != "gif" && image.ext == 'gif'
-            options << "-flatten"
-          end
-          # Flatten animated gifs, only if converting to a different format.
           # if type != "gif" && image.ext == 'gif'
           #   options << "-flatten"
           # end
