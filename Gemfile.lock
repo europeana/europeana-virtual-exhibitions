@@ -56,7 +56,7 @@ GIT
 
 GIT
   remote: git://github.com/europeana/europeana-styleguide-ruby.git
-  revision: f65f803429db916a93c1dbcc66eba1d157b4db0a
+  revision: 9016de4bb031c38e85b522c863c4f2f808d6e63c
   branch: develop
   specs:
     europeana-styleguide (0.2.0)
@@ -189,7 +189,7 @@ GEM
     fog-json (1.0.2)
       fog-core (~> 1.0)
       multi_json (~> 1.10)
-    fog-openstack (0.1.1)
+    fog-openstack (0.1.2)
       fog-core (>= 1.35)
       fog-json (>= 1.0)
       fog-xml (>= 0.1)
