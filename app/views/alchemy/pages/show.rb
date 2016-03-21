@@ -1,5 +1,5 @@
 module Alchemy::Pages
-  class Show < Europeana::Styleguide::View
+  class Show < Alchemy::Base
     include MustacheHelper
 
     def elements
@@ -89,6 +89,10 @@ module Alchemy::Pages
         end
       end
       @elements_sections
+    end
+
+    def body_cache_key
+      @page.cache_key
     end
   end
 end
