@@ -38,12 +38,15 @@ module Alchemy::Pages
 
 
     def breadcrumbs
-      base_crumbs + @page.self_and_ancestors.where('depth >= 2').map do | ancestor |
+      crumbs = base_crumbs + @page.self_and_ancestors.where('depth >= 2').map do | ancestor |
         {
           url: show_page_url(locale, ancestor.urlname),
           title: ancestor.title
         }
       end
+
+      crumbs.last[:is_last] = true
+      crumbs
     end
 
     def exhibition
@@ -63,7 +66,8 @@ module Alchemy::Pages
       [
         {
           url: show_page_url(locale, 'start'),
-          title: 'Home'
+          title: 'Home',
+          is_first: true
         }
       ]
     end
