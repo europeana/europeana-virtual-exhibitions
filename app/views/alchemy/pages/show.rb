@@ -21,8 +21,7 @@ module Alchemy::Pages
       {
         elements: elements,
         title: @page.title,
-        url: show_page_url(locale, @page.urlname),
-        breadcrumbs: breadcrumbs
+        url: show_page_url(locale, @page.urlname)
       }
     end
 
@@ -32,8 +31,20 @@ module Alchemy::Pages
         head_links: head_links,
         breakpoint_pixels: breakpoint_pixels,
         css_files: nil,
-        page: page_data
-      })
+        page_data: page_data,
+        breadcrumbs: breadcrumbs,
+        elements: elements,
+        title: title,
+        url: url
+      }.keys)
+    end
+
+    def title
+      @page.title
+    end
+
+    def url
+      show_page_url(locale, @page.urlname)
     end
 
 
