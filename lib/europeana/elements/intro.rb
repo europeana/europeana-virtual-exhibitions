@@ -20,8 +20,9 @@ module Europeana
           image: versions,
           title: @element.content_by_name("title").essence.body,
           sub_title: @element.content_by_name("sub_title").essence.body,
-          image_credit: image_credit
-            
+          image_credit: image_credit,
+          label:  @element.content_by_name("label").essence.body,
+          partner_image: versions("partner_logo")
         }
       end
     end

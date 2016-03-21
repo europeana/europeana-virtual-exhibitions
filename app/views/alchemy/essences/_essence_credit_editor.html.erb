@@ -5,12 +5,11 @@
 
   Please consult Alchemy::Content.rb docs for further methods on the content object
 %>
-<% cache(content) do %>
 <div class="content_editor essence_credit" id="<%= content.dom_id %>" data-content-id="<%= content.id %>">
-  <%= label_and_remove_link(content) %>
+  <%= content_label(content) %>
   <%= text_field_tag(
-    content.form_field_name,
-    content.ingredient,
+    content.form_field_name(:title),
+    content.essence.title,
     :id => content.form_field_id
   ) %>
 
@@ -38,4 +37,3 @@
     options_for_select(['license', 'wiki', 'secret'])
   ) %>
 </div>
-<% end %>

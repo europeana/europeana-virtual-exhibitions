@@ -16,9 +16,10 @@ module Europeana
           state_1_image: versions('state_1_image'),
           state_2_title: @element.content_by_name('state_2_title').essence.body,
           state_2_body: @element.content_by_name('state_2_body').essence.body,
-          state_2_image: versions('state_2_image'),
+          state_2_image: @element.content_by_name('state_2_image').essence.picture.present? ? versions('state_2_image') : versions('state_1_image'),
           state_3_logo: versions('state_3_logo'),
-          state_3_image: versions('state_3_image'),
+          state_3_image: @element.content_by_name('state_3_image').essence.picture.present? ? versions('state_3_image') : versions('state_1_image'),
+          state_2: @element.content_by_name('state_2_image').essence.picture.present?,
           url: @element.content_by_name('url').essence.link
         }
       end

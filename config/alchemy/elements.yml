@@ -22,6 +22,29 @@
     type: EssenceText
   - name: body
     type: EssenceRichtext
+  - name: label
+    type: EssenceText
+  - name: partner_logo
+    type: EssencePicture
+- name: featured_exhibition
+  hint: false
+  unique: true
+  contents:
+  - name: image
+    type: EssencePicture
+  - name: image_credit
+    type: EssenceCredit
+  - name: title
+    type: EssenceText
+  - name: sub_title
+    type: EssenceText
+  - name: body
+    type: EssenceRichtext
+  - name: label
+    type: EssenceText
+  - name: partner_logo
+    type: EssencePicture
+
 - name: image
   hint: false
   unique: false
