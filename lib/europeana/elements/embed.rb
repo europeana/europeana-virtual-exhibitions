@@ -27,7 +27,7 @@ module Europeana
       end
 
       def link
-        @link ||= URI.extract(@element.content_by_name("embed").essence.source).first
+        @link ||= @element.content_by_name("embed").essence.source.present? ? URI.extract(@element.content_by_name("embed").essence.source).first : ""
       end
 
       def parsed_url
