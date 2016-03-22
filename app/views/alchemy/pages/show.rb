@@ -21,7 +21,9 @@ module Alchemy::Pages
       {
         elements: elements,
         title: @page.title,
-        url: show_page_url(locale, @page.urlname)
+        url: show_page_url(locale, @page.urlname),
+        next_page: next_page,
+        previous_page: previous_page
       }
     end
 
@@ -42,6 +44,24 @@ module Alchemy::Pages
     def title
       @page.title
     end
+
+
+    def next_page
+      format_page(@page.right_sibling)
+    end
+
+    def previous_page
+      format_page(@page.left_sibling)
+    end
+
+    def format_page(page)
+      return false if !page.present?
+      {
+        title: page.title,
+        url: show_page_url(page.language.language_code, page.urlname)
+      }
+    end
+
 
     def url
       show_page_url(locale, @page.urlname)
