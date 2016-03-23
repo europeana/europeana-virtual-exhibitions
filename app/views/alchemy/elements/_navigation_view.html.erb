@@ -1,0 +1,10 @@
+<%- cache(element) do -%>
+  <%= element_view_for(element) do |el| -%>
+    <div class="previous">
+      <%= el.render :previous %>
+    </div>
+    <div class="next">
+      <%= el.render :next %>
+    </div>
+  <%- end -%>
+<%- end -%>
