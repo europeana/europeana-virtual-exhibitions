@@ -8,11 +8,11 @@ class Alchemy::PictureVersion < ActiveRecord::Base
 
   def data
     if new_record?
-      upload_and_save!(image).data
+      store_and_save!(image).data
     else
       content = image.app.datastore.read(file_uuid)
       if content.nil?
-        upload_and_save!(image).data
+        store_and_save!(image).data
       else
         content.first
       end
@@ -21,10 +21,10 @@ class Alchemy::PictureVersion < ActiveRecord::Base
 
   private
 
-  def upload_and_save!(image)
+  def store_and_save!(image)
     self.file_uuid = image.store(path: "versions/#{image.signature}/#{image.name}")
     self.signature = image.signature
-    self.save!
+    self.save
     image
   end
 end
