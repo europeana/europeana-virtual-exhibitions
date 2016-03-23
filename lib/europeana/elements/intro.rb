@@ -22,7 +22,7 @@ module Europeana
           sub_title: @element.content_by_name("sub_title").essence.body,
           image_credit: image_credit,
           label:  @element.content_by_name("label").present? ? @element.content_by_name("label").essence.body : false,
-          partner_image: versions("partner_logo")
+          partner_image: @element.content_by_name("partner_logo").present? ? versions("partner_logo") : false
         }
       end
     end
