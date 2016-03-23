@@ -37,14 +37,24 @@ module Alchemy::Pages
         breadcrumbs: breadcrumbs,
         elements: elements,
         title: title,
-        url: url
-      }.keys)
+        url: url,
+        share_links: share_links
+      })
     end
 
     def title
       @page.title
     end
 
+    def share_links
+      [:facebook, :twitter, :pinterest, :instagram].each.collect do |network|
+        [network, show_page_url(locale, @page.urlname, {utm_source: network, utm_medium: :social, utm_campaign: exhibition.slug })]
+      end.to_h
+    end
+
+    def editor_attribute(attribute)
+      " contenteditable='true' data-content-id=1 data-content-type='text' "
+    end
 
     def next_page
       format_page(@page.right_sibling)
