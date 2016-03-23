@@ -26,8 +26,4 @@ Alchemy::Devise::Ability.class_eval do
       cannot :publish, Alchemy::Page
     end
   end
-
-
-  private
-
 end

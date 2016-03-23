@@ -10,7 +10,6 @@ openstack_defaults = {
 }
 Dragonfly.app(:alchemy_pictures).configure do
   plugin :imagemagick
-  verify_urls false
   datastore :swift,
     { container_name: ENV.fetch('IMAGES_CONTAINER_NAME') }.merge(openstack_defaults)
   url_host ENV.fetch('CDN_HOST', 'http://localhost:3000')
