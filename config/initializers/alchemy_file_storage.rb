@@ -1,6 +1,10 @@
 require 'dragonfly'
 require 'dragonfly/swift_data_store'
 
+if ENV.fetch('DISABLE_SSL_VERIFY', false)
+  Excon.defaults[:ssl_verify_peer] = false
+end
+
 openstack_defaults = {
   openstack_auth_url: ENV.fetch('OPENSTACK_AUTH_URL', ''),
   openstack_username: ENV.fetch('OPENSTACK_USERNAME', ''),

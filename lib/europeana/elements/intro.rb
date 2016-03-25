@@ -4,25 +4,17 @@ module Europeana
       include Europeana::Mixins::ImageVersion
       include Europeana::Mixins::ImageCredit
 
-      def body
-        @element.content_by_name("body").essence.body
-      end
-
-      def stripped_body
-        @element.content_by_name("body").essence.stripped_body
-      end
-
       protected
       def data
         {
-          intro_description: body,
-          stripped_intro_description: stripped_body,
+          intro_description: get(:body, :body),
+          stripped_intro_description: get(:body, :stripped_body),
           image: versions,
-          title: @element.content_by_name("title").essence.body,
-          sub_title: @element.content_by_name("sub_title").essence.body,
+          title: get(:title, :body),
+          sub_title: get(:sub_title, :body),
           image_credit: image_credit,
-          label:  @element.content_by_name("label").present? ? @element.content_by_name("label").essence.body : false,
-          partner_image: @element.content_by_name("partner_logo").present? ? versions("partner_logo") : false
+          label: get(:label, :body),
+          partner_image: versions("partner_logo")
         }
       end
     end

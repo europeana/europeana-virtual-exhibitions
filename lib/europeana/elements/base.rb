@@ -33,6 +33,14 @@ module Europeana
         data.merge(Hash[@attributes.map {|attribute| [attribute, self.send(attribute)]}]).merge({type: type, alchemy_id: @element.id, id: "#{@element.name}_#{@element.id}"})
       end
 
+      def get(name, attribute = :ingredient)
+        if @element.content_by_name(name)
+          @element.content_by_name(name).essence.send(attribute)
+        else
+          false
+        end
+      end
+
       def data
         {}
       end
