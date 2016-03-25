@@ -10,7 +10,7 @@ module Europeana
 
       protected
       def data
-        image = @element.content_by_name('image') ? @element.content_by_name('image') : nil
+        image = @element.content_by_name('image') ? @element.content_by_name('image').essence : nil
         picture = image.present? && image.picture.present? ? image.picture : nil
         {
           image: versions,

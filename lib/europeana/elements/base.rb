@@ -15,7 +15,7 @@ module Europeana
         @attributes = []
 
         TYPES.each do |type|
-          @attributes << "is_#{type}"
+          @attributes << "is_#{type}".to_sym
         end
       end
 

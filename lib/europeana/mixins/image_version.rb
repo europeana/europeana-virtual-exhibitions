@@ -18,7 +18,7 @@ module Europeana
         return nil if image.nil?
         Hash[VERSIONS.map {|version,size| [version, 
           {
-            url: image.essense.picture_url(image_size: size)
+            url: image.essence.picture_url(image_size: size)
           }
         ]}]
       end
