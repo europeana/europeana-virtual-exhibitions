@@ -4,7 +4,9 @@ sudo: false
 language: ruby
 rvm:
   - 2.2.2
-  - 2.2.3
-  - 2.3.0
+before_script:
+  - psql -c 'create database travis_ci_test;' -U postgres
 env:
   - RAILS_ENV=test
+services:
+  - postgresql
