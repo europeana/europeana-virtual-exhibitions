@@ -10,7 +10,7 @@
     type: EssenceRichtext
 - name: intro
   hint: false
-  unique: true
+  unique: false
   contents:
   - name: image
     type: EssencePicture
@@ -120,10 +120,17 @@
   contents:
   - name: embed
     type: EssenceHtml
-
 - name: navigation
   contents:
   - name: previous
     type: EssenceLink
   - name: next
+    type: EssenceLink
+- name: chapter
+  contents:
+  - name: label
+    type: EssenceText
+  - name: image
+    type: EssencePicture
+  - name: link
     type: EssenceLink

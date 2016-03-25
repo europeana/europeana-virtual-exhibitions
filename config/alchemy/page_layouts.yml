@@ -4,7 +4,7 @@
 
 - name: exhibition_theme_page
   unique: false
-  elements: [text, image, rich_image, section, quote, intro, embed, navigation]
+  elements: [text, image, rich_image, section, quote, intro, embed, navigation, chapter]
 - name: exhibition_index_page
   unique: false
   elements: [foyer_card, featured_exhibition]
