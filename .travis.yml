@@ -10,3 +10,4 @@ env:
   - RAILS_ENV=test
 services:
   - postgresql
+script: "bundle exec rspec"
