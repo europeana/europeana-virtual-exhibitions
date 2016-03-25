@@ -10,14 +10,15 @@ module Europeana
 
       protected
       def data
-        image = @element.content_by_name('image').essence
+        image = @element.content_by_name('image') ? @element.content_by_name('image') : nil
+        picture = image.present? && image.picture.present? ? image.picture : nil
         {
           image: versions,
           caption: caption,
           image_credit: image_credit
         }.merge({
-          is_portrait: image.picture.present? ? image.image_size[:height] >= image.image_size[:width] : false,
-          is_landscape: image.picture.present? ? image.image_size[:height] < image.image_size[:width] : false
+          is_portrait: picture.present? ? image.image_size[:height] >= image.image_size[:width] : false,
+          is_landscape: picture.present? ? image.image_size[:height] < image.image_size[:width] : false
         })
       end
     end
