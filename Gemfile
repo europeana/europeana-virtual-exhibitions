@@ -79,5 +79,5 @@ group :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'factory_girl_rails', '~> 4.5'
   gem 'rspec-activemodel-mocks', '~> 1.0'
-
+  gem 'simplecov', require: false
 end
