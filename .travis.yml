@@ -1,0 +1,10 @@
+notifications:
+  email: false
+sudo: false
+language: ruby
+rvm:
+  - 2.2.2
+  - 2.2.3
+  - 2.3.0
+env:
+  - RAILS_ENV=test
