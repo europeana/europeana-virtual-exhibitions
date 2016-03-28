@@ -4,9 +4,9 @@ module Europeana
       protected
       def data
         {
-          quote: @element.content_by_name("quote").essence.body,
-          stripped_quote: @element.content_by_name("quote").essence.stripped_body,
-          quotee: @element.content_by_name("quotee").essence.body
+          quote: get(:quote, :body),
+          stripped_quote: get(:quote, :stripped_body),
+          quotee: get(:quotee, :body)
         }
       end
     end

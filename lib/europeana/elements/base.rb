@@ -13,7 +13,7 @@ module Europeana
       def initialize(element)
         @element = element
         @attributes = []
-
+        @contents = element.content_definitions.map{|c| c["name"]}
         TYPES.each do |type|
           @attributes << "is_#{type}".to_sym
         end
@@ -34,6 +34,9 @@ module Europeana
       end
 
       def get(name, attribute = :ingredient)
+        if !@contents.include?(name.to_s)
+          raise StandardError, "No content #{name} found for #{@element}"
+        end
         if @element.content_by_name(name)
           @element.content_by_name(name).essence.send(attribute)
         else
