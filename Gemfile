@@ -46,6 +46,8 @@ gem 'rack-plastic'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'dotenv-rails', '~> 2.0'
+  gem 'spring-commands-rspec'
+
 end
 
 group :development do

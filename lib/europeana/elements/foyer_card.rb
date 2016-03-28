@@ -11,16 +11,16 @@ module Europeana
 
       def data
         {
-          state_1_label: @element.content_by_name('state_1_label').essence.body,
-          state_1_title: @element.content_by_name('state_1_title').essence.body,
+          state_1_label: get(:state_1_label, :body),
+          state_1_title: get(:state_1_title, :body),
           state_1_image: versions('state_1_image'),
-          state_2_title: @element.content_by_name('state_2_title').essence.body,
-          state_2_body: @element.content_by_name('state_2_body').essence.body,
-          state_2_image: @element.content_by_name('state_2_image').essence.picture.present? ? versions('state_2_image') : versions('state_1_image'),
+          state_2_title: get(:state_2_title, :body),
+          state_2_body: get(:state_2_body, :body),
+          state_2_image: get(:state_2_image, :picture) ? versions('state_2_image') : versions('state_1_image'),
           state_3_logo: versions('state_3_logo'),
-          state_3_image: @element.content_by_name('state_3_image').essence.picture.present? ? versions('state_3_image') : versions('state_1_image'),
-          state_2: @element.content_by_name('state_2_image').essence.picture.present?,
-          url: @element.content_by_name('url').essence.link
+          state_3_image: get(:state_3_image, :picture) ? versions('state_3_image') : versions('state_1_image'),
+          state_2: get(:state_2_image, :picture) ? true : false,
+          url: get(:url, :link)
         }
       end
     end
