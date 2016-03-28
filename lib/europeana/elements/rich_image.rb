@@ -3,27 +3,27 @@ module Europeana
     class RichImage < Europeana::Elements::Image
 
       def quote
-        @element.content_by_name('quote').essence.body
+        get(:quote, :body)
       end
 
       def quotee
-        @element.content_by_name('quotee').essence.body
+        get(:quotee, :body)
       end
 
       def title
-        @element.content_by_name('title').essence.body
+        get(:title, :body)
       end
 
       def sub_title
-        @element.content_by_name('sub_title').essence.body
+        get(:sub_title, :body)
       end
 
       def body
-        @element.content_by_name('body').essence.body
+        get(:body, :body)
       end
 
       def stripped_body
-        @element.content_by_name('body').essence.stripped_body
+        get(:body, :stripped_body)
       end
 
 
@@ -33,8 +33,8 @@ module Europeana
           title: title.present? ? title : false,
           sub_title: sub_title.present? ? sub_title : false,
           image: versions,
-          is_align_image_right: @element.content_by_name('image_alignment').essence.value.downcase == 'right',
-          is_align_image_left: @element.content_by_name('image_alignment').essence.value.downcase == 'left',
+          is_align_image_right: get(:image_alignment, :value) ? get(:image_alignment, :value).downcase == 'right' : false,
+          is_align_image_left: get(:image_alignment, :value) ? get(:image_alignment, :value).downcase == 'left' : false,
           caption: caption.present? ? caption : false,
           quote: quote.present? ? quotee : false,
           quotee: quotee.present? ? quotee : false,

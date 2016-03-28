@@ -5,12 +5,12 @@ module Europeana
       def data
         {
           previous: {
-            title: @element.content_by_name("previous").essence.link_title.present? ? @element.content_by_name("previous").essence.link_title : false,
-            url: @element.content_by_name("previous").essence.link.present? ? @element.content_by_name("previous").essence.link : false
+            title: get(:previous, :link_title) ? get(:previous, :link_title) : false,
+            url: get(:previous, :link) ? get(:previous, :link) : false
           },
           next: {
-            title: @element.content_by_name("next").essence.link_title.present? ? @element.content_by_name("next").essence.link_title : false,
-            url: @element.content_by_name("next").essence.link.present? ? @element.content_by_name("next").essence.link : false
+            title: get(:next, :link_title) ? get(:next, :link_title) : false,
+            url: get(:next, :link) ? get(:next, :link) : false
           }
         }
       end

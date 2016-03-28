@@ -4,7 +4,7 @@ module Europeana
 
       def data
         {
-          section_title: @element.content_by_name('title').essence.body
+          section_title: get(:title, :body)
         }
       end
     end
