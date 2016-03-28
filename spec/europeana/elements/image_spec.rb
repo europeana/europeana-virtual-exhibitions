@@ -36,6 +36,40 @@ module Europeana
           end
         end
       end
+
+      describe 'alchemy to mustache mapping' do
+        let(:essenc_picture) { create (:alchemy_essence_picture)}
+        let(:alchemy_element) do
+          create(:alchemy_element, name: 'image', contents: [create(:alchemy_content, essence: essenc_picture, name: 'image')])
+        end
+
+        let(:mustache_data) { Europeana::Elements::Image.new(alchemy_element).to_hash }
+
+        it 'has all the required image versions' do
+          expect(mustache_data[:image].keys).to eq([:original, :full, :fullx2, :half, :halfx2, :small, :smallx2, :thumbnail, :thumbnailx2])
+        end
+
+        it 'has a correctly formatted path for "full" version' do
+          expect(mustache_data[:image][:full][:url]).to match('show/1600x1600/image.jpg')
+        end
+
+        context 'landscape image' do
+          let(:essenc_picture) { create(:alchemy_essence_picture, picture: create(:landscape_picture))}
+
+          it 'return true for is_landscape' do
+            expect(mustache_data[:is_landscape]).to eq(true)
+            expect(mustache_data[:is_portrait]).to eq(false)
+          end
+        end
+
+        context 'portrait image' do
+          let(:essenc_picture) { create(:alchemy_essence_picture, picture: create(:portrait_picture))}
+          it 'return true for is_landscape' do
+            expect(mustache_data[:is_landscape]).to eq(false)
+            expect(mustache_data[:is_portrait]).to eq(true)
+          end
+        end
+      end
     end
   end
 end

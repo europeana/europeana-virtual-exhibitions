@@ -12,15 +12,18 @@ openstack_defaults = {
   storage_headers: {'x-amz-acl' => 'public-read'},
   url_scheme: 'https'
 }
-Dragonfly.app(:alchemy_pictures).configure do
-  plugin :imagemagick
-  datastore :swift,
-    { container_name: ENV.fetch('IMAGES_CONTAINER_NAME', 'IMAGES_CONTAINER_NAME') }.merge(openstack_defaults)
-  url_host ENV.fetch('CDN_HOST', 'http://localhost:3000')
-end
 
-Dragonfly.app(:alchemy_attachments).configure do
-  datastore :swift,
-    { container_name: ENV.fetch('ATTACHMENTS_CONTAINER_NAME', 'ATTACHMENTS_CONTAINER_NAME') }.merge(openstack_defaults)
-  url_host ENV.fetch('CDN_HOST', 'http://localhost:3000')
+unless Rails.env.test?
+  Dragonfly.app(:alchemy_pictures).configure do
+    plugin :imagemagick
+    datastore :swift,
+      { container_name: ENV.fetch('IMAGES_CONTAINER_NAME', 'IMAGES_CONTAINER_NAME') }.merge(openstack_defaults)
+    url_host ENV.fetch('CDN_HOST', 'http://localhost:3000')
+  end
+
+  Dragonfly.app(:alchemy_attachments).configure do
+    datastore :swift,
+      { container_name: ENV.fetch('ATTACHMENTS_CONTAINER_NAME', 'ATTACHMENTS_CONTAINER_NAME') }.merge(openstack_defaults)
+    url_host ENV.fetch('CDN_HOST', 'http://localhost:3000')
+  end
 end
