@@ -2,12 +2,6 @@ module Europeana
   module Elements
     class FoyerCard < Europeana::Elements::Base
       include Europeana::Mixins::ImageVersion
-      include Europeana::Mixins::ImageCredit
-
-      def caption
-        @element.content_by_name('caption') ? @element.content_by_name('caption').essence.body : nil
-      end
-
 
       def data
         {
