@@ -18,7 +18,7 @@ module Europeana
           provider: provider,
           direct_link: link,
           embed_link: embed_link,
-          html: @element.content_by_name("embed").essence.source
+          html: get(:embed, :source)
         }.merge(provider_info)
       end
 
@@ -27,7 +27,7 @@ module Europeana
       end
 
       def link
-        @link ||= @element.content_by_name("embed").essence.source.present? ? URI.extract(@element.content_by_name("embed").essence.source).first : ""
+        @link ||= get(:embed, :source) ? URI.extract(get(:embed, :source)).first : ""
       end
 
       def parsed_url
