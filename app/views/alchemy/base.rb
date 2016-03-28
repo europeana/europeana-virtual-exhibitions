@@ -28,5 +28,10 @@ module Alchemy
     def force_cache
       !current_user.nil?
     end
+
+
+    def page_object
+      @page_object ||= Europeana::Page.new(@page)
+    end
   end
 end

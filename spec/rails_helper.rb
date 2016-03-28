@@ -8,15 +8,13 @@ require 'rspec/rails'
 require 'database_cleaner'
 require 'rspec-activemodel-mocks'
 
-
-
-
 require 'alchemy/seeder'
 require 'alchemy/test_support/controller_requests'
 require 'alchemy/test_support/essence_shared_examples'
 require 'alchemy/test_support/integration_helpers'
 require 'alchemy/test_support/factories'
 
+require "#{::Rails.root}/lib/support/factories"
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in

@@ -33,6 +33,20 @@ module Europeana
           end
         end
       end
+
+      describe 'alchemy to mustache mapping' do
+        let(:essenc_richtext) { create (:alchemy_essence_richtext)}
+        let(:alchemy_element) do
+          create(:alchemy_element, name: 'text', contents: [create(:alchemy_content, essence: essenc_richtext, name: 'body')])
+        end
+
+        let(:mustache_data) { Europeana::Elements::Text.new(alchemy_element).to_hash }
+
+        it 'has the right stripped body value' do
+          expect(mustache_data[:stripped_body]).to eq(essenc_richtext.stripped_body)
+        end
+
+      end
     end
   end
 end
