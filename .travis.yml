@@ -9,7 +9,7 @@ before_script:
 env:
   global:
     - RAILS_ENV=test
-    - DATABASE_URL=postgres://postgrest@localhost/travis_ci_test
+    - DATABASE_URL=postgres://postgres@localhost/travis_ci_test
 services:
   - postgresql
 script: "bundle exec rspec"
