@@ -55,7 +55,7 @@ GIT
 
 GIT
   remote: git://github.com/europeana/europeana-styleguide-ruby.git
-  revision: e2aa498f1a23d9a663521d1c694f6cb9b6533cdb
+  revision: 6b40a3fe1d9084440886030aef514281affe9dc7
   branch: develop
   specs:
     europeana-styleguide (0.2.0)
@@ -249,7 +249,7 @@ GEM
     mini_portile2 (2.0.0)
     minitest (5.8.4)
     multi_json (1.11.2)
-    mustache (1.0.2)
+    mustache (1.0.3)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (3.1.0)
