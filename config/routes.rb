@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  mount Alchemy::Engine => '/'
+  default_url_options :host => ENV.fetch("APP_HOST", 'test.european.eu/portal')
+  mount Alchemy::Engine => '/portal/exhibitions'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -55,4 +56,6 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
+  get '(/:locale)/exhibitions/*urlname(.:format)' => 'alchemy/pages#show', as: :show_page
 end
