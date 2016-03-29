@@ -54,7 +54,16 @@ module Alchemy
           expect(page.meta_tags).to match("noindex,nofollow")
         end
       end
+    end
 
+    describe "#link_tags" do
+      let(:language) { create(:alchemy_language)}
+      let!(:root_page) {create(:alchemy_page, name: 'music exhibition', language_code: :en)}
+      let!(:german_page) {create(:alchemy_page, :public, name: 'music exhibition', language_code: language.language_code)}
+      it "show right alternatives for german and english pages" do
+        expect(Europeana::Page.new(root_page).link_tags).to eq(['<link rel="alternate" hreflang="de" href="music-exhibition" />'])
+        expect(Europeana::Page.new(german_page).link_tags).to eq([])
+      end
     end
   end
 end
