@@ -1,5 +1,7 @@
 module Europeana
   class Page
+    include ActionView::Helpers::TagHelper
+
     def initialize(page)
       @page = page
     end
@@ -16,6 +18,23 @@ module Europeana
         end
       }
     end
+
+    def head_tags
+      [
+        meta_tags,
+        link_tags
+      ].flatten
+    end
+
+    def meta_tags
+      robots_tag
+    end
+
+    def link_tags
+      language_alternatives_tags
+    end
+
+
 
     private
     def section_element_count
@@ -40,6 +59,20 @@ module Europeana
         end
       end
       @elements_sections
+    end
+
+    def robots_tag
+      content = []
+      content << (@page.robot_index? ? 'index' : 'noindex')
+      content << (@page.robot_follow? ? 'follow' : 'nofollow')
+
+      tag(:meta, name: 'robots', content: content.join(','))
+    end
+
+    def language_alternatives_tags
+      Alchemy::Page.published.where.not(language_code: @page.language_code).where(urlname: @page.urlname).all.collect do |page|
+        tag(:link, { rel: :alternate, hreflang: page.language_code, href: page.urlname})
+      end
     end
 
   end

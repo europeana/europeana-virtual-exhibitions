@@ -6,6 +6,9 @@ module Alchemy::Pages
       page_object.elements
     end
 
+    def head_tags
+      page_object.head_tags
+    end
 
     def page_data
       {
