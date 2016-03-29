@@ -35,5 +35,26 @@ module Alchemy
         end
       end
     end
+
+    describe "#meta_tags" do
+      let(:page) { Europeana::Page.new(page_record)}
+
+      context "public page" do
+        let(:page_record) { create(:alchemy_page, :public)}
+
+        it "should have meta tags that allow indexing" do
+          expect(page.meta_tags).to match("index,follow")
+        end
+      end
+
+      context "non public page" do
+        let(:page_record) { create(:alchemy_page, :restricted, robot_index: false, robot_follow: false)}
+
+        it "should have meta tags that do not allow indexing" do
+          expect(page.meta_tags).to match("noindex,nofollow")
+        end
+      end
+
+    end
   end
 end
