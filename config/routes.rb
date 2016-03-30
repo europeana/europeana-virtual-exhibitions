@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  default_url_options :host => ENV.fetch("APP_HOST", 'http://ve-test-web.de.a9sapp.eu/')
+  default_url_options :host => ENV.fetch("APP_HOST", 'http://test.npc.eanadev.org/')
   scope '/portal/exhibitions' do
     mount Alchemy::Engine => '/'
 
