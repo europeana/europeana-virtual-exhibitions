@@ -32,6 +32,8 @@ module Exhibitions
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+    config.action_controller.default_url_options = {host: ENV.fetch('APP_HOST', 'test.npc.eanadev.org'), port: ENV.fetch('APP_PORT', nil)}
+
     config.assets.prefix = '/portal/exhibitions/assets'
     config.active_job.queue_adapter = :delayed_job
   end
