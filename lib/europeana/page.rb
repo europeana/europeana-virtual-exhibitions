@@ -1,6 +1,7 @@
 module Europeana
   class Page
     include ActionView::Helpers::TagHelper
+    include Rails.application.routes.url_helpers
 
     def initialize(page)
       @page = page
@@ -19,6 +20,25 @@ module Europeana
       }
     end
 
+
+    def chapter_elements
+      {
+        present: true,
+        items: exhibition.descendants.map.with_index do |page, index|
+          Europeana::Page.new(page).as_chapter
+        end
+      }
+    end
+
+    def as_chapter
+      {
+        is_chapter_nav: true,
+        title: @page.title,
+        url: show_page_url(@page.language_code, @page.urlname),
+        image: false
+      }
+    end
+
     def head_tags
       [
         meta_tags,
@@ -34,7 +54,22 @@ module Europeana
       language_alternatives_tags
     end
 
+    def exhibition
+      @exhibition ||= @page.self_and_ancestors.where(depth: 2).first
+    end
 
+    def table_of_contents
+      exhibition.descendants
+    end
+
+    def find_thumbnail
+      element = @page.elements.published.where(name: 'intro').first
+      return Europeana::Elements::ChapterThumbnail.new(element).to_hash if element
+
+      element = @page.elements.published.where(name: ['image', 'rich_image']).first
+      return Europeana::Elements::ChapterThumbnail.new(element).to_hash if element
+      false
+    end
 
     private
     def section_element_count

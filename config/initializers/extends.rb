@@ -1,1 +1,1 @@
-Alchemy::Engine.config.assets.prefix = '/portal/exhibitions'
+#Alchemy::Engine.config.assets.prefix = '/portal/exhibitions'

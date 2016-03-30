@@ -16,7 +16,8 @@ module Alchemy::Pages
         title: @page.title,
         url: show_page_url(locale, @page.urlname),
         next_page: next_page,
-        previous_page: previous_page
+        previous_page: previous_page,
+        chapter_elements: page_object.chapter_elements
       }
     end
 
@@ -72,7 +73,9 @@ module Alchemy::Pages
       show_page_url(locale, @page.urlname)
     end
 
-
+    def label
+      "LABEL"
+    end
     def breadcrumbs
       crumbs = base_crumbs + @page.self_and_ancestors.where('depth >= 2').map do | ancestor |
         {
