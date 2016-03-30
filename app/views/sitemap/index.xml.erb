@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+   <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+   <% @languages.each do |language| %>
+      <sitemap>
+         <loc><%= sitemap_url(locale: language.language_code) %></loc>
+         <lastmod><%= language.pages.published.order('updated_at').first.updated_at.utc.iso8601 %></lastmod>
+      </sitemap>
+   <% end %>
+   </sitemapindex>
