@@ -69,14 +69,14 @@ module MustacheHelper
       description = page_object.description
       head_meta = [
         { meta_name: 'description', content: description },
-        { meta_property: 'fb:appid', content: '185778248173748' },
+        { meta_property: 'fb:app_id', content: '185778248173748' },
         { meta_name: 'twitter:card', content: 'summary' },
         { meta_name: 'twitter:site', content: '@EuropeanaEU' },
         { meta_property: 'og:site_name', content: 'Europeana Exhibitions' },
         { meta_property: 'og:description', content: description },
         { meta_property: 'og:url', content: page_object.url },
         { meta_property: 'og:title', content: title},
-        { meta_property: 'og:image', content: page_object.image},
+        { meta_property: 'og:image', content: page_object.thumbnail},
       ]
       head_meta << page_object.robots_tag
       head_meta + super

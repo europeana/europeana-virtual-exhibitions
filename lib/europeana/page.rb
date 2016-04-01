@@ -171,13 +171,13 @@ module Europeana
       return @page.title
     end
 
-    def image
+    def thumbnail(version = :full)
       element = @page.find_elements(only: ['intro', 'image', 'rich_image']).first
       image = nil
       if element
         image = Europeana::Elements::Base.build(element).versions
-        if image.has_key?(:full)
-          image = full_url(image[:full][:url])
+        if image.has_key?(version)
+          image = full_url(image[version][:url])
         end
       end
       return image

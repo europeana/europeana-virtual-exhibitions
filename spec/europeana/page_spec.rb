@@ -43,7 +43,7 @@ module Alchemy
         let(:page_record) { create(:alchemy_page, :public)}
 
         it "should have meta tags that allow indexing" do
-          expect(page.meta_tags).to match("index,follow")
+          expect(page.meta_tags).to eq({:meta_name=>"robots", :content=>"index,follow"})
         end
       end
 
@@ -51,7 +51,7 @@ module Alchemy
         let(:page_record) { create(:alchemy_page, :restricted, robot_index: false, robot_follow: false)}
 
         it "should have meta tags that do not allow indexing" do
-          expect(page.meta_tags).to match("noindex,nofollow")
+          expect(page.meta_tags).to eq({:meta_name=>"robots", :content=>"noindex,nofollow"})
         end
       end
     end
@@ -61,9 +61,45 @@ module Alchemy
       let!(:root_page) {create(:alchemy_page, name: 'music exhibition', language_code: :en)}
       let!(:german_page) {create(:alchemy_page, :public, name: 'music exhibition', language_code: language.language_code)}
       it "show right alternatives for german and english pages" do
-        expect(Europeana::Page.new(root_page).link_tags).to eq(['<link rel="alternate" hreflang="de" href="music-exhibition" />'])
+        expect(Europeana::Page.new(root_page).link_tags).to eq([{:rel=>"alternate", :hreflang=>"de", :href=>"music-exhibition", :title=>nil}])
         expect(Europeana::Page.new(german_page).link_tags).to eq([])
       end
     end
+
+
+    context "complex exhibition" do
+      let(:exhibition_root_page) do
+        create(:alchemy_page, :public)
+      end
+
+      let(:exhibition_child_page_1) do
+        create(:alchemy_page, :public, parent_id: exhibition_root_page.id)
+      end
+
+      describe "#exhibition" do
+        context "child page" do
+          it "is equal to root of exhibition" do
+            expect(Europeana::Page::new(exhibition_child_page_1).exhibition).to eq(exhibition_root_page)
+          end
+        end
+        context "root page" do
+          it "is equal to itself" do
+            expect(Europeana::Page::new(exhibition_root_page).exhibition).to eq(exhibition_root_page)
+          end
+        end
+      end
+
+      describe "#chapter_elements" do
+        context "when starting at root of exhibition" do
+          it "outputs" do
+            puts Europeana::Page::new(exhibition_child_page_1).chapter_elements.inspect
+          end
+        end
+      end
+
+    end
+
+
+
   end
 end
