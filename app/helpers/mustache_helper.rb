@@ -167,7 +167,7 @@ module MustacheHelper
             ]
           },
           social: {
-            url: page_object.url
+            url: page_object.url,
             facebook: true,
             pinterest: true,
             twitter: true,
