@@ -153,12 +153,12 @@ module Europeana
 
     def language_alternatives_tags
       alternatives.collect do |page|
-        { rel: 'alternate', hreflang: page.language_code, href: page.urlname}
+        { rel: 'alternate', hreflang: page.language_code, href: page.urlname, title: nil}
       end
     end
 
     def language_default_link
-      [{ rel: 'alternate', hreflang: 'x-default', href: url}]
+      [{ rel: 'alternate', hreflang: 'x-default', href: url, title: nil}]
     end
 
     # meta information
@@ -184,7 +184,7 @@ module Europeana
     end
 
     def full_url(path)
-      "//#{ENV.fetch('APP_HOST', 'localhost')}#{ENV.fetch('APP_PORT', nil).nil? ? '' : ':'+ ENV.fetch('APP_PORT', nil)}#{path}"
+      "http://#{ENV.fetch('APP_HOST', 'test.npc.eanadev.org')}#{ENV.fetch('APP_PORT', nil).nil? ? '' : ':'+ ENV.fetch('APP_PORT', nil)}#{path}"
     end
   end
 end
