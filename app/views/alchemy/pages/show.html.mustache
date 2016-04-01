@@ -1,13 +1,9 @@
-{{>atoms/meta/_head}}
-
-{{>templates/Exhibitions/Exhibition-Page}}
-
 {{#debug_mode}}
-    <pre>
-        {{json}}
-    </pre>
+    {{json}}
 {{/debug_mode}}
 
-{{>atoms/meta/_foot}}
-
-
+{{^debug_mode}}
+    {{>atoms/meta/_head}}
+    {{>templates/Exhibitions/Exhibition-Page}}
+    {{>atoms/meta/_foot}}
+{{/debug_mode}}

@@ -13,6 +13,9 @@ module MustacheHelper
     if params[:controller] == 'home' && params[:action] == 'index'
       links << { rel: 'canonical', href: root_url }
     end
+
+    links = links + page_object.language_alternatives_tags
+    links = links + page_object.language_default_link
     { items: links }
   end
 
@@ -60,6 +63,27 @@ module MustacheHelper
     @mustache ||= {}
   end
 
+  def head_meta
+    mustache[:head_meta] ||= begin
+      title = page_object.title
+      description = page_object.description
+      head_meta = [
+        { meta_name: 'description', content: description },
+        { meta_property: 'fb:appid', content: '185778248173748' },
+        { meta_name: 'twitter:card', content: 'summary' },
+        { meta_name: 'twitter:site', content: '@EuropeanaEU' },
+        { meta_property: 'og:site_name', content: 'Europeana Exhibitions' },
+        { meta_property: 'og:description', content: description },
+        { meta_property: 'og:url', content: page_object.url },
+        { meta_property: 'og:title', content: title},
+        { meta_property: 'og:image', content: page_object.image},
+      ]
+      head_meta << page_object.robots_tag
+      head_meta + super
+    end
+  end
+
+
   def navigation
     mustache[:navigation] ||= begin
       {
@@ -71,7 +95,32 @@ module MustacheHelper
           logo: {
             url: root_path,
             text: 'Europeana ' + t('global.search-collections')
-          } # end prim nav
+          },
+          primary_nav: {
+            menu_id: 'main-menu',
+            items: page_object.menu_data
+          },
+          utility_nav: {
+            menu_id: 'settings-menu',
+            style_modifier: 'caret-right',
+            tabindex: 6,
+            items: [
+              {
+                url: '#',
+                text: 'Languages',
+                icon: 'settings',
+                submenu: {
+                  items: page_object.alternatives.collect do |alt|
+                    {
+                      text: alt.language.name,
+                      url: show_page_url(urlname: alt.urlname, locale: alt.language_code)
+                    }
+
+                  end
+                }
+              }
+            ]
+          }
         },
         home_url: root_url,
         footer: {

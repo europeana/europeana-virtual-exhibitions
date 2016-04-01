@@ -22,6 +22,9 @@ module Europeana
 
 
     def chapter_elements
+      if is_foyer
+        return {present: false, item: []}
+      end
       {
         present: true,
         items: exhibition.descendants.map.with_index do |page, index|
@@ -37,6 +40,18 @@ module Europeana
         url: show_page_url(@page.language_code, @page.urlname),
         image: false
       }
+    end
+
+    def is_chapter
+      @page.depth >= 3
+    end
+
+    def is_exhibition
+      @page.depth == 2
+    end
+
+    def is_foyer
+      @page.depth == 1
     end
 
     def head_tags
@@ -55,11 +70,40 @@ module Europeana
     end
 
     def exhibition
-      @exhibition ||= @page.self_and_ancestors.where(depth: 2).first
+      @exhibition ||= (@page.depth == 1 ? @page : @page.self_and_ancestors.where(depth: 2).first)
     end
 
     def table_of_contents
       exhibition.descendants
+    end
+
+    def chapters
+      exhibition.descendants
+    end
+
+    def title
+      @page.title
+    end
+
+    def url
+      show_page_url(@page.language_code, @page.urlname)
+    end
+
+
+    def menu_data
+
+      {
+        text: exhibition.title,
+        url: '#',
+        submenu: {
+            items: chapters.collect do |chapter|
+            {
+              text: chapter.title,
+              url: show_page_url(urlname: chapter.urlname, locale: chapter.language_code)
+            }
+            end
+        }
+      }
     end
 
     def find_thumbnail
@@ -71,7 +115,10 @@ module Europeana
       false
     end
 
-    private
+    def alternatives
+      Alchemy::Page.published.where.not(language_code: @page.language_code).where(urlname: @page.urlname).all
+    end
+
     def section_element_count
       if @elements_sections.nil?
         @sections = []
@@ -101,14 +148,43 @@ module Europeana
       content << (@page.robot_index? ? 'index' : 'noindex')
       content << (@page.robot_follow? ? 'follow' : 'nofollow')
 
-      tag(:meta, name: 'robots', content: content.join(','))
+      { meta_name: 'robots', content: content.join(',')}
     end
 
     def language_alternatives_tags
-      Alchemy::Page.published.where.not(language_code: @page.language_code).where(urlname: @page.urlname).all.collect do |page|
-        tag(:link, { rel: :alternate, hreflang: page.language_code, href: page.urlname})
+      alternatives.collect do |page|
+        { rel: 'alternate', hreflang: page.language_code, href: page.urlname}
       end
     end
 
+    def language_default_link
+      [{ rel: 'alternate', hreflang: 'x-default', href: url}]
+    end
+
+    # meta information
+    def description
+      element = @page.find_elements(only: ['intro', 'text', 'rich_image']).first
+      if element
+        element = Europeana::Elements::Base.build(element).get(:body, :stripped_body)
+      end
+      return element if element
+      return @page.title
+    end
+
+    def image
+      element = @page.find_elements(only: ['intro', 'image', 'rich_image']).first
+      image = nil
+      if element
+        image = Europeana::Elements::Base.build(element).versions
+        if image.has_key?(:full)
+          image = full_url(image[:full][:url])
+        end
+      end
+      return image
+    end
+
+    def full_url(path)
+      "//#{ENV.fetch('APP_HOST', 'localhost')}#{ENV.fetch('APP_PORT', nil).nil? ? '' : ':'+ ENV.fetch('APP_PORT', nil)}#{path}"
+    end
   end
 end

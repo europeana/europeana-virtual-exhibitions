@@ -2,22 +2,22 @@ module Alchemy::Pages
   class Show < Alchemy::Base
     include MustacheHelper
 
-    def elements
-      page_object.elements
-    end
-
     def head_tags
       page_object.head_tags
     end
 
     def page_data
       {
-        elements: elements,
+        elements: page_object.elements,
         title: @page.title,
         url: show_page_url(locale, @page.urlname),
         next_page: next_page,
         previous_page: previous_page,
-        chapter_elements: page_object.chapter_elements
+        chapter_elements: page_object.chapter_elements,
+        is_chapter: page_object.is_chapter,
+        is_foyer: page_object.is_foyer,
+        is_exhibition: page_object.is_exhibition,
+        ch: page_object.menu_data
       }
     end
 
@@ -29,12 +29,12 @@ module Alchemy::Pages
         css_files: nil,
         page_data: page_data,
         breadcrumbs: breadcrumbs,
-        elements: elements,
-        title: title,
-        url: url,
         share_links: share_links,
         next_page: next_page,
-        previous_page: previous_page
+        previous_page: previous_page,
+        head_tags: head_tags,
+        head_meta: head_meta,
+        alt: page_object.language_alternatives_tags
       })
     end
 
@@ -89,7 +89,7 @@ module Alchemy::Pages
     end
 
     def exhibition
-      @exhibition ||= @page.self_and_ancestors.where(depth: 2).first
+      @exhibition ||= (@page.depth == 1 ? @page : @page.self_and_ancestors.where(depth: 2).first)
     end
 
     def debug_mode
