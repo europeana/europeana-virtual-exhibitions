@@ -66,6 +66,26 @@ module Alchemy
       end
     end
 
+    describe "#thumbnail" do
+      context "elements assigned" do
+        it "should return nil" do
+          expect(Europeana::Page::new(basic_exhibition_page).thumbnail).to eq(nil)
+        end
+      end
+
+      context "image element assigned" do
+        let(:exhibition_with_elements) do
+          page = create(:alchemy_page)
+          page.elements << create(:alchemy_element, name: 'image', create_contents_after_create: true)
+          page
+        end
+
+        it "should not return nil" do
+          expect(Europeana::Page::new(exhibition_with_elements).thumbnail).not_to eq(nil)
+        end
+      end
+    end
+
 
     context "complex exhibition" do
       let(:exhibition_root_page) do
@@ -92,7 +112,7 @@ module Alchemy
       describe "#chapter_elements" do
         context "when starting at root of exhibition" do
           it "outputs" do
-            puts Europeana::Page::new(exhibition_child_page_1).chapter_elements.inspect
+            puts Europeana::Page::new(exhibition_child_page_1).thumbnail.inspect
           end
         end
       end
