@@ -54,13 +54,6 @@ module Europeana
       @page.depth == 1
     end
 
-    def head_tags
-      [
-        meta_tags,
-        link_tags
-      ].flatten
-    end
-
     def meta_tags
       robots_tag
     end

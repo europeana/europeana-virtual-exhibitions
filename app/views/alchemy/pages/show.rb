@@ -2,10 +2,6 @@ module Alchemy::Pages
   class Show < Alchemy::Base
     include MustacheHelper
 
-    def head_tags
-      page_object.head_tags
-    end
-
     def page_data
       {
         elements: page_object.elements,
@@ -17,7 +13,6 @@ module Alchemy::Pages
         is_chapter: page_object.is_chapter,
         is_foyer: page_object.is_foyer,
         is_exhibition: page_object.is_exhibition,
-        ch: page_object.menu_data
       }
     end
 
@@ -32,9 +27,7 @@ module Alchemy::Pages
         share_links: share_links,
         next_page: next_page,
         previous_page: previous_page,
-        head_tags: head_tags,
         head_meta: head_meta,
-        alt: page_object.language_alternatives_tags
       })
     end
 
