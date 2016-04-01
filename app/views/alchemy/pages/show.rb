@@ -28,6 +28,7 @@ module Alchemy::Pages
         next_page: next_page,
         previous_page: previous_page,
         head_meta: head_meta,
+        navigation: navigation
       })
     end
 

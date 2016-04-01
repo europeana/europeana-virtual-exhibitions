@@ -63,6 +63,31 @@ module MustacheHelper
     @mustache ||= {}
   end
 
+  def utility_nav
+    return {} if page_object.alternatives.count == 0
+    {
+      menu_id: 'settings-menu',
+      style_modifier: 'caret-right',
+      tabindex: 6,
+      items: [
+        {
+          url: '#',
+          text: 'Languages',
+          icon: 'settings',
+          submenu: {
+            items: page_object.alternatives.collect do |alt|
+              {
+                text: alt.language.name,
+                url: show_page_url(urlname: alt.urlname, locale: alt.language_code)
+              }
+
+            end
+          }
+        }
+      ]
+    }
+  end
+
   def head_meta
     mustache[:head_meta] ||= begin
       title = page_object.title
@@ -100,27 +125,7 @@ module MustacheHelper
             menu_id: 'main-menu',
             items: page_object.menu_data
           },
-          utility_nav: {
-            menu_id: 'settings-menu',
-            style_modifier: 'caret-right',
-            tabindex: 6,
-            items: [
-              {
-                url: '#',
-                text: 'Languages',
-                icon: 'settings',
-                submenu: {
-                  items: page_object.alternatives.collect do |alt|
-                    {
-                      text: alt.language.name,
-                      url: show_page_url(urlname: alt.urlname, locale: alt.language_code)
-                    }
-
-                  end
-                }
-              }
-            ]
-          }
+          utility_nav: utility_nav
         },
         home_url: root_url,
         footer: {
