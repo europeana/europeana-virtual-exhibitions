@@ -22,7 +22,7 @@ module Europeana
 
 
     def chapter_elements
-      if is_foyer
+      if !is_exhibition
         return {present: false, item: []}
       end
       {
@@ -31,6 +31,24 @@ module Europeana
           Europeana::Page.new(page).as_chapter
         end
       }
+    end
+
+    def credit_elements
+      if !is_credit
+        return { present: false, item: []}
+      end
+      {
+        present: true,
+        items: exhibition.self_and_descendants.map.with_index do |page, index|
+          Europeana::Page.new(page).media
+        end.flatten
+      }
+    end
+
+    def media
+      @page.elements.published.where(name: ['image', 'rich_image', 'intro']).map do |element|
+        Europeana::Elements::Base.build(element).to_hash
+      end
     end
 
     def as_chapter
@@ -52,6 +70,10 @@ module Europeana
 
     def is_foyer
       @page.depth == 1
+    end
+
+    def is_credit
+      @page.page_layout == 'exhibitions_credit_page'
     end
 
     def meta_tags
@@ -84,7 +106,6 @@ module Europeana
 
 
     def menu_data
-
       {
         text: exhibition.title,
         url: '#',

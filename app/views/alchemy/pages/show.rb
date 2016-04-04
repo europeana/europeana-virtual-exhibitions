@@ -10,9 +10,11 @@ module Alchemy::Pages
         next_page: next_page,
         previous_page: previous_page,
         chapter_elements: page_object.chapter_elements,
+        credit_elements: page_object.credit_elements,
         is_chapter: page_object.is_chapter,
         is_foyer: page_object.is_foyer,
         is_exhibition: page_object.is_exhibition,
+        is_credit: page_object.is_credit
       }
     end
 
