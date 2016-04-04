@@ -1,6 +1,6 @@
 module Europeana
   module Elements
-    class FeaturedExhibition < Europeana::Elements::Base
+    class FeaturedExhibition < Europeana::Elements::Intro
     end
   end
 end
