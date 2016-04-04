@@ -6,7 +6,7 @@
   Please consult Alchemy::Content.rb docs for further methods on the content object
 %>
 <div class="content_editor essence_credit" id="<%= content.dom_id %>" data-content-id="<%= content.id %>">
-  <%= content_label(content) %>
+  <label>Title</label>
   <%= text_field_tag(
     content.form_field_name(:title),
     content.essence.title,

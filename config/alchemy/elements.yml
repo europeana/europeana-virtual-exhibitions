@@ -51,10 +51,6 @@
   contents:
   - name: image
     type: EssencePicture
-  - name: caption
-    type: EssenceText
-  - name: link
-    type: EssenceLink
   - name: image_credit
     type: EssenceCredit
 - name: quote
@@ -80,8 +76,8 @@
     default: Left
     settings:
       select_values: [Left, Right]
-  - name: caption
-    type: EssenceText
+  - name: image_credit
+    type: EssenceCredit
   - name: quote
     type: EssenceRichtext
   - name: quotee

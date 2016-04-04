@@ -23,10 +23,9 @@ module Europeana
       describe 'attributes' do
         context 'element with no content' do
           let(:hash) { Elements::Base.build(element).to_hash }
-          it 'should have the following attributes: image, caption, image_credit, is_landscape, is_portrait' do
+          it 'should have the following attributes: image, image_credit, is_landscape, is_portrait' do
 
             expect(hash).to have_key(:image)
-            expect(hash).to have_key(:caption)
             expect(hash).to have_key(:image_credit)
             expect(hash).to have_key(:is_landscape)
             expect(hash).to have_key(:is_portrait)
