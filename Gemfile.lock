@@ -9,10 +9,10 @@ GIT
 
 GIT
   remote: git://github.com/AlchemyCMS/alchemy_cms.git
-  revision: 10b0025a446fad5ab27ec63b5b4fd99262367207
-  ref: 10b0025a446fad5ab27ec63b5b4fd99262367207
+  revision: 1c73cd8216885f455746831cbb93950e22ec2389
+  branch: master
   specs:
-    alchemy_cms (4.0.0.beta)
+    alchemy_cms (3.3.0.beta1)
       actionpack-page_caching (~> 1.0.0)
       active_model_serializers (~> 0.9)
       acts-as-taggable-on (~> 3.1)
@@ -20,22 +20,21 @@ GIT
       awesome_nested_set (~> 3.0.0)
       cancancan (~> 1.9)
       coffee-rails (~> 4.0)
-      compass-rails (~> 2.0, >= 2.0.4)
+      compass-rails (>= 2.0.4, < 4.0)
       dragonfly (~> 1.0.1)
-      jquery-rails (~> 4.0.3)
+      jquery-rails (~> 4.0)
       jquery-ui-rails (~> 5.0.0)
       kaminari (~> 0.15)
       magiclabs-userstamp (~> 2.1.0)
-      non-stupid-digest-assets (~> 1.0.3, < 1.0.7)
+      non-stupid-digest-assets (~> 1.0.8)
       rails (>= 4.2.0, < 5.0)
-      ransack (~> 1.6)
+      ransack (~> 1.4)
       request_store (~> 1.2)
       responders (~> 2.0)
       sass-rails (~> 5.0)
       sassy-buttons (~> 0.2.6)
       select2-rails (>= 3.5.9.1, < 4.0)
       simple_form (~> 3.0)
-      spinner.rb
       turbolinks (~> 2.5)
 
 GIT
@@ -157,10 +156,10 @@ GEM
       sass (>= 3.3.0, < 3.5)
     compass-import-once (1.0.5)
       sass (>= 3.2, < 3.5)
-    compass-rails (2.0.5)
+    compass-rails (3.0.2)
       compass (~> 1.0.0)
       sass-rails (< 5.1)
-      sprockets (< 2.13)
+      sprockets (< 4.0)
     database_cleaner (1.5.1)
     debug_inspector (0.0.2)
     delayed_job (4.1.1)
@@ -257,7 +256,7 @@ GEM
     netrc (0.11.0)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
-    non-stupid-digest-assets (1.0.6)
+    non-stupid-digest-assets (1.0.8)
       sprockets (>= 2.0)
     orm_adapter (0.5.0)
     pg (0.18.4)
@@ -362,7 +361,6 @@ GEM
       json (~> 1.8)
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.0)
-    spinner.rb (0.3.0)
     spring (1.6.4)
     spring-commands-rspec (1.0.4)
       spring (>= 0.9.1)

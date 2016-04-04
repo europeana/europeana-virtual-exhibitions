@@ -24,3 +24,5 @@ config/initializers/secret_token.rb
 
 # Ignore coverage
 /coverage
+
+public/portal/*
