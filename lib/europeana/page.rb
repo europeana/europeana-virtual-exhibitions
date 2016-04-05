@@ -56,7 +56,7 @@ module Europeana
         is_chapter_nav: true,
         title: @page.title,
         url: show_page_url(@page.language_code, @page.urlname),
-        image: false
+        image: find_thumbnail ? find_thumbnail[:image] : false
       }
     end
 

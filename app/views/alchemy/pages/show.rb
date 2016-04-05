@@ -66,10 +66,12 @@ module Alchemy::Pages
     end
 
     def next_page
+      return false unless is_chapter
       format_page(@page.right_sibling)
     end
 
     def previous_page
+      return false unless is_chapter
       format_page(@page.left_sibling)
     end
 
