@@ -10,4 +10,4 @@
   elements: [foyer_card, featured_exhibition]
 - name: exhibition_credit_page
   unique: false
-  elements: [text, image, rich_image]
+  elements: [credit_intro, text, image, rich_image]

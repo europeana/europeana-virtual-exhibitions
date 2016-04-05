@@ -130,3 +130,11 @@
     type: EssencePicture
   - name: link
     type: EssenceLink
+- name: credit_intro
+  contents:
+  - name: title
+    type: EssenceText
+  - name: body
+    type: EssenceRichtext
+  - name: image
+    type: EssencePicture
