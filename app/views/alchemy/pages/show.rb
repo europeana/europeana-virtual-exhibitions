@@ -30,8 +30,25 @@ module Alchemy::Pages
         next_page: next_page,
         previous_page: previous_page,
         head_meta: head_meta,
-        navigation: navigation
+        navigation: navigation,
+        footer: footer
       })
+    end
+
+    def is_foyer
+      page_object.is_foyer
+    end
+
+    def is_credit
+      page_object.is_credit
+    end
+
+    def is_chapter
+      page_object.is_chapter
+    end
+
+    def is_exhibition
+      page_object.is_exhibition
     end
 
     def title

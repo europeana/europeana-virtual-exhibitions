@@ -108,6 +108,76 @@ module MustacheHelper
     end
   end
 
+  def footer
+    page_object.is_foyer ? foyer_footer : page_footer
+  end
+
+  def foyer_footer
+    {
+      linklist1: {
+        title: "More info",
+        items: [
+          {text: "New collections", url: "http://europeana.eu/portal/browse/newcontent"},
+          {
+            text: t('site.footer.menu.data-providers'),
+            url: 'https://europeana.eu/about'
+          },
+          {
+            text: t('site.footer.menu.become-a-provider'),
+            url: 'http://pro.europeana.eu/share-your-data/'
+          }
+        ]
+      },
+      linklist2: {
+        title: t('global.help'),
+        items: [
+          {
+            text: t('site.footer.menu.search-tips'),
+            url: 'https://europeana.eu/help'
+          },
+          {
+            text: t('site.footer.menu.using-myeuropeana'),
+            url: '#'
+          },
+          {
+            text: t('global.terms-and-policies'),
+            url: 'https://europeana.eu/rights'
+          }
+        ]
+      },
+      subfooter: {
+        items: [
+          { text: "Home", url: ""},
+          { text: "Terms of use & policies", url: "http://europeana.eu/portal/rights/terms-and-policies.html"},
+          { text: "Contact us", url: ""},
+          { text: "Home", url: ""},
+
+        ]
+      }
+    }
+  end
+
+  def page_footer
+    {
+      items: [
+        {text: t('exhibitions.contacts', default: 'Contacts'), 'url': 'http://ny.nl'},
+        {text: t('exhibitions.credits', default: 'Credits'), 'url': 'http://ny.nl'},
+        {text: t('site.footer.menu.about'), 'url': 'http://ny.nl'},
+        {text: 'Europeana ' + t('global.search-collections'), 'url': 'http://ny.nl'}
+      ]
+    }
+  end
+
+  def social
+    {
+      url: page_object.url,
+      facebook: true,
+      pinterest: true,
+      twitter: true,
+      googleplus: true,
+      text: "Share this Exhibition"
+    }
+  end
 
   def navigation
     mustache[:navigation] ||= begin
@@ -128,58 +198,7 @@ module MustacheHelper
           utility_nav: utility_nav
         },
         home_url: root_url,
-        footer: {
-          linklist1: {
-            title: t('global.more-info'),
-            # Use less elegant way to get footer links
-            #
-            # items: Page.primary.map do |page|
-            #   {
-            #     text: t(page.slug, scope: 'site.footer.menu'),
-            #     url: static_page_path(page, format: 'html')
-            #   }
-            # end
-            items: [
-              {
-                text: t('site.footer.menu.about'),
-                url: 'https://europeana.eu/about'
-              },
-              {
-                text: t('site.footer.menu.data-providers'),
-                url: 'https://europeana.eu/about'
-              },
-              {
-                text: t('site.footer.menu.become-a-provider'),
-                url: 'http://pro.europeana.eu/share-your-data/'
-              }
-            ]
-          },
-          linklist2: {
-            title: t('global.help'),
-            items: [
-              {
-                text: t('site.footer.menu.search-tips'),
-                url: 'https://europeana.eu/help'
-              },
-              # {
-              #   text: t('site.footer.menu.using-myeuropeana'),
-              #   url: '#'
-              # },
-              {
-                text: t('global.terms-and-policies'),
-                url: 'https://europeana.eu/rights'
-              }
-            ]
-          },
-          social: {
-            url: page_object.url,
-            facebook: true,
-            pinterest: true,
-            twitter: true,
-            googleplus: true,
-            text: "Share this Exhibition"
-          }
-        }
+        footer: footer
       }
     end
   end
