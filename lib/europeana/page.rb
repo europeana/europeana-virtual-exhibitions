@@ -35,7 +35,7 @@ module Europeana
 
     def credit_elements
       if !is_credit
-        return { present: false, item: []}
+        return { present: false, items: []}
       end
       {
         present: true,
@@ -73,7 +73,7 @@ module Europeana
     end
 
     def is_credit
-      @page.page_layout == 'exhibitions_credit_page'
+      @page.page_layout == 'exhibition_credit_page'
     end
 
     def meta_tags
