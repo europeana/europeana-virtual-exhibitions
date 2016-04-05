@@ -47,7 +47,7 @@ module Europeana
 
     def media
       @page.elements.published.where(name: ['image', 'rich_image', 'intro']).map do |element|
-        Europeana::Elements::Base.build(element).to_hash
+        Europeana::Elements::Base.build(element).to_hash(include_url: url)
       end
     end
 

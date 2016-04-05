@@ -29,8 +29,8 @@ module Europeana
         self.class.name.demodulize.tableize.singularize
       end
 
-      def to_hash
-        data.merge(Hash[@attributes.map {|attribute| [attribute, self.send(attribute)]}]).merge({type: type, alchemy_id: @element.id, id: "#{@element.name}_#{@element.id}"})
+      def to_hash(include_url: false)
+        data.merge(Hash[@attributes.map {|attribute| [attribute, self.send(attribute)]}]).merge({type: type, alchemy_id: @element.id, id: "#{@element.name}_#{@element.id}"}).merge(include_url ? {page_url: include_url } : {})
       end
 
       def get(name, attribute = :ingredient)
