@@ -36,6 +36,9 @@ module Exhibitions
 
     config.assets.prefix = '/portal/exhibitions/assets'
     config.active_job.queue_adapter = :delayed_job
+    config.assets.initialize_on_precompile = false
+
+
 
   # Load Redis config from config/redis.yml, if it exists
   config.cache_store = begin
