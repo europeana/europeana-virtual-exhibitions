@@ -4,6 +4,13 @@ Rails.application.routes.draw do
     mount Alchemy::Engine => '/'
   end
 
+  scope '/portal/exhibitions' do
+    namespace :alchemy, path: nil do
+      namespace :api, defaults: {format: 'json'} do
+        resources :exhibitions, only: [:index]
+      end
+    end
+  end
 
   get '/portal/exhibitions/sitemap-index.xml' => 'sitemap#index'
   get '/portal/exhibitions/:locale/sitemap.xml' => 'sitemap#show', constraints: { :locale => /[a-z]{2}/}, as: :sitemap, defaults: {format: :xml}
