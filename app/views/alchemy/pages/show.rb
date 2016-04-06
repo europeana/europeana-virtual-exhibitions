@@ -2,6 +2,16 @@ module Alchemy::Pages
   class Show < Alchemy::Base
     include MustacheHelper
 
+    def cached_body
+      lambda do |text|
+        Rails.cache.fetch(body_cache_key, expires_in: 24.hours) do
+          Rails.logger.info "Missed cache for #{body_cache_key}"
+          render(text)
+        end
+      end
+    end
+
+
     def page_data
       {
         elements: page_object.elements,
