@@ -119,7 +119,7 @@ module Alchemy::Pages
     def base_crumbs
       [
         {
-          url: show_page_url(locale, 'start'),
+          url: show_page_url(locale, 'index'),
           title: 'Home',
           is_first: true
         }
