@@ -36,7 +36,7 @@ module Exhibitions
 
     config.assets.prefix = '/portal/exhibitions/assets'
     config.active_job.queue_adapter = :delayed_job
-    config.assets.initialize_on_precompile = false
+    #config.assets.initialize_on_precompile = false
 
 
 
@@ -51,11 +51,11 @@ module Exhibitions
     uri.host = redis_config[:host]
     uri.port = redis_config[:port]
     uri.path = '/' + [redis_config[:db], redis_config[:namespace]].join('/')
-
+    Rails.logger.info redis_config.inspect
+    Rails.logger.info uri.to_s
     [:redis_store, uri.to_s]
   rescue RuntimeError => e
     :null_store
   end
-
   end
 end
