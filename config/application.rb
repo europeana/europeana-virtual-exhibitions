@@ -51,8 +51,8 @@ module Exhibitions
     uri.host = redis_config[:host]
     uri.port = redis_config[:port]
     uri.path = '/' + [redis_config[:db], redis_config[:namespace]].join('/')
-    Rails.logger.info redis_config.inspect
-    Rails.logger.info uri.to_s
+    puts redis_config.inspect
+    puts uri.to_s
     [:redis_store, uri.to_s]
   rescue RuntimeError => e
     :null_store
