@@ -95,8 +95,6 @@ module MustacheHelper
       head_meta = [
         { meta_name: 'description', content: description },
         { meta_property: 'fb:app_id', content: '185778248173748' },
-        { meta_name: 'twitter:card', content: 'summary' },
-        { meta_name: 'twitter:site', content: '@EuropeanaEU' },
         { meta_property: 'og:site_name', content: 'Europeana Exhibitions' },
         { meta_property: 'og:description', content: description },
         { meta_property: 'og:url', content: page_object.url },
@@ -104,8 +102,26 @@ module MustacheHelper
         { meta_property: 'og:image', content: page_object.thumbnail},
       ]
       head_meta << page_object.robots_tag
-      head_meta + super
+      twitter_card_meta + head_meta + super
     end
+  end
+
+
+  def twitter_card_meta
+    meta = []
+
+    meta << { meta_name: 'twitter:site', content: '@EuropeanaEU' }
+    meta << { meta_name: 'twitter:title', content: page_object.title }
+    meta << { meta_name: 'twitter:description', content: page_object.description }
+
+    if page_object.thumbnail
+      meta << { meta_name: 'twitter:card', content: 'summary_large_image' }
+      meta << { meta_name: 'twitter:creator', content: '@EuropeanaEU' }
+      meta << { meta_name: 'twitter:image', content: page_object.thumbnail }
+    else
+      meta << { meta_name: 'twitter:card', content: 'summary' }
+    end
+    meta
   end
 
   def footer
