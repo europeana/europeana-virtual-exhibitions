@@ -38,7 +38,10 @@ module Europeana
           raise StandardError, "No content #{name} found for #{@element}"
         end
         if @element.content_by_name(name)
-          @element.content_by_name(name).essence.send(attribute)
+          value = @element.content_by_name(name).essence.send(attribute)
+          value.trim
+          return false if value.empty?
+          value
         else
           false
         end
