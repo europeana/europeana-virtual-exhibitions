@@ -57,6 +57,5 @@ module Exhibitions
     rescue RuntimeError => e
     :null_store
     end
-    config.cache_store = :null_store
   end
 end
