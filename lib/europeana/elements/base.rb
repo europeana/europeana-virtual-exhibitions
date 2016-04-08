@@ -39,9 +39,8 @@ module Europeana
         end
         if @element.content_by_name(name)
           value = @element.content_by_name(name).essence.send(attribute)
-          value.strip!
           return false if value.empty?
-          value
+          value.strip!
         else
           false
         end
