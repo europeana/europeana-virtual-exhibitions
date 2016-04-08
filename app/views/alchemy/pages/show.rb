@@ -41,7 +41,8 @@ module Alchemy::Pages
         previous_page: previous_page,
         head_meta: head_meta,
         navigation: navigation,
-        footer: footer
+        footer: footer,
+        google_analytics_code: google_analytics_code
       })
     end
 
@@ -86,7 +87,7 @@ module Alchemy::Pages
     end
 
     def format_page(page)
-      return false if !page.present?
+      return false if !page.present? || page.public == false
       {
         title: page.title,
         url: show_page_url(page.language.language_code, page.urlname)
@@ -119,6 +120,10 @@ module Alchemy::Pages
 
     def debug_mode
       params.include?(:debug)
+    end
+
+    def google_analytics_code
+      ENV.fetch("GOOGLE_ANALYTICS_CODE", "UA-123456-1")
     end
 
 
