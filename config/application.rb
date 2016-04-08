@@ -38,10 +38,10 @@ module Exhibitions
     config.active_job.queue_adapter = :delayed_job
     #config.assets.initialize_on_precompile = false
 
+    config.i18n.enforce_available_locales = false
 
-
-  # Load Redis config from config/redis.yml, if it exists
-  config.cache_store = begin
+    # Load Redis config from config/redis.yml, if it exists
+    config.cache_store = begin
     redis_config = Rails.application.config_for(:redis).symbolize_keys
     fail RuntimeError unless redis_config.present?
 
@@ -54,8 +54,8 @@ module Exhibitions
     puts redis_config.inspect
     puts uri.to_s
     [:redis_store, uri.to_s]
-  rescue RuntimeError => e
+    rescue RuntimeError => e
     :null_store
-  end
+    end
   end
 end
