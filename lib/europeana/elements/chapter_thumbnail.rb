@@ -5,7 +5,8 @@ module Europeana
 
       def data
         {
-          image: versions
+          image: versions,
+          label: get(:label, :body)
         }
       end
     end
