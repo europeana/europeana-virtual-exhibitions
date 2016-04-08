@@ -82,7 +82,7 @@ module Alchemy::Pages
 
     def previous_page
       return false unless is_chapter
-      format_page(@page.left_sibling)
+      format_page(@page.left_sibling) || format_page(exhibition)
     end
 
     def format_page(page)
