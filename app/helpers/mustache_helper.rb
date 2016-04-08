@@ -99,7 +99,7 @@ module MustacheHelper
         { meta_property: 'og:description', content: description },
         { meta_property: 'og:url', content: page_object.url },
         { meta_property: 'og:title', content: title},
-        { meta_property: 'og:image', content: page_object.thumbnail},
+        { meta_property: 'og:image', content: page_object.thumbnail || false },
       ]
       head_meta << page_object.robots_tag
       twitter_card_meta + head_meta + super
