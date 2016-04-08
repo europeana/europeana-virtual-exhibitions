@@ -84,3 +84,5 @@ group :test do
   gem 'rspec-activemodel-mocks', '~> 1.0'
   gem 'simplecov', require: false
 end
+
+gem 'newrelic_rpm'
