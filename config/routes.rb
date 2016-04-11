@@ -15,5 +15,9 @@ Rails.application.routes.draw do
   get '/portal/exhibitions/sitemap-index.xml' => 'sitemap#index'
   get '/portal/:locale/exhibitions/sitemap.xml' => 'sitemap#show', constraints: { :locale => /[a-z]{2}/}, as: :sitemap, defaults: {format: :xml}
   get '/portal/exhibitions/robots.txt' => 'sitemap#robots'
+  get '/portal/:locale/exhibitions/feed.:format' => 'sitemap#feed', constraints: { format: /(xml)/}
+
   get '/portal/:locale/exhibitions/*urlname(.:format)' => 'alchemy/pages#show', as: :show_page, constraints: { :locale => /[a-z]{2}/}
+
+
 end
