@@ -190,7 +190,7 @@ module Europeana
       if find_thumbnail && find_thumbnail.has_key?(:image)
         return full_url(find_thumbnail[:image][version][:url])
       end
-      nil
+      false
     end
 
     def full_url(path)

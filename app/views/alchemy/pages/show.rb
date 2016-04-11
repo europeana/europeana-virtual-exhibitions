@@ -1,6 +1,7 @@
 module Alchemy::Pages
   class Show < Alchemy::Base
     include MustacheHelper
+    include Rails.application.routes.url_helpers
 
     def cached_body
       lambda do |text|
@@ -42,7 +43,8 @@ module Alchemy::Pages
         head_meta: head_meta,
         navigation: navigation,
         footer: footer,
-        google_analytics_code: google_analytics_code
+        google_analytics_code: google_analytics_code,
+        growl_message: growl_message
       })
     end
 
@@ -103,7 +105,7 @@ module Alchemy::Pages
       "LABEL"
     end
     def breadcrumbs
-      crumbs = base_crumbs + @page.self_and_ancestors.where('depth >= 2').map do | ancestor |
+      crumbs = @page.self_and_ancestors.where('depth >= 1').map do | ancestor |
         {
           url: show_page_url(locale, ancestor.urlname),
           title: ancestor.title
@@ -130,15 +132,6 @@ module Alchemy::Pages
     private
     def locale
       @locale ||= @page.language.language_code
-    end
-    def base_crumbs
-      [
-        {
-          url: show_page_url(locale, 'index'),
-          title: 'Home',
-          is_first: true
-        }
-      ]
     end
 
     def body_cache_key

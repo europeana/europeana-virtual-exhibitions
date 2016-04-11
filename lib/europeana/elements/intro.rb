@@ -11,7 +11,7 @@ module Europeana
           stripped_intro_description: get(:body, :stripped_body),
           image: versions,
           title: get(:title, :body),
-          sub_title: get(:sub_title, :body),
+          subtitle: get(:sub_title, :body),
           image_credit: image_credit,
           label: get(:label, :body),
           partner_image: versions("partner_logo")

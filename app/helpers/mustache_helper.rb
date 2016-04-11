@@ -195,6 +195,10 @@ module MustacheHelper
     }
   end
 
+  def growl_message
+    t('exhibitions.scroll-down')
+  end
+
   def navigation
     mustache[:navigation] ||= begin
       {

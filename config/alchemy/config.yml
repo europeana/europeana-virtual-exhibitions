@@ -46,7 +46,7 @@ cache_pages: true
 #
 sitemap:
   show_root: true
-  show_flag: false
+  show_flag: true
 
 # === URL nesting
 #
