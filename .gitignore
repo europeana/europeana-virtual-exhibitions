@@ -21,7 +21,8 @@ config/initializers/secret_token.rb
 
 # Ignore .env.<environment> files
 .env.*
-
+.env
+!.env.example
 # Ignore coverage
 /coverage
 
