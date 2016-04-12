@@ -44,7 +44,8 @@ module Alchemy::Pages
         navigation: navigation,
         footer: footer,
         google_analytics_code: google_analytics_code,
-        growl_message: growl_message
+        growl_message: growl_message,
+        title: title
       })
     end
 
@@ -65,6 +66,10 @@ module Alchemy::Pages
     end
 
     def title
+      @page.title
+    end
+
+    def page_title
       @page.title
     end
 
