@@ -34,7 +34,7 @@ module Europeana
       def caption
         credit = @element.content_by_name('image_credit')
         return false if credit.nil?
-        "#{credit.essence.title}, #{credit.essence.author}, <a href='#{credit.essence.url}'>#{credit.essence.institution}</a>, #{license_label(credit)}"
+        "<a href='#{credit.essence.url}'>#{credit.essence.title}</a>, #{credit.essence.author}, #{credit.essence.institution}, #{license_label(credit)}"
       end
 
       def license_label(credit)
