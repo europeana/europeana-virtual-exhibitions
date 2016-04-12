@@ -4,7 +4,7 @@ module Europeana
       LICENSES = {
         "Public Domain Mark" => "public",
         "Out of copyright - non commercial re-use" => "OOC",
-        "CCO" => "CC0",
+        "CC0" => "CC0",
         "CC BY" => "CC_BY",
         "CC BY-SA" => "CC_BY_SA",
         "CC BY-ND" => "CC_BY_ND",
@@ -15,6 +15,22 @@ module Europeana
         "Rights Reserved - Paid Access" => "RR_paid",
         "Orphan Work" => "orphan",
         "Unknown" => "unknown"
+      }
+
+      LICENSES_URL = {
+        "public" => "license",
+        "OOC" => "license",
+        "CC0" => "http://europeana.eu/license/",
+        "CC_BY" => "http://europeana.eu/license/",
+        "CC_BY_SA" => "http://europeana.eu/license/",
+        "CC_BY_ND" => "http://europeana.eu/license/",
+        "CC_BY_NC" => "http://europeana.eu/license/",
+        "CC_BY_NC_SA" => "http://europeana.eu/license/",
+        "CC_BY_NC_ND" => "http://europeana.eu/license/",
+        "RR_free" => "http://europeana.eu/license/",
+        "RR_paid" => "http://europeana.eu/license/",
+        "orphan" => "http://europeana.eu/license/",
+        "unknown" => "http://europeana.eu/license/"
       }
       def image_credit(name = 'image_credit')
         credit = @element.content_by_name('image_credit')
@@ -34,7 +50,7 @@ module Europeana
       def caption
         credit = @element.content_by_name('image_credit')
         return false if credit.nil?
-        "<a href='#{credit.essence.url}'>#{credit.essence.title}</a>, #{credit.essence.author}, #{credit.essence.institution}, #{license_label(credit)}"
+        "<a href='#{credit.essence.url}'>#{credit.essence.title}</a>, #{credit.essence.author}, #{credit.essence.institution}, <a href='#{license_link(credit)}'>#{license_label(credit)}</a>"
       end
 
       def license_label(credit)
@@ -42,6 +58,11 @@ module Europeana
 
         return inverted[credit.essence.license] if inverted.has_key?(credit.essence.license)
         "unknown"
+      end
+
+      def license_link(credit)
+        url = Europeana::Mixins::ImageCredit::LICENSES_URL[credit.essence.license]
+        url
       end
 
       def stripped_caption
