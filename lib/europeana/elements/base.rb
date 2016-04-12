@@ -39,8 +39,12 @@ module Europeana
         end
         if @element.content_by_name(name)
           value = @element.content_by_name(name).essence.send(attribute)
-          return false if value.nil? || value.empty?
-          value.strip
+
+          if value.class == String
+            return false if value.nil? || value.empty?
+            return value.strip
+          end
+          value
         else
           false
         end
