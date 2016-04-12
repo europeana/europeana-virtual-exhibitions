@@ -5,7 +5,8 @@
 
   Please consult Alchemy::Content.rb docs for further methods on the content object
 %>
-<div class="content_editor essence_credit" id="<%= content.dom_id %>" data-content-id="<%= content.id %>">
+<div class="content_editor essence_credit" id="<%= content.dom_id %>" data-content-id="<%= content.id %>" style="padding-left: 20px;">
+  <h4>Image credit</h4>
   <label>Title</label>
   <%= text_field_tag(
     content.form_field_name(:title),
