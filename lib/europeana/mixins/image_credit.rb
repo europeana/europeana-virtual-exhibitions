@@ -1,6 +1,21 @@
 module Europeana
   module Mixins
     module ImageCredit
+      LICENSES = {
+        "Public Domain Mark" => "public",
+        "Out of copyright - non commercial re-use" => "OOC",
+        "The Creative Commons CC0 1.0 Universal Public Domain Dedication" => "CC0",
+        "Creative Commons - Attribution" => "CC_BY",
+        "Creative Commons - Attribution, ShareAlike" => "CC_BY_SA",
+        "Creative Commons - Attribution, No Derivatives" => "CC_BY_ND",
+        "Creative Commons - Attribution, Non-Commercial " => "CC_BY_NC",
+        "Creative Commons - Attribution, Non-Commercial, ShareAlike" => "CC_BY_NC_SA",
+        "Creative Commons - Attribution, Non-Commercial, No Derivatives" => "CC_BY_NC_ND",
+        "Rights Reserved - Free Access" => "RR_free",
+        "Rights Reserved - Paid Access" => "RR_paid",
+        "Orphan Work" => "orphan",
+        "Unknown" => "unknown"
+      }
       def image_credit(name = 'image_credit')
         credit = @element.content_by_name('image_credit')
         return false if credit.nil?
@@ -19,7 +34,14 @@ module Europeana
       def caption
         credit = @element.content_by_name('image_credit')
         return false if credit.nil?
-        "#{credit.essence.title}, #{credit.essence.author}, <a href='#{credit.essence.url}'>#{credit.essence.institution}</a>, #{credit.essence.license}"
+        "#{credit.essence.title}, #{credit.essence.author}, <a href='#{credit.essence.url}'>#{credit.essence.institution}</a>, #{license_label(credit)}"
+      end
+
+      def license_label(credit)
+        inverted = Europeana::Mixins::ImageCredit::LICENSES.invert
+
+        return inverted[credit.essence.license] if inverted.has_key?(credit.essence.license)
+        "unknown"
       end
 
       def stripped_caption
