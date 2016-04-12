@@ -106,10 +106,6 @@ module MustacheHelper
     end
   end
 
-  def title
-    page_object.title
-  end
-
   def twitter_card_meta
     meta = []
 
