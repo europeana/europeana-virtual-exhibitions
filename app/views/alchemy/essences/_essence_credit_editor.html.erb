@@ -35,6 +35,18 @@
   <label>License</label>
   <%= select_tag(
     content.form_field_name(:license),
-    options_for_select(['license', 'wiki', 'secret'])
+    options_for_select({"Public Domain Mark" => "public",
+"Out of copyright - non commercial re-use" => "OOC",
+"CC0" => "CC0",
+"CC-BY" => "CC_BY",
+"CC-BY-SA" => "CC_BY_SA",
+"CC-BY-ND" => "CC_BY_ND",
+"CC-BY-NC" => "CC_BY_NC",
+"CC-BY-NC-SA" => "CC_BY_NC_SA",
+"CC-BY-NC-ND" => "CC_BY_NC_ND",
+"Rights Reserved - Free Access" => "RR_free",
+"Rights Reserved - Paid Access" => "RR_paid",
+"Orphan Work" => "orphan",
+"Unknown" => "unknown"})
   ) %>
 </div>

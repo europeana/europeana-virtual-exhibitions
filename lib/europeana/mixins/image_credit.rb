@@ -9,10 +9,11 @@ module Europeana
           attribution_creator: credit.essence.author,
           attribution_institution: credit.essence.institution,
           attribution_url: credit.essence.url,
-          license_public: credit.essence.license,
           caption: caption,
-          stripped_caption: stripped_caption
-        }
+          stripped_caption: stripped_caption,
+        }.merge({ "license_#{credit.essence.license}" => true})
+
+
       end
 
       def caption
