@@ -79,12 +79,12 @@ module Alchemy::Pages
     end
 
     def next_page
-      return false unless is_chapter
+      return false unless is_chapter || is_credit
       format_page(@page.right_sibling)
     end
 
     def previous_page
-      return false unless is_chapter
+      return false unless is_chapter || is_credit
       format_page(@page.left_sibling) || format_page(exhibition)
     end
 
