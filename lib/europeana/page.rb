@@ -125,7 +125,7 @@ module Europeana
       element = @page.elements.published.where(name: 'intro').first
       return Europeana::Elements::ChapterThumbnail.new(element).to_hash if element
 
-      element = @page.elements.published.where(name: ['image', 'rich_image']).first
+      element = @page.elements.published.where(name: ['image', 'rich_image', 'credit_intro']).first
       return Europeana::Elements::ChapterThumbnail.new(element).to_hash if element
       false
     end
