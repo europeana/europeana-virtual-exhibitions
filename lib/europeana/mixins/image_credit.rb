@@ -19,18 +19,18 @@ module Europeana
 
       LICENSES_URL = {
         "public" => "https://creativecommons.org/publicdomain/mark/1.0/",
-        "OOC" => "http://www.europeana.eu/rights/out-of-copyright-non-commercial",
+        "OOC" => "http://www.europeana.eu/portal/rights/out-of-copyright-non-commercial",
         "CC0" => "https://creativecommons.org/publicdomain/zero/1.0/",
         "CC_BY" => "https://creativecommons.org/licenses/by/1.0",
         "CC_BY_SA" => "https://creativecommons.org/licenses/by-sa/1.0",
         "CC_BY_ND" => "https://creativecommons.org/licenses/by-nc-nd/1.0",
         "CC_BY_NC" => "https://creativecommons.org/licenses/by-nc/1.0",
         "CC_BY_NC_SA" => "https://creativecommons.org/licenses/by-nc-sa/1.0",
-        "CC_BY_NC_ND" => "https://creativecommons.org/licenses/by-nc-nd",
-        "RR_free" => "http://www.europeana.eu/rights/rr-f",
-        "RR_paid" => "http://www.europeana.eu/rights/rr-p",
-        "orphan" => "http://www.europeana.eu/rights/test-orphan",
-        "unknown" => "http://www.europeana.eu/rights/unknown"
+        "CC_BY_NC_ND" => "https://creativecommons.org/licenses/by-nc-nd/1.0",
+        "RR_free" => "http://www.europeana.eu/portal/rights/rr-f",
+        "RR_paid" => "http://www.europeana.eu/portal/rights/rr-p",
+        "orphan" => "http://www.europeana.eu/portal/rights/orphan-work-eu",
+        "unknown" => "http://www.europeana.eu/portal/rights/unknown"
       }
 
       def image_credit(name = 'image_credit')
