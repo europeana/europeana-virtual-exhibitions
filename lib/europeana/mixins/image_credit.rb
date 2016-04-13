@@ -43,6 +43,7 @@ module Europeana
           attribution_url: credit.essence.url,
           caption: caption,
           stripped_caption: stripped_caption,
+          license_url: license_link
         }.merge({ "license_#{credit.essence.license}" => true})
 
 
