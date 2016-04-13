@@ -26,6 +26,8 @@
     type: EssenceText
   - name: partner_logo
     type: EssencePicture
+  - name: hide_in_credits
+    type: EssenceBoolean
 - name: featured_exhibition
   hint: false
   unique: true
@@ -53,6 +55,8 @@
     type: EssencePicture
   - name: image_credit
     type: EssenceCredit
+  - name: hide_in_credits
+    type: EssenceBoolean
 - name: quote
   hint: false
   unique: false
@@ -84,6 +88,8 @@
     type: EssenceText
   - name: body
     type: EssenceRichtext
+  - name: hide_in_credits
+    type: EssenceBoolean
 - name: section
   hint: false
   unique: false
