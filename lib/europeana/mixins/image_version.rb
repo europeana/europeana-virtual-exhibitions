@@ -2,7 +2,7 @@ module Europeana
   module Mixins
     module ImageVersion
       VERSIONS = {
-        #original: {size: nil, format: 'jpeg', 'quality': 85 },
+        original: {size: nil, format: 'jpeg', 'quality': 85 },
         full: {size: '1600x1600', format: 'jpeg', 'quality': 85 },
         fullx2: {size: '3200x3200', format: 'jpeg', 'quality': 85 },
         half: {size: '800x800', format: 'jpeg', 'quality': 85 },
@@ -16,7 +16,7 @@ module Europeana
 
       def versions(name = 'image')
         image = @element.content_by_name(name)
-        return nil if image.nil?
+        return false if image.nil? || image.essence.picture.nil?
         Hash[VERSIONS.map {|version,settings| [version,
           {
             url: image.essence.picture_url(image_size: settings[:size], format: settings[:format], quality: settings[:quality])

@@ -30,6 +30,11 @@ module Europeana
             expect(hash).to have_key(:is_landscape)
             expect(hash).to have_key(:is_portrait)
           end
+
+          it 'should return false for image' do
+            expect(hash[:image]).to equal(false)
+          end
+
           it 'should have an attribute is_image that is true' do
             expect(hash[:is_image]).to equal(true)
           end
@@ -45,11 +50,11 @@ module Europeana
         let(:mustache_data) { Europeana::Elements::Image.new(alchemy_element).to_hash }
 
         it 'has all the required image versions' do
-          expect(mustache_data[:image].keys).to eq([:original, :full, :fullx2, :half, :halfx2, :small, :smallx2, :thumbnail, :thumbnailx2])
+          expect(mustache_data[:image].keys).to eq([:original, :full, :fullx2, :half, :halfx2, :small, :smallx2, :thumbnail, :thumbnailx2, :thumbnail_png])
         end
 
         it 'has a correctly formatted path for "full" version' do
-          expect(mustache_data[:image][:full][:url]).to match('show/1600x1600/image.jpg')
+          expect(mustache_data[:image][:full][:url]).to match('show/1600x1600/85/image.jpeg')
         end
 
         context 'landscape image' do
