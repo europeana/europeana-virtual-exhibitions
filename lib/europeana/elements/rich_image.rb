@@ -37,7 +37,7 @@ module Europeana
           is_align_image_left: get(:image_alignment, :value) ? get(:image_alignment, :value).downcase == 'left' : false,
           caption: caption.present? ? caption : false,
           stripped_caption: caption.present? ? caption : false,
-          quote: quote.present? ? quotee : false,
+          quote: quote.present? ? quote : false,
           quotee: quotee.present? ? quotee : false,
           body: body.present? ? body : false,
           stripped_body: stripped_body.present? ? stripped_body : false
