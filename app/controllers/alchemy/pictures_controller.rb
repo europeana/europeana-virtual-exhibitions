@@ -75,7 +75,7 @@ module Alchemy
       end
       if @size.present?
         if params[:crop_size].present? && params[:crop_from].present? || params[:crop].present?
-          @picture.crop(@size, params[:crop_from], params[:crop_size], @upsample)
+          @picture.crop(@size, false, params[:crop_size], @upsample)
         else
           @picture.resize(@size, @upsample)
         end

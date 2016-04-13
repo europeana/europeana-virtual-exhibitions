@@ -6,6 +6,7 @@ class Europeana::PictureVersionsJob < ActiveJob::Base
 
     Europeana::Elements::Image::VERSIONS.values.compact.each do |settings|
       Rails.logger.info "Creating #{JSON.generate(settings)} of picture #{id}"
+      next if settings[:size].nil?
 
       picture = Alchemy::Picture.find(id)
 
@@ -19,7 +20,15 @@ class Europeana::PictureVersionsJob < ActiveJob::Base
         settings[:format] = "jpeg"
       end
 
-      Alchemy::PictureVersion.from_cache(picture.resize(settings[:size]).encode(settings[:format], options.join(" "))).data
+      if settings[:size] && settings[:crop]
+        Rails.logger.info "Cropping"
+        picture = picture.crop(settings[:size], false, false, settings[:upsample] || false)
+      else
+        Rails.logger.info "Resizing"
+        picture = picture.resize(settings[:size])
+      end
+
+      Alchemy::PictureVersion.from_cache(picture.encode(settings[:format], options.join(" "))).data
       true
     end
   end
