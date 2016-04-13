@@ -41,7 +41,8 @@ module Europeana
           stripped_quote: get(:quote, :stripped_body),
           quotee: quotee.present? ? quotee : false,
           body: body.present? ? body : false,
-          stripped_body: stripped_body.present? ? stripped_body : false
+          stripped_body: stripped_body.present? ? stripped_body : false,
+          hide_in_credits: hide_in_credits
         }
       end
     end
