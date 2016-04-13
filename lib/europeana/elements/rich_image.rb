@@ -38,6 +38,7 @@ module Europeana
           caption: caption.present? ? caption : false,
           stripped_caption: caption.present? ? caption : false,
           quote: quote.present? ? quote : false,
+          stripped_quote: get(:quote, :stripped_body),
           quotee: quotee.present? ? quotee : false,
           body: body.present? ? body : false,
           stripped_body: stripped_body.present? ? stripped_body : false
