@@ -47,6 +47,7 @@ module Europeana
 
     def media
       @page.elements.published.where(name: ['image', 'rich_image', 'intro']).map do |element|
+
         Europeana::Elements::Base.build(element).to_hash(include_url: url)
       end
     end
@@ -187,14 +188,14 @@ module Europeana
     end
 
     def thumbnail(version = :full)
-      if find_thumbnail && find_thumbnail.has_key?(:image)
+      if find_thumbnail && find_thumbnail.has_key?(:image) && find_thumbnail[:image]
         return full_url(find_thumbnail[:image][version][:url])
       end
       false
     end
 
     def full_url(path)
-      "http://#{ENV.fetch('APP_HOST', 'test.npc.eanadev.org')}#{ENV.fetch('APP_PORT', nil).nil? ? '' : ':'+ ENV.fetch('APP_PORT', nil)}#{path}"
+      "http://#{ENV.fetch('CDN', 'cdn')}#{ENV.fetch('APP_PORT', nil).nil? ? '' : ':'+ ENV.fetch('APP_PORT', nil)}#{path}"
     end
   end
 end
