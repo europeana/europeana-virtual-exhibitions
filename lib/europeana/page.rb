@@ -27,7 +27,7 @@ module Europeana
       end
       {
         present: true,
-        items: exhibition.descendants.map.with_index do |page, index|
+        items: chapters.map.with_index do |page, index|
           Europeana::Page.new(page).as_chapter
         end
       }
@@ -120,7 +120,7 @@ module Europeana
         text: exhibition.title,
         url: '#',
         submenu: {
-            items: chapters.collect do |chapter|
+            items: menu_items.collect do |chapter|
             {
               text: chapter.title,
               url: show_page_url(urlname: chapter.urlname, locale: chapter.language_code),
@@ -129,6 +129,15 @@ module Europeana
             end
         }
       }
+    end
+
+    def menu_items
+      return exhibitions if is_foyer
+      chapters
+    end
+
+    def exhibitions
+      Alchemy::Page.published.where(depth: 2, language_code: @page.language_code).all
     end
 
     def find_thumbnail
