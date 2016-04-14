@@ -47,9 +47,10 @@ GIT
 
 GIT
   remote: git://github.com/europeana/dragonfly-swift-data-store.git
-  revision: d6900536f3b4428c32ceae5cfe68ae742002c34b
+  revision: c37b0ef153cdf837e2f6568710bfa6f9a3dc82dd
+  tag: v0.1.0
   specs:
-    dragonfly-swift_data_store (0.1)
+    dragonfly-swift_data_store (0.1.0)
       dragonfly (~> 1.0)
       fog-openstack
 

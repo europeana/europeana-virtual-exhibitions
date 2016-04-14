@@ -67,7 +67,7 @@ gem 'capistrano-alchemy', github: 'AlchemyCMS/capistrano-alchemy', branch: 'mast
 gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', branch: 'develop'
 gem 'stache', github: 'europeana/stache', branch: 'europeana-styleguide' # until upstream merges our pull requests
 
-gem 'dragonfly-swift_data_store', github: 'europeana/dragonfly-swift-data-store'
+gem 'dragonfly-swift_data_store', github: 'europeana/dragonfly-swift-data-store', tag: 'v0.1.0'
 
 group :localeapp do
   gem 'localeapp', '~> 1.0'
