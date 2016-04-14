@@ -46,7 +46,7 @@ GIT
       capistrano-rails (~> 1.1)
 
 GIT
-  remote: git://github.com/dennisvdvliet/dragonfly-swift-data-store.git
+  remote: git://github.com/europeana/dragonfly-swift-data-store.git
   revision: d6900536f3b4428c32ceae5cfe68ae742002c34b
   specs:
     dragonfly-swift_data_store (0.1)
@@ -190,7 +190,7 @@ GEM
       multi_json (~> 1.0)
       rack (>= 1.3.0)
     erubis (2.7.0)
-    excon (0.48.0)
+    excon (0.49.0)
     execjs (2.6.0)
     factory_girl (4.5.0)
       activesupport (>= 3.0.0)
@@ -198,7 +198,7 @@ GEM
       factory_girl (~> 4.5.0)
       railties (>= 3.0.0)
     ffi (1.9.10)
-    fog-core (1.36.0)
+    fog-core (1.37.0)
       builder
       excon (~> 0.45)
       formatador (~> 0.2)
