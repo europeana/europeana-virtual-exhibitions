@@ -92,11 +92,18 @@ module Europeana
     end
 
     def table_of_contents
-      exhibition.descendants
+      chapters
     end
 
     def chapters
-      exhibition.descendants
+      exhibition.descendants.where(depth: @page.depth+1)
+    end
+
+    def all_pages
+      if exhibition
+        return exhibition.self_and_descendants
+      end
+      return [@page]
     end
 
     def title
@@ -116,7 +123,8 @@ module Europeana
             items: chapters.collect do |chapter|
             {
               text: chapter.title,
-              url: show_page_url(urlname: chapter.urlname, locale: chapter.language_code)
+              url: show_page_url(urlname: chapter.urlname, locale: chapter.language_code),
+              is_current: chapter == @page
             }
             end
         }
