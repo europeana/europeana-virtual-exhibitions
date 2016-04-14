@@ -96,7 +96,7 @@ module Europeana
     end
 
     def chapters
-      exhibition.descendants.where(depth: @page.depth+1)
+      exhibition.descendants
     end
 
     def all_pages
