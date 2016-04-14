@@ -27,3 +27,6 @@ config/initializers/secret_token.rb
 /coverage
 
 public/portal/*
+
+# Ignore Ruby version
+/.ruby-version
