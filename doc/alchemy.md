@@ -114,11 +114,4 @@ In the case of an image element there are two attributes: image and title. The *
 
 Every Alchemy *essence* will be mapped to a regular ruby used that will be used in the mustache templates.
 
-Below you will find an example mapping for each of the essences used in the VE app. More will be added when needed.
-
-
-### EssenceImage
-TODO
-
-### EssenceRichText
-TODO
+Mapping in *Europeana::Elements::Embed* for the element with the type *embed* for example. All the classes in the *Europeana::Elements* namespace have a method called *data* that returns an hash with all the attributes for an element.
