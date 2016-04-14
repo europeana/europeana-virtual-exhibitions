@@ -175,10 +175,10 @@ module MustacheHelper
   def page_footer
     {
       items: [
-        {text: t('exhibitions.contacts', default: 'Contacts'), 'url': 'http://ny.nl'},
+        {text: t('exhibitions.contacts', default: 'Contacts'), 'url': 'http://europeana.eu/portal/contact.html'},
         {text: t('exhibitions.credits', default: 'Credits'), 'url': 'http://ny.nl'},
-        {text: t('site.footer.menu.about'), 'url': 'http://ny.nl'},
-        {text: 'Europeana ' + t('global.search-collections'), 'url': 'http://ny.nl'}
+        {text: t('site.footer.menu.about'), 'url': 'http://europeana.eu/portal/about.html'},
+        {text: 'Europeana ' + t('global.search-collections'), 'url': 'http://europeana.eu/portal/'}
       ]
     }
   end
