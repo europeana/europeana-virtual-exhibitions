@@ -58,6 +58,9 @@ module MustacheHelper
     }
   end
 
+  def version
+    { is_alpha: true }
+  end
 
   def mustache
     @mustache ||= {}
@@ -175,10 +178,9 @@ module MustacheHelper
   def page_footer
     {
       items: [
-        {text: t('exhibitions.contacts', default: 'Contacts'), 'url': 'http://ny.nl'},
-        {text: t('exhibitions.credits', default: 'Credits'), 'url': 'http://ny.nl'},
-        {text: t('site.footer.menu.about'), 'url': 'http://ny.nl'},
-        {text: 'Europeana ' + t('global.search-collections'), 'url': 'http://ny.nl'}
+        {text: t('exhibitions.contacts', default: 'Contacts'), 'url': 'http://europeana.eu/portal/contact.html'},
+        {text: t('site.footer.menu.about'), 'url': 'http://europeana.eu/portal/about.html'},
+        {text: 'Europeana ' + t('global.search-collections'), 'url': 'http://europeana.eu/portal/'}
       ]
     }
   end
@@ -207,7 +209,7 @@ module MustacheHelper
             settings_active: true
           },
           logo: {
-            url: root_path,
+            url: europeana_collections_url,
             text: 'Europeana ' + t('global.search-collections')
           },
           primary_nav: {
@@ -220,5 +222,11 @@ module MustacheHelper
         footer: footer
       }
     end
+  end
+
+  private
+
+  def europeana_collections_url
+    ENV['EUROPEANA_COLLECTIONS_URL'] || 'http://www.europeana.eu/portal/'
   end
 end

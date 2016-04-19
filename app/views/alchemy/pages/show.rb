@@ -84,7 +84,8 @@ module Alchemy::Pages
     end
 
     def next_page
-      return false unless is_chapter || is_credit
+      return false unless is_chapter || is_credit || is_exhibition
+      return format_page(@page.children.first) if is_exhibition
       format_page(@page.right_sibling)
     end
 
@@ -116,6 +117,12 @@ module Alchemy::Pages
           title: ancestor.title
         }
       end
+
+      # Temporary replacement until foyer is ready
+      crumbs[0] = {
+        url: europeana_collections_url,
+        title: t('site.navigation.breadcrumb.return_home', default: 'Return to Home')
+      }
 
       crumbs.last[:is_last] = true
       crumbs

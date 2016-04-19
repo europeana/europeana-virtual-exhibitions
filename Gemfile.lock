@@ -56,8 +56,8 @@ GIT
 
 GIT
   remote: git://github.com/europeana/europeana-styleguide-ruby.git
-  revision: f21fc4e7a37f6d545468ddbe816744c10f3c24da
-  branch: develop
+  revision: dc6be01503586f908e710c149a2e102050895d5a
+  ref: dc6be01
   specs:
     europeana-styleguide (0.2.0)
       activesupport (~> 4.0)
@@ -115,7 +115,7 @@ GEM
       tzinfo (~> 1.1)
     acts-as-taggable-on (3.5.0)
       activerecord (>= 3.2, < 5)
-    acts_as_list (0.7.3)
+    acts_as_list (0.7.4)
       activerecord (>= 3.0)
     addressable (2.4.0)
     appsignal (1.1.4)
@@ -415,6 +415,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  acts_as_list (~> 0.7.4)
   alchemy-devise!
   alchemy_cms!
   appsignal
@@ -448,3 +449,6 @@ DEPENDENCIES
   turbolinks
   uglifier (>= 1.3.0)
   web-console (~> 2.0)
+
+BUNDLED WITH
+   1.11.2
