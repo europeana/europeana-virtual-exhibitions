@@ -209,7 +209,7 @@ module MustacheHelper
             settings_active: true
           },
           logo: {
-            url: root_path,
+            url: europeana_collections_url,
             text: 'Europeana ' + t('global.search-collections')
           },
           primary_nav: {
@@ -222,5 +222,11 @@ module MustacheHelper
         footer: footer
       }
     end
+  end
+
+  private
+
+  def europeana_collections_url
+    ENV['EUROPEANA_COLLECTIONS_URL'] || 'http://www.europeana.eu/portal/'
   end
 end
