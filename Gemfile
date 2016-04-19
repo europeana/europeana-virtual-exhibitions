@@ -87,3 +87,4 @@ end
 
 
 gem 'appsignal'
+gem 'newrelic_rpm'

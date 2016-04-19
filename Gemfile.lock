@@ -258,6 +258,7 @@ GEM
       net-ssh (>= 2.6.5)
     net-ssh (3.1.0)
     netrc (0.11.0)
+    newrelic_rpm (3.15.1.316)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
     non-stupid-digest-assets (1.0.8)
@@ -441,6 +442,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   localeapp (~> 1.0)
+  newrelic_rpm
   pg (~> 0.15)
   puma (~> 2.13)
   rack-plastic
