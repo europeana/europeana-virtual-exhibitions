@@ -36,6 +36,8 @@ gem 'redis-rails'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'acts_as_list', '~> 0.7.4' # dependency of a dependency; version 0.7.3 yanked
+
 group :production do
   gem 'rails_12factor', '~> 0.0.3'
 end
