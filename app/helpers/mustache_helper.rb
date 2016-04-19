@@ -58,6 +58,9 @@ module MustacheHelper
     }
   end
 
+  def version
+    { is_beta: true }
+  end
 
   def mustache
     @mustache ||= {}
