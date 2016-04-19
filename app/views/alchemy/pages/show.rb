@@ -118,6 +118,12 @@ module Alchemy::Pages
         }
       end
 
+      # Temporary replacement until foyer is ready
+      crumbs[0] = {
+        url: europeana_collections_url,
+        title: t('site.navigation.breadcrumb.return_home', default: 'Return to Home')
+      }
+
       crumbs.last[:is_last] = true
       crumbs
     end

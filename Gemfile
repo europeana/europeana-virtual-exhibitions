@@ -36,6 +36,8 @@ gem 'redis-rails'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'acts_as_list', '~> 0.7.4' # dependency of a dependency; version 0.7.3 yanked
+
 group :production do
   gem 'rails_12factor', '~> 0.0.3'
 end
@@ -64,7 +66,7 @@ gem 'alchemy-devise', github: 'AlchemyCMS/alchemy-devise', branch: 'master'
 gem 'capistrano-alchemy', github: 'AlchemyCMS/capistrano-alchemy', branch: 'master', group: 'development'
 
 # European styleguide
-gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', branch: 'develop'
+gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', ref: 'dc6be01'
 gem 'stache', github: 'europeana/stache', branch: 'europeana-styleguide' # until upstream merges our pull requests
 
 gem 'dragonfly-swift_data_store', github: 'europeana/dragonfly-swift-data-store', tag: 'v0.1.0'
