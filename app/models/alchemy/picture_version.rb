@@ -2,7 +2,7 @@ class Alchemy::PictureVersion < ActiveRecord::Base
   attr_accessor :image
 
   def self.from_cache(image)
-    record = self.find_by_signature(image.signature)
+    record = find_by_signature(image.signature)
     record.nil? ? Alchemy::PictureVersion.new(image: image) : (record.image = image; record)
   end
 

@@ -20,14 +20,13 @@ module Europeana
       }
     end
 
-
     def chapter_elements
       if !is_exhibition
-        return {present: false, item: []}
+        return { present: false, item: [] }
       end
       {
         present: true,
-        items: chapters.map.with_index do |page, index|
+        items: chapters.map do |page|
           Europeana::Page.new(page).as_chapter
         end
       }
@@ -35,11 +34,11 @@ module Europeana
 
     def credit_elements
       if !is_credit
-        return { present: false, items: []}
+        return { present: false, items: [] }
       end
       {
         present: true,
-        items: exhibition.self_and_descendants.map.with_index do |page, index|
+        items: exhibition.self_and_descendants.map do |page|
           Europeana::Page.new(page).media
         end.flatten
       }
@@ -103,7 +102,7 @@ module Europeana
       if exhibition
         return exhibition.self_and_descendants
       end
-      return [@page]
+      [@page]
     end
 
     def title
@@ -114,18 +113,17 @@ module Europeana
       show_page_url(@page.language_code, @page.urlname)
     end
 
-
     def menu_data
       {
         text: exhibition.title,
         url: '#',
         submenu: {
             items: menu_items.collect do |chapter|
-            {
-              text: chapter.title,
-              url: show_page_url(urlname: chapter.urlname, locale: chapter.language_code),
-              is_current: chapter == @page
-            }
+              {
+                text: chapter.title,
+                url: show_page_url(urlname: chapter.urlname, locale: chapter.language_code),
+                is_current: chapter == @page
+              }
             end
         }
       }
@@ -158,7 +156,7 @@ module Europeana
         @sections = []
         current_index = 0
         @sections[current_index] = []
-        @page.elements.published.each do | element |
+        @page.elements.published.each do |element|
           if element.name != 'section'
             @sections[current_index] << element.id
           else
@@ -182,17 +180,17 @@ module Europeana
       content << (@page.robot_index? ? 'index' : 'noindex')
       content << (@page.robot_follow? ? 'follow' : 'nofollow')
 
-      { meta_name: 'robots', content: content.join(',')}
+      { meta_name: 'robots', content: content.join(',') }
     end
 
     def language_alternatives_tags
       alternatives.collect do |page|
-        { rel: 'alternate', hreflang: page.language_code, href: page.urlname, title: nil}
+        { rel: 'alternate', hreflang: page.language_code, href: page.urlname, title: nil }
       end
     end
 
     def language_default_link
-      [{ rel: 'alternate', hreflang: 'x-default', href: url, title: nil}]
+      [{ rel: 'alternate', hreflang: 'x-default', href: url, title: nil }]
     end
 
     # meta information
@@ -202,7 +200,7 @@ module Europeana
         element = Europeana::Elements::Base.build(element).get(:body, :stripped_body)
       end
       return element if element
-      return @page.title
+      @page.title
     end
 
     def thumbnail(version = :full)
@@ -213,7 +211,7 @@ module Europeana
     end
 
     def full_url(path)
-      "http://#{ENV.fetch('CDN_HOST', 'cdn')}#{ENV.fetch('APP_PORT', nil).nil? ? '' : ':'+ ENV.fetch('APP_PORT', nil)}#{path}"
+      "http://#{ENV.fetch('CDN_HOST', 'cdn')}#{ENV.fetch('APP_PORT', nil).nil? ? '' : ':' + ENV.fetch('APP_PORT', nil)}#{path}"
     end
   end
 end

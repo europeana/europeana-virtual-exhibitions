@@ -6,6 +6,7 @@ module Europeana
       include Europeana::Mixins::HideInCredits
 
       protected
+
       def data
         image = @element.content_by_name('image') ? @element.content_by_name('image').essence : nil
         picture = image.present? && image.picture.present? ? image.picture : nil
@@ -15,10 +16,12 @@ module Europeana
           stripped_caption: stripped_caption,
           image_credit: image_credit,
           hide_in_credits: hide_in_credits
-        }.merge({
-          is_portrait: picture.present? ? image.image_size[:height] >= image.image_size[:width] : false,
-          is_landscape: picture.present? ? image.image_size[:height] < image.image_size[:width] : false
-        })
+        }.merge(
+          {
+            is_portrait: picture.present? ? image.image_size[:height] >= image.image_size[:width] : false,
+            is_landscape: picture.present? ? image.image_size[:height] < image.image_size[:width] : false
+          }
+        )
       end
     end
   end

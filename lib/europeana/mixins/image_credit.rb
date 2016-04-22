@@ -2,38 +2,38 @@ module Europeana
   module Mixins
     module ImageCredit
       LICENSES = {
-        "Public Domain Mark" => "public",
-        "Out of copyright - non commercial re-use" => "OOC",
-        "CC0" => "CC0",
-        "CC BY" => "CC_BY",
-        "CC BY-SA" => "CC_BY_SA",
-        "CC BY-ND" => "CC_BY_ND",
-        "CC BY-NC" => "CC_BY_NC",
-        "CC BY-NC-SA" => "CC_BY_NC_SA",
-        "CC BY-NC-ND" => "CC_BY_NC_ND",
-        "Rights Reserved - Free Access" => "RR_free",
-        "Rights Reserved - Paid Access" => "RR_paid",
-        "Orphan Work" => "orphan",
-        "Unknown" => "unknown"
+        'Public Domain Mark' => 'public',
+        'Out of copyright - non commercial re-use' => 'OOC',
+        'CC0' => 'CC0',
+        'CC BY' => 'CC_BY',
+        'CC BY-SA' => 'CC_BY_SA',
+        'CC BY-ND' => 'CC_BY_ND',
+        'CC BY-NC' => 'CC_BY_NC',
+        'CC BY-NC-SA' => 'CC_BY_NC_SA',
+        'CC BY-NC-ND' => 'CC_BY_NC_ND',
+        'Rights Reserved - Free Access' => 'RR_free',
+        'Rights Reserved - Paid Access' => 'RR_paid',
+        'Orphan Work' => 'orphan',
+        'Unknown' => 'unknown'
       }
 
       LICENSES_URL = {
-        "public" => "https://creativecommons.org/publicdomain/mark/1.0/",
-        "OOC" => "http://www.europeana.eu/portal/rights/out-of-copyright-non-commercial",
-        "CC0" => "https://creativecommons.org/publicdomain/zero/1.0/",
-        "CC_BY" => "https://creativecommons.org/licenses/by/1.0",
-        "CC_BY_SA" => "https://creativecommons.org/licenses/by-sa/1.0",
-        "CC_BY_ND" => "https://creativecommons.org/licenses/by-nc-nd/1.0",
-        "CC_BY_NC" => "https://creativecommons.org/licenses/by-nc/1.0",
-        "CC_BY_NC_SA" => "https://creativecommons.org/licenses/by-nc-sa/1.0",
-        "CC_BY_NC_ND" => "https://creativecommons.org/licenses/by-nc-nd/1.0",
-        "RR_free" => "http://www.europeana.eu/portal/rights/rr-f",
-        "RR_paid" => "http://www.europeana.eu/portal/rights/rr-p",
-        "orphan" => "http://www.europeana.eu/portal/rights/orphan-work-eu",
-        "unknown" => "http://www.europeana.eu/portal/rights/unknown"
+        'public' => 'https://creativecommons.org/publicdomain/mark/1.0/',
+        'OOC' => 'http://www.europeana.eu/portal/rights/out-of-copyright-non-commercial',
+        'CC0' => 'https://creativecommons.org/publicdomain/zero/1.0/',
+        'CC_BY' => 'https://creativecommons.org/licenses/by/1.0',
+        'CC_BY_SA' => 'https://creativecommons.org/licenses/by-sa/1.0',
+        'CC_BY_ND' => 'https://creativecommons.org/licenses/by-nc-nd/1.0',
+        'CC_BY_NC' => 'https://creativecommons.org/licenses/by-nc/1.0',
+        'CC_BY_NC_SA' => 'https://creativecommons.org/licenses/by-nc-sa/1.0',
+        'CC_BY_NC_ND' => 'https://creativecommons.org/licenses/by-nc-nd/1.0',
+        'RR_free' => 'http://www.europeana.eu/portal/rights/rr-f',
+        'RR_paid' => 'http://www.europeana.eu/portal/rights/rr-p',
+        'orphan' => 'http://www.europeana.eu/portal/rights/orphan-work-eu',
+        'unknown' => 'http://www.europeana.eu/portal/rights/unknown'
       }
 
-      def image_credit(name = 'image_credit')
+      def image_credit(_name = 'image_credit')
         credit = @element.content_by_name('image_credit')
         return false if credit.nil?
         {
@@ -44,9 +44,7 @@ module Europeana
           caption: caption,
           stripped_caption: stripped_caption,
           license_url: license_link(credit)
-        }.merge({ "license_#{credit.essence.license}" => true})
-
-
+        }.merge("license_#{credit.essence.license}" => true)
       end
 
       def caption
@@ -59,7 +57,7 @@ module Europeana
         inverted = Europeana::Mixins::ImageCredit::LICENSES.invert
 
         return inverted[credit.essence.license] if inverted.has_key?(credit.essence.license)
-        "unknown"
+        'unknown'
       end
 
       def license_link(credit)
@@ -72,11 +70,10 @@ module Europeana
         strip_tags(caption)
       end
 
-
       def strip_tags(html)
         return html if html.blank?
-        if html.index("<")
-          text = ""
+        if html.index('<')
+          text = ''
           tokenizer = ::HTML::Tokenizer.new(html)
           while token = tokenizer.next
             node = ::HTML::Node.parse(nil, 0, 0, token, false)
@@ -85,7 +82,7 @@ module Europeana
           end
           # strip any comments, and if they have a newline at the end (ie. line with
           # only a comment) strip that too
-          text.gsub(/<!--(.*?)-->[\n]?/m, "")
+          text.gsub(/<!--(.*?)-->[\n]?/m, '')
         else
           html # already plain text
         end

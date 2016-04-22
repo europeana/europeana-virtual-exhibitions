@@ -5,7 +5,7 @@ module Europeana
     describe 'Section' do
       let(:element) { Alchemy::Element.create_from_scratch(name: 'section') }
 
-      describe "#to_hash" do
+      describe '#to_hash' do
         context 'new element' do
           let(:element) { Alchemy::Element.new_from_scratch(name: 'section') }
 
@@ -25,7 +25,7 @@ module Europeana
         context 'element with no content' do
           let(:hash) { Elements::Base.build(element).to_hash }
 
-          attributes =  %w(section_title)
+          attributes = %w(section_title)
           it 'should have the following attributes: ' + attributes.join(',') do
             attributes.each do |attribute|
               expect(hash).to have_key(attribute.to_sym)

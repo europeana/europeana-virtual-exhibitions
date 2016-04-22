@@ -13,9 +13,7 @@ module Alchemy
     extend ActiveSupport::Concern
 
     included do
-      before_action :enforce_no_locale,
-        if: :locale_prefix_not_allowed?,
-        only: [:index, :show]
+      before_action :enforce_no_locale, if: :locale_prefix_not_allowed?, only: [:index, :show]
     end
 
     private

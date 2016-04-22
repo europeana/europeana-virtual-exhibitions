@@ -5,10 +5,9 @@ Alchemy::Page.class_eval do
   end
 end
 
-
 Alchemy::Element.class_eval do
   after_commit :flush_cache
   def flush_cache
-    Europeana::PageCacheJob.perform_later page.id
+    Europeana::PageCacheJob.perform_later page.id unless page.nil?
   end
 end

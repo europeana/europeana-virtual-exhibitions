@@ -1,14 +1,14 @@
 require File.expand_path('../boot', __FILE__)
 
-require "rails"
+require 'rails'
 # Pick the frameworks you want:
-require "active_model/railtie"
-require "active_job/railtie"
-require "active_record/railtie"
-require "action_controller/railtie"
-require "action_mailer/railtie"
-require "action_view/railtie"
-require "sprockets/railtie"
+require 'active_model/railtie'
+require 'active_job/railtie'
+require 'active_record/railtie'
+require 'action_controller/railtie'
+require 'action_mailer/railtie'
+require 'action_view/railtie'
+require 'sprockets/railtie'
 # require "rails/test_unit/railtie"
 
 # Require the gems listed in Gemfile, including any gems
@@ -32,11 +32,11 @@ module Exhibitions
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
-    config.action_controller.default_url_options = {host: ENV.fetch('APP_HOST', 'test.npc.eanadev.org'), port: ENV.fetch('APP_PORT', nil)}
+    config.action_controller.default_url_options = { host: ENV.fetch('APP_HOST', 'test.npc.eanadev.org'), port: ENV.fetch('APP_PORT', nil) }
 
     config.assets.prefix = '/portal/exhibitions/assets'
     config.active_job.queue_adapter = :delayed_job
-    #config.assets.initialize_on_precompile = false
+    # config.assets.initialize_on_precompile = false
 
     config.i18n.enforce_available_locales = false
 
@@ -45,7 +45,7 @@ module Exhibitions
       redis_config = Rails.application.config_for(:redis).symbolize_keys
       fail RuntimeError unless redis_config.present?
       [:redis_store, redis_config[:url]]
-    rescue RuntimeError => e
+    rescue RuntimeError => _error
       :null_store
     end
   end

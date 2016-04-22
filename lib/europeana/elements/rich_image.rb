@@ -1,7 +1,6 @@
 module Europeana
   module Elements
     class RichImage < Europeana::Elements::Image
-
       def quote
         get(:quote, :body)
       end
@@ -26,8 +25,8 @@ module Europeana
         get(:body, :stripped_body)
       end
 
-
       protected
+
       def data
         {
           title: title.present? ? title : false,

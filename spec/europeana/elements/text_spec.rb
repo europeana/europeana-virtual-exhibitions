@@ -5,7 +5,7 @@ module Europeana
     describe 'Text' do
       let(:element) { Alchemy::Element.create_from_scratch(name: 'text') }
 
-      describe "#to_hash" do
+      describe '#to_hash' do
         context 'new element' do
           let(:element) { Alchemy::Element.new_from_scratch(name: 'text') }
 
@@ -25,7 +25,7 @@ module Europeana
         context 'element with no content' do
           let(:hash) { Elements::Base.build(element).to_hash }
 
-          attributes =  %w(body stripped_body)
+          attributes = %w(body stripped_body)
           it 'should have the following attributes: ' + attributes.join(',') do
             attributes.each do |attribute|
               expect(hash).to have_key(attribute.to_sym)
@@ -35,7 +35,7 @@ module Europeana
       end
 
       describe 'alchemy to mustache mapping' do
-        let(:essenc_richtext) { create (:alchemy_essence_richtext)}
+        let(:essenc_richtext) { create (:alchemy_essence_richtext) }
         let(:alchemy_element) do
           create(:alchemy_element, name: 'text', contents: [create(:alchemy_content, essence: essenc_richtext, name: 'body')])
         end
@@ -45,7 +45,6 @@ module Europeana
         it 'has the right stripped body value' do
           expect(mustache_data[:stripped_body]).to eq(essenc_richtext.stripped_body)
         end
-
       end
     end
   end
