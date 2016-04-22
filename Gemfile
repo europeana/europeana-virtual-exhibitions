@@ -48,7 +48,6 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'dotenv-rails', '~> 2.0'
   gem 'spring-commands-rspec'
-
 end
 
 group :development do
@@ -58,6 +57,7 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'rubocop', '0.35.1'
 end
 
 gem 'alchemy_cms', github: 'AlchemyCMS/alchemy_cms', branch: 'master'
@@ -84,7 +84,6 @@ group :test do
   gem 'rspec-activemodel-mocks', '~> 1.0'
   gem 'simplecov', require: false
 end
-
 
 gem 'appsignal'
 gem 'newrelic_rpm'
