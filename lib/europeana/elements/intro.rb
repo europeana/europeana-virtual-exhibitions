@@ -6,6 +6,7 @@ module Europeana
       include Europeana::Mixins::HideInCredits
 
       protected
+
       def data
         {
           intro_description: get(:body, :body),

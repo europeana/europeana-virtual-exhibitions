@@ -6,7 +6,7 @@ module Europeana
       include Europeana::Mixins::HideInCredits
 
       protected
-      
+
       def data
         image = @element.content_by_name('image') ? @element.content_by_name('image').essence : nil
         picture = image.present? && image.picture.present? ? image.picture : nil

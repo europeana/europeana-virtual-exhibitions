@@ -2,6 +2,7 @@ module Europeana
   module Elements
     class Quote < Europeana::Elements::Base
       protected
+
       def data
         {
           quote: get(:quote, :body),

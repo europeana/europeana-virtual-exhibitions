@@ -2,6 +2,7 @@ module Europeana
   module Elements
     class Navigation < Europeana::Elements::Base
       protected
+
       def data
         {
           previous: {
