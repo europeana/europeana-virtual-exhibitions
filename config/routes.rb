@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  default_url_options({host: ENV.fetch('APP_HOST', 'test.npc.eanadev.org'), port: ENV.fetch('APP_PORT', nil)})
+  default_url_options(host: ENV.fetch('APP_HOST', 'test.npc.eanadev.org'), port: ENV.fetch('APP_PORT', nil))
   scope '/portal/exhibitions' do
     mount Alchemy::Engine => '/'
   end
