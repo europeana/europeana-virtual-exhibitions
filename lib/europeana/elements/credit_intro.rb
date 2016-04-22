@@ -1,7 +1,6 @@
 module Europeana
   module Elements
     class CreditIntro < Europeana::Elements::Image
-
       def title
         get(:title, :body)
       end
@@ -19,6 +18,7 @@ module Europeana
       end
 
       protected
+
       def data
         {
           title: title.present? ? title : false,

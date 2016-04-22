@@ -30,7 +30,7 @@ module Europeana
       end
 
       def to_hash(include_url: false)
-        data.merge(Hash[@attributes.map {|attribute| [attribute, self.send(attribute)]}]).merge({type: type, alchemy_id: @element.id, id: "#{@element.name}_#{@element.id}"}).merge(include_url ? {page_url: include_url } : {})
+        data.merge(Hash[@attributes.map { |attribute| [attribute, send(attribute)] }]).merge({type: type, alchemy_id: @element.id, id: "#{@element.name}_#{@element.id}"}).merge(include_url ? { page_url: include_url } : {})
       end
 
       def get(name, attribute = :ingredient)
