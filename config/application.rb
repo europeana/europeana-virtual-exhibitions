@@ -45,7 +45,7 @@ module Exhibitions
       redis_config = Rails.application.config_for(:redis).symbolize_keys
       fail RuntimeError unless redis_config.present?
       [:redis_store, redis_config[:url]]
-    rescue RuntimeError => error
+    rescue RuntimeError => _error
       :null_store
     end
   end

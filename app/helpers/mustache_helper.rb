@@ -167,10 +167,10 @@ module MustacheHelper
       },
       subfooter: {
         items: [
-          { text: 'Home', url: ''},
-          { text: 'Terms of use & policies', url: 'http://europeana.eu/portal/rights/terms-and-policies.html'},
-          { text: 'Contact us', url: ''},
-          { text: 'Home', url: ''},
+          { text: 'Home', url: '' },
+          { text: 'Terms of use & policies', url: 'http://europeana.eu/portal/rights/terms-and-policies.html' },
+          { text: 'Contact us', url: '' },
+          { text: 'Home', url: '' },
 
         ]
       }
@@ -181,11 +181,11 @@ module MustacheHelper
     {
       items: [
         {
-          text: t('exhibitions.contacts', default: 'Contacts'), 
+          text: t('exhibitions.contacts', default: 'Contacts'),
           'url': 'http://europeana.eu/portal/contact.html'
         },
         {
-          text: t('site.footer.menu.about'), 
+          text: t('site.footer.menu.about'),
           'url': 'http://europeana.eu/portal/about.html'
         },
         {
