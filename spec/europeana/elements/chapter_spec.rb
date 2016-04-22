@@ -5,7 +5,7 @@ module Europeana
     describe 'Chapter' do
       let(:element) { Alchemy::Element.create_from_scratch(name: 'chapter') }
 
-      describe "#to_hash" do
+      describe '#to_hash' do
         context 'new element' do
           let(:element) { Alchemy::Element.new_from_scratch(name: 'chapter') }
 
@@ -25,7 +25,7 @@ module Europeana
         context 'element with no content' do
           let(:hash) { Elements::Base.build(element).to_hash }
 
-          attributes =  %w(url title image)
+          attributes = %w(url title image)
           it 'should have the following attributes: ' + attributes.join(',') do
             attributes.each do |attribute|
               expect(hash).to have_key(attribute.to_sym)
