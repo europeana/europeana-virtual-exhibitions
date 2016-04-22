@@ -25,13 +25,13 @@ module Europeana
         context 'element with no content' do
           let(:hash) { Elements::Base.build(element).to_hash }
 
-          attributes = %w(intro_description stripped_intro_description image title sub_title image_credit label partner_image)
+          attributes = %w(intro_description stripped_intro_description image title subtitle image_credit label partner_image)
           it 'should have the following attributes: ' + attributes.join(',') do
             attributes.each do |attribute|
               expect(hash).to have_key(attribute.to_sym)
             end
           end
-          it 'should have an attribute is_image that is true' do
+          it 'should have an attribute is_intro that is true' do
             expect(hash[:is_intro]).to equal(true)
           end
         end
