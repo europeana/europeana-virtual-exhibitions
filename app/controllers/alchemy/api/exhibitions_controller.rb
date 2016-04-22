@@ -1,6 +1,5 @@
 module Alchemy
   class Api::ExhibitionsController < Api::BaseController
-
     # Returns all exhibitions as json object
     #
     def index

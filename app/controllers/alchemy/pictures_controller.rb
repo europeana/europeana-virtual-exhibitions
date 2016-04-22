@@ -4,13 +4,13 @@ module Alchemy
 
     caches_page :show, :thumbnail, :zoom
 
-    #before_filter :ensure_secure_params
+    # before_filter :ensure_secure_params
 
     load_and_authorize_resource
 
     def show
       @size = params[:size]
-      expires_in 12.month, public: !@picture.restricted?
+      expires_in 12.months, public: !@picture.restricted?
 
       respond_to { |format| send_image(processed_image, format) }
     end
@@ -25,12 +25,12 @@ module Alchemy
         @size = params[:size]
       end
 
-      expires_in 12.month, public: !@picture.restricted?
+      expires_in 12.months, public: !@picture.restricted?
       respond_to { |format| send_image(processed_image, format) }
     end
 
     def zoom
-      expires_in 24.month, public: !@picture.restricted?
+      expires_in 24.months, public: !@picture.restricted?
       respond_to { |format| send_image(@picture.image_file, format) }
     end
 
@@ -56,10 +56,6 @@ module Alchemy
             quality = params[:quality] || Config.get(:output_image_jpg_quality)
             options << "-quality #{quality}"
           end
-          # Flatten animated gifs, only if converting to a different format.
-          # if type != "gif" && image.ext == 'gif'
-          #   options << "-flatten"
-          # end
           image = image.encode(type, options.join(' '))
           render text: Alchemy::PictureVersion.from_cache(image).data
         end

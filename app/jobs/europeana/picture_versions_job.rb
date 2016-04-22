@@ -9,12 +9,12 @@ class Europeana::PictureVersionsJob < ActiveJob::Base
       picture = Alchemy::Picture.find(id)
       options = []
 
-      if settings[:format] && settings[:format] == 'jpeg'  && settings[:quality]
+      if settings[:format] && settings[:format] == 'jpeg' && settings[:quality]
         options << "-quality #{settings[:quality]}"
       end
 
       if !settings[:format]
-        settings[:format] = "jpeg"
+        settings[:format] = 'jpeg'
       end
 
       if settings[:size] && settings[:crop]
@@ -23,7 +23,7 @@ class Europeana::PictureVersionsJob < ActiveJob::Base
         picture = picture.resize(settings[:size])
       end
 
-      Alchemy::PictureVersion.from_cache(picture.encode(settings[:format], options.join(" "))).data
+      Alchemy::PictureVersion.from_cache(picture.encode(settings[:format], options.join(' '))).data
       true
     end
   end

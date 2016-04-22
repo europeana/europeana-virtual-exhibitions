@@ -1,6 +1,7 @@
 class SitemapController < ApplicationController
 
-  before_filter :find_language, only: [:feed, :show]
+  before_action :find_language, only: [:feed, :show]
+
   def robots
     render text: 'robots.txt'
   end
@@ -10,7 +11,7 @@ class SitemapController < ApplicationController
   end
 
   def feed
-    @pages = @language.pages.where(depth: 2).published.order("published_at DESC").limit(25)
+    @pages = @language.pages.where(depth: 2).published.order('published_at DESC').limit(25)
   end
 
   def show
