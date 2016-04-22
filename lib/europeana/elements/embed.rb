@@ -8,8 +8,8 @@ module Europeana
       }
 
       def provider_info
-        PROVIDERS.keys.collect do | p |
-          { "is_#{p}_embed".to_sym => p == provider}
+        PROVIDERS.keys.collect do |p|
+          { "is_#{p}_embed".to_sym => p == provider }
         end.reduce({}, :merge)
       end
 
@@ -27,7 +27,7 @@ module Europeana
       end
 
       def link
-        @link ||= get(:embed, :source) ? URI.extract(get(:embed, :source)).first : ""
+        @link ||= get(:embed, :source) ? URI.extract(get(:embed, :source)).first : ''
       end
 
       def parsed_url
@@ -35,7 +35,7 @@ module Europeana
       end
 
       def provider
-        mapping = PROVIDERS.map{|provider,domains| domains.map{|domain| { domain => provider }}}.flatten.reduce({}, :merge)
+        mapping = PROVIDERS.map { |provider, domains| domains.map { |domain| { domain => provider } } }.flatten.reduce({}, :merge)
 
         if mapping.has_key?(parsed_url.host)
           return mapping[parsed_url.host]
