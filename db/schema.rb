@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160318153450) do
+ActiveRecord::Schema.define(version: 20160430132335) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -232,6 +232,7 @@ ActiveRecord::Schema.define(version: 20160318153450) do
     t.boolean  "default",        default: false
     t.string   "country_code",   default: "",      null: false
     t.integer  "site_id"
+    t.string   "locale"
   end
 
   add_index "alchemy_languages", ["language_code", "country_code"], name: "index_alchemy_languages_on_language_code_and_country_code", using: :btree
@@ -260,7 +261,7 @@ ActiveRecord::Schema.define(version: 20160318153450) do
     t.integer  "rgt"
     t.integer  "parent_id"
     t.integer  "depth"
-    t.boolean  "visible",          default: false
+    t.boolean  "visible",          default: true
     t.boolean  "public",           default: false
     t.boolean  "locked",           default: false
     t.integer  "locked_by"
