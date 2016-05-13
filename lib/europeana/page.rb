@@ -213,7 +213,7 @@ module Europeana
     end
 
     def full_url(path)
-      "http://#{ENV.fetch('CDN_HOST', 'cdn')}#{ENV.fetch('APP_PORT', nil).nil? ? '' : ':'+ ENV.fetch('APP_PORT', nil)}#{path}"
+      "http://#{ENV.fetch('CDN_HOST', ENV.fetch('APP_HOST', 'localhost'))}#{ENV.fetch('APP_PORT', nil).nil? ? '' : ':'+ ENV.fetch('APP_PORT', nil)}#{path}"
     end
   end
 end
