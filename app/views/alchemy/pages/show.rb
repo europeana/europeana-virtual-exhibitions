@@ -122,6 +122,7 @@ module Alchemy::Pages
       crumbs[0] = {
         url: europeana_collections_url,
         title: t('site.navigation.breadcrumb.return_home', default: 'Return to Home')
+        is_first: true
       }
 
       crumbs.last[:is_last] = true
