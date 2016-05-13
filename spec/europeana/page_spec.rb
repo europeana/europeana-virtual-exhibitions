@@ -69,7 +69,7 @@ module Alchemy
     describe "#thumbnail" do
       context "elements assigned" do
         it "should return nil" do
-          expect(Europeana::Page::new(basic_exhibition_page).thumbnail).to eq(nil)
+          expect(Europeana::Page::new(basic_exhibition_page).thumbnail).to eq(false)
         end
       end
 
