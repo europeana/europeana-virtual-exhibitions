@@ -144,3 +144,9 @@
     type: EssenceRichtext
   - name: image
     type: EssencePicture
+- name: image_compare
+  contents:
+  - name: image_1
+    type: EssencePicture
+  - name: image_2
+    type: EssencePicture
