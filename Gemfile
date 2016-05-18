@@ -85,6 +85,6 @@ group :test do
   gem 'simplecov', require: false
 end
 
-
+gem 'country_select'
 gem 'appsignal'
 gem 'newrelic_rpm'

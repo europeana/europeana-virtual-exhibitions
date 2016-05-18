@@ -36,6 +36,7 @@ module Europeana
       def image_credit(name = 'image_credit')
         credit = @element.content_by_name('image_credit')
         return false if credit.nil?
+        country = ISO3166::Country[credit.essence.country_code]
         {
           attribution_title: credit.essence.title,
           attribution_creator: credit.essence.author,
@@ -43,10 +44,10 @@ module Europeana
           attribution_url: credit.essence.url,
           caption: caption,
           stripped_caption: stripped_caption,
-          license_url: license_link(credit)
+          license_url: license_link(credit),
+          country_code: credit.essence.country_code,
+          country: country.nil? ? false : (country.translations[I18n.locale.to_s] || country.name)
         }.merge({ "license_#{credit.essence.license}" => true})
-
-
       end
 
       def caption

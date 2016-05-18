@@ -37,4 +37,8 @@
     content.form_field_name(:license),
     options_for_select(Europeana::Mixins::ImageCredit::LICENSES)
   ) %>
+
+  <label>Country</label>
+
+  <%= country_select("contents[#{content.id}]", "country_code", allow_blank: true) %>
 </div>
