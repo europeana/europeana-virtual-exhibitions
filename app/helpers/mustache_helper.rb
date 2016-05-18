@@ -75,7 +75,7 @@ module MustacheHelper
       items: [
         {
           url: '#',
-          text: 'Languages',
+          text: t('site.settings.language.label'),
           icon: 'settings',
           submenu: {
             items: page_object.alternatives.collect do |alt|
