@@ -8,7 +8,7 @@
     <% if @page_root %>
     <% @url_prefix = "/portal/exhibitions/#{@page_root.language_code}/" %>
     <ul id="sitemap">
-      <%= render partial: 'page_for_links_alt', object: @page_root, locals: {area_name: @area_name} %>
+      <%= render partial: 'page_for_links', object: @page_root, locals: {area_name: @area_name} %>
     </ul>
     <% end %>
   </div>
