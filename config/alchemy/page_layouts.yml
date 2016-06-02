@@ -4,10 +4,10 @@
 
 - name: exhibition_theme_page
   unique: false
-  elements: [text, image, rich_image, section, quote, intro, embed, image_compare]
+  elements: [text, image, rich_image, section, quote, intro, embed, image_compare, promo]
 - name: exhibition_index_page
   unique: false
-  elements: [foyer_card, featured_exhibition]
+  elements: [foyer_card, featured_exhibition, promo]
 - name: exhibition_credit_page
   unique: false
-  elements: [credit_intro, text, image, rich_image]
+  elements: [credit_intro, text, image, rich_image, promo]
