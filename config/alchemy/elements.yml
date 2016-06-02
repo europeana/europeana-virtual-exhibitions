@@ -150,3 +150,16 @@
     type: EssencePicture
   - name: image_2
     type: EssencePicture
+- name: promo
+  contents:
+  - name: image
+    type: EssencePicture
+  - name: text1
+    type: EssenceText
+  - name: text2
+    type: EssenceText
+  - name: button_text
+    type: EssenceText
+  - name: link
+    type: EssenceLink
+
