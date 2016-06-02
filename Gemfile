@@ -66,7 +66,7 @@ gem 'alchemy-devise', github: 'AlchemyCMS/alchemy-devise', branch: 'master'
 gem 'capistrano-alchemy', github: 'AlchemyCMS/capistrano-alchemy', branch: 'master', group: 'development'
 
 # European styleguide
-gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', ref: '3b73c13ac'
+gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', ref: 'ce38d89'
 gem 'stache', github: 'europeana/stache', branch: 'europeana-styleguide' # until upstream merges our pull requests
 
 gem 'dragonfly-swift_data_store', github: 'europeana/dragonfly-swift-data-store', tag: 'v0.1.0'
