@@ -56,8 +56,8 @@ GIT
 
 GIT
   remote: git://github.com/europeana/europeana-styleguide-ruby.git
-  revision: ce38d8947c479593964baf480ac7b14bb57f37d8
-  ref: ce38d89
+  revision: 13acc0dbef327d4369705fa2ad5bde0abd97603e
+  ref: 13acc0d
   specs:
     europeana-styleguide (0.2.0)
       activesupport (~> 4.0)
@@ -257,7 +257,7 @@ GEM
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0221)
     mini_portile2 (2.0.0)
-    minitest (5.8.4)
+    minitest (5.9.0)
     multi_json (1.11.2)
     mustache (1.0.3)
     net-scp (1.2.1)
