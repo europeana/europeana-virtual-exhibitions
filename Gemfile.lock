@@ -56,8 +56,8 @@ GIT
 
 GIT
   remote: git://github.com/europeana/europeana-styleguide-ruby.git
-  revision: 13acc0dbef327d4369705fa2ad5bde0abd97603e
-  ref: 13acc0d
+  revision: 9e9a766965366cea63602614db215a970a3091c7
+  ref: 9e9a766
   specs:
     europeana-styleguide (0.2.0)
       activesupport (~> 4.0)
@@ -188,6 +188,8 @@ GEM
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
     docile (1.1.5)
+    domain_name (0.5.20160310)
+      unf (>= 0.0.5, < 1.0.0)
     dotenv (2.1.1)
     dotenv-rails (2.1.1)
       dotenv (= 2.1.1)
@@ -224,6 +226,8 @@ GEM
     gli (2.13.4)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
+    http-cookie (1.0.2)
+      domain_name (~> 0.5)
     i18n (0.7.0)
     i18n_data (0.7.0)
     ipaddress (0.8.3)
@@ -253,23 +257,24 @@ GEM
     magiclabs-userstamp (2.1.0)
     mail (2.6.4)
       mime-types (>= 1.16, < 4)
-    mime-types (3.0)
-      mime-types-data (~> 3.2015)
-    mime-types-data (3.2016.0221)
-    mini_portile2 (2.0.0)
+    mime-types (2.99.2)
+    mini_portile2 (2.1.0)
     minitest (5.9.0)
     multi_json (1.11.2)
     mustache (1.0.3)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (3.1.1)
+    netrc (0.11.0)
     newrelic_rpm (3.15.1.316)
-    nokogiri (1.6.7.2)
-      mini_portile2 (~> 2.0.0.rc2)
+    nokogiri (1.6.8)
+      mini_portile2 (~> 2.1.0)
+      pkg-config (~> 1.1.7)
     non-stupid-digest-assets (1.0.8)
       sprockets (>= 2.0)
     orm_adapter (0.5.0)
     pg (0.18.4)
+    pkg-config (1.1.7)
     polyamorous (1.3.0)
       activerecord (>= 3.0)
     puma (2.16.0)
@@ -341,8 +346,10 @@ GEM
     request_store (1.3.1)
     responders (2.1.2)
       railties (>= 4.2.0, < 5.1)
-    rest-client (1.6.7)
-      mime-types (>= 1.16)
+    rest-client (1.8.0)
+      http-cookie (>= 1.0.2, < 2.0)
+      mime-types (>= 1.16, < 3.0)
+      netrc (~> 0.7)
     rspec-activemodel-mocks (1.0.3)
       activemodel (>= 3.0)
       activesupport (>= 3.0)
@@ -413,6 +420,9 @@ GEM
       thread_safe (~> 0.1)
     uglifier (3.0.0)
       execjs (>= 0.3.0, < 3)
+    unf (0.1.4)
+      unf_ext
+    unf_ext (0.0.7.2)
     unicode_utils (1.4.0)
     warden (1.2.6)
       rack (>= 1.0)
@@ -445,12 +455,14 @@ DEPENDENCIES
   jquery-rails
   localeapp (~> 1.0)
   newrelic_rpm
+  nokogiri (>= 1.6.8)
   pg (~> 0.15)
   puma (~> 2.13)
   rack-plastic
   rails (= 4.2.5.2)
   rails_12factor (~> 0.0.3)
   redis-rails
+  rest-client (>= 1.8.0)
   rspec-activemodel-mocks (~> 1.0)
   rspec-rails (~> 3.0)
   sass-rails (~> 5.0)

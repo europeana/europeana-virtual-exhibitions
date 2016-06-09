@@ -66,7 +66,7 @@ gem 'alchemy-devise', github: 'AlchemyCMS/alchemy-devise', branch: 'master'
 gem 'capistrano-alchemy', github: 'AlchemyCMS/capistrano-alchemy', branch: 'master', group: 'development'
 
 # European styleguide
-gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', ref: '13acc0d'
+gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', ref: '9e9a766'
 gem 'stache', github: 'europeana/stache', branch: 'europeana-styleguide' # until upstream merges our pull requests
 
 gem 'dragonfly-swift_data_store', github: 'europeana/dragonfly-swift-data-store', tag: 'v0.1.0'
@@ -88,3 +88,7 @@ end
 gem 'country_select'
 gem 'appsignal'
 gem 'newrelic_rpm'
+
+# Forced gem updates for security issues
+gem 'rest-client', '>= 1.8.0'
+gem 'nokogiri', '>= 1.6.8'

@@ -41,7 +41,7 @@ module Europeana
         present: true,
         items: exhibition.self_and_descendants.map.with_index do |page, index|
           Europeana::Page.new(page).media
-        end.flatten
+        end.flatten.compact
       }
     end
 
