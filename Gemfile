@@ -88,3 +88,7 @@ end
 gem 'country_select'
 gem 'appsignal'
 gem 'newrelic_rpm'
+
+# Forced gem updates for security issues
+gem 'rest-client', '>= 1.8.0'
+gem 'nokogiri', '>= 1.6.8'
