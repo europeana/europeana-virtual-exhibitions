@@ -4,12 +4,30 @@
 
 Europeana's Virtual Exhibitions as a Rails app using [Alchemy CMS](https://github.com/AlchemyCMS/alchemy_cms).
 
-## Setup for development
+## License
 
-* Clone the repository
+Licensed under the EUPL V.1.1.
+
+For full details, see [LICENSE.md](LICENSE.md).
+
+## Requirements
+* Ruby 2.x (latest stable version recommended)
+* Redis
+* PostgreSQL
+
+## Preparation
+* Create a PostgreSQL db
+* Create a Redis data store
+
+## Installation
+* Clone this repository
+* Configure with environment variables. See [.env.example](.env.example) for available variables, and in development/test copy this to .env.development or .env.test. Be sure to set `DATABASE_URL` to the URL of your PostgreSQL db.
+* Create config/redis.yml with a Redis URL for your environment. See samples beneath [deploy/](deploy/).
 * Run `bundle install`
-* Copy .env.example to .env.development, and alter where needed
-* Run `rake db:setup`
-* Run `foreman s`
-* Go to [http://0.0.0.0:3000](http://0.0.0.0:3000)
-* Create an account and start creating some nice pages
+* Run `bundle exec rake db:setup`
+
+## Usage
+* Run each command in the Procfile as a separate app instance. In development, use `foreman start` to run all.
+* The root URL of the application is /portal/exhibitions
+* Create an admin account at /portal/exhibitions/admin/signup
+* See [Alchemy CMS documentation](http://guides.alchemy-cms.com/) for general guidance on using the CMS.
