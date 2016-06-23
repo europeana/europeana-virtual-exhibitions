@@ -22,7 +22,7 @@ For full details, see [LICENSE.md](LICENSE.md).
 
 ## Installation
 * Clone this repository
-* Configure with environment variables. See [.env.example](.env.example) for available variables, and in development/test copy this to .env.development or .env.test. Be sure to set `DATABASE_URL` to the URL of your PostgreSQL db.
+* Configure with environment variables. See [.env.example](.env.example) for available variables, documented in [doc/environment.md](doc/environment.md), and in development/test copy this to .env.development or .env.test. Be sure to set `DATABASE_URL` to the URL of your PostgreSQL db.
 * Create config/redis.yml with a Redis URL for your environment. See samples beneath [deploy/](deploy/).
 * Run `bundle install`
 * Run `bundle exec rake db:setup`
