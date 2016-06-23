@@ -12,6 +12,7 @@ For full details, see [LICENSE.md](LICENSE.md).
 
 ## Requirements
 * Ruby 2.x (latest stable version recommended)
+* ImageMagick
 * Redis
 * PostgreSQL
 
