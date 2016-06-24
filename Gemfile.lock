@@ -1,4 +1,43 @@
 GIT
+  remote: git://github.com/AlchemyCMS/alchemy-devise.git
+  revision: 86d1bc633fe3d732d40e378b0de56c2de80c215d
+  branch: 3.3-stable
+  specs:
+    alchemy-devise (3.3.0)
+      alchemy_cms (> 3.2, < 3.4)
+      devise (>= 3.5.4, < 4.0)
+
+GIT
+  remote: git://github.com/AlchemyCMS/alchemy_cms.git
+  revision: 2f00411f436b28d0007eca6ca5a524d639ff07dd
+  branch: 3.3-stable
+  specs:
+    alchemy_cms (3.3.1)
+      actionpack-page_caching (~> 1.0.0)
+      active_model_serializers (~> 0.9.0)
+      acts-as-taggable-on (~> 3.1)
+      acts_as_list (~> 0.3)
+      awesome_nested_set (~> 3.0.0)
+      cancancan (~> 1.9)
+      coffee-rails (~> 4.0)
+      compass-rails (>= 2.0.4, < 4.0)
+      dragonfly (~> 1.0.1)
+      jquery-rails (~> 4.0)
+      jquery-ui-rails (~> 5.0.0)
+      kaminari (~> 0.15)
+      magiclabs-userstamp (~> 2.1.0)
+      non-stupid-digest-assets (~> 1.0.8)
+      rails (>= 4.2.0, < 5.0)
+      ransack (~> 1.4)
+      request_store (~> 1.2)
+      responders (~> 2.0)
+      sass-rails (~> 5.0)
+      sassy-buttons (~> 0.2.6)
+      select2-rails (>= 3.5.9.1, < 4.0)
+      simple_form (~> 3.0)
+      turbolinks (~> 2.5)
+
+GIT
   remote: git://github.com/europeana/dragonfly-swift-data-store.git
   revision: c37b0ef153cdf837e2f6568710bfa6f9a3dc82dd
   tag: v0.1.0
@@ -71,33 +110,6 @@ GEM
     acts_as_list (0.7.4)
       activerecord (>= 3.0)
     addressable (2.4.0)
-    alchemy-devise (3.3.0)
-      alchemy_cms (> 3.2, < 4.0)
-      devise (>= 3.5.4, < 4.0)
-    alchemy_cms (3.3.0)
-      actionpack-page_caching (~> 1.0.0)
-      active_model_serializers (~> 0.9.0)
-      acts-as-taggable-on (~> 3.1)
-      acts_as_list (~> 0.3)
-      awesome_nested_set (~> 3.0.0)
-      cancancan (~> 1.9)
-      coffee-rails (~> 4.0)
-      compass-rails (>= 2.0.4, < 4.0)
-      dragonfly (~> 1.0.1)
-      jquery-rails (~> 4.0)
-      jquery-ui-rails (~> 5.0.0)
-      kaminari (~> 0.15)
-      magiclabs-userstamp (~> 2.1.0)
-      non-stupid-digest-assets (~> 1.0.8)
-      rails (>= 4.2.0, < 5.0)
-      ransack (~> 1.4)
-      request_store (~> 1.2)
-      responders (~> 2.0)
-      sass-rails (~> 5.0)
-      sassy-buttons (~> 0.2.6)
-      select2-rails (>= 3.5.9.1, < 4.0)
-      simple_form (~> 3.0)
-      turbolinks (~> 2.5)
     arel (6.0.3)
     awesome_nested_set (3.0.3)
       activerecord (>= 4.0.0, < 5)
@@ -399,8 +411,8 @@ PLATFORMS
 
 DEPENDENCIES
   acts_as_list (~> 0.7.4)
-  alchemy-devise (= 3.3.0)
-  alchemy_cms (= 3.3.0)
+  alchemy-devise!
+  alchemy_cms!
   byebug
   coffee-rails (~> 4.1.0)
   country_select
