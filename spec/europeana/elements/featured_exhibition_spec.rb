@@ -25,7 +25,7 @@ module Europeana
         context 'element with no content' do
           let(:hash) { Elements::Base.build(element).to_hash }
 
-          attributes =  %w(link)
+          attributes = %w(link)
           it 'should have the following attributes: ' + attributes.join(',') do
             attributes.each do |attribute|
               expect(hash).to have_key(attribute.to_sym)
