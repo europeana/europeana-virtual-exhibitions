@@ -34,7 +34,7 @@ module Europeana
       }
 
       def image_credit(name = 'image_credit')
-        credit = @element.content_by_name('image_credit')
+        credit = @element.content_by_name(name)
         return false if credit.nil?
         country = ISO3166::Country[credit.essence.country_code]
         {

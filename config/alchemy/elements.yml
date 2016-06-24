@@ -148,8 +148,13 @@
   contents:
   - name: image_1
     type: EssencePicture
+  - name: image_1_credit
+    type: EssenceCredit
   - name: image_2
     type: EssencePicture
+  - name: image_2_credit
+    type: EssenceCredit
+
 - name: promo
   contents:
   - name: image
