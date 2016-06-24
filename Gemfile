@@ -3,8 +3,8 @@ source 'https://rubygems.org'
 gem 'rails', '4.2.5.2'
 
 gem 'acts_as_list', '~> 0.7.4' # dependency of a dependency; version 0.7.3 yanked
-gem 'alchemy_cms', '~> 3.3.0'
-gem 'alchemy-devise', '~> 3.3.0'
+gem 'alchemy_cms', '3.3.0'
+gem 'alchemy-devise', '3.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'country_select'
 gem 'delayed_job_active_record'
