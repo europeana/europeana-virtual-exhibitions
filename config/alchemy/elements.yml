@@ -20,6 +20,8 @@
     type: EssenceText
   - name: sub_title
     type: EssenceText
+  - name: link
+    type: EssenceLink
   - name: body
     type: EssenceRichtext
   - name: label
@@ -40,6 +42,8 @@
     type: EssenceText
   - name: sub_title
     type: EssenceText
+  - name: link
+    type: EssenceLink
   - name: body
     type: EssenceRichtext
   - name: label

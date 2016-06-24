@@ -13,6 +13,7 @@ module Europeana
           image: versions,
           title: get(:title, :body),
           subtitle: get(:sub_title, :body),
+          link: get(:link, :link),
           image_credit: image_credit,
           label: get(:label, :body),
           partner_image: versions("partner_logo"),
