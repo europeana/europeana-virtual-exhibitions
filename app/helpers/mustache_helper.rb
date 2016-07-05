@@ -2,7 +2,7 @@ module MustacheHelper
   def head_links
     links = [
       # { rel: 'shortcut icon', type: 'image/x-icon', href: asset_path('favicon.ico') },
-      { rel: 'stylesheet', href: styleguide_url('/css/virtual-exhibitions/screen.css'), media: 'all', css: 'true' },
+      #{  rel: 'stylesheet', href: styleguide_url('/css/virtual-exhibitions/screen.css'), media: 'all', css: 'true' },
       # { rel: 'stylesheet', href: styleguide_url('/css/screen.css'), media: 'all', css: 'true' },
       # { rel: 'stylesheet', href: styleguide_url('/css/screen.css'), media: 'all', css: 'true' },
 
@@ -17,6 +17,12 @@ module MustacheHelper
     links = links + page_object.language_alternatives_tags
     links = links + page_object.language_default_link
     { items: links }
+  end
+
+  def css_files
+    [
+      { path: styleguide_url('/css/virtual-exhibitions/screen.css'), media: 'all' }
+    ]
   end
 
   def js_vars
