@@ -34,7 +34,7 @@ module Alchemy::Pages
         js_files: js_files,
         head_links: head_links,
         breakpoint_pixels: breakpoint_pixels,
-        css_files: nil,
+        css_files: css_files,
         page_data: page_data,
         breadcrumbs: breadcrumbs,
         share_links: share_links,
