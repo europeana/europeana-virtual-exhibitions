@@ -32,9 +32,10 @@ group :production, :development do
   gem 'newrelic_rpm'
 end
 
+gem 'puma', '~> 2.13'
+
 group :development, :test do
   gem 'dotenv-rails', '~> 2.0'
-  gem 'puma', '~> 2.13'
   gem 'spring-commands-rspec'
 end
 
