@@ -45,6 +45,8 @@ module Europeana
           caption: caption,
           stripped_caption: stripped_caption,
           license_url: license_link(credit),
+          license_code: credit.essence.license,
+          license_label: license_label(credit),
           country_code: credit.essence.country_code,
           country: country.nil? ? false : (country.translations[I18n.locale.to_s] || country.name)
         }.merge({ "license_#{credit.essence.license}" => true})
