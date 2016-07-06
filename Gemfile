@@ -60,13 +60,13 @@ group :development do
   gem 'spring'
 end
 
-gem 'alchemy_cms', github: 'AlchemyCMS/alchemy_cms', branch: 'master'
-gem 'alchemy-devise', github: 'AlchemyCMS/alchemy-devise', branch: 'master'
+gem 'alchemy_cms', github: 'AlchemyCMS/alchemy_cms', branch: '3.3-stable'
+gem 'alchemy-devise', github: 'AlchemyCMS/alchemy-devise', branch: '3.3-stable'
 
 gem 'capistrano-alchemy', github: 'AlchemyCMS/capistrano-alchemy', branch: 'master', group: 'development'
 
 # European styleguide
-gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', ref: '9e9a766'
+gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', ref: '8a5e2d7'
 gem 'stache', github: 'europeana/stache', branch: 'europeana-styleguide' # until upstream merges our pull requests
 
 gem 'dragonfly-swift_data_store', github: 'europeana/dragonfly-swift-data-store', tag: 'v0.1.0'

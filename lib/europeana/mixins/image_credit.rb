@@ -44,6 +44,8 @@ module Europeana
           attribution_url: credit.essence.url,
           caption: caption,
           stripped_caption: stripped_caption,
+          license_code: credit.essence.license,
+          license_text: license_label(credit),
           license_url: license_link(credit),
           country_code: credit.essence.country_code,
           country: country.nil? ? false : (country.translations[I18n.locale.to_s] || country.name)
