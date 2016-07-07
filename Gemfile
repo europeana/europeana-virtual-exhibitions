@@ -10,7 +10,7 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'country_select'
 gem 'delayed_job_active_record'
 gem 'dragonfly-swift_data_store', github: 'europeana/dragonfly-swift-data-store', tag: 'v0.1.0'
-gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', ref: '8a5e2d7f1'
+gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', ref: 'af495e5'
 gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'
 gem 'nokogiri', '>= 1.6.8' # Forced update for security issues
