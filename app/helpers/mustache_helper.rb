@@ -36,7 +36,7 @@ module MustacheHelper
 
   def js_files
     [{ path: styleguide_url('/js/dist/require.js'),
-      data_main: styleguide_url('/js/dist/main/main-virtual-exhibitions') }]
+      data_main: styleguide_url('/js/dist/main/templates/main-virtual-exhibitions') }]
   end
 
   def breakpoint_pixels
