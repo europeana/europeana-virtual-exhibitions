@@ -187,7 +187,7 @@ module Europeana
 
     def language_alternatives_tags
       alternatives.collect do |page|
-        { rel: 'alternate', hreflang: page.language_code, href: page.urlname, title: nil}
+        { rel: 'alternate', hreflang: page.language_code, href: show_page_url(page.language_code, page.urlname), title: nil}
       end
     end
 

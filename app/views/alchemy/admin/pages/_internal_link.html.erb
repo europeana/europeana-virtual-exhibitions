@@ -6,10 +6,8 @@
   <% end %>
   <div id="page_selector_container">
     <% if @page_root %>
-    <% @url_prefix = "portal/exhibitions/#{@page_root.language_code}/" %>
-    <ul id="sitemap">
-      <%= render partial: 'page_for_links', object: @page_root, locals: {area_name: @area_name} %>
-    </ul>
+      <% @url_prefix = "portal/exhibitions/#{@page_root.language_code}/" %>
+      <%= render 'sitemap', page_partial: 'page_for_links', full: true %>
     <% end %>
   </div>
   <div class="input select">
