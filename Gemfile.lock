@@ -1,16 +1,42 @@
 GIT
-  remote: git://github.com/AlchemyCMS/alchemy-devise.git
-  revision: 86d1bc633fe3d732d40e378b0de56c2de80c215d
-  branch: 3.3-stable
+  remote: git://github.com/europeana/dragonfly-swift-data-store.git
+  revision: c37b0ef153cdf837e2f6568710bfa6f9a3dc82dd
+  tag: v0.1.0
+  specs:
+    dragonfly-swift_data_store (0.1.0)
+      dragonfly (~> 1.0)
+      fog-openstack
+
+GIT
+  remote: git://github.com/europeana/europeana-styleguide-ruby.git
+  revision: a413be19c722ffb0603d02437d91801748586b24
+  ref: a413be1
+  specs:
+    europeana-styleguide (0.2.0)
+      activesupport (~> 4.0)
+      mustache (~> 1.0.1)
+      stache (~> 1.1.1)
+
+GIT
+  remote: git://github.com/europeana/stache.git
+  revision: e5ceff86974620d7d7db28018fc29a2c9c24d1d0
+  branch: europeana-styleguide
+  specs:
+    stache (1.1.1)
+
+GIT
+  remote: https://github.com/AlchemyCMS/alchemy-devise
+  revision: 8c0a1e26efa7d2cd6c10ad51c8112fdae2fd86dc
+  ref: 8c0a1e26
   specs:
     alchemy-devise (3.3.0)
       alchemy_cms (> 3.2, < 3.4)
       devise (>= 3.5.4, < 4.0)
 
 GIT
-  remote: git://github.com/AlchemyCMS/alchemy_cms.git
-  revision: 2f00411f436b28d0007eca6ca5a524d639ff07dd
-  branch: 3.3-stable
+  remote: https://github.com/AlchemyCMS/alchemy_cms
+  revision: 2365f502e1c68e9b0633dd88770e18069ab9da95
+  ref: 2365f502
   specs:
     alchemy_cms (3.3.1)
       actionpack-page_caching (~> 1.0.0)
@@ -36,32 +62,6 @@ GIT
       select2-rails (>= 3.5.9.1, < 4.0)
       simple_form (~> 3.0)
       turbolinks (~> 2.5)
-
-GIT
-  remote: git://github.com/europeana/dragonfly-swift-data-store.git
-  revision: c37b0ef153cdf837e2f6568710bfa6f9a3dc82dd
-  tag: v0.1.0
-  specs:
-    dragonfly-swift_data_store (0.1.0)
-      dragonfly (~> 1.0)
-      fog-openstack
-
-GIT
-  remote: git://github.com/europeana/europeana-styleguide-ruby.git
-  revision: a413be19c722ffb0603d02437d91801748586b24
-  ref: a413be1
-  specs:
-    europeana-styleguide (0.2.0)
-      activesupport (~> 4.0)
-      mustache (~> 1.0.1)
-      stache (~> 1.1.1)
-
-GIT
-  remote: git://github.com/europeana/stache.git
-  revision: e5ceff86974620d7d7db28018fc29a2c9c24d1d0
-  branch: europeana-styleguide
-  specs:
-    stache (1.1.1)
 
 GEM
   remote: https://rubygems.org/
@@ -185,7 +185,7 @@ GEM
     factory_girl_rails (4.7.0)
       factory_girl (~> 4.7.0)
       railties (>= 3.0.0)
-    ffi (1.9.10)
+    ffi (1.9.14)
     fog-core (1.37.0)
       builder
       excon (~> 0.45)
