@@ -119,11 +119,11 @@ module Alchemy::Pages
       end
 
       # Temporary replacement until foyer is ready
-      crumbs[0] = {
+      crumbs.unshift({
         url: europeana_collections_url,
         title: t('site.navigation.breadcrumb.return_home', default: 'Return to Home'),
         is_first: true
-      }
+      })
 
       crumbs.last[:is_last] = true
       crumbs
