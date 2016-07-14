@@ -118,12 +118,13 @@ module Alchemy::Pages
         }
       end
 
-      # Temporary replacement until foyer is ready
-      crumbs.unshift({
-        url: europeana_collections_url,
-        title: t('site.navigation.breadcrumb.return_home', default: 'Return to Home'),
-        is_first: true
-      })
+      # Prepend the link to the portal.
+      crumbs.unshift(
+                      url: europeana_collections_url,
+                      title: t('site.navigation.breadcrumb.return_home',
+                      default: 'Return to Home'),
+                      is_first: true
+                    )
 
       crumbs.last[:is_last] = true
       crumbs
