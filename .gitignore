@@ -17,6 +17,7 @@ uploads/*
 
 # Ignore sensitive data
 config/database.yml
+config/newrelic.yml
 config/initializers/secret_token.rb
 
 # Ignore .env.<environment> files

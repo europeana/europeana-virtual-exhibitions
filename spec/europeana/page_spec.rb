@@ -61,7 +61,7 @@ module Alchemy
       let!(:root_page) {create(:alchemy_page, name: 'music exhibition', language_code: :en)}
       let!(:german_page) {create(:alchemy_page, :public, name: 'music exhibition', language_code: language.language_code)}
       it "show right alternatives for german and english pages" do
-        expect(Europeana::Page.new(root_page).link_tags).to eq([{:rel=>"alternate", :hreflang=>"de", :href=>"music-exhibition", :title=>nil}])
+        expect(Europeana::Page.new(root_page).link_tags).to eq([{:rel=>"alternate", :hreflang=>"de", :href=>"http://#{ENV.fetch('CDN_HOST', ENV.fetch('APP_HOST', 'localhost'))}/portal/de/exhibitions/music-exhibition", :title=>nil}])
         expect(Europeana::Page.new(german_page).link_tags).to eq([])
       end
     end
@@ -69,7 +69,7 @@ module Alchemy
     describe "#thumbnail" do
       context "elements assigned" do
         it "should return nil" do
-          expect(Europeana::Page::new(basic_exhibition_page).thumbnail).to eq(nil)
+          expect(Europeana::Page::new(basic_exhibition_page).thumbnail).to eq(false)
         end
       end
 

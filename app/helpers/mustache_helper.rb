@@ -2,7 +2,7 @@ module MustacheHelper
   def head_links
     links = [
       # { rel: 'shortcut icon', type: 'image/x-icon', href: asset_path('favicon.ico') },
-      { rel: 'stylesheet', href: styleguide_url('/css/virtual-exhibitions/screen.css'), media: 'all', css: 'true' },
+      #{  rel: 'stylesheet', href: styleguide_url('/css/virtual-exhibitions/screen.css'), media: 'all', css: 'true' },
       # { rel: 'stylesheet', href: styleguide_url('/css/screen.css'), media: 'all', css: 'true' },
       # { rel: 'stylesheet', href: styleguide_url('/css/screen.css'), media: 'all', css: 'true' },
 
@@ -19,6 +19,12 @@ module MustacheHelper
     { items: links }
   end
 
+  def css_files
+    [
+      { path: styleguide_url('/css/virtual-exhibitions/screen.css'), media: 'all' }
+    ]
+  end
+
   def js_vars
     page_name = (params[:controller] || '') + '/' + (params[:action] || '')
     [
@@ -30,7 +36,7 @@ module MustacheHelper
 
   def js_files
     [{ path: styleguide_url('/js/dist/require.js'),
-      data_main: styleguide_url('/js/dist/main/main-virtual-exhibitions') }]
+      data_main: styleguide_url('/js/dist/main/templates/main-virtual-exhibitions') }]
   end
 
   def breakpoint_pixels
@@ -75,7 +81,7 @@ module MustacheHelper
       items: [
         {
           url: '#',
-          text: 'Languages',
+          text: t('site.settings.language.label'),
           icon: 'settings',
           submenu: {
             items: page_object.alternatives.collect do |alt|

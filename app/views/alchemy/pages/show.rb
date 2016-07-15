@@ -34,7 +34,7 @@ module Alchemy::Pages
         js_files: js_files,
         head_links: head_links,
         breakpoint_pixels: breakpoint_pixels,
-        css_files: nil,
+        css_files: css_files,
         page_data: page_data,
         breadcrumbs: breadcrumbs,
         share_links: share_links,
@@ -118,11 +118,15 @@ module Alchemy::Pages
         }
       end
 
-      # Temporary replacement until foyer is ready
-      crumbs[0] = {
-        url: europeana_collections_url,
-        title: t('site.navigation.breadcrumb.return_home', default: 'Return to Home')
-      }
+      # Prepend the link to the portal.
+      crumbs.unshift(
+                      url: europeana_collections_url,
+                      title: t('site.navigation.breadcrumb.return_home', default: 'Return to Home'),
+                      is_first: true
+                    )
+
+      # Set the index page's breadcrumb title to locale specific string.
+      crumbs[1][:title] = t('site.navigation.breadcrumb.exhibitions.return_home', default: 'Exhibitions')
 
       crumbs.last[:is_last] = true
       crumbs

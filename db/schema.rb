@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160318153450) do
+ActiveRecord::Schema.define(version: 20160518192506) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -99,13 +99,14 @@ ActiveRecord::Schema.define(version: 20160318153450) do
   add_index "alchemy_essence_booleans", ["value"], name: "index_alchemy_essence_booleans_on_value", using: :btree
 
   create_table "alchemy_essence_credits", force: :cascade do |t|
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.string   "title"
     t.string   "author"
     t.string   "institution"
     t.string   "url"
     t.string   "license"
+    t.string   "country_code"
   end
 
   create_table "alchemy_essence_dates", force: :cascade do |t|
@@ -232,6 +233,7 @@ ActiveRecord::Schema.define(version: 20160318153450) do
     t.boolean  "default",        default: false
     t.string   "country_code",   default: "",      null: false
     t.integer  "site_id"
+    t.string   "locale"
   end
 
   add_index "alchemy_languages", ["language_code", "country_code"], name: "index_alchemy_languages_on_language_code_and_country_code", using: :btree
@@ -260,7 +262,7 @@ ActiveRecord::Schema.define(version: 20160318153450) do
     t.integer  "rgt"
     t.integer  "parent_id"
     t.integer  "depth"
-    t.boolean  "visible",          default: false
+    t.boolean  "visible",          default: true
     t.boolean  "public",           default: false
     t.boolean  "locked",           default: false
     t.integer  "locked_by"

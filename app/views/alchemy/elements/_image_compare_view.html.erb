@@ -1,0 +1,16 @@
+<%- cache(element) do -%>
+  <%= element_view_for(element) do |el| -%>
+    <div class="image_1">
+      <%= el.render :image_1 %>
+    </div>
+    <div class="image_1_credit">
+      <%= el.render :image_1_credit %>
+    </div>
+    <div class="image_2">
+      <%= el.render :image_2 %>
+    </div>
+    <div class="image_2_credit">
+      <%= el.render :image_2_credit %>
+    </div>
+  <%- end -%>
+<%- end -%>
