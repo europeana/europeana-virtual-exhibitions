@@ -121,10 +121,12 @@ module Alchemy::Pages
       # Prepend the link to the portal.
       crumbs.unshift(
                       url: europeana_collections_url,
-                      title: t('site.navigation.breadcrumb.return_home',
-                      default: 'Return to Home'),
+                      title: t('site.navigation.breadcrumb.return_home', default: 'Return to Home'),
                       is_first: true
                     )
+
+      # Set the index page's breadcrumb title to locale specific string.
+      crumbs[1][:title] = t('site.navigation.breadcrumb.exhibitions.return_home', default: 'Exhibitions')
 
       crumbs.last[:is_last] = true
       crumbs
