@@ -122,23 +122,23 @@ module Europeana
     def menu_data
       [
         {
-            url: europeana_collections_url,
-            text: I18n.t('global.navigation.home'),
-            is_current: false
+          url: europeana_collections_url,
+          text: I18n.t('global.navigation.home'),
+          is_current: false
         },
         {
-            text: I18n.t('global.navigation.collections'),
-            is_current: false,
-            submenu: {
-                items: navigation_global_primary_nav_collections_submenu_items
-            }
+          text: I18n.t('global.navigation.collections'),
+          is_current: false,
+          submenu: {
+            items: navigation_global_primary_nav_collections_submenu_items
+          }
         },
         {
-            text: I18n.t('global.navigation.browse'),
-            is_current: false,
-            submenu: {
-                items: navigation_global_primary_nav_browse_submenu_items
-            }
+          text: I18n.t('global.navigation.browse'),
+          is_current: false,
+          submenu: {
+            items: navigation_global_primary_nav_browse_submenu_items
+          }
         },
         {
           text: exhibition.title,
@@ -154,11 +154,11 @@ module Europeana
           }
         },
         {
-            url: 'http://blog.europeana.eu/',
-            text: I18n.t('global.navigation.blog'),
-            submenu: {
-                items: navigation_global_primary_nav_blog_submenu_items
-            }
+          url: 'http://blog.europeana.eu/',
+          text: I18n.t('global.navigation.blog'),
+          submenu: {
+            items: navigation_global_primary_nav_blog_submenu_items
+          }
         }
       ]
     end
@@ -169,8 +169,8 @@ module Europeana
     #
     def navigation_global_primary_nav_collections_submenu_items
         [
-          link_item('Music', URI.join(europeana_collections_url,'collections/music') , is_current: false),
-          link_item('Art History', URI.join(europeana_collections_url,'collections/art-history') , is_current: false)
+          link_item('Music', URI.join(europeana_collections_url, 'collections/music'), is_current: false),
+          link_item('Art History', URI.join(europeana_collections_url, 'collections/art-history'), is_current: false)
         ]
     end
 
@@ -179,15 +179,15 @@ module Europeana
     #
     def navigation_global_primary_nav_browse_submenu_items
       [
-          link_item(I18n.t('global.navigation.browse_newcontent'), URI.join(europeana_collections_url,'/browse/newcontent'),
+          link_item(I18n.t('global.navigation.browse_newcontent'), URI.join(europeana_collections_url, '/browse/newcontent'),
                     is_current: false),
-          link_item(I18n.t('global.navigation.browse_colours'), URI.join(europeana_collections_url,'/browse/colours'),
+          link_item(I18n.t('global.navigation.browse_colours'), URI.join(europeana_collections_url, '/browse/colours'),
                     is_current: false),
-          link_item(I18n.t('global.navigation.browse_sources'), URI.join(europeana_collections_url,'/browse/sources'),
+          link_item(I18n.t('global.navigation.browse_sources'), URI.join(europeana_collections_url, '/browse/sources'),
                     is_current: false),
-          link_item(I18n.t('global.navigation.concepts'), URI.join(europeana_collections_url,'/browse/topics'),
+          link_item(I18n.t('global.navigation.concepts'), URI.join(europeana_collections_url, '/browse/topics'),
                     is_current: false),
-          link_item(I18n.t('global.navigation.agents'), URI.join(europeana_collections_url,'/browse/people'),
+          link_item(I18n.t('global.navigation.agents'), URI.join(europeana_collections_url, '/browse/people'),
                     is_current: false)
       ]
     end
@@ -199,7 +199,7 @@ module Europeana
       # Commented out individual blog posts for now to avoid having to port
       # even more code from the collections portal.
 
-      #feed_items = feed_entry_nav_items(Cache::FeedJob::URLS[:blog][:all], 6)
+      # feed_items = feed_entry_nav_items(Cache::FeedJob::URLS[:blog][:all], 6)
       [link_item(I18n.t('global.navigation.all_blog_posts'), 'http://blog.europeana.eu/',
                               is_morelink: true)]
     end
