@@ -20,6 +20,8 @@
     type: EssenceText
   - name: sub_title
     type: EssenceText
+  - name: link
+    type: EssenceLink
   - name: body
     type: EssenceRichtext
   - name: label
@@ -40,6 +42,8 @@
     type: EssenceText
   - name: sub_title
     type: EssenceText
+  - name: link
+    type: EssenceLink
   - name: body
     type: EssenceRichtext
   - name: label
@@ -144,3 +148,27 @@
     type: EssenceRichtext
   - name: image
     type: EssencePicture
+- name: image_compare
+  contents:
+  - name: image_1
+    type: EssencePicture
+  - name: image_1_credit
+    type: EssenceCredit
+  - name: image_2
+    type: EssencePicture
+  - name: image_2_credit
+    type: EssenceCredit
+
+- name: promo
+  contents:
+  - name: image
+    type: EssencePicture
+  - name: text1
+    type: EssenceText
+  - name: text2
+    type: EssenceText
+  - name: button_text
+    type: EssenceText
+  - name: link
+    type: EssenceLink
+

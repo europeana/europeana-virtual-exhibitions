@@ -41,7 +41,7 @@ module Europeana
         present: true,
         items: exhibition.self_and_descendants.map.with_index do |page, index|
           Europeana::Page.new(page).media
-        end.flatten
+        end.flatten.compact
       }
     end
 
@@ -187,7 +187,7 @@ module Europeana
 
     def language_alternatives_tags
       alternatives.collect do |page|
-        { rel: 'alternate', hreflang: page.language_code, href: page.urlname, title: nil}
+        { rel: 'alternate', hreflang: page.language_code, href: show_page_url(page.language_code, page.urlname), title: nil}
       end
     end
 
@@ -213,7 +213,7 @@ module Europeana
     end
 
     def full_url(path)
-      "http://#{ENV.fetch('CDN_HOST', 'cdn')}#{ENV.fetch('APP_PORT', nil).nil? ? '' : ':'+ ENV.fetch('APP_PORT', nil)}#{path}"
+      "http://#{ENV.fetch('CDN_HOST', ENV.fetch('APP_HOST', 'localhost'))}#{ENV.fetch('APP_PORT', nil).nil? ? '' : ':'+ ENV.fetch('APP_PORT', nil)}#{path}"
     end
   end
 end

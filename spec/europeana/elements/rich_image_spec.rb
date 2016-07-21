@@ -25,7 +25,7 @@ module Europeana
         context 'element with no content' do
           let(:hash) { Elements::Base.build(element).to_hash }
 
-          attributes =  %w(title sub_title image is_align_image_right is_align_image_left caption quote quotee body stripped_body)
+          attributes = %w(title sub_title image is_align_image_right is_align_image_left caption quote quotee body stripped_body)
           it 'should have the following attributes: ' + attributes.join(',') do
             attributes.each do |attribute|
               expect(hash).to have_key(attribute.to_sym)

@@ -2,12 +2,12 @@ require 'rails_helper'
 
 module Europeana
   describe 'Elements' do
-    describe 'Foyer card' do
-      let(:element) { Alchemy::Element.create_from_scratch(name: 'foyer_card') }
+    describe 'Promo' do
+      let(:element) { Alchemy::Element.create_from_scratch(name: 'promo') }
 
       describe "#to_hash" do
         context 'new element' do
-          let(:element) { Alchemy::Element.new_from_scratch(name: 'foyer_card') }
+          let(:element) { Alchemy::Element.new_from_scratch(name: 'promo') }
 
           it 'should not raise and error when outputting to an hash' do
             expect { Elements::Base.build(element).to_hash }.to_not raise_error
@@ -25,7 +25,7 @@ module Europeana
         context 'element with no content' do
           let(:hash) { Elements::Base.build(element).to_hash }
 
-          attributes = %w(url state_1_label state_1_title state_1_image state_2_title state_2_body state_2_image state_3_logo state_3_image)
+          attributes = %w(button_text text1 text2 link image)
           it 'should have the following attributes: ' + attributes.join(',') do
             attributes.each do |attribute|
               expect(hash).to have_key(attribute.to_sym)

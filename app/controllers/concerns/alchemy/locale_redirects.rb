@@ -13,25 +13,22 @@ module Alchemy
     extend ActiveSupport::Concern
 
     included do
-      before_action :enforce_no_locale,
-        if: :locale_prefix_not_allowed?,
+      before_action :enforce_locale,
         only: [:index, :show]
     end
 
     private
 
     # Redirects to requested action without locale prefixed
-    def enforce_no_locale
-      redirect_permanently_to additional_params.merge(locale: nil)
-    end
-
-    # Is the requested locale allowed?
-    #
-    # If Alchemy is not in multi language mode or the requested locale is the default locale,
-    # then we want to redirect to a non prefixed url.
-    #
-    def locale_prefix_not_allowed?
-      false
+    def enforce_locale
+      # If we are missing a locale send clients to a url with locale
+      unless params.include?(:locale)
+        redirect_permanently_to Rails.application.routes.url_helpers.show_page_url(urlname: params[:urlname], locale: :en) and return
+      end
+      # If we get the messed up Alchemy URL
+      if request.path.split("/")[2] == "exhibitions"
+        redirect_permanently_to Rails.application.routes.url_helpers.show_page_url(urlname: params[:urlname], locale: params[:locale]) and return
+      end
     end
   end
 end

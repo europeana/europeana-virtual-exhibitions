@@ -1,7 +1,6 @@
 module Europeana
   module Elements
     class RichImage < Europeana::Elements::Image
-
       def quote
         get(:quote, :body)
       end
@@ -42,7 +41,8 @@ module Europeana
           quotee: quotee.present? ? quotee : false,
           body: body.present? ? body : false,
           stripped_body: stripped_body.present? ? stripped_body : false,
-          hide_in_credits: hide_in_credits
+          hide_in_credits: hide_in_credits,
+          image_credit: image_credit
         }
       end
     end

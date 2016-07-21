@@ -2,7 +2,7 @@ module Europeana
   module Elements
     class Base
 
-      TYPES = %w(text image rich_image section quote intro foyer_card embed navigation featured_exhibition credit_intro)
+      TYPES = %w(text image rich_image section quote intro foyer_card embed navigation featured_exhibition credit_intro image_compare promo)
 
       attr_accessor :element
 
