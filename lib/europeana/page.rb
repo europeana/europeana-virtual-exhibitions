@@ -145,11 +145,11 @@ module Europeana
           url: '#',
           submenu: {
               items: menu_items.collect do |chapter|
-              {
-                text: chapter.title,
-                url: show_page_url(urlname: chapter.urlname, locale: chapter.language_code),
-                is_current: chapter == @page
-              }
+                {
+                  text: chapter.title,
+                  url: show_page_url(urlname: chapter.urlname, locale: chapter.language_code),
+                  is_current: chapter == @page
+                }
               end
           }
         },
@@ -163,15 +163,14 @@ module Europeana
       ]
     end
 
-
     ##
     # Support method for menu_data, remove upon refactor.
     #
     def navigation_global_primary_nav_collections_submenu_items
-        [
-          link_item('Music', URI.join(europeana_collections_url, 'collections/music'), is_current: false),
-          link_item('Art History', URI.join(europeana_collections_url, 'collections/art-history'), is_current: false)
-        ]
+      [
+        link_item('Music', URI.join(europeana_collections_url, 'collections/music'), is_current: false),
+        link_item('Art History', URI.join(europeana_collections_url, 'collections/art-history'), is_current: false)
+      ]
     end
 
     ##
@@ -179,16 +178,16 @@ module Europeana
     #
     def navigation_global_primary_nav_browse_submenu_items
       [
-          link_item(I18n.t('global.navigation.browse_newcontent'), URI.join(europeana_collections_url, '/browse/newcontent'),
-                    is_current: false),
-          link_item(I18n.t('global.navigation.browse_colours'), URI.join(europeana_collections_url, '/browse/colours'),
-                    is_current: false),
-          link_item(I18n.t('global.navigation.browse_sources'), URI.join(europeana_collections_url, '/browse/sources'),
-                    is_current: false),
-          link_item(I18n.t('global.navigation.concepts'), URI.join(europeana_collections_url, '/browse/topics'),
-                    is_current: false),
-          link_item(I18n.t('global.navigation.agents'), URI.join(europeana_collections_url, '/browse/people'),
-                    is_current: false)
+        link_item(I18n.t('global.navigation.browse_newcontent'), URI.join(europeana_collections_url, '/browse/newcontent'),
+                  is_current: false),
+        link_item(I18n.t('global.navigation.browse_colours'), URI.join(europeana_collections_url, '/browse/colours'),
+                  is_current: false),
+        link_item(I18n.t('global.navigation.browse_sources'), URI.join(europeana_collections_url, '/browse/sources'),
+                  is_current: false),
+        link_item(I18n.t('global.navigation.concepts'), URI.join(europeana_collections_url, '/browse/topics'),
+                  is_current: false),
+        link_item(I18n.t('global.navigation.agents'), URI.join(europeana_collections_url, '/browse/people'),
+                  is_current: false)
       ]
     end
 
@@ -200,8 +199,7 @@ module Europeana
       # even more code from the collections portal.
 
       # feed_items = feed_entry_nav_items(Cache::FeedJob::URLS[:blog][:all], 6)
-      [link_item(I18n.t('global.navigation.all_blog_posts'), 'http://blog.europeana.eu/',
-                              is_morelink: true)]
+      [link_item(I18n.t('global.navigation.all_blog_posts'), 'http://blog.europeana.eu/', is_morelink: true)]
     end
 
     ##
