@@ -122,11 +122,6 @@ module Europeana
     def menu_data
       [
         {
-          url: europeana_collections_url,
-          text: I18n.t('global.navigation.home'),
-          is_current: false
-        },
-        {
           text: I18n.t('global.navigation.collections'),
           is_current: false,
           submenu: {
