@@ -32,16 +32,16 @@ module Exhibitions
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
-    config.action_controller.default_url_options = {host: ENV.fetch('APP_HOST', 'test.npc.eanadev.org'), port: ENV.fetch('APP_PORT', nil)}
+    config.action_controller.default_url_options = Rails.application.routes.default_url_options
 
-    config.assets.prefix = '/portal/exhibitions/assets'
+    # Read relative URL root from env
+    config.relative_url_root = ENV['RAILS_RELATIVE_URL_ROOT'] || ''
+
+    config.assets.prefix = '/exhibitions/assets'
     config.active_job.queue_adapter = :delayed_job
     #config.assets.initialize_on_precompile = false
 
     config.i18n.enforce_available_locales = false
-
-    # Read relative URL root from env
-    config.relative_url_root = ENV['RAILS_RELATIVE_URL_ROOT'] || ''
 
     # Load Redis config from config/redis.yml, if it exists
     config.cache_store = begin
