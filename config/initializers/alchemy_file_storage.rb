@@ -29,26 +29,22 @@ unless Rails.env.test?
 
     Dragonfly.app(:alchemy_pictures).configure do
       plugin :imagemagick
-      datastore :s3,
-        { root_path: ENV.fetch('AWS_IMAGE_PREFIX','AWS_IMAGE_PREFIX') }.merge(s3_defaults)
+      datastore :s3, { root_path: ENV.fetch('AWS_IMAGE_PREFIX', 'AWS_IMAGE_PREFIX') }.merge(s3_defaults)
     end
     Dragonfly.app(:alchemy_attachments).configure do
-      datastore :s3,
-        { root_path: ENV.fetch('AWS_ATTACHEMENT_PREFIX','AWS_ATTACHEMENT_PREFIX') }.merge(s3_defaults)
+      datastore :s3, { root_path: ENV.fetch('AWS_ATTACHEMENT_PREFIX', 'AWS_ATTACHEMENT_PREFIX') }.merge(s3_defaults)
     end
 
   elsif filestorage_provider == 'OpenStack'
 
     Dragonfly.app(:alchemy_pictures).configure do
       plugin :imagemagick
-      datastore :swift,
-        { container_name: ENV.fetch('IMAGES_CONTAINER_NAME', 'IMAGES_CONTAINER_NAME') }.merge(openstack_defaults)
+      datastore :swift, { container_name: ENV.fetch('IMAGES_CONTAINER_NAME', 'IMAGES_CONTAINER_NAME') }.merge(openstack_defaults)
       url_host ENV.fetch('CDN_HOST', 'http://localhost:3000')
     end
 
     Dragonfly.app(:alchemy_attachments).configure do
-      datastore :swift,
-        { container_name: ENV.fetch('ATTACHMENTS_CONTAINER_NAME', 'ATTACHMENTS_CONTAINER_NAME') }.merge(openstack_defaults)
+      datastore :swift, { container_name: ENV.fetch('ATTACHMENTS_CONTAINER_NAME', 'ATTACHMENTS_CONTAINER_NAME') }.merge(openstack_defaults)
       url_host ENV.fetch('CDN_HOST', 'http://localhost:3000')
     end
 
