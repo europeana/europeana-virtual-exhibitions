@@ -40,6 +40,9 @@ module Exhibitions
 
     config.i18n.enforce_available_locales = false
 
+    # Read relative URL root from env
+    config.relative_url_root = ENV['RAILS_RELATIVE_URL_ROOT'] || ''
+
     # Load Redis config from config/redis.yml, if it exists
     config.cache_store = begin
       redis_config = Rails.application.config_for(:redis).symbolize_keys

@@ -15,7 +15,9 @@ gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'
 gem 'nokogiri', '>= 1.6.8' # Forced update for security issues
 gem 'pg', '~> 0.15'
+gem 'puma', '~> 2.13'
 gem 'rack-plastic'
+gem 'rack-rewrite'
 gem 'redis-rails'
 gem 'rest-client', '>= 1.8.0' # Forced update for security issues
 gem 'sass-rails', '~> 5.0'
@@ -31,8 +33,6 @@ end
 group :production, :development do
   gem 'newrelic_rpm'
 end
-
-gem 'puma', '~> 2.13'
 
 group :development, :test do
   gem 'dotenv-rails', '~> 2.0'
