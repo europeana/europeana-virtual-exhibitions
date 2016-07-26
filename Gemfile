@@ -36,6 +36,7 @@ gem 'puma', '~> 2.13'
 
 group :development, :test do
   gem 'dotenv-rails', '~> 2.0'
+  gem 'rubocop', '0.39.0', require: false # only update when Hound does
   gem 'spring-commands-rspec'
 end
 
