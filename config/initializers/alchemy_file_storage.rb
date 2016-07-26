@@ -17,7 +17,7 @@ openstack_defaults = {
 s3_defaults = {
   bucket_name: ENV.fetch('AWS_DIRECTORY', ''),
   access_key_id: ENV.fetch('AWS_ACCESS_KEY_ID', ''),
-  secret_access_key: ENV.fetch('AWS_SECRET_ACCES_KEY', ''),
+  secret_access_key: ENV.fetch('AWS_SECRET_ACCESS_KEY', ''),
   region: ENV.fetch('AWS_REGION', '')
 }
 
