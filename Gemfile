@@ -17,7 +17,7 @@ gem 'nokogiri', '>= 1.6.8' # Forced update for security issues
 gem 'pg', '~> 0.15'
 gem 'puma', '~> 2.13'
 gem 'rack-plastic'
-gem 'rack-rewrite'
+gem 'rails_with_relative_url_root', '~> 0.1'
 gem 'redis-rails'
 gem 'rest-client', '>= 1.8.0' # Forced update for security issues
 gem 'sass-rails', '~> 5.0'
