@@ -23,7 +23,7 @@ module LocalisedRoutes
   end
 
   def determine_locale?
-     !alchemy_admin_controller?
+    !alchemy_admin_controller?
   end
 
   def enforce_locale
