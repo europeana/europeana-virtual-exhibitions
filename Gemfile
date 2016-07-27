@@ -46,6 +46,7 @@ group :development do
 end
 
 group :test do
+  gem 'capybara', '~> 2.4'
   gem 'database_cleaner', '~> 1.3'
   gem 'rspec-rails', '~> 3.0'
   gem 'factory_girl_rails', '~> 4.5'
