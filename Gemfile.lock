@@ -120,6 +120,13 @@ GEM
     builder (3.2.2)
     byebug (8.2.4)
     cancancan (1.15.0)
+    capybara (2.7.1)
+      addressable
+      mime-types (>= 1.16)
+      nokogiri (>= 1.3.3)
+      rack (>= 1.0.0)
+      rack-test (>= 0.5.4)
+      xpath (~> 2.0)
     chunky_png (1.3.6)
     coffee-rails (4.1.1)
       coffee-script (>= 2.2.0)
@@ -270,6 +277,7 @@ GEM
     rack-plastic (0.1.3)
       nokogiri (~> 1.4)
       rack (~> 1.0)
+    rack-rewrite (1.5.1)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.6)
@@ -296,6 +304,10 @@ GEM
       rails_stdout_logging
     rails_serve_static_assets (0.0.5)
     rails_stdout_logging (0.0.5)
+    rails_with_relative_url_root (0.1.0)
+      rack (~> 1.0)
+      rack-rewrite (~> 1.0)
+      rails (~> 4.0)
     railties (4.2.6)
       actionpack (= 4.2.6)
       activesupport (= 4.2.6)
@@ -425,6 +437,8 @@ GEM
       binding_of_caller (>= 0.7.2)
       railties (>= 4.0)
       sprockets-rails (>= 2.0, < 4.0)
+    xpath (2.0.0)
+      nokogiri (~> 1.3)
     ya2yaml (0.31)
 
 PLATFORMS
@@ -435,6 +449,7 @@ DEPENDENCIES
   alchemy-devise!
   alchemy_cms!
   byebug
+  capybara (~> 2.4)
   coffee-rails (~> 4.1.0)
   country_select
   database_cleaner (~> 1.3)
@@ -454,6 +469,7 @@ DEPENDENCIES
   rack-plastic
   rails (= 4.2.6)
   rails_12factor (~> 0.0.3)
+  rails_with_relative_url_root (~> 0.1)
   redis-rails
   rest-client (>= 1.8.0)
   rspec-activemodel-mocks (~> 1.0)

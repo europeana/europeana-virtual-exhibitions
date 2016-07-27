@@ -16,7 +16,9 @@ gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'
 gem 'nokogiri', '>= 1.6.8' # Forced update for security issues
 gem 'pg', '~> 0.15'
+gem 'puma', '~> 2.13'
 gem 'rack-plastic'
+gem 'rails_with_relative_url_root', '~> 0.1'
 gem 'redis-rails'
 gem 'rest-client', '>= 1.8.0' # Forced update for security issues
 gem 'sass-rails', '~> 5.0'
@@ -33,8 +35,6 @@ group :production, :development do
   gem 'newrelic_rpm'
 end
 
-gem 'puma', '~> 2.13'
-
 group :development, :test do
   gem 'dotenv-rails', '~> 2.0'
   gem 'rubocop', '0.39.0', require: false # only update when Hound does
@@ -48,6 +48,7 @@ group :development do
 end
 
 group :test do
+  gem 'capybara', '~> 2.4'
   gem 'database_cleaner', '~> 1.3'
   gem 'rspec-rails', '~> 3.0'
   gem 'factory_girl_rails', '~> 4.5'
