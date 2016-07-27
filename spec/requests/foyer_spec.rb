@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 RSpec.describe 'redirects to the foyer' do
   it 'redirects GET / to /en/exhibitions/foyer' do
     get('/')

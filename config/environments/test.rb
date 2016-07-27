@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ENV['APP_HOST'] ||= 'test.host'
 
 Rails.application.configure do

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 RSpec.describe 'localisation redirects' do
   context 'without locale' do
     it 'redirects GET /exhibitions to /en/exhibitions' do

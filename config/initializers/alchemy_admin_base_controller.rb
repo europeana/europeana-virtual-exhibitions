@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 Alchemy::Admin::BaseController.class_eval do
   def determine_locale?
     false

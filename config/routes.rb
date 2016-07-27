@@ -1,9 +1,7 @@
 Rails.application.routes.draw do
   default_url_options(
-    {
-      host: ENV.fetch('APP_HOST', nil),
-      port: ENV.fetch('APP_PORT', nil)
-    }
+    host: ENV.fetch('APP_HOST', nil),
+    port: ENV.fetch('APP_PORT', nil)
   )
 
   root to: 'locale#index'
