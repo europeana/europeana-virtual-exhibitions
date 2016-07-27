@@ -30,6 +30,4 @@ Rails.application.routes.draw do
     get '/sitemap-index.xml', to: 'sitemap#index'
     get '/robots.txt', to: 'sitemap#robots'
   end
-
-#   get '*path', to: 'locale#show'
 end
