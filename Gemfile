@@ -9,8 +9,9 @@ gem 'alchemy_cms', git: 'https://github.com/AlchemyCMS/alchemy_cms', ref: '2365f
 gem 'coffee-rails', '~> 4.1.0'
 gem 'country_select'
 gem 'delayed_job_active_record'
+gem 'dragonfly-s3_data_store'
 gem 'dragonfly-swift_data_store', github: 'europeana/dragonfly-swift-data-store', tag: 'v0.1.0'
-gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', ref: '86b981d1'
+gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', ref: '962f8c9'
 gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'
 gem 'nokogiri', '>= 1.6.8' # Forced update for security issues
@@ -36,6 +37,7 @@ end
 
 group :development, :test do
   gem 'dotenv-rails', '~> 2.0'
+  gem 'rubocop', '0.39.0', require: false # only update when Hound does
   gem 'spring-commands-rspec'
 end
 

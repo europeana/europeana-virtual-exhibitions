@@ -62,7 +62,7 @@ module Alchemy
       let!(:german_page) {create(:alchemy_page, :public, name: 'music exhibition', language_code: language.language_code)}
       it "show right alternatives for german and english pages" do
         expect(Europeana::Page.new(root_page).link_tags[0][:hreflang]).to eq("de")
-        expect(Europeana::Page.new(root_page).link_tags[0][:href]).to include("/portal/de/exhibitions/music-exhibition")
+        expect(Europeana::Page.new(root_page).link_tags[0][:href]).to include("/de/exhibitions/music-exhibition")
 
         expect(Europeana::Page.new(german_page).link_tags).to eq([])
       end
