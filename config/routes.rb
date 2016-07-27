@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   end
 
   scope '/exhibitions' do
+    get '/:locale/*path', constraints: { locale: /[a-z]{2}/ }, to: redirect('%{locale}/exhibitions/%{path}')
+
     mount Alchemy::Engine => '/'
 
     namespace :alchemy, path: nil do

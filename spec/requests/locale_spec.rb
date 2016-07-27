@@ -25,4 +25,11 @@ RSpec.describe 'localisation redirects' do
       expect(response).to redirect_to('/fr/exhibitions')
     end
   end
+
+  context 'with locale misplaced in URL' do
+    it 'redirects GET /exhibitions/de/faces-of-europe to /de/exhibitions/faces-of-europe' do
+      get('/exhibitions/de/faces-of-europe')
+      expect(response).to redirect_to('/de/exhibitions/faces-of-europe')
+    end
+  end
 end
