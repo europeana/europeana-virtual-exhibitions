@@ -35,7 +35,8 @@ module LocalisedRoutes
   end
 
   def alchemy_admin_controller?
-    self.class.superclass == Alchemy::Admin::BaseController
+    self.class.superclass == Alchemy::Admin::BaseController ||
+      self.class == Alchemy::UserSessionsController
   end
 
   def extract_locale_from_accept_language_header
