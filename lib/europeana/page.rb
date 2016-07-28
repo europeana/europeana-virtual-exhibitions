@@ -2,6 +2,7 @@ module Europeana
   class Page
     include ActionView::Helpers::TagHelper
     include Rails.application.routes.url_helpers
+    include LanguageHelper
 
     def initialize(page)
       @page = page
@@ -19,7 +20,6 @@ module Europeana
         end
       }
     end
-
 
     def chapter_elements
       if !is_exhibition
@@ -266,13 +266,13 @@ module Europeana
     end
 
     def language_alternatives_tags
-      alternatives.collect do |page|
+      ([@page] + alternatives).collect do |page|
         { rel: 'alternate', hreflang: page.language_code, href: show_page_url(page.language_code, page.urlname), title: nil}
       end
     end
 
     def language_default_link
-      [{ rel: 'alternate', hreflang: 'x-default', href: url, title: nil}]
+      [{ rel: 'alternate', hreflang: 'x-default', href: url_without_locale(url), title: nil}]
     end
 
     # meta information

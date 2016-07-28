@@ -1,6 +1,5 @@
 module Alchemy
   class Base < Europeana::Styleguide::View
-
     def cached_body
       lambda do |text|
         Rails.cache.fetch(cache_key, expires_in: 24.hours, force: force_cache) do
@@ -9,6 +8,26 @@ module Alchemy
       end
     end
 
+    def head_links
+      links = [ opensearch_link ]
+      if params[:controller] == 'home' && params[:action] == 'index'
+        links << { rel: 'canonical', href: root_url }
+      end
+
+      links = links + page_object.language_alternatives_tags
+      links = links + page_object.language_default_link
+      { items: links }
+    end
+
+    private
+
+    def opensearch_link
+      {
+        rel: 'search', type: 'application/opensearchdescription+xml',
+        href: Rails.application.config.x.europeana_opensearch_host + '/opensearch.xml',
+        title: 'Europeana Search'
+      }
+    end
 
     def cache_version
       @cache_version ||= begin
@@ -28,7 +47,6 @@ module Alchemy
     def force_cache
       !current_user.nil?
     end
-
 
     def page_object
       @page_object ||= Europeana::Page.new(@page)

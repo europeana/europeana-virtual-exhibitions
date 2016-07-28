@@ -79,10 +79,10 @@ RSpec.configure do |config|
   end
 
   config.append_after(:each) do
-    DatabaseCleaner.clean
+    DatabaseCleaner.clean_with(:truncation)
     if RSpec.current_example.metadata[:type] == :feature
       allow(Alchemy::Seeder).to receive(:puts)
-      Alchemy::Seeder.seed!
     end
+    Alchemy::Seeder.seed!
   end
 end
