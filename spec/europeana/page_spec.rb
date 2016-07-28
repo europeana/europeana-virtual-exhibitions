@@ -61,10 +61,10 @@ module Alchemy
       let!(:root_page) {create(:alchemy_page, name: 'music exhibition', language_code: :en)}
       let!(:german_page) {create(:alchemy_page, :public, name: 'music exhibition', language_code: language.language_code)}
       it "show right alternatives for german and english pages" do
-        expect(Europeana::Page.new(root_page).link_tags[0][:hreflang]).to eq("de")
-        expect(Europeana::Page.new(root_page).link_tags[0][:href]).to include("/de/exhibitions/music-exhibition")
-
-        expect(Europeana::Page.new(german_page).link_tags).to eq([])
+        expect(Europeana::Page.new(root_page).link_tags.detect { |tag| tag[:hreflang] == 'de' }).not_to be_nil
+        expect(Europeana::Page.new(root_page).link_tags.detect { |tag| tag[:href].include?('/de/exhibitions/music-exhibition') }).not_to be_nil
+        expect(Europeana::Page.new(german_page).link_tags.detect { |tag| tag[:hreflang] == 'de' }).not_to be_nil
+        expect(Europeana::Page.new(german_page).link_tags.detect { |tag| tag[:href].include?('/de/exhibitions/music-exhibition') }).not_to be_nil
       end
     end
 
@@ -88,7 +88,6 @@ module Alchemy
       end
     end
 
-
     context "complex exhibition" do
       let(:exhibition_root_page) do
         create(:alchemy_page, :public)
@@ -110,18 +109,6 @@ module Alchemy
           end
         end
       end
-
-      describe "#chapter_elements" do
-        context "when starting at root of exhibition" do
-          it "outputs" do
-            puts Europeana::Page::new(exhibition_child_page_1).thumbnail.inspect
-          end
-        end
-      end
-
     end
-
-
-
   end
 end
