@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 RSpec.feature 'Locale stored in session' do
   describe 'session' do
     it 'stores the locale' do
