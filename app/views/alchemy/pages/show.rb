@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Alchemy
   module Pages
     class Show < Alchemy::Base
@@ -31,45 +32,43 @@ module Alchemy
 
       def json
         JSON.pretty_generate(
-          {
-            js_files: js_files,
-            head_links: head_links,
-            breakpoint_pixels: breakpoint_pixels,
-            css_files: css_files,
-            page_data: page_data,
-            breadcrumbs: breadcrumbs,
-            share_links: share_links,
-            next_page: next_page,
-            previous_page: previous_page,
-            head_meta: head_meta,
-            navigation: navigation,
-            footer: footer,
-            google_analytics_code: google_analytics_code,
-            growl_message: growl_message,
-            title: title
-          }
+          js_files: js_files,
+          head_links: head_links,
+          breakpoint_pixels: breakpoint_pixels,
+          css_files: css_files,
+          page_data: page_data,
+          breadcrumbs: breadcrumbs,
+          share_links: share_links,
+          next_page: next_page,
+          previous_page: previous_page,
+          head_meta: head_meta,
+          navigation: navigation,
+          footer: footer,
+          google_analytics_code: google_analytics_code,
+          growl_message: growl_message,
+          title: title
         )
       end
 
-      def is_foyer?
+      def foyer?
         page_object.is_foyer
       end
-      alias_method :is_foyer, :is_foyer?
+      alias_method :is_foyer, :foyer?
 
-      def is_credit?
+      def credit?
         page_object.is_credit
       end
-      alias_method :is_credit, :is_credit?
+      alias_method :is_credit, :credit?
 
-      def is_chapter?
+      def chapter?
         page_object.is_chapter
       end
-      alias_method :is_chapter, :is_chapter?
+      alias_method :is_chapter, :chapter?
 
-      def is_exhibition?
+      def exhibition?
         page_object.is_exhibition
       end
-      alias_method :is_exhibition, :is_exhibition?
+      alias_method :is_exhibition, :exhibition?
 
       def title
         @page.title
@@ -80,13 +79,9 @@ module Alchemy
       end
 
       def share_links
-        [:facebook, :twitter, :pinterest, :instagram].each.collect do |network|
+        [:facebook, :twitter, :pinterest, :instagram].each.map do |network|
           [network, share_link_url(network)]
         end.to_h
-      end
-
-      def editor_attribute(attribute)
-        " contenteditable='true' data-content-id=1 data-content-type='text' "
       end
 
       def next_page
@@ -126,10 +121,10 @@ module Alchemy
 
         # Prepend the link to the portal.
         crumbs.unshift(
-                        url: europeana_collections_url,
-                        title: t('site.navigation.breadcrumb.return_home', default: 'Return to Home'),
-                        is_first: true
-                      )
+          url: europeana_collections_url,
+          title: t('site.navigation.breadcrumb.return_home', default: 'Return to Home'),
+          is_first: true
+        )
 
         # Set the index page's breadcrumb title to locale specific string.
         crumbs[1][:title] = t('site.navigation.breadcrumb.exhibitions.return_home', default: 'Exhibitions')
@@ -154,8 +149,7 @@ module Alchemy
 
       def share_link_url(network)
         show_page_url(locale, @page.urlname,
-                      { utm_source: network, utm_medium: :social, utm_campaign: exhibition.slug }
-                     )
+                      utm_source: network, utm_medium: :social, utm_campaign: exhibition.slug)
       end
 
       def locale

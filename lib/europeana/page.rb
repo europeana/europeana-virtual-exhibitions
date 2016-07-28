@@ -139,13 +139,13 @@ module Europeana
           text: exhibition.title,
           url: '#',
           submenu: {
-              items: menu_items.map do |chapter|
-                {
-                  text: chapter.title,
-                  url: show_page_url(urlname: chapter.urlname, locale: chapter.language_code),
-                  is_current: chapter == @page
-                }
-              end
+            items: menu_items.map do |chapter|
+              {
+                text: chapter.title,
+                url: show_page_url(urlname: chapter.urlname, locale: chapter.language_code),
+                is_current: chapter == @page
+              }
+            end
           }
         },
         {
