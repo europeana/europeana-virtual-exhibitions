@@ -23,7 +23,7 @@ module LocalisedRoutes
   end
 
   def determine_locale?
-    !alchemy_admin_controller?
+    self.class == Alchemy::PagesController
   end
 
   def enforce_locale
@@ -31,12 +31,7 @@ module LocalisedRoutes
   end
 
   def enforce_locale?
-    !params.key?(:locale) && !alchemy_admin_controller?
-  end
-
-  def alchemy_admin_controller?
-    self.class.superclass == Alchemy::Admin::BaseController ||
-      self.class == Alchemy::UserSessionsController
+    !params.key?(:locale) && self.class == Alchemy::PagesController
   end
 
   def extract_locale_from_accept_language_header
