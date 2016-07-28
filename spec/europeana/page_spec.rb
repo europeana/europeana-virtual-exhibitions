@@ -87,25 +87,62 @@ module Alchemy
       end
     end
 
+    describe '#breadcrumbs' do
+      let(:page_record) { create(:alchemy_page, :public, visible: true, name: 'Page for Breadcrumbs', page_layout: 'exhibition_theme_page') }
+      let(:breadcrumbs) { Europeana::Page.new(page_record).breadcrumbs }
+
+      it 'should have breadcrumbs back to the portal, the index and itself' do
+        expect(breadcrumbs.count).to eq(3)
+        expect(breadcrumbs[0][:url]).to include('portal')
+        expect(breadcrumbs[0][:title]).to include('Return to Home')
+        expect(breadcrumbs[0][:is_first]).to eq(true)
+        expect(breadcrumbs[1][:url]).to include('/en/exhibitions/startseite')
+        expect(breadcrumbs[1][:title]).to include('Exhibitions')
+        expect(breadcrumbs[2][:url]).to include('/en/exhibitions/page-for-breadcrumbs')
+        expect(breadcrumbs[2][:title]).to include('Page for Breadcrumbs')
+        expect(breadcrumbs[2][:is_last]).to eq(true)
+      end
+    end
+
     context 'complex exhibition' do
       let(:exhibition_root_page) do
-        create(:alchemy_page, :public)
+        create(:alchemy_page, :public, visible: true)
       end
 
       let(:exhibition_child_page_1) do
-        create(:alchemy_page, :public, parent_id: exhibition_root_page.id)
+        create(:alchemy_page, :public, visible: true, parent_id: exhibition_root_page.id)
       end
+
+      let(:child_page) { Europeana::Page.new(exhibition_child_page_1) }
 
       describe '#exhibition' do
         context 'child page' do
           it 'is equal to root of exhibition' do
-            expect(Europeana::Page::new(exhibition_child_page_1).exhibition).to eq(exhibition_root_page)
+            expect(child_page.exhibition).to eq(exhibition_root_page)
           end
         end
         context 'root page' do
           it 'is equal to itself' do
-            expect(Europeana::Page::new(exhibition_root_page).exhibition).to eq(exhibition_root_page)
+            expect(Europeana::Page.new(exhibition_root_page).exhibition).to eq(exhibition_root_page)
           end
+        end
+      end
+
+      describe '#breadcrumbs' do
+        let(:breadcrumbs) { child_page.breadcrumbs }
+
+        it "should have breadcrumbs back to the portal, the index, it's parent and itself" do
+          expect(breadcrumbs.count).to eq(4)
+          expect(breadcrumbs[0][:url]).to include('portal')
+          expect(breadcrumbs[0][:title]).to include('Return to Home')
+          expect(breadcrumbs[0][:is_first]).to eq(true)
+          expect(breadcrumbs[1][:url]).to include('/en/exhibitions/startseite')
+          expect(breadcrumbs[1][:title]).to include('Exhibitions')
+          expect(breadcrumbs[2][:url]).to match(%r{en\/exhibitions\/a-public-page-\d*})
+          expect(breadcrumbs[2][:title]).to match(/A Public Page \d*/)
+          expect(breadcrumbs[3][:url]).to match(%r{en\/exhibitions\/a-public-page-\d*\/a-public-page-\d*})
+          expect(breadcrumbs[3][:title]).to match(/A Public Page \d*/)
+          expect(breadcrumbs[3][:is_last]).to eq(true)
         end
       end
     end

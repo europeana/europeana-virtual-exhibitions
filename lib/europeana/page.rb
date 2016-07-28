@@ -114,6 +114,20 @@ module Europeana
       @url ||= show_page_url(locale: @page.language_code, urlname: @page.urlname)
     end
 
+    def breadcrumbs
+      crumbs = @page.self_and_ancestors.where('depth >= 1').map do |ancestor|
+        {
+          url: show_page_url(@page.language_code, ancestor.urlname),
+          title: ancestor.title
+        }
+      end
+      # Set the index page's breadcrumb title to locale specific string.
+      crumbs[0][:title] = I18n.t('site.navigation.breadcrumb.exhibitions.return_home', default: 'Exhibitions')
+      crumbs = prepend_portal_breadcrumb crumbs
+      crumbs.last[:is_last] = true
+      crumbs
+    end
+
     ##
     # All this logic expcept for the exhibition related
     # elements come from the europeana collection portal.
@@ -295,5 +309,17 @@ module Europeana
     def full_url(path)
       "http://#{ENV.fetch('CDN_HOST', ENV.fetch('APP_HOST', 'localhost'))}#{ENV.fetch('APP_PORT', nil).nil? ? '' : ':'+ ENV.fetch('APP_PORT', nil)}#{path}"
     end
+
+    private
+
+      def prepend_portal_breadcrumb(crumbs)
+        # Prepend the link to the portal.
+        crumbs.unshift(
+          url: europeana_collections_url,
+          title: I18n.t('site.navigation.breadcrumb.return_home', default: 'Return to Home'),
+          is_first: true
+        )
+        crumbs
+      end
   end
 end
