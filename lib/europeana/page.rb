@@ -139,7 +139,7 @@ module Europeana
           text: exhibition.title,
           url: '#',
           submenu: {
-              items: menu_items.collect do |chapter|
+              items: menu_items.map do |chapter|
                 {
                   text: chapter.title,
                   url: show_page_url(urlname: chapter.urlname, locale: chapter.language_code),
@@ -266,13 +266,13 @@ module Europeana
     end
 
     def language_alternatives_tags
-      ([@page] + alternatives).collect do |page|
+      ([@page] + alternatives).map do |page|
         { rel: 'alternate', hreflang: page.language_code, href: show_page_url(page.language_code, page.urlname), title: nil}
       end
     end
 
     def language_default_link
-      [{ rel: 'alternate', hreflang: 'x-default', href: url_without_locale(url), title: nil}]
+      [{ rel: 'alternate', hreflang: 'x-default', href: url_without_locale(url), title: nil }]
     end
 
     # meta information

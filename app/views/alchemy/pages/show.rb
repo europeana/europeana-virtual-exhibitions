@@ -30,40 +30,46 @@ module Alchemy
       end
 
       def json
-        JSON.pretty_generate({
-          js_files: js_files,
-          head_links: head_links,
-          breakpoint_pixels: breakpoint_pixels,
-          css_files: css_files,
-          page_data: page_data,
-          breadcrumbs: breadcrumbs,
-          share_links: share_links,
-          next_page: next_page,
-          previous_page: previous_page,
-          head_meta: head_meta,
-          navigation: navigation,
-          footer: footer,
-          google_analytics_code: google_analytics_code,
-          growl_message: growl_message,
-          title: title
-        })
+        JSON.pretty_generate(
+          {
+            js_files: js_files,
+            head_links: head_links,
+            breakpoint_pixels: breakpoint_pixels,
+            css_files: css_files,
+            page_data: page_data,
+            breadcrumbs: breadcrumbs,
+            share_links: share_links,
+            next_page: next_page,
+            previous_page: previous_page,
+            head_meta: head_meta,
+            navigation: navigation,
+            footer: footer,
+            google_analytics_code: google_analytics_code,
+            growl_message: growl_message,
+            title: title
+          }
+        )
       end
 
-      def is_foyer
+      def is_foyer?
         page_object.is_foyer
       end
+      alias_method :is_foyer, :is_foyer?
 
-      def is_credit
+      def is_credit?
         page_object.is_credit
       end
+      alias_method :is_credit, :is_credit?
 
-      def is_chapter
+      def is_chapter?
         page_object.is_chapter
       end
+      alias_method :is_chapter, :is_chapter?
 
-      def is_exhibition
+      def is_exhibition?
         page_object.is_exhibition
       end
+      alias_method :is_exhibition, :is_exhibition?
 
       def title
         @page.title
@@ -111,7 +117,7 @@ module Alchemy
       end
 
       def breadcrumbs
-        crumbs = @page.self_and_ancestors.where('depth >= 1').map do | ancestor |
+        crumbs = @page.self_and_ancestors.where('depth >= 1').map do |ancestor|
           {
             url: show_page_url(locale, ancestor.urlname),
             title: ancestor.title
