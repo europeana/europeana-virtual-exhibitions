@@ -1,6 +1,6 @@
 module LanguageHelper
-  def url_without_locale(url)
-    url.sub("/#{I18n.locale}", '')
+  def url_without_locale(url, locale: I18n.locale)
+    url.sub("/#{locale}", '')
   end
 
   def current_url_without_locale

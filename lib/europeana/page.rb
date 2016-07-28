@@ -111,7 +111,7 @@ module Europeana
     end
 
     def url
-      show_page_url(@page.language_code, @page.urlname)
+      @url ||= show_page_url(locale: @page.language_code, urlname: @page.urlname)
     end
 
     ##
@@ -272,7 +272,7 @@ module Europeana
     end
 
     def language_default_link
-      [{ rel: 'alternate', hreflang: 'x-default', href: url_without_locale(url), title: nil }]
+      [{ rel: 'alternate', hreflang: 'x-default', href: url_without_locale(url, locale: @page.language_code), title: nil }]
     end
 
     # meta information
