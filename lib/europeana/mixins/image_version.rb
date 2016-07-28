@@ -36,7 +36,7 @@ module Europeana
           end
           [version,
           {
-            url: image.essence.picture_url(options)
+            url: Rails.application.config.relative_url_root + image.essence.picture_url(options)
           }
         ]}]
       end
