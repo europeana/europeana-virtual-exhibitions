@@ -56,14 +56,17 @@ module Alchemy
     end
 
     describe '#link_tags' do
-      let(:language) { create(:alchemy_language)}
-      let!(:root_page) {create(:alchemy_page, name: 'music exhibition', language_code: :en)}
-      let!(:german_page) {create(:alchemy_page, :public, name: 'music exhibition', language_code: language.language_code)}
+      let(:language_de) { create(:alchemy_language, name: 'Deutsch', code: 'de') }
+      let(:language_en) { Alchemy::Language.find_by_code('en') }
+      let(:english_alchemy_page) { create(:alchemy_page, :public, visible: true, name: 'music exhibition', language: language_en) }
+      let(:german_alchemy_page) { create(:alchemy_page, :public, visible: true, name: 'music exhibition', language: language_de) }
+      let!(:english_page) { Europeana::Page.new(english_alchemy_page) }
+      let!(:german_page) {Europeana::Page.new(german_alchemy_page)}
       it 'show right alternatives for german and english pages' do
-        expect(Europeana::Page.new(root_page).link_tags.detect { |tag| tag[:hreflang] == 'de' }).not_to be_nil
-        expect(Europeana::Page.new(root_page).link_tags.detect { |tag| tag[:href].include?('/de/exhibitions/music-exhibition') }).not_to be_nil
-        expect(Europeana::Page.new(german_page).link_tags.detect { |tag| tag[:hreflang] == 'de' }).not_to be_nil
-        expect(Europeana::Page.new(german_page).link_tags.detect { |tag| tag[:href].include?('/de/exhibitions/music-exhibition') }).not_to be_nil
+        expect(english_page.link_tags.detect { |tag| tag[:hreflang] == 'de' }).not_to be_nil
+        expect(english_page.link_tags.detect { |tag| tag[:href].include?('/de/exhibitions/music-exhibition') }).not_to be_nil
+        expect(german_page.link_tags.detect { |tag| tag[:hreflang] == 'en' }).not_to be_nil
+        expect(german_page.link_tags.detect { |tag| tag[:href].include?('/en/exhibitions/music-exhibition') }).not_to be_nil
       end
     end
 
