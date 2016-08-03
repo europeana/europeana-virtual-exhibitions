@@ -8,13 +8,6 @@ require 'rspec/rails'
 require 'database_cleaner'
 require 'rspec-activemodel-mocks'
 
-require 'alchemy/seeder'
-require 'alchemy/test_support/controller_requests'
-require 'alchemy/test_support/essence_shared_examples'
-require 'alchemy/test_support/integration_helpers'
-require 'alchemy/test_support/factories'
-
-require "#{::Rails.root}/lib/support/factories"
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -43,7 +36,10 @@ RSpec.configure do |config|
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
-  config.use_transactional_fixtures = false
+  config.use_transactional_fixtures = true
+
+  # All the fixtures, all the time.
+  config.global_fixtures = :all
 
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and
@@ -65,21 +61,11 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 
-  [:controller, :feature].each do |type|
-    config.include Alchemy::TestSupport::IntegrationHelpers, type: type
-  end
-
-  config.include FactoryGirl::Syntax::Methods
-
-
   config.before(:suite) do
     DatabaseCleaner.clean_with(:truncation)
-    Alchemy::Shell.silence!
-    Alchemy::Seeder.seed!
   end
 
   config.append_after(:each) do
     DatabaseCleaner.clean_with(:truncation)
-    Alchemy::Seeder.seed!
   end
 end

@@ -2,13 +2,13 @@
 module Alchemy
   describe 'Show' do
     let(:basic_exhibition_page) do
-      create(:alchemy_page, :public, visible: true, name: 'Page 1', page_layout: 'exhibition_theme_page')
+      alchemy_pages(:exhibition_page)
     end
 
     describe '#elements' do
       context 'page with only one element' do
         before do
-          basic_exhibition_page.elements << create(:alchemy_element, name: 'text')
+          basic_exhibition_page.elements << alchemy_elements(:text_element)
         end
 
         let(:page) { Europeana::Page.new(basic_exhibition_page)}
@@ -19,15 +19,12 @@ module Alchemy
       end
 
       context 'page with two elements' do
-        let(:basic_exhibition) do
-          create(:alchemy_page, :public, visible: true, name: 'page with two elements', page_layout: 'exhibition_theme_page')
-        end
         before do
-          basic_exhibition.elements << create(:alchemy_element, create_contents_after_create: true, name: 'text')
-          basic_exhibition.elements << create(:alchemy_element, name: 'quote', create_contents_after_create: true)
+          basic_exhibition_page.elements << alchemy_elements(:text_element)
+          basic_exhibition_page.elements << alchemy_elements(:quote_element)
         end
 
-        let(:page) { Europeana::Page.new(basic_exhibition)}
+        let(:page) { Europeana::Page.new(basic_exhibition_page) }
 
         it 'has set is_full_section_element to false' do
           expect(page.elements[:items].first[:is_full_section_element]).to eq(false)
@@ -36,10 +33,10 @@ module Alchemy
     end
 
     describe '#meta_tags' do
-      let(:page) { Europeana::Page.new(page_record)}
+      let(:page) { Europeana::Page.new(page_record) }
 
       context 'public page' do
-        let(:page_record) { create(:alchemy_page, :public)}
+        let(:page_record) { alchemy_pages(:exhibition_page) }
 
         it 'should have meta tags that allow indexing' do
           expect(page.meta_tags).to eq(meta_name: 'robots', content: 'index,follow')
@@ -47,7 +44,7 @@ module Alchemy
       end
 
       context 'non public page' do
-        let(:page_record) { create(:alchemy_page, :restricted, robot_index: false, robot_follow: false)}
+        let(:page_record) { alchemy_pages(:restricted_page) }
 
         it 'should have meta tags that do not allow indexing' do
           expect(page.meta_tags).to eq(meta_name: 'robots', content: 'noindex,nofollow')
@@ -56,12 +53,10 @@ module Alchemy
     end
 
     describe '#link_tags' do
-      let(:language_de) { create(:alchemy_language, name: 'Deutsch', code: 'de') }
-      let(:language_en) { Alchemy::Language.find_by_code('en') }
-      let(:english_alchemy_page) { create(:alchemy_page, :public, visible: true, name: 'music exhibition', language: language_en) }
-      let(:german_alchemy_page) { create(:alchemy_page, :public, visible: true, name: 'music exhibition', language: language_de) }
+      let(:english_alchemy_page) { alchemy_pages(:english_music_page) }
+      let(:german_alchemy_page) { alchemy_pages(:german_music_page) }
       let!(:english_page) { Europeana::Page.new(english_alchemy_page) }
-      let!(:german_page) {Europeana::Page.new(german_alchemy_page)}
+      let!(:german_page) { Europeana::Page.new(german_alchemy_page) }
       it 'show right alternatives for german and english pages' do
         expect(english_page.link_tags.detect { |tag| tag[:hreflang] == 'de' }).not_to be_nil
         expect(english_page.link_tags.detect { |tag| tag[:href].include?('/de/exhibitions/music-exhibition') }).not_to be_nil
@@ -79,8 +74,8 @@ module Alchemy
 
       context 'image element assigned' do
         let(:exhibition_with_elements) do
-          page = create(:alchemy_page)
-          page.elements << create(:alchemy_element, name: 'image', create_contents_after_create: true)
+          page = alchemy_pages(:exhibition_page)
+          page.elements << alchemy_elements(:image_element)
           page
         end
 
@@ -91,7 +86,7 @@ module Alchemy
     end
 
     describe '#breadcrumbs' do
-      let(:page_record) { create(:alchemy_page, :public, visible: true, name: 'Page for Breadcrumbs', page_layout: 'exhibition_theme_page') }
+      let(:page_record) { alchemy_pages(:exhibition_page) }
       let(:breadcrumbs) { Europeana::Page.new(page_record).breadcrumbs }
 
       it 'should have breadcrumbs back to the portal, the index and itself' do
@@ -99,21 +94,21 @@ module Alchemy
         expect(breadcrumbs[0][:url]).to include('portal')
         expect(breadcrumbs[0][:title]).to include('Return to Home')
         expect(breadcrumbs[0][:is_first]).to eq(true)
-        expect(breadcrumbs[1][:url]).to include('/en/exhibitions/startseite')
+        expect(breadcrumbs[1][:url]).to include('/de/exhibitions/startseite')
         expect(breadcrumbs[1][:title]).to include('Exhibitions')
-        expect(breadcrumbs[2][:url]).to include('/en/exhibitions/page-for-breadcrumbs')
-        expect(breadcrumbs[2][:title]).to include('Page for Breadcrumbs')
+        expect(breadcrumbs[2][:url]).to include('/de/exhibitions/page-1')
+        expect(breadcrumbs[2][:title]).to include('Page 1')
         expect(breadcrumbs[2][:is_last]).to eq(true)
       end
     end
 
     context 'complex exhibition' do
       let(:exhibition_root_page) do
-        create(:alchemy_page, :public, visible: true)
+        alchemy_pages(:complex_exhibition_root)
       end
 
       let(:exhibition_child_page_1) do
-        create(:alchemy_page, :public, visible: true, parent_id: exhibition_root_page.id)
+        alchemy_pages(:complex_exhibition_child)
       end
 
       let(:child_page) { Europeana::Page.new(exhibition_child_page_1) }
@@ -139,12 +134,12 @@ module Alchemy
           expect(breadcrumbs[0][:url]).to include('portal')
           expect(breadcrumbs[0][:title]).to include('Return to Home')
           expect(breadcrumbs[0][:is_first]).to eq(true)
-          expect(breadcrumbs[1][:url]).to include('/en/exhibitions/startseite')
+          expect(breadcrumbs[1][:url]).to include('/de/exhibitions/startseite')
           expect(breadcrumbs[1][:title]).to include('Exhibitions')
-          expect(breadcrumbs[2][:url]).to match(%r{en\/exhibitions\/a-public-page-\d*})
-          expect(breadcrumbs[2][:title]).to match(/A Public Page \d*/)
-          expect(breadcrumbs[3][:url]).to match(%r{en\/exhibitions\/a-public-page-\d*\/a-public-page-\d*})
-          expect(breadcrumbs[3][:title]).to match(/A Public Page \d*/)
+          expect(breadcrumbs[2][:url]).to match(%r{de\/exhibitions\/exhibition-root})
+          expect(breadcrumbs[2][:title]).to match(/Exhibition root/)
+          expect(breadcrumbs[3][:url]).to match(%r{de\/exhibitions\/exhibition-root\/exhibition-child})
+          expect(breadcrumbs[3][:title]).to match(/Exhibition child/)
           expect(breadcrumbs[3][:is_last]).to eq(true)
         end
       end
