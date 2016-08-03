@@ -9,13 +9,13 @@ module Europeana
         context 'new element' do
           let(:element) { Alchemy::Element.new_from_scratch(name: 'featured_exhibition') }
 
-          it 'should not raise and error when outputting to an hash' do
+          it 'should not raise an error when outputting to an hash' do
             expect { Elements::Base.build(element).to_hash }.to_not raise_error
           end
         end
 
         context 'persisted element' do
-          it 'should not raise and error when outputting to an hash' do
+          it 'should not raise an error when outputting to an hash' do
             expect { Elements::Base.build(element).to_hash }.to_not raise_error
           end
         end

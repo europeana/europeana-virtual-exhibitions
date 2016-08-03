@@ -1,0 +1,14 @@
+essence_picture:
+  picture: picture
+  caption: 'this is an image'
+  title: 'picture'
+
+essence_landscape_picture:
+  picture: landscape_picture
+  caption: 'this is a landscape image'
+  title: 'landscape picture'
+
+essence_portrait_picture:
+  picture: portrait_picture
+  caption: 'this is a portrait image'
+  title: 'portrait picture'

@@ -1,0 +1,169 @@
+root:
+  name: 'Root'
+  depth: 0
+  lft: 1
+  rgt: 26
+
+language_root_page_de:
+  name: 'Startrseite'
+  urlname: 'startseite'
+  depth: 1
+  lft: 2
+  rgt: 15
+  title: 'startseite'
+  public: true
+  visible: true
+  language_code: 'de'
+  language_root: true
+  language: german
+  parent: root
+  page_layout: 'exhibition_index_page'
+
+language_root_page_en:
+  name: 'Startrseite'
+  urlname: 'startseite'
+  depth: 1
+  lft: 16
+  rgt: 21
+  title: 'startseite'
+  public: true
+  visible: true
+  language_code: 'en'
+  language_root: true
+  language: english
+  parent: root
+  page_layout: 'exhibition_index_page'
+
+language_root_page_fr:
+  name: 'Startrseite'
+  urlname: 'startseite'
+  depth: 1
+  lft: 22
+  rgt: 25
+  title: 'startseite'
+  public: true
+  visible: true
+  language_code: 'fr'
+  language_root: true
+  language: french
+  parent: root
+  page_layout: 'exhibition_index_page'
+
+
+exhibition_page:
+  title: 'Page 1'
+  urlname: 'page-1'
+  depth: 2
+  lft: 3
+  rgt: 4
+  public: true
+  visible: true
+  language_code: 'de'
+  parent: language_root_page_de
+  page_layout: 'exhibition_theme_page'
+
+complex_exhibition_root:
+  name: 'Exhibition root'
+  title: 'Exhibition root'
+  urlname: 'exhibition-root'
+  depth: 2
+  lft: 5
+  rgt: 8
+  public: true
+  visible: true
+  language_code: 'de'
+  parent: language_root_page_de
+  page_layout: 'exhibition_theme_page'
+
+complex_exhibition_child:
+  name: 'Exhibition child'
+  title: 'Exhibition child'
+  urlname: 'exhibition-root/exhibition-child'
+  depth: 3
+  lft: 6
+  rgt: 7
+  public: true
+  visible: false
+  language_code: 'de'
+  parent: complex_exhibition_root
+  page_layout: 'exhibition_theme_page'
+
+
+english_music_page:
+  name: 'music exhibition'
+  title: 'music exhibition'
+  urlname: 'music-exhibition'
+  depth: 2
+  lft: 17
+  rgt: 18
+  public: true
+  visible: true
+  language_code: 'en'
+  language: english
+  parent: language_root_page_en
+  page_layout: 'exhibition_theme_page'
+
+german_music_page:
+  name: 'music exhibition'
+  title: 'music exhibition'
+  urlname: 'music-exhibition'
+  depth: 2
+  lft: 9
+  rgt: 10
+  public: true
+  visible: true
+  language_code: 'de'
+  language: german
+  parent: language_root_page_de
+  page_layout: 'exhibition_theme_page'
+
+
+sample_page_de:
+  name: 'sample'
+  title: 'Sample'
+  urlname: 'sample'
+  depth: 2
+  lft: 11
+  rgt: 12
+  public: true
+  visible: true
+  language_code: 'de'
+  language: german
+  parent: language_root_page_de
+  page_layout: 'exhibition_theme_page'
+
+sample_page_en:
+  name: 'sample'
+  title: 'Sample'
+  urlname: 'sample'
+  depth: 2
+  lft: 19
+  rgt: 20
+  public: true
+  visible: true
+  language_code: 'en'
+  language: english
+  parent: language_root_page_en
+  page_layout: 'exhibition_theme_page'
+
+sample_page_fr:
+  name: 'sample'
+  title: 'Sample'
+  urlname: 'sample'
+  depth: 2
+  lft: 23
+  rgt: 24
+  public: true
+  visible: true
+  language_code: 'fr'
+  language: french
+  parent: language_root_page_fr
+  page_layout: 'exhibition_theme_page'
+
+
+restricted_page:
+  name: 'A restricted Page'
+  page_layout: 'exhibition_theme_page'
+  restricted: true
+  robot_index: false
+  robot_follow: false

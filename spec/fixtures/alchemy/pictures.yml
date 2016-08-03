@@ -1,0 +1,17 @@
+picture:
+  image_file_width: 1
+  image_file_height: 1
+  name: 'image'
+  image_file_name: 'image.png'
+
+landscape_picture:
+  image_file_width: 700
+  image_file_height: 400
+  name: 'landscape image'
+  image_file_name: 'placeholder-700x400.png'
+
+portrait_picture:
+  image_file_width: 400
+  image_file_height: 700
+  name: 'portrait image'
+  image_file_name: 'placeholder-400x700.png'

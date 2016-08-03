@@ -9,13 +9,13 @@ module Europeana
         context 'new element' do
           let(:element) { Alchemy::Element.new_from_scratch(name: 'image') }
 
-          it 'should not raise and error when outputting to an hash' do
+          it 'should not raise an error when outputting to an hash' do
             expect { Elements::Base.build(element).to_hash }.to_not raise_error
           end
         end
 
         context 'persisted element' do
-          it 'should not raise and error when outputting to an hash' do
+          it 'should not raise an error when outputting to an hash' do
             expect { Elements::Base.build(element).to_hash }.to_not raise_error
           end
         end
@@ -42,9 +42,8 @@ module Europeana
       end
 
       describe 'alchemy to mustache mapping' do
-        let(:essenc_picture) { create (:alchemy_essence_picture)}
         let(:alchemy_element) do
-          create(:alchemy_element, name: 'image', contents: [create(:alchemy_content, essence: essenc_picture, name: 'image')])
+          alchemy_elements(:image_element)
         end
 
         let(:mustache_data) { Europeana::Elements::Image.new(alchemy_element).to_hash }
@@ -58,7 +57,9 @@ module Europeana
         end
 
         context 'landscape image' do
-          let(:essenc_picture) { create(:alchemy_essence_picture, picture: create(:landscape_picture))}
+          let(:alchemy_element) do
+            alchemy_elements(:landscape_image_element)
+          end
 
           it 'return true for is_landscape' do
             expect(mustache_data[:is_landscape]).to eq(true)
@@ -67,7 +68,10 @@ module Europeana
         end
 
         context 'portrait image' do
-          let(:essenc_picture) { create(:alchemy_essence_picture, picture: create(:portrait_picture))}
+          let(:alchemy_element) do
+            alchemy_elements(:portrait_image_element)
+          end
+
           it 'return true for is_landscape' do
             expect(mustache_data[:is_landscape]).to eq(false)
             expect(mustache_data[:is_portrait]).to eq(true)
