@@ -1,24 +1,4 @@
 module MustacheHelper
-  def head_links
-    links = [
-      # { rel: 'shortcut icon', type: 'image/x-icon', href: asset_path('favicon.ico') },
-      #{  rel: 'stylesheet', href: styleguide_url('/css/virtual-exhibitions/screen.css'), media: 'all', css: 'true' },
-      # { rel: 'stylesheet', href: styleguide_url('/css/screen.css'), media: 'all', css: 'true' },
-      # { rel: 'stylesheet', href: styleguide_url('/css/screen.css'), media: 'all', css: 'true' },
-
-      { rel: 'search', type: 'application/opensearchdescription+xml',
-        href: Rails.application.config.x.europeana_opensearch_host + '/opensearch.xml',
-        title: 'Europeana Search' }
-    ]
-    if params[:controller] == 'home' && params[:action] == 'index'
-      links << { rel: 'canonical', href: root_url }
-    end
-
-    links = links + page_object.language_alternatives_tags
-    links = links + page_object.language_default_link
-    { items: links }
-  end
-
   def css_files
     [
       { path: styleguide_url('/css/virtual-exhibitions/screen.css'), media: 'all' }
@@ -35,31 +15,35 @@ module MustacheHelper
   end
 
   def js_files
-    [{ path: styleguide_url('/js/dist/require.js'),
-      data_main: styleguide_url('/js/dist/main/templates/main-virtual-exhibitions') }]
+    [
+      {
+        path: styleguide_url('/js/dist/require.js'),
+        data_main: styleguide_url('/js/dist/main/templates/main-virtual-exhibitions')
+      }
+    ]
   end
 
   def breakpoint_pixels
     {
-      "img":{
-        "show_thumbnail": "1px",
-        "show_small": "200px",
-        "show_half":  "400px",
-        "show_full":  "800px"
+      'img':{
+        'show_thumbnail': '1px',
+        'show_small': '200px',
+        'show_half':  '400px',
+        'show_full':  '800px'
       },
-      "bg":{
-        "show_thumbnail": "1px",
-        "show_small": "200px",
-        "show_half":  "400px",
-        "show_full":  "800px"
+      'bg':{
+        'show_thumbnail': '1px',
+        'show_small': '200px',
+        'show_half':  '400px',
+        'show_full':  '800px'
       },
-      "bg-hr":{
-        "dpr": "2",
-        "dpr_fraction": "2/1",
-        "show_thumbnail": "1",
-        "show_small": "400px",
-        "show_half":  "800px",
-        "show_full":  "1600px"
+      'bg-hr':{
+        'dpr': '2',
+        'dpr_fraction': '2/1',
+        'show_thumbnail': '1',
+        'show_small': '400px',
+        'show_half':  '800px',
+        'show_full':  '1600px'
       }
     }
   end
@@ -73,7 +57,7 @@ module MustacheHelper
   end
 
   def utility_nav
-    return {} if page_object.alternatives.count == 0
+    return {} unless page_object.alternatives.present?
     {
       menu_id: 'settings-menu',
       style_modifier: 'caret-right',
@@ -84,12 +68,11 @@ module MustacheHelper
           text: t('site.settings.language.label'),
           icon: 'settings',
           submenu: {
-            items: page_object.alternatives.collect do |alt|
+            items: page_object.alternatives.map do |alt|
               {
                 text: alt.language.name,
                 url: show_page_url(urlname: alt.urlname, locale: alt.language_code)
               }
-
             end
           }
         }

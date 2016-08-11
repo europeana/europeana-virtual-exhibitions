@@ -1,15 +1,14 @@
-require 'rails_helper'
-
+# frozen_string_literal: true
 module Alchemy
   describe 'Show' do
     let(:basic_exhibition_page) do
-      create(:alchemy_page, :public, visible: true, name: 'Page 1', page_layout: 'exhibition_theme_page')
+      alchemy_pages(:exhibition_page)
     end
 
-    describe "#elements" do
+    describe '#elements' do
       context 'page with only one element' do
         before do
-          basic_exhibition_page.elements << create(:alchemy_element, name: 'text')
+          basic_exhibition_page.elements << alchemy_elements(:text_element)
         end
 
         let(:page) { Europeana::Page.new(basic_exhibition_page)}
@@ -20,15 +19,12 @@ module Alchemy
       end
 
       context 'page with two elements' do
-        let(:basic_exhibition) do
-          create(:alchemy_page, :public, visible: true, name: 'page with two elements', page_layout: 'exhibition_theme_page')
-        end
         before do
-          basic_exhibition.elements << create(:alchemy_element, create_contents_after_create: true, name: 'text')
-          basic_exhibition.elements << create(:alchemy_element, name: 'quote', create_contents_after_create: true)
+          basic_exhibition_page.elements << alchemy_elements(:text_element)
+          basic_exhibition_page.elements << alchemy_elements(:quote_element)
         end
 
-        let(:page) { Europeana::Page.new(basic_exhibition)}
+        let(:page) { Europeana::Page.new(basic_exhibition_page) }
 
         it 'has set is_full_section_element to false' do
           expect(page.elements[:items].first[:is_full_section_element]).to eq(false)
@@ -36,92 +32,117 @@ module Alchemy
       end
     end
 
-    describe "#meta_tags" do
-      let(:page) { Europeana::Page.new(page_record)}
+    describe '#meta_tags' do
+      let(:page) { Europeana::Page.new(page_record) }
 
-      context "public page" do
-        let(:page_record) { create(:alchemy_page, :public)}
+      context 'public page' do
+        let(:page_record) { alchemy_pages(:exhibition_page) }
 
-        it "should have meta tags that allow indexing" do
-          expect(page.meta_tags).to eq({:meta_name=>"robots", :content=>"index,follow"})
+        it 'should have meta tags that allow indexing' do
+          expect(page.meta_tags).to eq(meta_name: 'robots', content: 'index,follow')
         end
       end
 
-      context "non public page" do
-        let(:page_record) { create(:alchemy_page, :restricted, robot_index: false, robot_follow: false)}
+      context 'non public page' do
+        let(:page_record) { alchemy_pages(:restricted_page) }
 
-        it "should have meta tags that do not allow indexing" do
-          expect(page.meta_tags).to eq({:meta_name=>"robots", :content=>"noindex,nofollow"})
+        it 'should have meta tags that do not allow indexing' do
+          expect(page.meta_tags).to eq(meta_name: 'robots', content: 'noindex,nofollow')
         end
       end
     end
 
-    describe "#link_tags" do
-      let(:language) { create(:alchemy_language)}
-      let!(:root_page) {create(:alchemy_page, name: 'music exhibition', language_code: :en)}
-      let!(:german_page) {create(:alchemy_page, :public, name: 'music exhibition', language_code: language.language_code)}
-      it "show right alternatives for german and english pages" do
-        expect(Europeana::Page.new(root_page).link_tags[0][:hreflang]).to eq("de")
-        expect(Europeana::Page.new(root_page).link_tags[0][:href]).to include("/portal/de/exhibitions/music-exhibition")
-
-        expect(Europeana::Page.new(german_page).link_tags).to eq([])
+    describe '#link_tags' do
+      let(:english_alchemy_page) { alchemy_pages(:english_music_page) }
+      let(:german_alchemy_page) { alchemy_pages(:german_music_page) }
+      let!(:english_page) { Europeana::Page.new(english_alchemy_page) }
+      let!(:german_page) { Europeana::Page.new(german_alchemy_page) }
+      it 'show right alternatives for german and english pages' do
+        expect(english_page.link_tags.detect { |tag| tag[:hreflang] == 'de' }).not_to be_nil
+        expect(english_page.link_tags.detect { |tag| tag[:href].include?('/de/exhibitions/music-exhibition') }).not_to be_nil
+        expect(german_page.link_tags.detect { |tag| tag[:hreflang] == 'en' }).not_to be_nil
+        expect(german_page.link_tags.detect { |tag| tag[:href].include?('/en/exhibitions/music-exhibition') }).not_to be_nil
       end
     end
 
-    describe "#thumbnail" do
-      context "elements assigned" do
-        it "should return nil" do
+    describe '#thumbnail' do
+      context 'elements assigned' do
+        it 'should return nil' do
           expect(Europeana::Page::new(basic_exhibition_page).thumbnail).to eq(false)
         end
       end
 
-      context "image element assigned" do
+      context 'image element assigned' do
         let(:exhibition_with_elements) do
-          page = create(:alchemy_page)
-          page.elements << create(:alchemy_element, name: 'image', create_contents_after_create: true)
+          page = alchemy_pages(:exhibition_page)
+          page.elements << alchemy_elements(:image_element)
           page
         end
 
-        it "should not return nil" do
+        it 'should not return nil' do
           expect(Europeana::Page::new(exhibition_with_elements).thumbnail).not_to eq(nil)
         end
       end
     end
 
+    describe '#breadcrumbs' do
+      let(:page_record) { alchemy_pages(:exhibition_page) }
+      let(:breadcrumbs) { Europeana::Page.new(page_record).breadcrumbs }
 
-    context "complex exhibition" do
+      it 'should have breadcrumbs back to the portal, the index and itself' do
+        expect(breadcrumbs.count).to eq(3)
+        expect(breadcrumbs[0][:url]).to include('portal')
+        expect(breadcrumbs[0][:title]).to include('Return to Home')
+        expect(breadcrumbs[0][:is_first]).to eq(true)
+        expect(breadcrumbs[1][:url]).to include('/de/exhibitions/startseite')
+        expect(breadcrumbs[1][:title]).to include('Exhibitions')
+        expect(breadcrumbs[2][:url]).to include('/de/exhibitions/page-1')
+        expect(breadcrumbs[2][:title]).to include('Page 1')
+        expect(breadcrumbs[2][:is_last]).to eq(true)
+      end
+    end
+
+    context 'complex exhibition' do
       let(:exhibition_root_page) do
-        create(:alchemy_page, :public)
+        alchemy_pages(:complex_exhibition_root)
       end
 
       let(:exhibition_child_page_1) do
-        create(:alchemy_page, :public, parent_id: exhibition_root_page.id)
+        alchemy_pages(:complex_exhibition_child)
       end
 
-      describe "#exhibition" do
-        context "child page" do
-          it "is equal to root of exhibition" do
-            expect(Europeana::Page::new(exhibition_child_page_1).exhibition).to eq(exhibition_root_page)
-          end
-        end
-        context "root page" do
-          it "is equal to itself" do
-            expect(Europeana::Page::new(exhibition_root_page).exhibition).to eq(exhibition_root_page)
-          end
-        end
-      end
+      let(:child_page) { Europeana::Page.new(exhibition_child_page_1) }
 
-      describe "#chapter_elements" do
-        context "when starting at root of exhibition" do
-          it "outputs" do
-            puts Europeana::Page::new(exhibition_child_page_1).thumbnail.inspect
+      describe '#exhibition' do
+        context 'child page' do
+          it 'is equal to root of exhibition' do
+            expect(child_page.exhibition).to eq(exhibition_root_page)
+          end
+        end
+        context 'root page' do
+          it 'is equal to itself' do
+            expect(Europeana::Page.new(exhibition_root_page).exhibition).to eq(exhibition_root_page)
           end
         end
       end
 
+      describe '#breadcrumbs' do
+        let(:breadcrumbs) { child_page.breadcrumbs }
+
+        it "should have breadcrumbs back to the portal, the index, it's parent and itself" do
+          expect(breadcrumbs.count).to eq(4)
+          expect(breadcrumbs[0][:url]).to include('portal')
+          expect(breadcrumbs[0][:title]).to include('Return to Home')
+          expect(breadcrumbs[0][:is_first]).to eq(true)
+          expect(breadcrumbs[1][:url]).to include('/de/exhibitions/startseite')
+          expect(breadcrumbs[1][:title]).to include('Exhibitions')
+          expect(breadcrumbs[2][:url]).to match(%r{de\/exhibitions\/exhibition-root})
+          expect(breadcrumbs[2][:title]).to match(/Exhibition root/)
+          expect(breadcrumbs[3][:url]).to match(%r{de\/exhibitions\/exhibition-root\/exhibition-child})
+          expect(breadcrumbs[3][:title]).to match(/Exhibition child/)
+          expect(breadcrumbs[3][:is_last]).to eq(true)
+        end
+      end
     end
-
-
-
   end
 end

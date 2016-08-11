@@ -1,6 +1,6 @@
-Alchemy::Engine.routes.default_url_options[:host] = ENV.fetch('APP_HOST', 'test.npc.eanadev.org')
-Alchemy::Engine.routes.default_url_options[:port] = ENV.fetch('APP_PORT', nil)
+# frozen_string_literal: true
+Alchemy::Engine.routes.default_url_options = Rails.application.routes.default_url_options
 
-Alchemy.login_path = '/portal/exhibitions/admin/login'
-Alchemy.logout_path = '/portal/exhibitions/admin/logout'
-Alchemy.signup_path = '/portal/exhibitions/admin/signup'
+Alchemy.login_path = Rails.application.config.relative_url_root + '/exhibitions/admin/login'
+Alchemy.logout_path = Rails.application.config.relative_url_root + '/exhibitions/admin/logout'
+Alchemy.signup_path = Rails.application.config.relative_url_root + '/exhibitions/admin/signup'

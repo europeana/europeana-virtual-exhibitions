@@ -1,0 +1,23 @@
+image_content:
+  name: 'image'
+  essence_type: 'Alchemy::EssencePicture'
+  element: image_element
+  essence: essence_picture
+
+landscape_image_content:
+  name: 'image'
+  essence_type: 'Alchemy::EssencePicture'
+  element: landscape_image_element
+  essence: essence_landscape_picture
+
+portrait_image_content:
+  name: 'image'
+  essence_type: 'Alchemy::EssencePicture'
+  element: portrait_image_element
+  essence: essence_portrait_picture
+
+rich_text_content:
+  name: 'body'
+  essence_type: 'Alchemy::EssenceRichtext'
+  element: richtext_element
+  essence: richtext_essence

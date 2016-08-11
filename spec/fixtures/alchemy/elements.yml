@@ -1,0 +1,23 @@
+text_element:
+  name: 'text'
+  public: true
+
+richtext_element:
+  name: 'text'
+  public: true
+
+quote_element:
+  name: 'quote'
+  public: true
+
+image_element:
+  name: 'image'
+  public: true
+
+landscape_image_element:
+  name: 'image'
+  public: true
+
+portrait_image_element:
+  name: 'image'
+  public: true

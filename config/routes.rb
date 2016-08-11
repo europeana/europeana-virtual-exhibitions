@@ -1,23 +1,33 @@
 Rails.application.routes.draw do
-  default_url_options({:host => ENV.fetch('APP_HOST', 'test.npc.eanadev.org'), :port => ENV.fetch('APP_PORT', nil)})
-  scope '/portal/exhibitions' do
-    mount Alchemy::Engine => '/'
-  end
+  default_url_options(
+    host: ENV.fetch('APP_HOST', nil),
+    port: ENV.fetch('APP_PORT', nil)
+  )
 
-  scope '/portal/exhibitions' do
-    namespace :alchemy, path: nil do
-      namespace :api, defaults: {format: 'json'} do
-        resources :exhibitions, only: [:index]
-      end
+  root to: 'locale#index'
+
+  scope '/:locale', constraints: { locale: /[a-z]{2}/ } do
+    get '/', to: redirect('%{locale}/exhibitions/foyer')
+    scope '/exhibitions' do
+      get '/', to: redirect('%{locale}/exhibitions/foyer')
+      get 'sitemap.xml', to: 'sitemap#show', as: :sitemap, defaults: { format: :xml }
+      get '/feed.:format', to: 'sitemap#feed', constraints: { format: /(xml)/ }
+      get '/*urlname(.:format)', to: 'alchemy/pages#show', as: :show_page
     end
   end
 
-  get '/portal/exhibitions/sitemap-index.xml' => 'sitemap#index'
-  get '/portal/:locale/exhibitions/sitemap.xml' => 'sitemap#show', constraints: { :locale => /[a-z]{2}/}, as: :sitemap, defaults: {format: :xml}
-  get '/portal/exhibitions/robots.txt' => 'sitemap#robots'
-  get '/portal/:locale/exhibitions/feed.:format' => 'sitemap#feed', constraints: { format: /(xml)/}
+  scope '/exhibitions' do
+    get '/:locale/*path', constraints: { locale: /[a-z]{2}/ }, to: redirect('%{locale}/exhibitions/%{path}')
 
-  get '/portal/:locale/exhibitions/*urlname(.:format)' => 'alchemy/pages#show', as: :show_page, constraints: { :locale => /[a-z]{2}/}
+    mount Alchemy::Engine => '/'
 
+    namespace :alchemy, path: nil do
+      namespace :api, defaults: { format: 'json' } do
+        resources :exhibitions, only: [:index]
+      end
+    end
 
+    get '/sitemap-index.xml', to: 'sitemap#index'
+    get '/robots.txt', to: 'sitemap#robots'
+  end
 end

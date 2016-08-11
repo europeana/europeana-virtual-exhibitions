@@ -2,6 +2,7 @@ module Europeana
   class Page
     include ActionView::Helpers::TagHelper
     include Rails.application.routes.url_helpers
+    include LanguageHelper
 
     def initialize(page)
       @page = page
@@ -19,7 +20,6 @@ module Europeana
         end
       }
     end
-
 
     def chapter_elements
       if !is_exhibition
@@ -111,7 +111,21 @@ module Europeana
     end
 
     def url
-      show_page_url(@page.language_code, @page.urlname)
+      @url ||= show_page_url(locale: @page.language_code, urlname: @page.urlname)
+    end
+
+    def breadcrumbs
+      crumbs = @page.self_and_ancestors.where('depth >= 1').map do |ancestor|
+        {
+          url: show_page_url(@page.language_code, ancestor.urlname),
+          title: ancestor.title
+        }
+      end
+      # Set the index page's breadcrumb title to locale specific string.
+      crumbs[0][:title] = I18n.t('site.navigation.breadcrumb.exhibitions.return_home', default: 'Exhibitions')
+      crumbs = prepend_portal_breadcrumb crumbs
+      crumbs.last[:is_last] = true
+      crumbs
     end
 
     ##
@@ -121,11 +135,6 @@ module Europeana
     #
     def menu_data
       [
-        {
-          url: europeana_collections_url,
-          text: I18n.t('global.navigation.home'),
-          is_current: false
-        },
         {
           text: I18n.t('global.navigation.collections'),
           is_current: false,
@@ -144,13 +153,13 @@ module Europeana
           text: exhibition.title,
           url: '#',
           submenu: {
-              items: menu_items.collect do |chapter|
-                {
-                  text: chapter.title,
-                  url: show_page_url(urlname: chapter.urlname, locale: chapter.language_code),
-                  is_current: chapter == @page
-                }
-              end
+            items: menu_items.map do |chapter|
+              {
+                text: chapter.title,
+                url: show_page_url(urlname: chapter.urlname, locale: chapter.language_code),
+                is_current: chapter == @page
+              }
+            end
           }
         },
         {
@@ -271,13 +280,13 @@ module Europeana
     end
 
     def language_alternatives_tags
-      alternatives.collect do |page|
+      ([@page] + alternatives).map do |page|
         { rel: 'alternate', hreflang: page.language_code, href: show_page_url(page.language_code, page.urlname), title: nil}
       end
     end
 
     def language_default_link
-      [{ rel: 'alternate', hreflang: 'x-default', href: url, title: nil}]
+      [{ rel: 'alternate', hreflang: 'x-default', href: url_without_locale(url, locale: @page.language_code), title: nil }]
     end
 
     # meta information
@@ -300,5 +309,17 @@ module Europeana
     def full_url(path)
       "http://#{ENV.fetch('CDN_HOST', ENV.fetch('APP_HOST', 'localhost'))}#{ENV.fetch('APP_PORT', nil).nil? ? '' : ':'+ ENV.fetch('APP_PORT', nil)}#{path}"
     end
+
+    private
+
+      def prepend_portal_breadcrumb(crumbs)
+        # Prepend the link to the portal.
+        crumbs.unshift(
+          url: europeana_collections_url,
+          title: I18n.t('site.navigation.breadcrumb.return_home', default: 'Return to Home'),
+          is_first: true
+        )
+        crumbs
+      end
   end
 end

@@ -1,0 +1,4 @@
+site:
+  name: 'A site'
+  host: 'domain.com'
+  public: true

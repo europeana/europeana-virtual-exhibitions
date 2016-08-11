@@ -1,0 +1,30 @@
+german:
+  name: 'Deutsch'
+  language_code: 'de'
+  locale: 'de'
+  default: true
+  frontpage_name: 'Intro'
+  page_layout: 'index'
+  public: true
+  site: site
+
+english:
+  name: 'English'
+  language_code: 'en'
+  locale: 'en'
+  frontpage_name: 'Intro'
+  page_layout: 'index'
+  public: true
+  default: false
+  site: site
+
+french:
+  name: 'Français'
+  language_code: 'fr'
+  locale: 'fr'
+  frontpage_name: 'Intro'
+  page_layout: 'index'
+  public: true
+  default: false
+  site: site
+
