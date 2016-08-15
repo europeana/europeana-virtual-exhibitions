@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.6'
+gem 'rails', '4.2.7.1'
 
 gem 'acts_as_list', '~> 0.7.4' # dependency of a dependency; version 0.7.3 yanked
 gem 'alchemy-devise', git: 'https://github.com/AlchemyCMS/alchemy-devise', ref: '8c0a1e26'
