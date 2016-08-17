@@ -187,15 +187,15 @@ module Europeana
     #
     def navigation_global_primary_nav_browse_submenu_items
       [
-        link_item(I18n.t('global.navigation.browse_newcontent'), URI.join(europeana_collections_url, '/browse/newcontent'),
+        link_item(I18n.t('global.navigation.browse_newcontent'), URI.join(europeana_collections_url, 'browse/newcontent'),
                   is_current: false),
-        link_item(I18n.t('global.navigation.browse_colours'), URI.join(europeana_collections_url, '/browse/colours'),
+        link_item(I18n.t('global.navigation.browse_colours'), URI.join(europeana_collections_url, 'browse/colours'),
                   is_current: false),
-        link_item(I18n.t('global.navigation.browse_sources'), URI.join(europeana_collections_url, '/browse/sources'),
+        link_item(I18n.t('global.navigation.browse_sources'), URI.join(europeana_collections_url, 'browse/sources'),
                   is_current: false),
-        link_item(I18n.t('global.navigation.concepts'), URI.join(europeana_collections_url, '/browse/topics'),
+        link_item(I18n.t('global.navigation.concepts'), URI.join(europeana_collections_url, 'browse/topics'),
                   is_current: false),
-        link_item(I18n.t('global.navigation.agents'), URI.join(europeana_collections_url, '/browse/people'),
+        link_item(I18n.t('global.navigation.agents'), URI.join(europeana_collections_url, 'browse/people'),
                   is_current: false)
       ]
     end
