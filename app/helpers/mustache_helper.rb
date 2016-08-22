@@ -122,10 +122,10 @@ module MustacheHelper
   def foyer_footer
     {
       linklist1: {
-        title: "More info",
+        title: 'More info',
         items: [
           {
-            text: "New collections", url: "http://europeana.eu/portal/browse/newcontent"
+            text: 'New collections', url: 'http://europeana.eu/portal/browse/newcontent'
           },
           {
             text: t('site.footer.menu.data-providers'),
@@ -156,10 +156,10 @@ module MustacheHelper
       },
       subfooter: {
         items: [
-          { text: "Home", url: "" },
-          { text: "Terms of use & policies", url: "http://europeana.eu/portal/rights/terms-and-policies.html" },
-          { text: "Contact us", url: "" },
-          { text: "Home", url: "" },
+          { text: 'Home', url: '' },
+          { text: 'Terms of use & policies', url: 'http://europeana.eu/portal/rights/terms-and-policies.html' },
+          { text: 'Contact us', url: '' },
+          { text: 'Home', url: '' },
 
         ]
       }
@@ -183,7 +183,7 @@ module MustacheHelper
       pinterest: true,
       twitter: true,
       googleplus: true,
-      text: "Share this Exhibition"
+      text: 'Share this Exhibition'
     }
   end
 
