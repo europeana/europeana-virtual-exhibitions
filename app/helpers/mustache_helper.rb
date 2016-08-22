@@ -124,7 +124,9 @@ module MustacheHelper
       linklist1: {
         title: "More info",
         items: [
-          {text: "New collections", url: "http://europeana.eu/portal/browse/newcontent"},
+          {
+            text: "New collections", url: "http://europeana.eu/portal/browse/newcontent"
+          },
           {
             text: t('site.footer.menu.data-providers'),
             url: 'https://europeana.eu/about'
@@ -154,10 +156,10 @@ module MustacheHelper
       },
       subfooter: {
         items: [
-          { text: "Home", url: ""},
-          { text: "Terms of use & policies", url: "http://europeana.eu/portal/rights/terms-and-policies.html"},
-          { text: "Contact us", url: ""},
-          { text: "Home", url: ""},
+          { text: "Home", url: "" },
+          { text: "Terms of use & policies", url: "http://europeana.eu/portal/rights/terms-and-policies.html" },
+          { text: "Contact us", url: "" },
+          { text: "Home", url: "" },
 
         ]
       }
@@ -167,9 +169,9 @@ module MustacheHelper
   def page_footer
     {
       items: [
-        {text: t('exhibitions.contacts', default: 'Contacts'), url: 'http://europeana.eu/portal/contact.html'},
-        {text: t('site.footer.menu.about'), url: 'http://europeana.eu/portal/about.html'},
-        {text: 'Europeana ' + t('global.search-collections'), url: 'http://europeana.eu/portal/'}
+        { text: t('exhibitions.contacts', default: 'Contacts'), url: 'http://europeana.eu/portal/contact.html' },
+        { text: t('site.footer.menu.about'), url: 'http://europeana.eu/portal/about.html' },
+        { text: 'Europeana ' + t('global.search-collections'), url: 'http://europeana.eu/portal/' }
       ]
     }
   end
