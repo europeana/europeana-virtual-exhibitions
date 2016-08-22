@@ -25,25 +25,25 @@ module MustacheHelper
 
   def breakpoint_pixels
     {
-      'img':{
-        'show_thumbnail': '1px',
-        'show_small': '200px',
-        'show_half':  '400px',
-        'show_full':  '800px'
+      img: {
+        show_thumbnail: '1px',
+        show_small: '200px',
+        show_half:  '400px',
+        show_full:  '800px'
       },
-      'bg':{
-        'show_thumbnail': '1px',
-        'show_small': '200px',
-        'show_half':  '400px',
-        'show_full':  '800px'
+      bg: {
+        show_thumbnail: '1px',
+        show_small: '200px',
+        show_half:  '400px',
+        show_full:  '800px'
       },
-      'bg-hr':{
-        'dpr': '2',
-        'dpr_fraction': '2/1',
-        'show_thumbnail': '1',
-        'show_small': '400px',
-        'show_half':  '800px',
-        'show_full':  '1600px'
+      bghr: {
+        dpr: '2',
+        dpr_fraction: '2/1',
+        show_thumbnail: '1',
+        show_small: '400px',
+        show_half:  '800px',
+        show_full:  '1600px'
       }
     }
   end
@@ -66,7 +66,7 @@ module MustacheHelper
         {
           url: '#',
           text: t('site.settings.language.label'),
-          icon: 'settings',
+          icon: 'language',
           submenu: {
             items: page_object.alternatives.map do |alt|
               {
@@ -167,9 +167,9 @@ module MustacheHelper
   def page_footer
     {
       items: [
-        {text: t('exhibitions.contacts', default: 'Contacts'), 'url': 'http://europeana.eu/portal/contact.html'},
-        {text: t('site.footer.menu.about'), 'url': 'http://europeana.eu/portal/about.html'},
-        {text: 'Europeana ' + t('global.search-collections'), 'url': 'http://europeana.eu/portal/'}
+        {text: t('exhibitions.contacts', default: 'Contacts'), url: 'http://europeana.eu/portal/contact.html'},
+        {text: t('site.footer.menu.about'), url: 'http://europeana.eu/portal/about.html'},
+        {text: 'Europeana ' + t('global.search-collections'), url: 'http://europeana.eu/portal/'}
       ]
     }
   end
