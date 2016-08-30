@@ -125,7 +125,7 @@ module MustacheHelper
         title: 'More info',
         items: [
           {
-            text: 'New collections', url: 'http://europeana.eu/portal/browse/newcontent'
+            text: 'New collections', url: "#{europeana_collections_url}browse/newcontent"
           },
           {
             text: t('site.footer.menu.data-providers'),
@@ -157,7 +157,7 @@ module MustacheHelper
       subfooter: {
         items: [
           { text: 'Home', url: '' },
-          { text: 'Terms of use & policies', url: 'http://europeana.eu/portal/rights/terms-and-policies.html' },
+          { text: 'Terms of use & policies', url: "#{europeana_collections_url}rights/terms-and-policies.html" },
           { text: 'Contact us', url: '' },
           { text: 'Home', url: '' },
 
@@ -169,9 +169,9 @@ module MustacheHelper
   def page_footer
     {
       items: [
-        { text: t('exhibitions.contacts', default: 'Contacts'), url: 'http://europeana.eu/portal/contact.html' },
-        { text: t('site.footer.menu.about'), url: 'http://europeana.eu/portal/about.html' },
-        { text: 'Europeana ' + t('global.search-collections'), url: 'http://europeana.eu/portal/' }
+        { text: t('exhibitions.contacts', default: 'Contacts'), url: "#{europeana_collections_url}contact.html" },
+        { text: t('site.footer.menu.about'), url: "#{europeana_collections_url}about.html" },
+        { text: 'Europeana ' + t('global.search-collections'), url: "#{europeana_collections_url}" }
       ]
     }
   end
