@@ -17,8 +17,8 @@ module MustacheHelper
   def js_files
     [
       {
-        path: styleguide_url('/js/dist/require.js'),
-        data_main: styleguide_url('/js/dist/main/templates/main-virtual-exhibitions')
+        path: styleguide_url('/js/modules/require.js'),
+        data_main: styleguide_url('/js/modules/main/templates/main-virtual-exhibitions')
       }
     ]
   end
