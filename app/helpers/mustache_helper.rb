@@ -17,33 +17,33 @@ module MustacheHelper
   def js_files
     [
       {
-        path: styleguide_url('/js/dist/require.js'),
-        data_main: styleguide_url('/js/dist/main/templates/main-virtual-exhibitions')
+        path: styleguide_url('/js/modules/require.js'),
+        data_main: styleguide_url('/js/modules/main/templates/main-virtual-exhibitions')
       }
     ]
   end
 
   def breakpoint_pixels
     {
-      'img':{
-        'show_thumbnail': '1px',
-        'show_small': '200px',
-        'show_half':  '400px',
-        'show_full':  '800px'
+      img: {
+        show_thumbnail: '1px',
+        show_small: '200px',
+        show_half:  '400px',
+        show_full:  '800px'
       },
-      'bg':{
-        'show_thumbnail': '1px',
-        'show_small': '200px',
-        'show_half':  '400px',
-        'show_full':  '800px'
+      bg: {
+        show_thumbnail: '1px',
+        show_small: '200px',
+        show_half:  '400px',
+        show_full:  '800px'
       },
-      'bg-hr':{
-        'dpr': '2',
-        'dpr_fraction': '2/1',
-        'show_thumbnail': '1',
-        'show_small': '400px',
-        'show_half':  '800px',
-        'show_full':  '1600px'
+      bghr: {
+        dpr: '2',
+        dpr_fraction: '2/1',
+        show_thumbnail: '1',
+        show_small: '400px',
+        show_half:  '800px',
+        show_full:  '1600px'
       }
     }
   end
@@ -66,7 +66,7 @@ module MustacheHelper
         {
           url: '#',
           text: t('site.settings.language.label'),
-          icon: 'settings',
+          icon: 'language',
           submenu: {
             items: page_object.alternatives.map do |alt|
               {
@@ -122,9 +122,11 @@ module MustacheHelper
   def foyer_footer
     {
       linklist1: {
-        title: "More info",
+        title: 'More info',
         items: [
-          {text: "New collections", url: "http://europeana.eu/portal/browse/newcontent"},
+          {
+            text: 'New collections', url: "#{europeana_collections_url}browse/newcontent"
+          },
           {
             text: t('site.footer.menu.data-providers'),
             url: 'https://europeana.eu/about'
@@ -154,10 +156,10 @@ module MustacheHelper
       },
       subfooter: {
         items: [
-          { text: "Home", url: ""},
-          { text: "Terms of use & policies", url: "http://europeana.eu/portal/rights/terms-and-policies.html"},
-          { text: "Contact us", url: ""},
-          { text: "Home", url: ""},
+          { text: 'Home', url: '' },
+          { text: 'Terms of use & policies', url: "#{europeana_collections_url}rights/terms-and-policies.html" },
+          { text: 'Contact us', url: '' },
+          { text: 'Home', url: '' },
 
         ]
       }
@@ -167,9 +169,9 @@ module MustacheHelper
   def page_footer
     {
       items: [
-        {text: t('exhibitions.contacts', default: 'Contacts'), 'url': 'http://europeana.eu/portal/contact.html'},
-        {text: t('site.footer.menu.about'), 'url': 'http://europeana.eu/portal/about.html'},
-        {text: 'Europeana ' + t('global.search-collections'), 'url': 'http://europeana.eu/portal/'}
+        { text: t('exhibitions.contacts', default: 'Contacts'), url: "#{europeana_collections_url}contact.html" },
+        { text: t('site.footer.menu.about'), url: "#{europeana_collections_url}about.html" },
+        { text: 'Europeana ' + t('global.search-collections'), url: "#{europeana_collections_url}" }
       ]
     }
   end
@@ -181,7 +183,7 @@ module MustacheHelper
       pinterest: true,
       twitter: true,
       googleplus: true,
-      text: "Share this Exhibition"
+      text: 'Share this Exhibition'
     }
   end
 
