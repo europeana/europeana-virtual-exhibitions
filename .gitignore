@@ -14,6 +14,7 @@
 
 # Ignore Alchemy uploads folder
 uploads/*
+dragonfly/
 
 # Ignore sensitive data
 config/database.yml
@@ -28,6 +29,8 @@ config/initializers/secret_token.rb
 /coverage
 
 public/portal/*
+
+vendor/bundle/
 
 # Ignore Ruby version
 /.ruby-version
