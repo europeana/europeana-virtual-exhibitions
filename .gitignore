@@ -19,6 +19,8 @@ dragonfly/
 # Ignore sensitive data
 config/database.yml
 config/newrelic.yml
+config/redis.yml
+config/smtp.yml
 config/initializers/secret_token.rb
 
 # Ignore .env.<environment> files
