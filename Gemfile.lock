@@ -186,7 +186,7 @@ GEM
       dragonfly (~> 1.0)
       fog-aws
     erubis (2.7.0)
-    europeana-feedback-button (0.0.3)
+    europeana-feedback-button (0.0.4)
       rails (~> 4.2, >= 4.2.7.1)
     excon (0.49.0)
     execjs (2.7.0)
@@ -467,7 +467,7 @@ DEPENDENCIES
   dotenv-rails (~> 2.0)
   dragonfly-s3_data_store
   dragonfly-swift_data_store!
-  europeana-feedback-button (= 0.0.3)
+  europeana-feedback-button (= 0.0.4)
   europeana-styleguide!
   jbuilder (~> 2.0)
   jquery-rails
