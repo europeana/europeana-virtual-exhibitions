@@ -1,5 +1,6 @@
 module Alchemy
   class Base < Europeana::Styleguide::View
+    include Europeana::FeedbackButton::FeedbackableView
     def cached_body
       lambda do |text|
         Rails.cache.fetch(cache_key, expires_in: 24.hours, force: force_cache) do

@@ -14,6 +14,7 @@ require "sprockets/railtie"
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
+require 'europeana/feedback_button'
 
 module Exhibitions
   class Application < Rails::Application
@@ -50,6 +51,13 @@ module Exhibitions
       [:redis_store, redis_config[:url]]
     rescue RuntimeError => e
       :null_store
+    end
+
+    # Load Action Mailer SMTP config from config/smtp.yml, if it exists
+    config.action_mailer.smtp_settings = begin
+      Rails.application.config_for(:smtp).symbolize_keys
+    rescue RuntimeError
+      {}
     end
   end
 end

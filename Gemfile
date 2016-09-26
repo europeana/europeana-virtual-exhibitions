@@ -11,7 +11,7 @@ gem 'country_select'
 gem 'delayed_job_active_record'
 gem 'dragonfly-s3_data_store'
 gem 'dragonfly-swift_data_store', github: 'europeana/dragonfly-swift-data-store', tag: 'v0.1.0'
-gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', ref: 'cdbcbcb'
+gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', ref: '543ab48'
 gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'
 gem 'nokogiri', '>= 1.6.8' # Forced update for security issues
@@ -26,6 +26,7 @@ gem 'stache', github: 'europeana/stache', branch: 'europeana-styleguide' # until
 gem 'therubyracer', platforms: :ruby
 gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
+gem 'europeana-feedback-button', '0.0.3'
 
 group :production do
   gem 'rails_12factor', '~> 0.0.3'
@@ -53,6 +54,9 @@ group :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'rspec-activemodel-mocks', '~> 1.0'
   gem 'simplecov', require: false
+  gem 'selenium-webdriver'
+  gem 'phantomjs', require: 'phantomjs/poltergeist'
+  gem 'poltergeist'
 end
 
 group :localeapp do
