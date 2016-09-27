@@ -26,7 +26,7 @@ gem 'stache', github: 'europeana/stache', branch: 'europeana-styleguide' # until
 gem 'therubyracer', platforms: :ruby
 gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
-gem 'europeana-feedback-button', '0.0.3'
+gem 'europeana-feedback-button', '0.0.4'
 
 group :production do
   gem 'rails_12factor', '~> 0.0.3'
