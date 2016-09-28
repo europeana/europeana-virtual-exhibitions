@@ -3,9 +3,9 @@
 {{/debug_mode}}
 
 {{^debug_mode}}
+    {{>atoms/meta/_head}}
     {{#cached_body}}
-        {{>atoms/meta/_head}}
         {{>templates/Exhibitions/Exhibition-Page}}
-        {{>atoms/meta/_foot}}
     {{/cached_body}}
+    {{>atoms/meta/_foot}}
 {{/debug_mode}}
