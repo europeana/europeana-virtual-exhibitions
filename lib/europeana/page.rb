@@ -231,7 +231,7 @@ module Europeana
     end
 
     def exhibitions
-      Alchemy::Page.published.where(depth: 2, language_code: @page.language_code).all
+      Alchemy::Page.published.visible.where(depth: 2, language_code: @page.language_code).all
     end
 
     def find_thumbnail
