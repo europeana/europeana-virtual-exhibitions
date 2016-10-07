@@ -98,6 +98,12 @@ module MustacheHelper
     end
   end
 
+  def page_config
+    {
+      newsletter: true
+    }
+  end
+
   def twitter_card_meta
     meta = []
 
