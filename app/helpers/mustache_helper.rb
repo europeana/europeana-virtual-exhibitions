@@ -104,6 +104,15 @@ module MustacheHelper
     }
   end
 
+  def newsletter
+    {
+      form: {
+        action: 'https://europeana.us3.list-manage.com/subscribe/post?u=ad318b7566f97eccc895e014e&amp;id=1d4f51a117',
+        language_op: true
+      }
+    }
+  end
+
   def twitter_card_meta
     meta = []
 
