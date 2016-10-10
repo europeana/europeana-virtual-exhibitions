@@ -169,6 +169,12 @@ module MustacheHelper
           }
         ]
       },
+      social: {
+          facebook: true,
+          pinterest: true,
+          twitter: true,
+          googleplus: true
+      },
       subfooter: {
         items: [
           { text: 'Home', url: '' },
