@@ -22,9 +22,6 @@ module Europeana
     end
 
     def chapter_elements
-      if !is_exhibition
-        return {present: false, item: []}
-      end
       {
         present: true,
         items: chapters.map.with_index do |page, index|
