@@ -98,6 +98,21 @@ module MustacheHelper
     end
   end
 
+  def page_config
+    {
+      newsletter: true
+    }
+  end
+
+  def newsletter
+    {
+      form: {
+        action: 'https://europeana.us3.list-manage.com/subscribe/post?u=ad318b7566f97eccc895e014e&amp;id=1d4f51a117',
+        language_op: true
+      }
+    }
+  end
+
   def twitter_card_meta
     meta = []
 
@@ -122,18 +137,27 @@ module MustacheHelper
   def foyer_footer
     {
       linklist1: {
-        title: 'More info',
+        title: t('global.more-info'),
         items: [
           {
-            text: 'New collections', url: "#{europeana_collections_url}browse/newcontent"
+            text: t('site.footer.menu.about'),
+            url: "#{europeana_collections_url}about.html"
+          },
+          {
+            text: t('site.footer.menu.roadmap'),
+            url: "#{europeana_collections_url}roadmap.html"
           },
           {
             text: t('site.footer.menu.data-providers'),
-            url: 'https://europeana.eu/about'
+            url: "#{europeana_collections_url}explore/sources.html"
           },
           {
             text: t('site.footer.menu.become-a-provider'),
             url: 'http://pro.europeana.eu/share-your-data/'
+          },
+          {
+            text: t('site.footer.menu.contact-us'),
+            url: "#{europeana_collections_url}contact.html"
           }
         ]
       },
@@ -142,17 +166,19 @@ module MustacheHelper
         items: [
           {
             text: t('site.footer.menu.search-tips'),
-            url: 'https://europeana.eu/help'
-          },
-          {
-            text: t('site.footer.menu.using-myeuropeana'),
-            url: '#'
+            url: "#{europeana_collections_url}help"
           },
           {
             text: t('global.terms-and-policies'),
-            url: 'https://europeana.eu/rights'
+            url: "#{europeana_collections_url}rights"
           }
         ]
+      },
+      social: {
+          facebook: true,
+          pinterest: true,
+          twitter: true,
+          googleplus: true
       },
       subfooter: {
         items: [

@@ -1,5 +1,11 @@
 # frozen_string_literal: true
 RSpec.describe 'alchemy/pages/show.html.mustache' do
+  it 'should have meta referrer tag' do
+    assign(:page, alchemy_pages(:sample_page_en))
+    render
+    expect(rendered).to have_selector('meta[name="referrer"][content="always"]', visible: false)
+  end
+
   context 'when page has multiple languages' do
     let(:sample_pages) do
       {}.tap do |hash|

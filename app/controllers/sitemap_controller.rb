@@ -10,7 +10,7 @@ class SitemapController < ApplicationController
   end
 
   def feed
-    @pages = @language.pages.where(depth: 2).published.order("published_at DESC").limit(25)
+    @pages = @language.pages.where(depth: 2).published.visible.order("lft ASC").limit(25)
   end
 
   def show
