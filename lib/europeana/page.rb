@@ -22,9 +22,6 @@ module Europeana
     end
 
     def chapter_elements
-      if !is_exhibition
-        return {present: false, item: []}
-      end
       {
         present: true,
         items: chapters.map.with_index do |page, index|
@@ -178,7 +175,7 @@ module Europeana
     def navigation_global_primary_nav_collections_submenu_items
       [
         link_item('Music', URI.join(europeana_collections_url, 'collections/music'), is_current: false),
-        link_item('Art History', URI.join(europeana_collections_url, 'collections/art-history'), is_current: false)
+        link_item('Art', URI.join(europeana_collections_url, 'collections/art'), is_current: false)
       ]
     end
 
