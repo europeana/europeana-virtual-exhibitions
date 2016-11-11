@@ -2,7 +2,7 @@ module Alchemy
   class PicturesController < Alchemy::BaseController
     ALLOWED_IMAGE_TYPES = %w(png jpeg gif)
 
-    caches_page :show, :thumbnail, :zoom
+    caches_page :zoom
 
     #before_filter :ensure_secure_params
 
