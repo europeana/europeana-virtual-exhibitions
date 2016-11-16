@@ -64,7 +64,7 @@ module Europeana
           license_text: license_label(credit),
           country_code: credit.essence.country_code,
           country: country.nil? ? false : (country.translations[I18n.locale.to_s] || country.name)
-        }.merge({ "license_#{credit.essence.license}" => true})
+        }.merge({ "license_#{credit.essence.license }" => true})
       end
 
       def caption
@@ -76,11 +76,11 @@ module Europeana
       def license_label(credit)
         inverted = Europeana::Mixins::ImageCredit::LICENSES.invert
 
-        return inverted[credit.essence.license] if inverted.has_key?(credit.essence.license)
+        return inverted[credit.essence.license] if inverted.key?(credit.essence.license)
         # Some legacy licences need to be looked up via the licence key of the license which has the same URL
         license_url = license_link(credit)
         Europeana::Mixins::ImageCredit::LICENSES_URL.select { |_key, url| url == license_url}.each do |key, _value|
-          return inverted[key] if inverted.has_key?(key)
+          return inverted[key] if inverted.key?(key)
         end
         'Copyright Not Evaluated'
       end
