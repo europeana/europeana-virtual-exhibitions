@@ -10,12 +10,12 @@ module Europeana
         'CC BY-NC' => 'CC_BY_NC',
         'CC BY-NC-SA' => 'CC_BY_NC_SA',
         'CC BY-NC-ND' => 'CC_BY_NC_ND',
-        'In Copyright - EU Orphan Work' => 'INC-OW-EU',
-        'In Copyright - Educational Use Permitted' => 'INC_EDU',
-        'In Copyright' => 'INC',
-        'No Copyright - Non-Commercial Use Only' => 'NOC_NC',
-        'No Copyright - Other Known Legal Restrictions' => 'NOC_OKLR',
-        'Copyright Not Evaluated' => 'CNE',
+        'In Copyright - EU Orphan Work' => 'RS_INC_OW_EU',
+        'In Copyright - Educational Use Permitted' => 'RS_INC_EDU',
+        'In Copyright' => 'RS_INC',
+        'No Copyright - Non-Commercial Use Only' => 'RS_NOC_NC',
+        'No Copyright - Other Known Legal Restrictions' => 'RS_NOC_OKLR',
+        'Copyright Not Evaluated' => 'RS_CNE',
       }
 
       LICENSES_URL = {
@@ -27,25 +27,25 @@ module Europeana
         'CC_BY_NC' => 'https://creativecommons.org/licenses/by-nc/1.0',
         'CC_BY_NC_SA' => 'https://creativecommons.org/licenses/by-nc-sa/1.0',
         'CC_BY_NC_ND' => 'https://creativecommons.org/licenses/by-nc-nd/1.0',
-        'INC_EDU' => 'http://rightsstatements.org/vocab/InC-EDU/1.0/',
-        'NOC_OKLR' => 'http://rightsstatements.org/vocab/NoC-OKLR/1.0/',
+        'RS_INC_EDU' => 'http://rightsstatements.org/vocab/InC-EDU/1.0/',
+        'RS_NOC_OKLR' => 'http://rightsstatements.org/vocab/NoC-OKLR/1.0/',
 
-        # 'RR_free' and 'RR_paid' are the same as 'INC' but here for legacy data
+        # 'RR_free' and 'RR_paid' are the same as 'RS_INC' but here for legacy data
         'RR_free' => 'http://rightsstatements.org/vocab/InC/1.0/',
         'RR_paid' => 'http://rightsstatements.org/vocab/InC/1.0/',
-        'INC' => 'http://rightsstatements.org/vocab/InC/1.0/',
+        'RS_INC' => 'http://rightsstatements.org/vocab/InC/1.0/',
 
-        # 'OOC' is the same as 'NOC-NC' but here for legacy data
-        'OOC' => 'http://rightsstatements.org/vocab/NoC-NC/1.0/',
-        'NOC-NC' => 'http://rightsstatements.org/vocab/NoC-NC/1.0/',
+        # 'OOC' is the same as 'RS_NOC_NC' but here for legacy data
+        'RS_OOC' => 'http://rightsstatements.org/vocab/NoC-NC/1.0/',
+        'RS_NOC_NC' => 'http://rightsstatements.org/vocab/NoC-NC/1.0/',
 
-        # 'orphan' is the same as 'INC-OW-EU' but here for legacy data
+        # 'orphan' is the same as 'RS_INC_OW_EU' but here for legacy data
         'orphan' => 'http://rightsstatements.org/vocab/InC-OW-EU/1.0/',
-        'INC-OW-EU' => 'http://rightsstatements.org/vocab/InC-OW-EU/1.0/',
+        'RS_INC_OW_EU' => 'http://rightsstatements.org/vocab/InC-OW-EU/1.0/',
 
-        # 'unknown' is the same as 'CNE' but here for legacy data
+        # 'unknown' is the same as 'RS_CNE' but here for legacy data
         'unknown' => 'http://rightsstatements.org/vocab/CNE/1.0/',
-        'CNE' => 'http://rightsstatements.org/vocab/CNE/1.0/'
+        'RS_CNE' => 'http://rightsstatements.org/vocab/CNE/1.0/'
       }
 
       def image_credit(name = 'image_credit')
