@@ -2,35 +2,50 @@ module Europeana
   module Mixins
     module ImageCredit
       LICENSES = {
-        "Public Domain Mark" => "public",
-        "Out of copyright - non commercial re-use" => "OOC",
-        "CC0" => "CC0",
-        "CC BY" => "CC_BY",
-        "CC BY-SA" => "CC_BY_SA",
-        "CC BY-ND" => "CC_BY_ND",
-        "CC BY-NC" => "CC_BY_NC",
-        "CC BY-NC-SA" => "CC_BY_NC_SA",
-        "CC BY-NC-ND" => "CC_BY_NC_ND",
-        "Rights Reserved - Free Access" => "RR_free",
-        "Rights Reserved - Paid Access" => "RR_paid",
-        "Orphan Work" => "orphan",
-        "Unknown" => "unknown"
+        'Public Domain Mark' => 'public',
+        'CC0' => 'CC0',
+        'CC BY' => 'CC_BY',
+        'CC BY-SA' => 'CC_BY_SA',
+        'CC BY-ND' => 'CC_BY_ND',
+        'CC BY-NC' => 'CC_BY_NC',
+        'CC BY-NC-SA' => 'CC_BY_NC_SA',
+        'CC BY-NC-ND' => 'CC_BY_NC_ND',
+        'In Copyright - EU Orphan Work' => 'RS_INC_OW_EU',
+        'In Copyright - Educational Use Permitted' => 'RS_INC_EDU',
+        'In Copyright' => 'RS_INC',
+        'No Copyright - Non-Commercial Use Only' => 'RS_NOC_NC',
+        'No Copyright - Other Known Legal Restrictions' => 'RS_NOC_OKLR',
+        'Copyright Not Evaluated' => 'RS_CNE',
       }
 
       LICENSES_URL = {
-        "public" => "https://creativecommons.org/publicdomain/mark/1.0/",
-        "OOC" => "http://www.europeana.eu/portal/rights/out-of-copyright-non-commercial",
-        "CC0" => "https://creativecommons.org/publicdomain/zero/1.0/",
-        "CC_BY" => "https://creativecommons.org/licenses/by/1.0",
-        "CC_BY_SA" => "https://creativecommons.org/licenses/by-sa/1.0",
-        "CC_BY_ND" => "https://creativecommons.org/licenses/by-nc-nd/1.0",
-        "CC_BY_NC" => "https://creativecommons.org/licenses/by-nc/1.0",
-        "CC_BY_NC_SA" => "https://creativecommons.org/licenses/by-nc-sa/1.0",
-        "CC_BY_NC_ND" => "https://creativecommons.org/licenses/by-nc-nd/1.0",
-        "RR_free" => "http://www.europeana.eu/portal/rights/rr-f",
-        "RR_paid" => "http://www.europeana.eu/portal/rights/rr-p",
-        "orphan" => "http://www.europeana.eu/portal/rights/orphan-work-eu",
-        "unknown" => "http://www.europeana.eu/portal/rights/unknown"
+        'public' => 'https://creativecommons.org/publicdomain/mark/1.0/',
+        'CC0' => 'https://creativecommons.org/publicdomain/zero/1.0/',
+        'CC_BY' => 'https://creativecommons.org/licenses/by/1.0',
+        'CC_BY_SA' => 'https://creativecommons.org/licenses/by-sa/1.0',
+        'CC_BY_ND' => 'https://creativecommons.org/licenses/by-nc-nd/1.0',
+        'CC_BY_NC' => 'https://creativecommons.org/licenses/by-nc/1.0',
+        'CC_BY_NC_SA' => 'https://creativecommons.org/licenses/by-nc-sa/1.0',
+        'CC_BY_NC_ND' => 'https://creativecommons.org/licenses/by-nc-nd/1.0',
+        'RS_INC_EDU' => 'http://rightsstatements.org/vocab/InC-EDU/1.0/',
+        'RS_NOC_OKLR' => 'http://rightsstatements.org/vocab/NoC-OKLR/1.0/',
+
+        # 'RR_free' and 'RR_paid' are the same as 'RS_INC' but here for legacy data
+        'RR_free' => 'http://rightsstatements.org/vocab/InC/1.0/',
+        'RR_paid' => 'http://rightsstatements.org/vocab/InC/1.0/',
+        'RS_INC' => 'http://rightsstatements.org/vocab/InC/1.0/',
+
+        # 'OOC' is the same as 'RS_NOC_NC' but here for legacy data
+        'RS_OOC' => 'http://rightsstatements.org/vocab/NoC-NC/1.0/',
+        'RS_NOC_NC' => 'http://rightsstatements.org/vocab/NoC-NC/1.0/',
+
+        # 'orphan' is the same as 'RS_INC_OW_EU' but here for legacy data
+        'orphan' => 'http://rightsstatements.org/vocab/InC-OW-EU/1.0/',
+        'RS_INC_OW_EU' => 'http://rightsstatements.org/vocab/InC-OW-EU/1.0/',
+
+        # 'unknown' is the same as 'RS_CNE' but here for legacy data
+        'unknown' => 'http://rightsstatements.org/vocab/CNE/1.0/',
+        'RS_CNE' => 'http://rightsstatements.org/vocab/CNE/1.0/'
       }
 
       def image_credit(name = 'image_credit')
@@ -49,7 +64,7 @@ module Europeana
           license_text: license_label(credit),
           country_code: credit.essence.country_code,
           country: country.nil? ? false : (country.translations[I18n.locale.to_s] || country.name)
-        }.merge({ "license_#{credit.essence.license}" => true})
+        }.merge("license_#{credit.essence.license}" => true)
       end
 
       def caption
@@ -61,8 +76,13 @@ module Europeana
       def license_label(credit)
         inverted = Europeana::Mixins::ImageCredit::LICENSES.invert
 
-        return inverted[credit.essence.license] if inverted.has_key?(credit.essence.license)
-        "unknown"
+        return inverted[credit.essence.license] if inverted.key?(credit.essence.license)
+        # Some legacy licences need to be looked up via the licence key of the license which has the same URL
+        license_url = license_link(credit)
+        Europeana::Mixins::ImageCredit::LICENSES_URL.select { |_key, url| url == license_url }.each do |key, _value|
+          return inverted[key] if inverted.key?(key)
+        end
+        'Copyright Not Evaluated'
       end
 
       def license_link(credit)
@@ -78,8 +98,8 @@ module Europeana
 
       def strip_tags(html)
         return html if html.blank?
-        if html.index("<")
-          text = ""
+        if html.index('<')
+          text = ''
           tokenizer = ::HTML::Tokenizer.new(html)
           while token = tokenizer.next
             node = ::HTML::Node.parse(nil, 0, 0, token, false)
@@ -88,7 +108,7 @@ module Europeana
           end
           # strip any comments, and if they have a newline at the end (ie. line with
           # only a comment) strip that too
-          text.gsub(/<!--(.*?)-->[\n]?/m, "")
+          text.gsub(/<!--(.*?)-->[\n]?/m, '')
         else
           html # already plain text
         end
