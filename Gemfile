@@ -30,6 +30,7 @@ gem 'europeana-feedback-button', '0.0.4'
 
 group :production do
   gem 'rails_12factor', '~> 0.0.3'
+  gem 'europeana-logging', '~> 0.1.0'
 end
 
 group :production, :development do
