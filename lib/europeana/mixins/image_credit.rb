@@ -56,7 +56,7 @@ module Europeana
           attribution_title: credit.essence.title,
           attribution_creator: credit.essence.author,
           attribution_institution: credit.essence.institution,
-          attribution_url: credit.essence.url,
+          attribution_url: attribution_url(credit),
           caption: caption,
           stripped_caption: stripped_caption,
           license_url: license_link(credit),
@@ -83,6 +83,10 @@ module Europeana
           return inverted[key] if inverted.key?(key)
         end
         'Copyright Not Evaluated'
+      end
+
+      def attribution_url(credit)
+        credit.essence.url.blank? ? false : credit.essence.url
       end
 
       def license_link(credit)
