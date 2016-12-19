@@ -188,7 +188,7 @@ GEM
     erubis (2.7.0)
     europeana-feedback-button (0.0.4)
       rails (~> 4.2, >= 4.2.7.1)
-    europeana-logging (0.1.0)
+    europeana-logging (0.1.1)
       lograge (~> 0.4)
       logstash-event (~> 1.2)
       logstash-logger (~> 0.19)
@@ -251,7 +251,7 @@ GEM
       activesupport (>= 4, < 5.1)
       railties (>= 4, < 5.1)
     logstash-event (1.2.02)
-    logstash-logger (0.20.0)
+    logstash-logger (0.20.1)
       logstash-event (~> 1.2)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
@@ -479,7 +479,7 @@ DEPENDENCIES
   dragonfly-s3_data_store
   dragonfly-swift_data_store!
   europeana-feedback-button (= 0.0.4)
-  europeana-logging (~> 0.1.0)
+  europeana-logging (~> 0.1.1)
   europeana-styleguide!
   jbuilder (~> 2.0)
   jquery-rails
