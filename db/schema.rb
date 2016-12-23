@@ -11,10 +11,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160518192506) do
+ActiveRecord::Schema.define(version: 20161222132759) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "btree_gin"
+  enable_extension "btree_gist"
+  enable_extension "citext"
+  enable_extension "cube"
+  enable_extension "dblink"
+  enable_extension "dict_int"
+  enable_extension "dict_xsyn"
+  enable_extension "earthdistance"
+  enable_extension "fuzzystrmatch"
+  enable_extension "hstore"
+  enable_extension "intarray"
+  enable_extension "ltree"
+  enable_extension "pg_stat_statements"
+  enable_extension "pg_trgm"
+  enable_extension "pgcrypto"
+  enable_extension "pgrowlocks"
+  enable_extension "pgstattuple"
+  enable_extension "sslinfo"
+  enable_extension "tablefunc"
+  enable_extension "unaccent"
+  enable_extension "uuid-ossp"
+  enable_extension "xml2"
 
   create_table "alchemy_attachments", force: :cascade do |t|
     t.string   "name"
@@ -74,18 +96,6 @@ ActiveRecord::Schema.define(version: 20160518192506) do
   create_table "alchemy_elements_alchemy_pages", id: false, force: :cascade do |t|
     t.integer "element_id"
     t.integer "page_id"
-  end
-
-  create_table "alchemy_essence_audios", force: :cascade do |t|
-    t.integer  "attachment_id"
-    t.boolean  "controls",      default: true
-    t.integer  "creator_id"
-    t.integer  "updater_id"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
-    t.boolean  "autoplay",      default: false
-    t.boolean  "loop",          default: false
-    t.boolean  "muted",         default: false
   end
 
   create_table "alchemy_essence_booleans", force: :cascade do |t|
@@ -199,21 +209,6 @@ ActiveRecord::Schema.define(version: 20160518192506) do
     t.datetime "updated_at",                      null: false
   end
 
-  create_table "alchemy_essence_videos", force: :cascade do |t|
-    t.integer  "attachment_id"
-    t.string   "width"
-    t.string   "height"
-    t.boolean  "allow_fullscreen", default: true
-    t.boolean  "autoplay",         default: false
-    t.boolean  "controls",         default: true
-    t.integer  "creator_id"
-    t.integer  "updater_id"
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
-    t.boolean  "loop",             default: false
-    t.boolean  "muted",            default: false
-  end
-
   create_table "alchemy_folded_pages", force: :cascade do |t|
     t.integer "page_id"
     t.integer "user_id"
@@ -262,7 +257,7 @@ ActiveRecord::Schema.define(version: 20160518192506) do
     t.integer  "rgt"
     t.integer  "parent_id"
     t.integer  "depth"
-    t.boolean  "visible",          default: true
+    t.boolean  "visible",          default: false
     t.boolean  "public",           default: false
     t.boolean  "locked",           default: false
     t.integer  "locked_by"
