@@ -11,7 +11,7 @@ gem 'country_select'
 gem 'delayed_job_active_record'
 gem 'dragonfly-s3_data_store'
 gem 'dragonfly-swift_data_store', github: 'europeana/dragonfly-swift-data-store', tag: 'v0.1.0'
-gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', ref: 'db72172'
+gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', ref: '3bcb9dc'
 gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'
 gem 'nokogiri', '>= 1.6.8' # Forced update for security issues
@@ -30,6 +30,7 @@ gem 'europeana-feedback-button', '0.0.4'
 
 group :production do
   gem 'rails_12factor', '~> 0.0.3'
+  gem 'europeana-logging', '~> 0.1.1'
 end
 
 group :production, :development do

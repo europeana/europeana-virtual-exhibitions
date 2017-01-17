@@ -9,8 +9,8 @@ GIT
 
 GIT
   remote: git://github.com/europeana/europeana-styleguide-ruby.git
-  revision: db72172a366c00c37eda98cfe39b82249431c764
-  ref: db72172
+  revision: 3bcb9dc6274684bec44492c810ca59a99fd5996a
+  ref: 3bcb9dc
   specs:
     europeana-styleguide (0.2.0)
       activesupport (~> 4.0)
@@ -188,6 +188,11 @@ GEM
     erubis (2.7.0)
     europeana-feedback-button (0.0.4)
       rails (~> 4.2, >= 4.2.7.1)
+    europeana-logging (0.1.1)
+      lograge (~> 0.4)
+      logstash-event (~> 1.2)
+      logstash-logger (~> 0.19)
+      rails (> 4.2, < 6)
     excon (0.49.0)
     execjs (2.7.0)
     ffi (1.9.14)
@@ -241,6 +246,13 @@ GEM
       rack
       rest-client
       ya2yaml
+    lograge (0.4.1)
+      actionpack (>= 4, < 5.1)
+      activesupport (>= 4, < 5.1)
+      railties (>= 4, < 5.1)
+    logstash-event (1.2.02)
+    logstash-logger (0.20.1)
+      logstash-event (~> 1.2)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     magiclabs-userstamp (2.1.0)
@@ -467,6 +479,7 @@ DEPENDENCIES
   dragonfly-s3_data_store
   dragonfly-swift_data_store!
   europeana-feedback-button (= 0.0.4)
+  europeana-logging (~> 0.1.1)
   europeana-styleguide!
   jbuilder (~> 2.0)
   jquery-rails
