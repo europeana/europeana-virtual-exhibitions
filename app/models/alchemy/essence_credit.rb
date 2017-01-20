@@ -10,11 +10,6 @@ class Alchemy::EssenceCredit < ActiveRecord::Base
     inverted_licenses = Europeana::Mixins::ImageCredit::LICENSES.invert
 
     return db_license if inverted_licenses.key?(db_license)
-
-    license_url = Europeana::Mixins::ImageCredit::LICENSES_URL[db_license]
-    Europeana::Mixins::ImageCredit::LICENSES_URL.select { |_key, url| url == license_url }.each do |key, _value|
-      return key if inverted_licenses.key?(key)
-    end
     'CNE' # unable to determine
   end
 end
