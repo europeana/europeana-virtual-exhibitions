@@ -154,7 +154,8 @@ module Europeana
               {
                 text: chapter.title,
                 url: show_page_url(urlname: chapter.urlname, locale: chapter.language_code),
-                is_current: chapter == @page
+                is_current: chapter == @page,
+                submenu: false
               }
             end
           }
