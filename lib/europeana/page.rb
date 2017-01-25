@@ -213,7 +213,7 @@ module Europeana
     # Support method for menu_data, remove upon refactor.
     #
     def link_item(text, url, options = {})
-      { text: text, url: url }.merge(options)
+      { text: text, url: url, submenu: false }.merge(options)
     end
 
     ##
