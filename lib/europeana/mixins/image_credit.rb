@@ -29,22 +29,9 @@ module Europeana
         'CC_BY_NC_ND' => 'https://creativecommons.org/licenses/by-nc-nd/1.0',
         'RS_INC_EDU' => 'http://rightsstatements.org/vocab/InC-EDU/1.0/',
         'RS_NOC_OKLR' => 'http://rightsstatements.org/vocab/NoC-OKLR/1.0/',
-
-        # 'RR_free' and 'RR_paid' are the same as 'RS_INC' but here for legacy data
-        'RR_free' => 'http://rightsstatements.org/vocab/InC/1.0/',
-        'RR_paid' => 'http://rightsstatements.org/vocab/InC/1.0/',
         'RS_INC' => 'http://rightsstatements.org/vocab/InC/1.0/',
-
-        # 'OOC' is the same as 'RS_NOC_NC' but here for legacy data
-        'RS_OOC' => 'http://rightsstatements.org/vocab/NoC-NC/1.0/',
         'RS_NOC_NC' => 'http://rightsstatements.org/vocab/NoC-NC/1.0/',
-
-        # 'orphan' is the same as 'RS_INC_OW_EU' but here for legacy data
-        'orphan' => 'http://rightsstatements.org/vocab/InC-OW-EU/1.0/',
         'RS_INC_OW_EU' => 'http://rightsstatements.org/vocab/InC-OW-EU/1.0/',
-
-        # 'unknown' is the same as 'RS_CNE' but here for legacy data
-        'unknown' => 'http://rightsstatements.org/vocab/CNE/1.0/',
         'RS_CNE' => 'http://rightsstatements.org/vocab/CNE/1.0/'
       }
 
@@ -77,11 +64,6 @@ module Europeana
         inverted = Europeana::Mixins::ImageCredit::LICENSES.invert
 
         return inverted[credit.essence.license] if inverted.key?(credit.essence.license)
-        # Some legacy licences need to be looked up via the licence key of the license which has the same URL
-        license_url = license_link(credit)
-        Europeana::Mixins::ImageCredit::LICENSES_URL.select { |_key, url| url == license_url }.each do |key, _value|
-          return inverted[key] if inverted.key?(key)
-        end
         'Copyright Not Evaluated'
       end
 
