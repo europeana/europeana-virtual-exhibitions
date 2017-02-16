@@ -49,7 +49,7 @@ module MustacheHelper
   end
 
   def version
-    { is_alpha: true }
+    { is_alpha: false }
   end
 
   def mustache
