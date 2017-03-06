@@ -9,8 +9,8 @@ GIT
 
 GIT
   remote: git://github.com/europeana/europeana-styleguide-ruby.git
-  revision: 5d8efb9d0afb0c124c0d2861aecb623c7e3f8cd5
-  ref: 5d8efb9
+  revision: e74cf01139ed3230c8c14bd6f0fa63d264ca7da5
+  ref: e74cf01
   specs:
     europeana-styleguide (0.2.0)
       activesupport (~> 4.0)
@@ -222,7 +222,7 @@ GEM
       activesupport (>= 4.1.0)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
-    i18n (0.7.0)
+    i18n (0.8.1)
     i18n_data (0.7.0)
     ipaddress (0.8.3)
     jbuilder (2.4.1)
@@ -234,7 +234,7 @@ GEM
       thor (>= 0.14, < 2.0)
     jquery-ui-rails (5.0.5)
       railties (>= 3.2.16)
-    json (1.8.3)
+    json (1.8.6)
     kaminari (0.17.0)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
@@ -260,7 +260,7 @@ GEM
       mime-types (>= 1.16, < 4)
     mime-types (2.99.2)
     mini_portile2 (2.1.0)
-    minitest (5.9.1)
+    minitest (5.10.1)
     multi_json (1.12.1)
     mustache (1.0.3)
     netrc (0.11.0)
@@ -434,7 +434,7 @@ GEM
       libv8 (~> 3.16.14.0)
       ref
     thor (0.19.1)
-    thread_safe (0.3.5)
+    thread_safe (0.3.6)
     tilt (2.0.5)
     turbolinks (2.5.3)
       coffee-rails
@@ -512,4 +512,4 @@ DEPENDENCIES
   web-console (~> 2.0)
 
 BUNDLED WITH
-   1.13.7
+   1.14.6
