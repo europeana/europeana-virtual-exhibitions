@@ -14,7 +14,7 @@ gem 'dragonfly-swift_data_store', github: 'europeana/dragonfly-swift-data-store'
 gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', ref: 'e74cf01'
 gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'
-gem 'nokogiri', '>= 1.6.8' # Forced update for security issues
+gem 'nokogiri', '>= 1.7.1' # Forced update for security issues
 gem 'pg', '~> 0.15'
 gem 'puma', '~> 2.13'
 gem 'rack-plastic'
