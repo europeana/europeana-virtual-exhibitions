@@ -9,8 +9,8 @@ GIT
 
 GIT
   remote: git://github.com/europeana/europeana-styleguide-ruby.git
-  revision: e74cf01139ed3230c8c14bd6f0fa63d264ca7da5
-  ref: e74cf01
+  revision: 5e6e367d6f10a33efae8a037a60d0a2585cfba44
+  ref: 5e6e367
   specs:
     europeana-styleguide (0.2.0)
       activesupport (~> 4.0)
@@ -262,7 +262,7 @@ GEM
     mini_portile2 (2.1.0)
     minitest (5.10.1)
     multi_json (1.12.1)
-    mustache (1.0.3)
+    mustache (1.0.5)
     netrc (0.11.0)
     newrelic_rpm (3.15.1.316)
     nokogiri (1.7.1)
@@ -483,7 +483,7 @@ DEPENDENCIES
   jquery-rails
   localeapp (~> 1.0)
   newrelic_rpm
-  nokogiri (>= 1.7.1)
+  nokogiri (>= 1.6.8)
   pg (~> 0.15)
   phantomjs
   poltergeist
@@ -508,6 +508,3 @@ DEPENDENCIES
   turbolinks
   uglifier (>= 1.3.0)
   web-console (~> 2.0)
-
-BUNDLED WITH
-   1.14.6
