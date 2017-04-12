@@ -66,7 +66,7 @@ module MustacheHelper
         {
           url: '#',
           text: t('site.settings.language.label'),
-          icon: 'language',
+          icon_class: 'svg-icon-language',
           submenu: {
             items: page_object.alternatives.map do |alt|
               {
