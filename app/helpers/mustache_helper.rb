@@ -49,7 +49,7 @@ module MustacheHelper
   end
 
   def version
-    { is_alpha: true }
+    { is_alpha: false }
   end
 
   def mustache
@@ -71,7 +71,8 @@ module MustacheHelper
             items: page_object.alternatives.map do |alt|
               {
                 text: alt.language.name,
-                url: show_page_url(urlname: alt.urlname, locale: alt.language_code)
+                url: show_page_url(urlname: alt.urlname, locale: alt.language_code),
+                submenu: false
               }
             end
           }
