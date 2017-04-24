@@ -11,7 +11,7 @@ gem 'country_select'
 gem 'delayed_job_active_record'
 gem 'dragonfly-s3_data_store'
 gem 'dragonfly-swift_data_store', github: 'europeana/dragonfly-swift-data-store', tag: 'v0.1.0'
-gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', ref: 'e74cf01'
+gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', ref: '5b36ad0'
 gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'
 gem 'nokogiri', '>= 1.7.1' # Forced update for security issues
