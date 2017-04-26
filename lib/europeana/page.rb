@@ -217,13 +217,12 @@ module Europeana
     #
     def navigation_global_primary_nav_galleries
       {
-          text: I18n.t('global.navigation.galleries'),
-          is_current: false,
-          url: collections_galleries_path,
-          submenu: false
+        text: I18n.t('global.navigation.galleries'),
+        is_current: false,
+        url: collections_galleries_path,
+        submenu: false
       }
     end
-
 
     ##
     # Support method for menu_data, remove upon refactor.
