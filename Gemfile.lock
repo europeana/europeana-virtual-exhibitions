@@ -9,8 +9,8 @@ GIT
 
 GIT
   remote: git://github.com/europeana/europeana-styleguide-ruby.git
-  revision: 5d8efb9d0afb0c124c0d2861aecb623c7e3f8cd5
-  ref: 5d8efb9
+  revision: f1cddba2f7bbc1c7ae59602a00bccd6af1817b6c
+  ref: f1cddba
   specs:
     europeana-styleguide (0.2.0)
       activesupport (~> 4.0)
@@ -262,7 +262,7 @@ GEM
     mini_portile2 (2.1.0)
     minitest (5.10.1)
     multi_json (1.12.1)
-    mustache (1.0.3)
+    mustache (1.0.5)
     netrc (0.11.0)
     newrelic_rpm (3.15.1.316)
     nokogiri (1.7.1)

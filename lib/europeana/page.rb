@@ -43,7 +43,7 @@ module Europeana
     end
 
     def media
-      @page.elements.published.where(name: ['image', 'rich_image', 'intro']).map do |element|
+      @page.elements.published.where(name: ['image', 'rich_image', 'intro', 'image_compare']).map do |element|
         element = Europeana::Elements::Base.build(element)
         next if element.hide_in_credits
         element.to_hash(include_url: url)
@@ -149,6 +149,7 @@ module Europeana
         {
           text: exhibition.title,
           url: '#',
+          is_current: true,
           submenu: {
             items: menu_items.map do |chapter|
               {
@@ -186,16 +187,17 @@ module Europeana
     #
     def navigation_global_primary_nav_browse_submenu_items
       [
-        link_item(I18n.t('global.navigation.browse_newcontent'), URI.join(europeana_collections_url, 'browse/newcontent'),
+        link_item(I18n.t('global.navigation.browse_newcontent'), URI.join(europeana_collections_url, 'explore/newcontent'),
                   is_current: false),
-        link_item(I18n.t('global.navigation.browse_colours'), URI.join(europeana_collections_url, 'browse/colours'),
+        link_item(I18n.t('global.navigation.browse_colours'), URI.join(europeana_collections_url, 'explore/colours'),
                   is_current: false),
-        link_item(I18n.t('global.navigation.browse_sources'), URI.join(europeana_collections_url, 'browse/sources'),
+        link_item(I18n.t('global.navigation.browse_sources'), URI.join(europeana_collections_url, 'explore/sources'),
                   is_current: false),
-        link_item(I18n.t('global.navigation.concepts'), URI.join(europeana_collections_url, 'browse/topics'),
+        link_item(I18n.t('global.navigation.concepts'), URI.join(europeana_collections_url, 'explore/topics'),
                   is_current: false),
-        link_item(I18n.t('global.navigation.agents'), URI.join(europeana_collections_url, 'browse/people'),
-                  is_current: false)
+        link_item(I18n.t('global.navigation.agents'), URI.join(europeana_collections_url, 'explore/people'),
+                  is_current: false),
+        navigation_global_primary_nav_galleries
       ]
     end
 
@@ -213,6 +215,18 @@ module Europeana
     ##
     # Support method for menu_data, remove upon refactor.
     #
+    def navigation_global_primary_nav_galleries
+      {
+        text: I18n.t('global.navigation.galleries'),
+        is_current: false,
+        url: collections_galleries_path,
+        submenu: false
+      }
+    end
+
+    ##
+    # Support method for menu_data, remove upon refactor.
+    #
     def link_item(text, url, options = {})
       { text: text, url: url, submenu: false }.merge(options)
     end
@@ -224,8 +238,15 @@ module Europeana
       ENV['EUROPEANA_COLLECTIONS_URL'] || 'http://www.europeana.eu/portal/'
     end
 
+    ##
+    # Support method for menu_data, remove upon refactor.
+    #
+    def collections_galleries_path
+      europeana_collections_url + 'explore/galleries'
+    end
+
     def menu_items
-      return exhibitions if is_foyer
+      return exhibitions.limit(6) if is_foyer
       chapters
     end
 
