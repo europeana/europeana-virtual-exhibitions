@@ -27,7 +27,8 @@ module Europeana
               stripped_caption: stripped_caption(:image_2_credit),
               image: versions(:image_2),
               image_credit: image_credit(:image_2_credit)
-            }]
+            }
+          ]
         }
       end
     end
