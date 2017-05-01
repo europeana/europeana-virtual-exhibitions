@@ -44,8 +44,8 @@ module Europeana
           attribution_creator: credit.essence.author,
           attribution_institution: credit.essence.institution,
           attribution_url: attribution_url(credit),
-          caption: caption,
-          stripped_caption: stripped_caption,
+          caption: caption(name),
+          stripped_caption: stripped_caption(name),
           license_url: license_link(credit),
           license_code: credit.essence.license,
           license_text: license_label(credit),
@@ -54,8 +54,8 @@ module Europeana
         }.merge("license_#{credit.essence.license}" => true)
       end
 
-      def caption
-        credit = @element.content_by_name('image_credit')
+      def caption(name = 'image_credit')
+        credit = @element.content_by_name(name)
         return false if credit.nil?
         "<a href='#{credit.essence.url}'>#{credit.essence.title}</a>, #{credit.essence.author}, #{credit.essence.institution}, <a href='#{license_link(credit)}'>#{license_label(credit)}</a>"
       end
@@ -76,9 +76,9 @@ module Europeana
         url
       end
 
-      def stripped_caption
-        return false if caption == false
-        strip_tags(caption)
+      def stripped_caption(name = 'image_credit')
+        return false if caption(name) == false
+        strip_tags(caption(name))
       end
 
 
