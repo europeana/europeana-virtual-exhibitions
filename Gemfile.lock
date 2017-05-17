@@ -484,7 +484,7 @@ DEPENDENCIES
   localeapp (~> 1.0)
   mail (= 2.6.6.rc1)
   newrelic_rpm
-  nokogiri (= 1.7.2)
+  nokogiri
   pg (~> 0.15)
   phantomjs
   poltergeist
