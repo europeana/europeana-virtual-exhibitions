@@ -2,7 +2,6 @@
 
 module Alchemy
   PageRedirects.module_exec do
-
     # Returns an URL to redirect the request to.
     #
     # == Lookup:
@@ -58,7 +57,7 @@ module Alchemy
     # Otherwise it returns nil.
     #
     def any_public_foyer
-      foyer_page = Page.where(urlname: 'foyer', public: true ).first
+      foyer_page = Page.where(urlname: 'foyer', public: true).first
       foyer_page if foyer_page
     end
   end
