@@ -8,7 +8,7 @@ module Alchemy
     # == Lookup:
     #
     # 0. THIS LOGIC IS A EUROPEANA SPECIFC EXTENSION
-    #    If the page is a unpublished 'foyer' we redirect to the foyer of the default language
+    #    If the page is an unpublished 'foyer' we redirect to the foyer of the default language
     #    + If the default language foyer isn't published we redirect to the first published foyer of any language.
     #
     # 1. If the page is not published and we have a published child,
@@ -23,7 +23,7 @@ module Alchemy
     # @return NilClass
     #
     def redirect_url
-      # This method is being overridden to redirect to ensure alternative languages take precedence
+      # This method is being overridden to ensure alternative languages take precedence
       # when trying to find a redirect for unpublished pages
       @_redirect_url ||= redirect_to_alternative_foyer_url || public_child_redirect_url || controller_and_action_url ||
         locale_prefixed_url || nil
@@ -32,7 +32,7 @@ module Alchemy
     private
 
     def redirect_to_alternative_foyer_url
-      if !@page.public? &&  @page.urlname == 'foyer'
+      if !@page.public? && @page.urlname == 'foyer'
         page_to_redirect_to = default_language_public_foyer || any_public_foyer
         if page_to_redirect_to
           options = {
