@@ -25,7 +25,7 @@ module Alchemy
       # This method is being overridden to ensure alternative languages take precedence
       # when trying to find a redirect for unpublished pages
       @_redirect_url ||= redirect_to_alternative_foyer_url || public_child_redirect_url || controller_and_action_url ||
-        locale_prefixed_url || nil
+                         locale_prefixed_url || nil
     end
 
     private
