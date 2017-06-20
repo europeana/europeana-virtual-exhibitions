@@ -31,7 +31,7 @@ module Alchemy
     private
 
     def redirect_to_alternative_foyer_url
-      if !@page.public? && @page.urlname == 'foyer'
+      if !@page.public? && @page.language_root?
         page_to_redirect_to = default_language_public_foyer || any_public_foyer
         if page_to_redirect_to
           options = {
@@ -48,7 +48,7 @@ module Alchemy
     # Otherwise it returns nil.
     #
     def default_language_public_foyer
-      foyer_page = Language.default.pages.find_by(urlname: 'foyer')
+      foyer_page = Language.default.pages.find_by(language_root: true)
       foyer_page if foyer_page && foyer_page.public?
     end
 
@@ -57,7 +57,7 @@ module Alchemy
     # Otherwise it returns nil.
     #
     def any_public_foyer
-      foyer_page = Page.where(urlname: 'foyer', public: true).first
+      foyer_page = Page.where(language_root: true, public: true).first
       foyer_page if foyer_page
     end
   end
