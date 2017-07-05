@@ -175,16 +175,19 @@ module Europeana
     # Support method for menu_data, remove upon refactor.
     #
     def navigation_global_primary_nav_collections_submenu_items
-      [
-        link_item('1914-1918', URI.join(europeana_collections_url, 'collections/world-war-I'), is_current: false),
-        link_item('Art', URI.join(europeana_collections_url, 'collections/art'), is_current: false),
-        link_item('Fashion', URI.join(europeana_collections_url, 'collections/fashion'), is_current: false),
-        link_item('Maps and Geography', URI.join(europeana_collections_url, 'collections/maps'), is_current: false),
-        link_item('Music', URI.join(europeana_collections_url, 'collections/music'), is_current: false),
-        link_item('Natural History', URI.join(europeana_collections_url, 'collections/natural-history'), is_current: false),
-        link_item('Photography', URI.join(europeana_collections_url, 'collections/photography'), is_current: false),
-        link_item('Sport', URI.join(europeana_collections_url, 'collections/sport'), is_current: false)
-      ]
+      collection_titles_and_slugs = {
+        '1914-1918' => 'world-war-I',
+        'Art' => 'art',
+        'Fashion' => 'fashion',
+        'Maps and Geography' => 'maps',
+        'Music' => 'music',
+        'Natural History' => 'natural-history',
+        'Photography' => 'photography',
+        'Sport' => 'sport'
+      }
+      collection_titles_and_slugs.map do |title, slug|
+        link_item(title, URI.join(europeana_collections_url, 'collections/', slug), is_current: false)
+      end
     end
 
     ##
