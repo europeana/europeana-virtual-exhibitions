@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 RSpec.describe 'alchemy/pages/show.html.mustache' do
-  let(:locale_code) {'en'}
+  let(:locale_code) { 'en' }
   before do
     I18n.locale = locale_code
   end
@@ -55,7 +55,7 @@ RSpec.describe 'alchemy/pages/show.html.mustache' do
     end
 
     context 'when it is another language' do
-      let(:locale_code) {'de'}
+      let(:locale_code) { 'de' }
 
       it 'should have the title with " - (Translated Exhibitions) - Europeana Collections" appended' do
         assign(:page, sample_pages[locale_code])
@@ -73,7 +73,7 @@ RSpec.describe 'alchemy/pages/show.html.mustache' do
     end
 
     context 'when it is another language' do
-      let(:locale_code) {'de'}
+      let(:locale_code) { 'de' }
       it 'should have the translated foyer title' do
         assign(:page, alchemy_pages(:language_root_page_de))
         render
