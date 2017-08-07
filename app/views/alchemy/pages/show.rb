@@ -75,7 +75,11 @@ module Alchemy
       end
 
       def page_title
-        [@page.title, t('global.sitename', default: 'Europeana Collections')].join(' - ')
+        [
+          foyer? ? nil : @page.title,
+          t('global.navigation.exhibitions', default: 'Exhibitions'),
+          t('site.name', default: 'Europeana Collections')
+        ].compact.join(' - ')
       end
 
       def share_links
