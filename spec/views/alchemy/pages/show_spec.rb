@@ -48,7 +48,7 @@ RSpec.describe 'alchemy/pages/show.html.mustache' do
       end
     end
 
-    it 'should have the title with " - Europeana Collections" appended' do
+    it 'should have the title with " - Exhibitions - Europeana Collections" appended' do
       assign(:page, sample_pages[locale_code])
       render
       expect(rendered).to have_title('Sample - Exhibitions - Europeana Collections')
