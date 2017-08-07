@@ -75,7 +75,7 @@ module Alchemy
       end
 
       def page_title
-        [@page.title , t('global.sitename', default: 'Europeana Collections')].join(' - ')
+        [@page.title, t('global.sitename', default: 'Europeana Collections')].join(' - ')
       end
 
       def share_links
