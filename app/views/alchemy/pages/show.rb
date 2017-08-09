@@ -77,8 +77,8 @@ module Alchemy
       def page_title
         [
           foyer? ? nil : @page.title,
-          t('global.navigation.exhibitions', default: 'Exhibitions'),
-          t('site.name', default: 'Europeana Collections')
+          t('global.navigation.exhibitions'),
+          t('site.name')
         ].compact.join(' - ')
       end
 
