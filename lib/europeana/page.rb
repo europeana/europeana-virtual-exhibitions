@@ -119,7 +119,7 @@ module Europeana
         }
       end
       # Set the index page's breadcrumb title to locale specific string.
-      crumbs[0][:title] = ::I18n.t('site.navigation.breadcrumb.exhibitions.return_home', default: 'Exhibitions')
+      crumbs[0][:title] = ::I18n.t('site.navigation.breadcrumb.exhibitions.return_home')
       crumbs = prepend_portal_breadcrumb crumbs
       crumbs.last[:is_last] = true
       crumbs
@@ -344,7 +344,7 @@ module Europeana
         # Prepend the link to the portal.
         crumbs.unshift(
           url: europeana_collections_url,
-          title: ::I18n.t('site.navigation.breadcrumb.return_home', default: 'Return to Home'),
+          title: ::I18n.t('site.navigation.breadcrumb.return_home'),
           is_first: true
         )
         crumbs
