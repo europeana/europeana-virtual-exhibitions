@@ -8,12 +8,21 @@ GIT
       fog-openstack
 
 GIT
-  remote: git://github.com/europeana/europeana-styleguide-ruby.git
-  revision: f1cddba2f7bbc1c7ae59602a00bccd6af1817b6c
-  ref: f1cddba
+  remote: git://github.com/europeana/europeana-i18n-ruby.git
+  revision: 400ad7ec082850d44fba2c6752ff19f726e562d7
+  branch: develop
   specs:
-    europeana-styleguide (0.2.0)
+    europeana-i18n (0.0.1)
+      rails (>= 4.0, < 6.0)
+
+GIT
+  remote: git://github.com/europeana/europeana-styleguide-ruby.git
+  revision: 03fc544609bb6ae73398698eaf25c202c089e32f
+  ref: 03fc544
+  specs:
+    europeana-styleguide (0.3.0)
       activesupport (~> 4.0)
+      europeana-i18n
       mustache (~> 1.0.1)
       stache (~> 1.1.1)
 
@@ -477,6 +486,7 @@ DEPENDENCIES
   dragonfly-s3_data_store
   dragonfly-swift_data_store!
   europeana-feedback-button (= 0.0.4)
+  europeana-i18n!
   europeana-logging (~> 0.1.1)
   europeana-styleguide!
   jbuilder (~> 2.0)

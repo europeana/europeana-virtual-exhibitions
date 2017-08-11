@@ -196,7 +196,7 @@ module MustacheHelper
   def page_footer
     {
       items: [
-        { text: t('exhibitions.contacts', default: 'Contacts'), url: "#{europeana_collections_url}contact.html" },
+        { text: t('exhibitions.contacts'), url: "#{europeana_collections_url}contact.html" },
         { text: t('site.footer.menu.about'), url: "#{europeana_collections_url}about.html" },
         { text: 'Europeana ' + t('global.search-collections'), url: "#{europeana_collections_url}" }
       ]

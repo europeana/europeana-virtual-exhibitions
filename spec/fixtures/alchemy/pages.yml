@@ -120,7 +120,7 @@ german_music_page:
 
 sample_page_de:
   name: 'sample'
-  title: 'Sample'
+  title: 'Beispiel'
   urlname: 'sample'
   depth: 2
   lft: 11

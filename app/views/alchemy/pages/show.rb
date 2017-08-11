@@ -75,7 +75,11 @@ module Alchemy
       end
 
       def page_title
-        @page.title
+        [
+          foyer? ? nil : @page.title,
+          t('global.navigation.exhibitions'),
+          t('site.name')
+        ].compact.join(' - ')
       end
 
       def share_links
