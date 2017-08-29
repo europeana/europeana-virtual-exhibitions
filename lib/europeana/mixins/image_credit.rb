@@ -50,7 +50,7 @@ module Europeana
           license_code: credit.essence.license,
           license_text: license_label(credit),
           country_code: credit.essence.country_code,
-          country: country.nil? ? false : (country.translations[I18n.locale.to_s] || country.name)
+          country: country.nil? ? false : (country.translations[::I18n.locale.to_s] || country.name)
         }.merge("license_#{credit.essence.license}" => true)
       end
 
