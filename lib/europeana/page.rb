@@ -2,6 +2,7 @@ module Europeana
   class Page
     include ActionView::Helpers::TagHelper
     include Rails.application.routes.url_helpers
+    include FeedHelper
     include LanguageHelper
 
     def initialize(page)
@@ -162,7 +163,7 @@ module Europeana
           }
         },
         {
-          url: 'http://blog.europeana.eu/',
+          url: cached_feed(Feed.top_nav_feeds('en')[:blog])&.url,
           text: ::I18n.t('global.navigation.blog'),
           submenu: {
             items: navigation_global_primary_nav_blog_submenu_items
@@ -175,19 +176,7 @@ module Europeana
     # Support method for menu_data, remove upon refactor.
     #
     def navigation_global_primary_nav_collections_submenu_items
-      collection_titles_and_slugs = {
-        '1914-1918' => 'world-war-I',
-        'Art' => 'art',
-        'Fashion' => 'fashion',
-        'Maps and Geography' => 'maps',
-        'Music' => 'music',
-        'Natural History' => 'natural-history',
-        'Photography' => 'photography',
-        'Sport' => 'sport'
-      }
-      collection_titles_and_slugs.map do |title, slug|
-        link_item(title, URI.join(europeana_collections_url, 'collections/', slug), is_current: false)
-      end
+      feed_entry_nav_items(Feed.top_nav_feeds('en')[:collections], 6)
     end
 
     ##
@@ -213,11 +202,8 @@ module Europeana
     # Support method for menu_data, remove upon refactor.
     #
     def navigation_global_primary_nav_blog_submenu_items
-      # Commented out individual blog posts for now to avoid having to port
-      # even more code from the collections portal.
-
-      # feed_items = feed_entry_nav_items(Cache::FeedJob::URLS[:blog][:all], 6)
-      [link_item(::I18n.t('global.navigation.all_blog_posts'), 'http://blog.europeana.eu/', is_morelink: true)]
+      blog_feed_url = Feed.top_nav_feeds('en')[:blog]
+      feed_entry_nav_items(blog_feed_url, 6) << link_item(::I18n.t('global.navigation.all_blog_posts'), cached_feed(blog_feed_url)&.url, is_morelink: true)
     end
 
     ##
@@ -228,8 +214,18 @@ module Europeana
         text: ::I18n.t('global.navigation.galleries'),
         is_current: false,
         url: collections_galleries_path,
-        submenu: false
+        submenu:  {
+          items: navigation_global_primary_nav_galleries_submenu_items
+        }
       }
+    end
+
+    ##
+    # Support method for menu_data, remove upon refactor.
+    #
+    def navigation_global_primary_nav_galleries_submenu_items
+      galleries_feed_url = Feed.top_nav_feeds('en')[:galleries]
+      feed_entry_nav_items(galleries_feed_url, 6) << link_item(::I18n.t('global.navigation.all_galleries'), cached_feed(galleries_feed_url)&.url, is_morelink: true)
     end
 
     ##
@@ -237,6 +233,15 @@ module Europeana
     #
     def link_item(text, url, options = {})
       { text: text, url: url, submenu: false }.merge(options)
+    end
+
+    ##
+    # Support method for menu_date, remove upon refactor.
+    #
+    def feed_entry_nav_items(url, max)
+      feed_entries(url)[0..(max - 1)].map do |item|
+        link_item(CGI.unescapeHTML(item.title), CGI.unescapeHTML(item.url))
+      end
     end
 
     ##

@@ -6,6 +6,7 @@ gem 'rails', '4.2.7.1'
 gem 'acts_as_list', '~> 0.7.4' # dependency of a dependency; version 0.7.3 yanked
 gem 'alchemy-devise', git: 'https://github.com/AlchemyCMS/alchemy-devise', ref: '8c0a1e26'
 gem 'alchemy_cms', '~> 3.3.0'
+gem 'clockwork', '~> 1.2'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'country_select'
 gem 'delayed_job_active_record'
@@ -29,6 +30,7 @@ gem 'therubyracer', platforms: :ruby
 gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
 gem 'europeana-feedback-button', '0.0.4'
+gem 'europeana-feeds'
 
 group :production do
   gem 'rails_12factor', '~> 0.0.3'

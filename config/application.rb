@@ -15,6 +15,7 @@ require "sprockets/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 require 'europeana/feedback_button'
+require 'europeana/feeds'
 
 module Exhibitions
   class Application < Rails::Application
