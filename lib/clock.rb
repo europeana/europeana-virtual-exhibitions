@@ -8,7 +8,7 @@ include Clockwork
 
 unless ENV['DISABLE_SCHEDULED_JOBS']
   every(1.hour, 'cache.feeds') do
-    Feed.top_nav_feeds('en').each do |_feed, url|
+    Feed.top_nav_feeds('en').each_value do |url|
       Europeana::Feeds::FetchJob.perform_later(url)
     end
   end

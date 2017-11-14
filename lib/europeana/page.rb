@@ -5,6 +5,8 @@ module Europeana
     include FeedHelper
     include LanguageHelper
 
+    delegate :t, to: ::I18n
+
     def initialize(page)
       @page = page
     end
@@ -120,7 +122,7 @@ module Europeana
         }
       end
       # Set the index page's breadcrumb title to locale specific string.
-      crumbs[0][:title] = ::I18n.t('site.navigation.breadcrumb.exhibitions.return_home')
+      crumbs[0][:title] = t('site.navigation.breadcrumb.exhibitions.return_home')
       crumbs = prepend_portal_breadcrumb crumbs
       crumbs.last[:is_last] = true
       crumbs
@@ -134,14 +136,14 @@ module Europeana
     def menu_data
       [
         {
-          text: ::I18n.t('global.navigation.collections'),
+          text: t('global.navigation.collections'),
           is_current: false,
           submenu: {
             items: navigation_global_primary_nav_collections_submenu_items
           }
         },
         {
-          text: ::I18n.t('global.navigation.browse'),
+          text: t('global.navigation.browse'),
           is_current: false,
           submenu: {
             items: navigation_global_primary_nav_browse_submenu_items
@@ -164,7 +166,7 @@ module Europeana
         },
         {
           url: cached_feed(Feed.top_nav_feeds('en')[:blog])&.url,
-          text: ::I18n.t('global.navigation.blog'),
+          text: t('global.navigation.blog'),
           submenu: {
             items: navigation_global_primary_nav_blog_submenu_items
           }
@@ -184,15 +186,15 @@ module Europeana
     #
     def navigation_global_primary_nav_browse_submenu_items
       [
-        link_item(::I18n.t('global.navigation.browse_newcontent'), URI.join(europeana_collections_url, 'explore/newcontent'),
+        link_item(t('global.navigation.browse_newcontent'), URI.join(europeana_collections_url, 'explore/newcontent'),
                   is_current: false),
-        link_item(::I18n.t('global.navigation.browse_colours'), URI.join(europeana_collections_url, 'explore/colours'),
+        link_item(t('global.navigation.browse_colours'), URI.join(europeana_collections_url, 'explore/colours'),
                   is_current: false),
-        link_item(::I18n.t('global.navigation.browse_sources'), URI.join(europeana_collections_url, 'explore/sources'),
+        link_item(t('global.navigation.browse_sources'), URI.join(europeana_collections_url, 'explore/sources'),
                   is_current: false),
-        link_item(::I18n.t('global.navigation.concepts'), URI.join(europeana_collections_url, 'explore/topics'),
+        link_item(t('global.navigation.concepts'), URI.join(europeana_collections_url, 'explore/topics'),
                   is_current: false),
-        link_item(::I18n.t('global.navigation.agents'), URI.join(europeana_collections_url, 'explore/people'),
+        link_item(t('global.navigation.agents'), URI.join(europeana_collections_url, 'explore/people'),
                   is_current: false),
         navigation_global_primary_nav_galleries
       ]
@@ -203,7 +205,8 @@ module Europeana
     #
     def navigation_global_primary_nav_blog_submenu_items
       blog_feed_url = Feed.top_nav_feeds('en')[:blog]
-      feed_entry_nav_items(blog_feed_url, 6) << link_item(::I18n.t('global.navigation.all_blog_posts'), cached_feed(blog_feed_url)&.url, is_morelink: true)
+      items = feed_entry_nav_items(blog_feed_url, 6)
+      items << link_item(t('global.navigation.all_blog_posts'), cached_feed(blog_feed_url)&.url, is_morelink: true)
     end
 
     ##
@@ -211,7 +214,7 @@ module Europeana
     #
     def navigation_global_primary_nav_galleries
       {
-        text: ::I18n.t('global.navigation.galleries'),
+        text: t('global.navigation.galleries'),
         is_current: false,
         url: collections_galleries_path,
         submenu:  {
@@ -225,7 +228,8 @@ module Europeana
     #
     def navigation_global_primary_nav_galleries_submenu_items
       galleries_feed_url = Feed.top_nav_feeds('en')[:galleries]
-      feed_entry_nav_items(galleries_feed_url, 6) << link_item(::I18n.t('global.navigation.all_galleries'), cached_feed(galleries_feed_url)&.url, is_morelink: true)
+      items = feed_entry_nav_items(galleries_feed_url, 6)
+      items << link_item(t('global.navigation.all_galleries'), cached_feed(galleries_feed_url)&.url, is_morelink: true)
     end
 
     ##
@@ -349,7 +353,7 @@ module Europeana
         # Prepend the link to the portal.
         crumbs.unshift(
           url: europeana_collections_url,
-          title: ::I18n.t('site.navigation.breadcrumb.return_home'),
+          title: t('site.navigation.breadcrumb.return_home'),
           is_first: true
         )
         crumbs

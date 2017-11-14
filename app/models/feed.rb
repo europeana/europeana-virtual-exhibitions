@@ -18,7 +18,6 @@ class Feed
       }
     end
 
-
     def portal_url
       ENV['EUROPEANA_COLLECTIONS_URL'] || 'https://www.europeana.eu/portal/'
     end
