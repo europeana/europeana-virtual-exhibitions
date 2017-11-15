@@ -131,7 +131,7 @@ module Europeana
     ##
     # All this logic expcept for the exhibition related
     # elements come from the europeana collection portal.
-    # TODO: This should be refactored to link into the portal's menu data more directly.
+    # TODO: This should be refactored to reuse rather than duplicate the portal code.
     #
     def menu_data
       [
@@ -178,7 +178,7 @@ module Europeana
     # Support method for menu_data, remove upon refactor.
     #
     def navigation_global_primary_nav_collections_submenu_items
-      feed_entry_nav_items(Feed.top_nav_feeds('en')[:collections], 6)
+      feed_entry_nav_items(Feed.top_nav_feeds('en')[:collections], 0)
     end
 
     ##
