@@ -33,6 +33,3 @@ config/initializers/secret_token.rb
 public/portal/*
 
 vendor/bundle/
-
-# Ignore Ruby version
-/.ruby-version
