@@ -10,10 +10,10 @@ module Europeana
 
     def elements
       {
-        present: @page.elements.published.where.not(name: 'chapter').count >= 1,
-        items: @page.elements.published.where.not(name: 'chapter').map.with_index do |element, index|
+        present: non_chapter_elements.count >= 1,
+        items: non_chapter_elements.map.with_index do |element, index|
           {
-            is_last: index == (@page.elements.published.count - 1),
+            is_last: index == (page_elements.count - 1),
             is_first: index == 0,
             is_full_section_element: section_element_count[element.id] == 1
           }.merge(Europeana::Elements::Base.build(element).to_hash)
@@ -21,10 +21,18 @@ module Europeana
       }
     end
 
+    def page_elements
+      @page_elements ||= @page.elements.published
+    end
+
+    def non_chapter_elements
+      page_elements.reject { |element| element.name == 'chapter' }
+    end
+
     def chapter_elements
       {
         present: true,
-        items: chapters.map.with_index do |page, index|
+        items: chapters.map do |page|
           Europeana::Page.new(page).as_chapter
         end
       }
@@ -32,18 +40,22 @@ module Europeana
 
     def credit_elements
       if !is_credit
-        return { present: false, items: []}
+        return { present: false, items: [] }
       end
       {
         present: true,
-        items: exhibition.self_and_descendants.map.with_index do |page, index|
+        items: exhibition.self_and_descendants.map do |page|
           Europeana::Page.new(page).media
         end.flatten.compact
       }
     end
 
+    def media_elements
+      @media_elements ||= page_elements.select { |page| %w(image rich_image intro image_compare).include?(page.name) }
+    end
+
     def media
-      @page.elements.published.where(name: ['image', 'rich_image', 'intro', 'image_compare']).map do |element|
+      media_elements.map do |element|
         element = Europeana::Elements::Base.build(element)
         next if element.hide_in_credits
         element.to_hash(include_url: url)
@@ -85,7 +97,7 @@ module Europeana
     end
 
     def exhibition
-      @exhibition ||= (@page.depth == 1 ? @page : @page.self_and_ancestors.where(depth: 2).first)
+      @exhibition ||= @page.depth == 1 ? @page : page_and_ancestors.detect { |page| page.depth == 2 }
     end
 
     def table_of_contents
@@ -93,7 +105,7 @@ module Europeana
     end
 
     def chapters
-      exhibition.descendants
+      @chapters ||= exhibition.descendants
     end
 
     def all_pages
@@ -112,7 +124,7 @@ module Europeana
     end
 
     def breadcrumbs
-      crumbs = @page.self_and_ancestors.where('depth >= 1').map do |ancestor|
+      crumbs = page_and_ancestors.select { |page| page.depth >= 1 }.map do |ancestor|
         {
           url: show_page_url(@page.language_code, ancestor.urlname),
           title: ancestor.title
@@ -123,6 +135,10 @@ module Europeana
       crumbs = prepend_portal_breadcrumb crumbs
       crumbs.last[:is_last] = true
       crumbs
+    end
+
+    def page_and_ancestors
+      @page_and_ancestors ||= @page.self_and_ancestors
     end
 
     ##
@@ -259,20 +275,22 @@ module Europeana
     end
 
     def exhibitions
-      Alchemy::Page.published.visible.where(depth: 2, language_code: @page.language_code).order("lft ASC").all
+      @exhibitions ||= Alchemy::Page.published.visible.where(depth: 2, language_code: @page.language_code).order("lft ASC").all
     end
 
     def find_thumbnail
-      element = @page.elements.published.where(name: 'intro').first
-      return Europeana::Elements::ChapterThumbnail.new(element).to_hash if element
+      intro_element = page_elements.detect { |element| element.name == 'intro' }
+      return Europeana::Elements::ChapterThumbnail.new(intro_element).to_hash if intro_element
 
-      element = @page.elements.published.where(name: ['image', 'rich_image', 'credit_intro']).first
-      return Europeana::Elements::ChapterThumbnail.new(element).to_hash if element
+      img_element =  page_elements.detect { |element| %w(image rich_image credit_intro).include?(element.name) }
+      return Europeana::Elements::ChapterThumbnail.new(img_element).to_hash if img_element
       false
     end
 
     def alternatives
-      Alchemy::Page.published.where.not(language_code: @page.language_code).where(urlname: @page.urlname).all
+      @alternatives || begin
+        Alchemy::Page.published.where.not(language_code: @page.language_code).where(urlname: @page.urlname).all
+      end
     end
 
     def section_element_count
@@ -280,7 +298,7 @@ module Europeana
         @sections = []
         current_index = 0
         @sections[current_index] = []
-        @page.elements.published.each do | element |
+        page_elements.each do | element |
           if element.name != 'section'
             @sections[current_index] << element.id
           else

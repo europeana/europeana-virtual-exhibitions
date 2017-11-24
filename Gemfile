@@ -30,16 +30,21 @@ gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
 gem 'europeana-feedback-button', '0.0.4'
 
+group :profiling do
+  gem 'stackprof'
+end
+
+
 group :production do
   gem 'rails_12factor', '~> 0.0.3'
   gem 'europeana-logging', '~> 0.1.1'
 end
 
-group :production, :development do
+group :production, :development, :profiling do
   gem 'newrelic_rpm'
 end
 
-group :development, :test do
+group :development, :test, :profiling do
   gem 'dotenv-rails', '~> 2.0'
   gem 'rubocop', '0.39.0', require: false # only update when Hound does
   gem 'spring-commands-rspec'
