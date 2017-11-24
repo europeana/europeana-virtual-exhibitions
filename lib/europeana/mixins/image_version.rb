@@ -31,16 +31,17 @@ module Europeana
         @versions[name] ||= begin
           image = @element.content_by_name(name)
           return false if image.nil? || image.essence.picture.nil?
-          Hash[VERSIONS.map {|version,settings|
+          Hash[VERSIONS.map do |version, settings|
             options = { image_size: settings[:size], format: settings[:format] }
             if settings[:crop]
-              options.merge!({crop_size: 1, crop: 1, crop_from: 1, upsample: settings[:upsample] || false})
+              options.merge!(crop_size: 1, crop: 1, crop_from: 1, upsample: settings[:upsample] || false)
             end
             [version,
-            {
-              url: Rails.application.config.relative_url_root + image.essence.picture_url(options)
-            }
-          ]}]
+              {
+                url: Rails.application.config.relative_url_root + image.essence.picture_url(options)
+              }
+            ]
+          end]
         end
       end
     end

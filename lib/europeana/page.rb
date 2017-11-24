@@ -284,14 +284,14 @@ module Europeana
     end
 
     def exhibitions
-      @exhibitions ||= Alchemy::Page.published.visible.where(depth: 2, language_code: @page.language_code).order("lft ASC").all
+      @exhibitions ||= Alchemy::Page.published.visible.where(depth: 2, language_code: @page.language_code).order('lft ASC').all
     end
 
     def find_thumbnail
       intro_element = page_elements.detect { |element| element.name == 'intro' }
       return Europeana::Elements::ChapterThumbnail.new(intro_element).to_hash if intro_element
 
-      img_element =  page_elements.detect { |element| %w(image rich_image credit_intro).include?(element.name) }
+      img_element = page_elements.detect { |element| %w(image rich_image credit_intro).include?(element.name) }
       return Europeana::Elements::ChapterThumbnail.new(img_element).to_hash if img_element
       false
     end
@@ -307,7 +307,7 @@ module Europeana
         @sections = []
         current_index = 0
         @sections[current_index] = []
-        page_elements.each do | element |
+        page_elements.each do |element|
           if element.name != 'section'
             @sections[current_index] << element.id
           else

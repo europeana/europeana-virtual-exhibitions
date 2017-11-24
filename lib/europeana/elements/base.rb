@@ -37,7 +37,7 @@ module Europeana
         if !@contents.include?(name.to_s)
           raise StandardError, "No content #{name} found for #{@element}"
         end
-        detected_content = all_content.detect { |content| content.name == name.to_s}
+        detected_content = all_content.detect { |content| content.name == name.to_s }
         if detected_content&.essence&.respond_to?(attribute)
           value = detected_content.essence.send(attribute)
 
@@ -56,7 +56,7 @@ module Europeana
       end
 
       def all_content
-        @all_content =  @element.contents
+        @all_content = @element.contents
       end
     end
   end
