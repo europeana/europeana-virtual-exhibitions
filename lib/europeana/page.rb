@@ -297,7 +297,7 @@ module Europeana
     end
 
     def alternatives
-      @alternatives || begin
+      @alternatives ||= begin
         Alchemy::Page.published.where.not(language_code: @page.language_code).where(urlname: @page.urlname).all
       end
     end

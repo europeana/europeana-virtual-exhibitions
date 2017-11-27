@@ -43,6 +43,8 @@ module Exhibitions
     config.active_job.queue_adapter = :delayed_job
     #config.assets.initialize_on_precompile = false
 
+    config.log_level = :debug
+
     config.i18n.enforce_available_locales = false
 
     # Load Redis config from config/redis.yml, if it exists

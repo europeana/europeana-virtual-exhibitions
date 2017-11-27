@@ -56,7 +56,7 @@ module Europeana
       end
 
       def all_content
-        @all_content = @element.contents
+        @all_content ||= @element.contents
       end
     end
   end
