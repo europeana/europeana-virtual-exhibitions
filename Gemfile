@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.7.1'
+gem 'rails', '4.2.9'
 
 gem 'acts_as_list', '~> 0.7.4' # dependency of a dependency; version 0.7.3 yanked
 gem 'alchemy-devise', git: 'https://github.com/AlchemyCMS/alchemy-devise', ref: '8c0a1e26'
@@ -19,7 +19,7 @@ gem 'jquery-rails'
 gem 'mail', '2.6.6.rc1' # locked pending stable release with fix for https://github.com/mikel/mail/pull/1097
 gem 'nokogiri'
 gem 'pg', '~> 0.15'
-gem 'puma', '~> 2.13'
+gem 'puma', '~> 3.10'
 gem 'rack-plastic'
 gem 'rails_with_relative_url_root', '~> 0.1'
 gem 'redis-rails'
@@ -32,16 +32,21 @@ gem 'uglifier', '>= 1.3.0'
 gem 'europeana-feedback-button', '0.0.4'
 gem 'europeana-feeds', '0.0.2'
 
+group :profiling do
+  gem 'stackprof'
+end
+
+
 group :production do
   gem 'rails_12factor', '~> 0.0.3'
   gem 'europeana-logging', '~> 0.1.1'
 end
 
-group :production, :development do
+group :production, :development, :profiling do
   gem 'newrelic_rpm'
 end
 
-group :development, :test do
+group :development, :test, :profiling do
   gem 'dotenv-rails', '~> 2.0'
   gem 'rubocop', '0.39.0', require: false # only update when Hound does
   gem 'spring-commands-rspec'
