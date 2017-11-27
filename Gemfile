@@ -18,7 +18,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'
 gem 'mail', '2.6.6.rc1' # locked pending stable release with fix for https://github.com/mikel/mail/pull/1097
 gem 'nokogiri'
-gem 'pg', '~> 0.15'
+gem 'pg', '~> 0.21'
 gem 'puma', '~> 3.10'
 gem 'rack-plastic'
 gem 'rails_with_relative_url_root', '~> 0.1'

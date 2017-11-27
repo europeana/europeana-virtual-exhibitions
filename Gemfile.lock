@@ -526,7 +526,7 @@ DEPENDENCIES
   mail (= 2.6.6.rc1)
   newrelic_rpm
   nokogiri
-  pg (~> 0.15)
+  pg (~> 0.21)
   phantomjs
   poltergeist
   puma (~> 3.10)
