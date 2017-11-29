@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Alchemy::Page.module_exec do
   after_commit :flush_cache
   def flush_cache
