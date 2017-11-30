@@ -9,7 +9,7 @@ The goal was to make the differences between the virtual exhibitions application
 We made changes to default Alchemy behaviour on a couple of levels:
 
 1. We added mapping code, this code can be found in *lib/europeana* and does not overlap with Alchemy code.
-2. We use some *class_eval* magic to override Alchemy behaviour, this is done through intializers. As of July 2016 this happens in the following files: cache_flush.rb, picture.rb and extends.rb
+2. We use some *extensions* magic to override Alchemy behaviour. This happens for Alchemy::Page, Alchemy:Element, Alchemy::Picture models and the page_redirects and legacy_page_redirects controller concerns.
 3. We added a sitemap controller to render sitemaps. Can be found in *app/controllers/sitemap_controller.rb*
 4. Some views that needed adjustments are overridden in the folder *app/views/alchemy* this mostly concerns the admin. To override certain templates we copied from the *3.3* version and adjusted where need. For all the files found in the *app/views/alchemy* you can find a corresponding file the Alchemy source code that you can use to create a diff.
 5. Override *app/controllers/concerns/alchemy/locale_redirect*. Since all urls should have a language code we remove some logic that deals with this in the default Alchemy CMS.
