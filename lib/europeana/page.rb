@@ -66,12 +66,12 @@ module Europeana
     end
 
     def as_chapter
-      {
+      @as_chapter ||= {
         is_chapter_nav: true,
         title: @page.title,
         url: show_page_url(@page.language_code, @page.urlname),
-        label: find_thumbnail ? find_thumbnail[:label] : false,
-        image: find_thumbnail ? find_thumbnail[:image] : false
+        label: chapter_thumbnail ? chapter_thumbnail[:label] : false,
+        image: chapter_thumbnail ? chapter_thumbnail[:image] : false
       }
     end
 
@@ -287,13 +287,18 @@ module Europeana
       @exhibitions ||= Alchemy::Page.published.visible.where(depth: 2, language_code: @page.language_code).order('lft ASC').all
     end
 
-    def find_thumbnail
-      intro_element = page_elements.detect { |element| element.name == 'intro' }
-      return Europeana::Elements::ChapterThumbnail.new(intro_element).to_hash if intro_element
-
-      img_element = page_elements.detect { |element| %w(image rich_image credit_intro).include?(element.name) }
-      return Europeana::Elements::ChapterThumbnail.new(img_element).to_hash if img_element
-      false
+    def chapter_thumbnail
+      @chapter_thumbnail ||= begin
+        intro_element = page_elements.detect { |element| element.name == 'intro' }
+        img_element = page_elements.detect { |element| %w(image rich_image credit_intro).include?(element.name) }
+        if intro_element
+          Europeana::Elements::ChapterThumbnail.new(intro_element).to_hash
+        elsif img_element
+          Europeana::Elements::ChapterThumbnail.new(img_element).to_hash
+        else
+          false
+        end
+      end
     end
 
     def alternatives
@@ -355,8 +360,8 @@ module Europeana
     end
 
     def thumbnail(version = :full)
-      if find_thumbnail && find_thumbnail.has_key?(:image) && find_thumbnail[:image]
-        return full_url(find_thumbnail[:image][version][:url])
+      if chapter_thumbnail && chapter_thumbnail.has_key?(:image) && chapter_thumbnail[:image]
+        return full_url(chapter_thumbnail[:image][version][:url])
       end
       false
     end

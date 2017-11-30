@@ -30,7 +30,7 @@ module Europeana
 
       def versions(name = 'image')
         @versions ||= {}
-        @versions[name] ||= begin
+        @versions[name.to_sym] ||= begin
           image = @element.content_by_name(name)
           if image&.essence&.picture.present?
             versions_hash = {}
