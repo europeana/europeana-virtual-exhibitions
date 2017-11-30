@@ -5,7 +5,7 @@ if ENV.key?('VCAP_SERVICES')
 end
 fail 'No Postgres service found in environment.' if postgres_config.nil?
 service_config = postgres_config.first
-postgres_url = "#{service_config['credentials']['uri']}"
+postgres_url = service_config['credentials']['uri']
 %>
 production:
   url: "<%= postgres_url %>"
