@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Europeana
   class Page
     include ActionView::Helpers::TagHelper
@@ -17,7 +19,7 @@ module Europeana
         items: non_chapter_elements.map.with_index do |element, index|
           {
             is_last: index == (page_elements.count - 1),
-            is_first: index == 0,
+            is_first: index.zero?,
             is_full_section_element: section_element_count[element.id] == 1
           }.merge(Europeana::Elements::Base.build(element).to_hash)
         end
@@ -115,7 +117,7 @@ module Europeana
       if exhibition
         return exhibition.self_and_descendants
       end
-      return [@page]
+      [@page]
     end
 
     def title
@@ -288,6 +290,7 @@ module Europeana
     end
 
     def chapter_thumbnail
+      return @chapter_thumbnail if @chapter_thumbnail == false
       @chapter_thumbnail ||= begin
         intro_element = page_elements.detect { |element| element.name == 'intro' }
         img_element = page_elements.detect { |element| %w(image rich_image credit_intro).include?(element.name) }
@@ -336,12 +339,12 @@ module Europeana
       content << (@page.robot_index? ? 'index' : 'noindex')
       content << (@page.robot_follow? ? 'follow' : 'nofollow')
 
-      { meta_name: 'robots', content: content.join(',')}
+      { meta_name: 'robots', content: content.join(',') }
     end
 
     def language_alternatives_tags
       ([@page] + alternatives).map do |page|
-        { rel: 'alternate', hreflang: page.language_code, href: show_page_url(page.language_code, page.urlname), title: nil}
+        { rel: 'alternate', hreflang: page.language_code, href: show_page_url(page.language_code, page.urlname), title: nil }
       end
     end
 
@@ -351,7 +354,7 @@ module Europeana
 
     # meta information
     def description
-      element = @page.find_elements(only: ['intro', 'text', 'rich_image']).first
+      element = @page.find_elements(only: %w(intro text rich_image)).first
       if element
         element = Europeana::Elements::Base.build(element).get(:body, :stripped_body)
       end
@@ -360,26 +363,27 @@ module Europeana
     end
 
     def thumbnail(version = :full)
-      if chapter_thumbnail && chapter_thumbnail.has_key?(:image) && chapter_thumbnail[:image]
+      if chapter_thumbnail && chapter_thumbnail.key(:image)
         return full_url(chapter_thumbnail[:image][version][:url])
       end
       false
     end
 
     def full_url(path)
-      "http://#{ENV.fetch('CDN_HOST', ENV.fetch('APP_HOST', 'localhost'))}#{ENV.fetch('APP_PORT', nil).nil? ? '' : ':'+ ENV.fetch('APP_PORT', nil)}#{path}"
+      port = ENV.fetch('APP_PORT', nil)
+      "http://#{ENV.fetch('CDN_HOST', ENV.fetch('APP_HOST', 'localhost'))}#{port.nil? ? '' : ':' + port}#{path}"
     end
 
     private
 
-      def prepend_portal_breadcrumb(crumbs)
-        # Prepend the link to the portal.
-        crumbs.unshift(
-          url: europeana_collections_url,
-          title: t('site.navigation.breadcrumb.return_home'),
-          is_first: true
-        )
-        crumbs
-      end
+    def prepend_portal_breadcrumb(crumbs)
+      # Prepend the link to the portal.
+      crumbs.unshift(
+        url: europeana_collections_url,
+        title: t('site.navigation.breadcrumb.return_home'),
+        is_first: true
+      )
+      crumbs
+    end
   end
 end
