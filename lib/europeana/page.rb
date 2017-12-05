@@ -290,7 +290,6 @@ module Europeana
     end
 
     def chapter_thumbnail
-      return @chapter_thumbnail if @chapter_thumbnail == false
       @chapter_thumbnail ||= begin
         intro_element = page_elements.detect { |element| element.name == 'intro' }
         img_element = page_elements.detect { |element| %w(image rich_image credit_intro).include?(element.name) }
@@ -299,7 +298,7 @@ module Europeana
         elsif img_element
           Europeana::Elements::ChapterThumbnail.new(img_element).to_hash
         else
-          false
+          {}
         end
       end
     end
@@ -363,7 +362,7 @@ module Europeana
     end
 
     def thumbnail(version = :full)
-      if chapter_thumbnail && chapter_thumbnail.key(:image)
+      if chapter_thumbnail&.key(:image)
         return full_url(chapter_thumbnail[:image][version][:url])
       end
       false
