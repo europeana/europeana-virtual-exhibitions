@@ -3,6 +3,8 @@
 module Europeana
   module Mixins
     module ImageVersion
+      include PictureVersionHelper
+
       # Hash that defines which versions of an image are
       # available and will be created on upload
 
@@ -35,11 +37,9 @@ module Europeana
           if image&.essence&.picture.present?
             versions_hash = {}
             VERSIONS.each_pair do |version, settings|
-              options = { image_size: settings[:size], format: settings[:format] }
-              if settings[:crop]
-                options.merge!(crop_size: 1, crop: 1, crop_from: 1, upsample: settings[:upsample] || false)
-              end
-              versions_hash[version] = { url: Rails.application.config.relative_url_root + image.essence.picture_url(options) }
+              picture = image.essence.picture
+              url = version_url(picture_version(picture, settings))
+              versions_hash[version] = { url: url }
             end
             versions_hash
           else
