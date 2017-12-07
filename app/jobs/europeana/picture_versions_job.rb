@@ -4,10 +4,13 @@ class Europeana::PictureVersionsJob < ActiveJob::Base
 
   def perform(id)
     picture = Alchemy::Picture.find(id)
-    Europeana::Elements::Image::VERSIONS.values.compact.each do |settings|
+    Europeana::Elements::Image::VERSIONS.each_pair do |version_key, settings|
       Rails.logger.info "Creating #{JSON.generate(settings)} of picture #{id}"
       next if settings[:size].nil?
-      picture_version(picture, settings).data
+      version = picture_version(picture, settings)
+      # call .data on the version to ensure it is persisted
+      version.data
+      Alchemy::DragonflySignature.create(picture_id: id, version_key: version_key, signature: version.signature)
       true
     end
   end
