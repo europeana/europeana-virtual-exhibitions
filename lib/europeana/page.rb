@@ -72,8 +72,8 @@ module Europeana
         is_chapter_nav: true,
         title: @page.title,
         url: show_page_url(@page.language_code, @page.urlname),
-        label: chapter_thumbnail ? chapter_thumbnail[:label] : false,
-        image: chapter_thumbnail ? chapter_thumbnail[:image] : false
+        label: chapter_thumbnail[:label] || false,
+        image: chapter_thumbnail[:image] || false
       }
     end
 
@@ -291,11 +291,9 @@ module Europeana
 
     def chapter_thumbnail
       @chapter_thumbnail ||= begin
-        intro_element = page_elements.detect { |element| element.name == 'intro' }
-        img_element = page_elements.detect { |element| %w(image rich_image credit_intro).include?(element.name) }
-        if intro_element
+        if intro_element = page_elements.detect { |element| element.name == 'intro' }
           Europeana::Elements::ChapterThumbnail.new(intro_element).to_hash
-        elsif img_element
+        elsif img_element = page_elements.detect { |element| %w(image rich_image credit_intro).include?(element.name) }
           Europeana::Elements::ChapterThumbnail.new(img_element).to_hash
         else
           {}
@@ -358,19 +356,21 @@ module Europeana
         element = Europeana::Elements::Base.build(element).get(:body, :stripped_body)
       end
       return element if element
-      return @page.title
+      @page.title
     end
 
     def thumbnail(version = :full)
-      if chapter_thumbnail&.key(:image)
+      if chapter_thumbnail&.key?(:image)
         return full_url(chapter_thumbnail[:image][version][:url])
       end
       false
     end
 
     def full_url(path)
+      host = ENV.fetch('CDN_HOST', ENV.fetch('APP_HOST', 'localhost'))
+      protocol = host == 'localhost' ? 'http' : 'https'
       port = ENV.fetch('APP_PORT', nil)
-      "http://#{ENV.fetch('CDN_HOST', ENV.fetch('APP_HOST', 'localhost'))}#{port.nil? ? '' : ':' + port}#{path}"
+      "#{protocol}://#{host}#{port.nil? ? '' : ':' + port}#{path}"
     end
 
     private
