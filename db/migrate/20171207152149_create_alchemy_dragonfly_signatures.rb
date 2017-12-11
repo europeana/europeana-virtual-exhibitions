@@ -11,7 +11,7 @@ class CreateAlchemyDragonflySignatures < ActiveRecord::Migration
     end
 
     add_index :alchemy_dragonfly_signatures, %i(picture_id version_key), unique: true,
-              :name => 'index_signatures_on_picture_id_and_versions_key'
+                                                                         name: 'index_signatures_on_picture_id_and_versions_key'
     add_foreign_key :alchemy_dragonfly_signatures, :alchemy_pictures, column: :picture_id
     add_foreign_key :alchemy_dragonfly_signatures, :alchemy_picture_versions, column: :signature, primary_key: 'signature'
   end
