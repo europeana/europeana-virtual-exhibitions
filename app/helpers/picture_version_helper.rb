@@ -11,19 +11,19 @@ module PictureVersionHelper
   def picture_version(picture, settings = {})
     options = []
 
-    if settings[:format] && settings[:format] == 'jpeg'  && settings[:quality]
+    if settings[:format] && settings[:format] == 'jpeg' && settings[:quality]
       options << "-quality #{settings[:quality]}"
     end
 
-    if !settings[:format]
+    unless settings[:format]
       settings[:format] = 'jpeg'
     end
 
-    if settings[:size] && settings[:crop]
-      dragonfly_job = picture.crop(settings[:size], false, false, settings[:upsample] || false)
-    else
-      dragonfly_job = picture.resize(settings[:size])
-    end
+    dragonfly_job = if settings[:size] && settings[:crop]
+                      picture.crop(settings[:size], false, false, settings[:upsample] || false)
+                    else
+                      picture.resize(settings[:size])
+                    end
 
     dragonfly_job = dragonfly_job.encode(settings[:format], options.compact.join(' '))
     Alchemy::PictureVersion.from_cache(dragonfly_job)
@@ -36,8 +36,6 @@ module PictureVersionHelper
   def version_url(version)
     if Dragonfly.app(:alchemy_pictures).datastore.is_a?(Dragonfly::S3DataStore)
       Dragonfly.app(:alchemy_pictures).datastore.url_for(version.file_uuid)
-    else
-      nil
     end
   end
 end
