@@ -38,4 +38,13 @@ module PictureVersionHelper
       Dragonfly.app(:alchemy_pictures).datastore.url_for(version.file_uuid)
     end
   end
+
+  #
+  # @param picture [Alchemy::Picture]
+  # @param version_key [Symbol]
+  # @return Alchemy::PictureVersion
+  def picture_version_from_key(picture, version_key)
+    dragonfly_signature = Alchemy::DragonflySignature.find_by(picture_id: picture.id, version_key: version_key)
+    Alchemy::PictureVersion.find_by_signature(dragonfly_signature.signature) if dragonfly_signature
+  end
 end

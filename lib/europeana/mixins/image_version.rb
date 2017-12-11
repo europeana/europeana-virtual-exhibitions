@@ -38,7 +38,8 @@ module Europeana
             versions_hash = {}
             VERSIONS.each_pair do |version, settings|
               picture = image.essence.picture
-              url = version_url(picture_version(picture, settings))
+              alchemy_picture_version = picture_version_from_key(picture, version) || picture_version(picture, settings)
+              url = version_url(alchemy_picture_version)
               versions_hash[version] = { url: url }
             end
             versions_hash
