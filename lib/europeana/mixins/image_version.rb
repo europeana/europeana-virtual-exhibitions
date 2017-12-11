@@ -35,13 +35,11 @@ module Europeana
         @versions[name.to_sym] ||= begin
           image = @element.content_by_name(name)
           if image&.essence&.picture.present?
-            versions_hash = {}
-            VERSIONS.each_pair do |version, settings|
+            VERSIONS.each_with_object({}) do |(version, settings), memo|
               picture = image.essence.picture
-              url = version_url(picture_version(picture, settings))
-              versions_hash[version] = { url: url }
+              url = picture_version_url(picture_version(picture, settings))
+              memo[version] = { url: url }
             end
-            versions_hash
           else
             false
           end
