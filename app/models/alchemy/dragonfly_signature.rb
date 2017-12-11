@@ -1,4 +1,6 @@
 # frozen_string_literal: true
 
-class Alchemy::DragonflySignature < ActiveRecord::Base
+module Alchemy
+  class DragonflySignature < ActiveRecord::Base
+  end
 end
