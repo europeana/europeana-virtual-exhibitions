@@ -10,7 +10,7 @@ class Europeana::PictureVersionsJob < ActiveJob::Base
       version = picture_version(picture, settings)
       # call .data on the version to ensure it is persisted
       version.data
-      Alchemy::DragonflySignature.create(picture_id: id, version_key: version_key, signature: version.signature)
+      Alchemy::DragonflySignature.find_or_create_by(picture_id: id, version_key: version_key, signature: version.signature)
       true
     end
   end
