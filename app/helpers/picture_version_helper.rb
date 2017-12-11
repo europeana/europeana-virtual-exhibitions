@@ -20,10 +20,10 @@ module PictureVersionHelper
     end
 
     dragonfly_job = if settings[:size] && settings[:crop]
-      picture.crop(settings[:size], false, false, settings[:upsample] || false)
-    else
-      picture.resize(settings[:size])
-    end
+                      picture.crop(settings[:size], false, false, settings[:upsample] || false)
+                    else
+                      picture.resize(settings[:size])
+                    end
 
     dragonfly_job = dragonfly_job.encode(settings[:format], options.compact.join(' '))
     Alchemy::PictureVersion.from_cache(dragonfly_job)
