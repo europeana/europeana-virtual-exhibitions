@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Europeana
   class Page
     include ActionView::Helpers::TagHelper
@@ -17,7 +19,7 @@ module Europeana
         items: non_chapter_elements.map.with_index do |element, index|
           {
             is_last: index == (page_elements.count - 1),
-            is_first: index == 0,
+            is_first: index.zero?,
             is_full_section_element: section_element_count[element.id] == 1
           }.merge(Europeana::Elements::Base.build(element).to_hash)
         end
@@ -66,12 +68,12 @@ module Europeana
     end
 
     def as_chapter
-      {
+      @as_chapter ||= {
         is_chapter_nav: true,
         title: @page.title,
         url: show_page_url(@page.language_code, @page.urlname),
-        label: find_thumbnail ? find_thumbnail[:label] : false,
-        image: find_thumbnail ? find_thumbnail[:image] : false
+        label: chapter_thumbnail[:label] || false,
+        image: chapter_thumbnail[:image] || false
       }
     end
 
@@ -115,7 +117,7 @@ module Europeana
       if exhibition
         return exhibition.self_and_descendants
       end
-      return [@page]
+      [@page]
     end
 
     def title
@@ -287,13 +289,16 @@ module Europeana
       @exhibitions ||= Alchemy::Page.published.visible.where(depth: 2, language_code: @page.language_code).order('lft ASC').all
     end
 
-    def find_thumbnail
-      intro_element = page_elements.detect { |element| element.name == 'intro' }
-      return Europeana::Elements::ChapterThumbnail.new(intro_element).to_hash if intro_element
-
-      img_element = page_elements.detect { |element| %w(image rich_image credit_intro).include?(element.name) }
-      return Europeana::Elements::ChapterThumbnail.new(img_element).to_hash if img_element
-      false
+    def chapter_thumbnail
+      @chapter_thumbnail ||= begin
+        if intro_element = page_elements.detect { |element| element.name == 'intro' }
+          Europeana::Elements::ChapterThumbnail.new(intro_element).to_hash
+        elsif img_element = page_elements.detect { |element| %w(image rich_image credit_intro).include?(element.name) }
+          Europeana::Elements::ChapterThumbnail.new(img_element).to_hash
+        else
+          {}
+        end
+      end
     end
 
     def alternatives
@@ -331,12 +336,12 @@ module Europeana
       content << (@page.robot_index? ? 'index' : 'noindex')
       content << (@page.robot_follow? ? 'follow' : 'nofollow')
 
-      { meta_name: 'robots', content: content.join(',')}
+      { meta_name: 'robots', content: content.join(',') }
     end
 
     def language_alternatives_tags
       ([@page] + alternatives).map do |page|
-        { rel: 'alternate', hreflang: page.language_code, href: show_page_url(page.language_code, page.urlname), title: nil}
+        { rel: 'alternate', hreflang: page.language_code, href: show_page_url(page.language_code, page.urlname), title: nil }
       end
     end
 
@@ -346,35 +351,38 @@ module Europeana
 
     # meta information
     def description
-      element = @page.find_elements(only: ['intro', 'text', 'rich_image']).first
+      element = @page.find_elements(only: %w(intro text rich_image)).first
       if element
         element = Europeana::Elements::Base.build(element).get(:body, :stripped_body)
       end
       return element if element
-      return @page.title
+      @page.title
     end
 
     def thumbnail(version = :full)
-      if find_thumbnail && find_thumbnail.has_key?(:image) && find_thumbnail[:image]
-        return full_url(find_thumbnail[:image][version][:url])
+      if chapter_thumbnail&.key?(:image)
+        return full_url(chapter_thumbnail[:image][version][:url])
       end
       false
     end
 
     def full_url(path)
-      "http://#{ENV.fetch('CDN_HOST', ENV.fetch('APP_HOST', 'localhost'))}#{ENV.fetch('APP_PORT', nil).nil? ? '' : ':'+ ENV.fetch('APP_PORT', nil)}#{path}"
+      host = ENV.fetch('CDN_HOST', ENV.fetch('APP_HOST', 'localhost'))
+      protocol = host == 'localhost' ? 'http' : 'https'
+      port = ENV.fetch('APP_PORT', nil)
+      "#{protocol}://#{host}#{port.nil? ? '' : ':' + port}#{path}"
     end
 
     private
 
-      def prepend_portal_breadcrumb(crumbs)
-        # Prepend the link to the portal.
-        crumbs.unshift(
-          url: europeana_collections_url,
-          title: t('site.navigation.breadcrumb.return_home'),
-          is_first: true
-        )
-        crumbs
-      end
+    def prepend_portal_breadcrumb(crumbs)
+      # Prepend the link to the portal.
+      crumbs.unshift(
+        url: europeana_collections_url,
+        title: t('site.navigation.breadcrumb.return_home'),
+        is_first: true
+      )
+      crumbs
+    end
   end
 end
