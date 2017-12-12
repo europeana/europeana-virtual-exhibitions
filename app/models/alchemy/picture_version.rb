@@ -1,7 +1,6 @@
 class Alchemy::PictureVersion < ActiveRecord::Base
-  has_many :alchemy_dragonfly_signatures,
-          class_name: 'Alchemy::DragonflySignature',foreign_key: :signature, primary_key: :signature,
-          dependent: :destroy
+  has_many :alchemy_dragonfly_signatures, class_name: 'Alchemy::DragonflySignature',foreign_key: :signature,
+                                          primary_key: :signature, dependent: :destroy
   attr_accessor :image
 
   def self.from_cache(image)
