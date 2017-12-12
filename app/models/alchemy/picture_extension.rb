@@ -1,4 +1,6 @@
-Alchemy::Picture.class_eval do
+# frozen_string_literal: true
+
+Alchemy::Picture.module_exec do
   after_save :process_versions
 
   def process_versions
