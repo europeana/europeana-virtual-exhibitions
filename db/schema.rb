@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161222132759) do
+ActiveRecord::Schema.define(version: 20171207152149) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,7 +36,6 @@ ActiveRecord::Schema.define(version: 20161222132759) do
   enable_extension "tablefunc"
   enable_extension "unaccent"
   enable_extension "uuid-ossp"
-  enable_extension "xml2"
 
   create_table "alchemy_attachments", force: :cascade do |t|
     t.string   "name"
@@ -73,6 +72,16 @@ ActiveRecord::Schema.define(version: 20161222132759) do
   end
 
   add_index "alchemy_contents", ["element_id", "position"], name: "index_contents_on_element_id_and_position", using: :btree
+
+  create_table "alchemy_dragonfly_signatures", force: :cascade do |t|
+    t.integer  "picture_id",  null: false
+    t.string   "version_key", null: false
+    t.string   "signature",   null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "alchemy_dragonfly_signatures", ["picture_id", "version_key"], name: "index_signatures_on_picture_id_and_versions_key", unique: true, using: :btree
 
   create_table "alchemy_elements", force: :cascade do |t|
     t.string   "name"
@@ -386,4 +395,6 @@ ActiveRecord::Schema.define(version: 20161222132759) do
 
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
 
+  add_foreign_key "alchemy_dragonfly_signatures", "alchemy_picture_versions", column: "signature", primary_key: "signature"
+  add_foreign_key "alchemy_dragonfly_signatures", "alchemy_pictures", column: "picture_id"
 end

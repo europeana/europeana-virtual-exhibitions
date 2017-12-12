@@ -7,6 +7,7 @@ require 'spec_helper'
 require 'rspec/rails'
 require 'database_cleaner'
 require 'rspec-activemodel-mocks'
+require 'shoulda/matchers'
 
 # Add additional requires below this line. Rails is not loaded until this point!
 require 'capybara_helper'

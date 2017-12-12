@@ -63,6 +63,7 @@ group :test do
   gem 'database_cleaner', '~> 1.3'
   gem 'rspec-rails', '~> 3.0'
   gem 'rspec-activemodel-mocks', '~> 1.0'
+  gem 'shoulda-matchers', '~> 2.5.0'
   gem 'simplecov', require: false
   gem 'selenium-webdriver'
   gem 'phantomjs', require: 'phantomjs/poltergeist'
