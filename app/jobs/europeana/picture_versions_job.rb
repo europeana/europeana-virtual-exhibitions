@@ -8,7 +8,8 @@ class Europeana::PictureVersionsJob < ActiveJob::Base
       Rails.logger.info "Creating #{JSON.generate(settings)} of picture #{id}"
       next if settings[:size].nil?
       version = picture_version(picture, settings)
-      # call .data on the version to ensure it is persisted
+      # call the .data method on the version. This will ensure the image data is available,
+      # or will be generated and persisted to the datastore.
       version.data
       Alchemy::DragonflySignature.find_or_create_by(picture_id: id, version_key: version_key, signature: version.signature)
       true

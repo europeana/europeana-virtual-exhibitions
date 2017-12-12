@@ -81,7 +81,7 @@ ActiveRecord::Schema.define(version: 20171207152149) do
     t.datetime "updated_at",  null: false
   end
 
-  add_index "alchemy_dragonfly_signatures", ["picture_id", "version_key"], name: "index_signatures_on_picture_id_and_version_key", unique: true, using: :btree
+  add_index "alchemy_dragonfly_signatures", ["picture_id", "version_key"], name: "index_signatures_on_picture_id_and_versions_key", unique: true, using: :btree
 
   create_table "alchemy_elements", force: :cascade do |t|
     t.string   "name"

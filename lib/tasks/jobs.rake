@@ -13,7 +13,7 @@ namespace :jobs do
   namespace :pictures do
     desc 'Enqueue picture versions jobs to generate Alchemy::PictureVersions'
     task version_jobs: :environment do
-      Alchemy::Picture.all.each do |picture|
+      Alchemy::Picture.find_each do |picture|
         Europeana::PictureVersionsJob.perform_later(picture.id)
       end
     end
