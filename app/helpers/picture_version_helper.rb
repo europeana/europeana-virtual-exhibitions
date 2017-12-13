@@ -35,7 +35,7 @@ module PictureVersionHelper
   # @param version_picture [Alchemy::PictureVersion]
   def picture_version_url(version)
     if Dragonfly.app(:alchemy_pictures).datastore.is_a?(Dragonfly::S3DataStore)
-      Dragonfly.app(:alchemy_pictures).datastore.url_for(version.file_uuid).sub(/^http:\/\//,'https://')
+      Dragonfly.app(:alchemy_pictures).datastore.url_for(version.file_uuid).sub(%r(^http:\/\/), 'https://')
     end
   end
 
