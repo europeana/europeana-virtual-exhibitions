@@ -38,7 +38,7 @@ module Europeana
             VERSIONS.each_with_object({}) do |(version, settings), memo|
               picture = image.essence.picture
               alchemy_picture_version = picture_version_from_key(picture, version) || picture_version(picture, settings)
-              url = picture_version_url(alchemy_picture_version).sub(/^http:\/\//,'https://')
+              url = picture_version_url(alchemy_picture_version)
               memo[version] = { url: url }
             end
           else
