@@ -15,6 +15,7 @@ require "sprockets/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 require 'europeana/feedback_button'
+require 'europeana/feeds'
 
 module Exhibitions
   class Application < Rails::Application
@@ -41,6 +42,8 @@ module Exhibitions
     config.assets.prefix = '/exhibitions/assets'
     config.active_job.queue_adapter = :delayed_job
     #config.assets.initialize_on_precompile = false
+
+    config.log_level = :debug
 
     config.i18n.enforce_available_locales = false
 

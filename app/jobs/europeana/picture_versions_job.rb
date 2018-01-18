@@ -1,29 +1,17 @@
 class Europeana::PictureVersionsJob < ActiveJob::Base
   queue_as :default
+  include PictureVersionHelper
 
   def perform(id)
-    Europeana::Elements::Image::VERSIONS.values.compact.each do |settings|
+    picture = Alchemy::Picture.find(id)
+    Europeana::Elements::Image::VERSIONS.each_pair do |version_key, settings|
       Rails.logger.info "Creating #{JSON.generate(settings)} of picture #{id}"
       next if settings[:size].nil?
-
-      picture = Alchemy::Picture.find(id)
-      options = []
-
-      if settings[:format] && settings[:format] == 'jpeg'  && settings[:quality]
-        options << "-quality #{settings[:quality]}"
-      end
-
-      if !settings[:format]
-        settings[:format] = "jpeg"
-      end
-
-      if settings[:size] && settings[:crop]
-        picture = picture.crop(settings[:size], false, false, settings[:upsample] || false)
-      else
-        picture = picture.resize(settings[:size])
-      end
-
-      Alchemy::PictureVersion.from_cache(picture.encode(settings[:format], options.join(" "))).data
+      version = picture_version(picture, settings)
+      # call the .data method on the version. This will ensure the image data is available,
+      # or will be generated and persisted to the datastore.
+      version.data
+      Alchemy::DragonflySignature.find_or_create_by(picture_id: id, version_key: version_key, signature: version.signature)
       true
     end
   end

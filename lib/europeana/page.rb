@@ -1,8 +1,13 @@
+# frozen_string_literal: true
+
 module Europeana
   class Page
     include ActionView::Helpers::TagHelper
     include Rails.application.routes.url_helpers
+    include FeedHelper
     include LanguageHelper
+
+    delegate :t, to: ::I18n
 
     def initialize(page)
       @page = page
@@ -10,21 +15,29 @@ module Europeana
 
     def elements
       {
-        present: @page.elements.published.where.not(name: 'chapter').count >= 1,
-        items: @page.elements.published.where.not(name: 'chapter').map.with_index do |element, index|
+        present: non_chapter_elements.count >= 1,
+        items: non_chapter_elements.map.with_index do |element, index|
           {
-            is_last: index == (@page.elements.published.count - 1),
-            is_first: index == 0,
+            is_last: index == (page_elements.count - 1),
+            is_first: index.zero?,
             is_full_section_element: section_element_count[element.id] == 1
           }.merge(Europeana::Elements::Base.build(element).to_hash)
         end
       }
     end
 
+    def page_elements
+      @page_elements ||= @page.elements.published
+    end
+
+    def non_chapter_elements
+      page_elements.reject { |element| element.name == 'chapter' }
+    end
+
     def chapter_elements
       {
         present: true,
-        items: chapters.map.with_index do |page, index|
+        items: chapters.map do |page|
           Europeana::Page.new(page).as_chapter
         end
       }
@@ -32,18 +45,22 @@ module Europeana
 
     def credit_elements
       if !is_credit
-        return { present: false, items: []}
+        return { present: false, items: [] }
       end
       {
         present: true,
-        items: exhibition.self_and_descendants.map.with_index do |page, index|
+        items: exhibition.self_and_descendants.map do |page|
           Europeana::Page.new(page).media
         end.flatten.compact
       }
     end
 
+    def media_elements
+      @media_elements ||= page_elements.select { |page| %w(image rich_image intro image_compare).include?(page.name) }
+    end
+
     def media
-      @page.elements.published.where(name: ['image', 'rich_image', 'intro', 'image_compare']).map do |element|
+      media_elements.map do |element|
         element = Europeana::Elements::Base.build(element)
         next if element.hide_in_credits
         element.to_hash(include_url: url)
@@ -51,12 +68,12 @@ module Europeana
     end
 
     def as_chapter
-      {
+      @as_chapter ||= {
         is_chapter_nav: true,
         title: @page.title,
         url: show_page_url(@page.language_code, @page.urlname),
-        label: find_thumbnail ? find_thumbnail[:label] : false,
-        image: find_thumbnail ? find_thumbnail[:image] : false
+        label: chapter_thumbnail[:label] || false,
+        image: chapter_thumbnail[:image] || false
       }
     end
 
@@ -85,7 +102,7 @@ module Europeana
     end
 
     def exhibition
-      @exhibition ||= (@page.depth == 1 ? @page : @page.self_and_ancestors.where(depth: 2).first)
+      @exhibition ||= @page.depth == 1 ? @page : page_and_ancestors.detect { |page| page.depth == 2 }
     end
 
     def table_of_contents
@@ -93,14 +110,14 @@ module Europeana
     end
 
     def chapters
-      exhibition.descendants
+      @chapters ||= exhibition.descendants
     end
 
     def all_pages
       if exhibition
         return exhibition.self_and_descendants
       end
-      return [@page]
+      [@page]
     end
 
     def title
@@ -112,35 +129,39 @@ module Europeana
     end
 
     def breadcrumbs
-      crumbs = @page.self_and_ancestors.where('depth >= 1').map do |ancestor|
+      crumbs = page_and_ancestors.select { |page| page.depth >= 1 }.map do |ancestor|
         {
           url: show_page_url(@page.language_code, ancestor.urlname),
           title: ancestor.title
         }
       end
       # Set the index page's breadcrumb title to locale specific string.
-      crumbs[0][:title] = ::I18n.t('site.navigation.breadcrumb.exhibitions.return_home')
+      crumbs[0][:title] = t('site.navigation.breadcrumb.exhibitions.return_home')
       crumbs = prepend_portal_breadcrumb crumbs
       crumbs.last[:is_last] = true
       crumbs
     end
 
+    def page_and_ancestors
+      @page_and_ancestors ||= @page.self_and_ancestors
+    end
+
     ##
     # All this logic expcept for the exhibition related
     # elements come from the europeana collection portal.
-    # TODO: This should be refactored to link into the portal's menu data more directly.
+    # TODO: This should be refactored to reuse rather than duplicate the portal code.
     #
     def menu_data
       [
         {
-          text: ::I18n.t('global.navigation.collections'),
+          text: t('global.navigation.collections'),
           is_current: false,
           submenu: {
             items: navigation_global_primary_nav_collections_submenu_items
           }
         },
         {
-          text: ::I18n.t('global.navigation.browse'),
+          text: t('global.navigation.browse'),
           is_current: false,
           submenu: {
             items: navigation_global_primary_nav_browse_submenu_items
@@ -162,8 +183,8 @@ module Europeana
           }
         },
         {
-          url: 'http://blog.europeana.eu/',
-          text: ::I18n.t('global.navigation.blog'),
+          url: cached_feed(Feed.top_nav_feeds('en')[:blog])&.url,
+          text: t('global.navigation.blog'),
           submenu: {
             items: navigation_global_primary_nav_blog_submenu_items
           }
@@ -175,19 +196,7 @@ module Europeana
     # Support method for menu_data, remove upon refactor.
     #
     def navigation_global_primary_nav_collections_submenu_items
-      collection_titles_and_slugs = {
-        '1914-1918' => 'world-war-I',
-        'Art' => 'art',
-        'Fashion' => 'fashion',
-        'Maps and Geography' => 'maps',
-        'Music' => 'music',
-        'Natural History' => 'natural-history',
-        'Photography' => 'photography',
-        'Sport' => 'sport'
-      }
-      collection_titles_and_slugs.map do |title, slug|
-        link_item(title, URI.join(europeana_collections_url, 'collections/', slug), is_current: false)
-      end
+      feed_entry_nav_items(Feed.top_nav_feeds('en')[:collections], 0)
     end
 
     ##
@@ -195,15 +204,15 @@ module Europeana
     #
     def navigation_global_primary_nav_browse_submenu_items
       [
-        link_item(::I18n.t('global.navigation.browse_newcontent'), URI.join(europeana_collections_url, 'explore/newcontent'),
+        link_item(t('global.navigation.browse_newcontent'), URI.join(europeana_collections_url, 'explore/newcontent'),
                   is_current: false),
-        link_item(::I18n.t('global.navigation.browse_colours'), URI.join(europeana_collections_url, 'explore/colours'),
+        link_item(t('global.navigation.browse_colours'), URI.join(europeana_collections_url, 'explore/colours'),
                   is_current: false),
-        link_item(::I18n.t('global.navigation.browse_sources'), URI.join(europeana_collections_url, 'explore/sources'),
+        link_item(t('global.navigation.browse_sources'), URI.join(europeana_collections_url, 'explore/sources'),
                   is_current: false),
-        link_item(::I18n.t('global.navigation.concepts'), URI.join(europeana_collections_url, 'explore/topics'),
+        link_item(t('global.navigation.concepts'), URI.join(europeana_collections_url, 'explore/topics'),
                   is_current: false),
-        link_item(::I18n.t('global.navigation.agents'), URI.join(europeana_collections_url, 'explore/people'),
+        link_item(t('global.navigation.agents'), URI.join(europeana_collections_url, 'explore/people'),
                   is_current: false),
         navigation_global_primary_nav_galleries
       ]
@@ -213,11 +222,9 @@ module Europeana
     # Support method for menu_data, remove upon refactor.
     #
     def navigation_global_primary_nav_blog_submenu_items
-      # Commented out individual blog posts for now to avoid having to port
-      # even more code from the collections portal.
-
-      # feed_items = feed_entry_nav_items(Cache::FeedJob::URLS[:blog][:all], 6)
-      [link_item(::I18n.t('global.navigation.all_blog_posts'), 'http://blog.europeana.eu/', is_morelink: true)]
+      blog_feed_url = Feed.top_nav_feeds('en')[:blog]
+      items = feed_entry_nav_items(blog_feed_url, 6)
+      items << link_item(t('global.navigation.all_blog_posts'), cached_feed(blog_feed_url)&.url, is_morelink: true)
     end
 
     ##
@@ -225,11 +232,22 @@ module Europeana
     #
     def navigation_global_primary_nav_galleries
       {
-        text: ::I18n.t('global.navigation.galleries'),
+        text: t('global.navigation.galleries'),
         is_current: false,
         url: collections_galleries_path,
-        submenu: false
+        submenu:  {
+          items: navigation_global_primary_nav_galleries_submenu_items
+        }
       }
+    end
+
+    ##
+    # Support method for menu_data, remove upon refactor.
+    #
+    def navigation_global_primary_nav_galleries_submenu_items
+      galleries_feed_url = Feed.top_nav_feeds('en')[:galleries]
+      items = feed_entry_nav_items(galleries_feed_url, 6)
+      items << link_item(t('global.navigation.all_galleries'), cached_feed(galleries_feed_url)&.url, is_morelink: true)
     end
 
     ##
@@ -237,6 +255,15 @@ module Europeana
     #
     def link_item(text, url, options = {})
       { text: text, url: url, submenu: false }.merge(options)
+    end
+
+    ##
+    # Support method for menu_date, remove upon refactor.
+    #
+    def feed_entry_nav_items(url, max)
+      feed_entries(url)[0..(max - 1)].map do |item|
+        link_item(CGI.unescapeHTML(item.title), CGI.unescapeHTML(item.url))
+      end
     end
 
     ##
@@ -259,20 +286,25 @@ module Europeana
     end
 
     def exhibitions
-      Alchemy::Page.published.visible.where(depth: 2, language_code: @page.language_code).order("lft ASC").all
+      @exhibitions ||= Alchemy::Page.published.visible.where(depth: 2, language_code: @page.language_code).order('lft ASC').all
     end
 
-    def find_thumbnail
-      element = @page.elements.published.where(name: 'intro').first
-      return Europeana::Elements::ChapterThumbnail.new(element).to_hash if element
-
-      element = @page.elements.published.where(name: ['image', 'rich_image', 'credit_intro']).first
-      return Europeana::Elements::ChapterThumbnail.new(element).to_hash if element
-      false
+    def chapter_thumbnail
+      @chapter_thumbnail ||= begin
+        if intro_element = page_elements.detect { |element| element.name == 'intro' }
+          Europeana::Elements::ChapterThumbnail.new(intro_element).to_hash
+        elsif img_element = page_elements.detect { |element| %w(image rich_image credit_intro).include?(element.name) }
+          Europeana::Elements::ChapterThumbnail.new(img_element).to_hash
+        else
+          {}
+        end
+      end
     end
 
     def alternatives
-      Alchemy::Page.published.where.not(language_code: @page.language_code).where(urlname: @page.urlname).all
+      @alternatives ||= begin
+        Alchemy::Page.published.where.not(language_code: @page.language_code).where(urlname: @page.urlname).all
+      end
     end
 
     def section_element_count
@@ -280,7 +312,7 @@ module Europeana
         @sections = []
         current_index = 0
         @sections[current_index] = []
-        @page.elements.published.each do | element |
+        page_elements.each do |element|
           if element.name != 'section'
             @sections[current_index] << element.id
           else
@@ -304,12 +336,12 @@ module Europeana
       content << (@page.robot_index? ? 'index' : 'noindex')
       content << (@page.robot_follow? ? 'follow' : 'nofollow')
 
-      { meta_name: 'robots', content: content.join(',')}
+      { meta_name: 'robots', content: content.join(',') }
     end
 
     def language_alternatives_tags
       ([@page] + alternatives).map do |page|
-        { rel: 'alternate', hreflang: page.language_code, href: show_page_url(page.language_code, page.urlname), title: nil}
+        { rel: 'alternate', hreflang: page.language_code, href: show_page_url(page.language_code, page.urlname), title: nil }
       end
     end
 
@@ -319,35 +351,38 @@ module Europeana
 
     # meta information
     def description
-      element = @page.find_elements(only: ['intro', 'text', 'rich_image']).first
+      element = @page.find_elements(only: %w(intro text rich_image)).first
       if element
         element = Europeana::Elements::Base.build(element).get(:body, :stripped_body)
       end
       return element if element
-      return @page.title
+      @page.title
     end
 
     def thumbnail(version = :full)
-      if find_thumbnail && find_thumbnail.has_key?(:image) && find_thumbnail[:image]
-        return full_url(find_thumbnail[:image][version][:url])
+      if chapter_thumbnail&.key?(:image)
+        return full_url(chapter_thumbnail[:image][version][:url])
       end
       false
     end
 
     def full_url(path)
-      "http://#{ENV.fetch('CDN_HOST', ENV.fetch('APP_HOST', 'localhost'))}#{ENV.fetch('APP_PORT', nil).nil? ? '' : ':'+ ENV.fetch('APP_PORT', nil)}#{path}"
+      host = ENV.fetch('CDN_HOST', ENV.fetch('APP_HOST', 'localhost'))
+      protocol = host == 'localhost' ? 'http' : 'https'
+      port = ENV.fetch('APP_PORT', nil)
+      "#{protocol}://#{host}#{port.nil? ? '' : ':' + port}#{path}"
     end
 
     private
 
-      def prepend_portal_breadcrumb(crumbs)
-        # Prepend the link to the portal.
-        crumbs.unshift(
-          url: europeana_collections_url,
-          title: ::I18n.t('site.navigation.breadcrumb.return_home'),
-          is_first: true
-        )
-        crumbs
-      end
+    def prepend_portal_breadcrumb(crumbs)
+      # Prepend the link to the portal.
+      crumbs.unshift(
+        url: europeana_collections_url,
+        title: t('site.navigation.breadcrumb.return_home'),
+        is_first: true
+      )
+      crumbs
+    end
   end
 end

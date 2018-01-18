@@ -3,15 +3,18 @@ picture:
   image_file_height: 1
   name: 'image'
   image_file_name: 'image.png'
+  image_file_uid: 'd421f166-48a3-40e8-8b72-2c72ec874eb1/image.jpg'
 
 landscape_picture:
   image_file_width: 700
   image_file_height: 400
   name: 'landscape image'
   image_file_name: 'placeholder-700x400.png'
+  image_file_uid: 'd421f166-48a3-40e8-8b72-2c72ec874eb1/placeholder-700x400.png'
 
 portrait_picture:
   image_file_width: 400
   image_file_height: 700
   name: 'portrait image'
   image_file_name: 'placeholder-400x700.png'
+  image_file_uid: 'd421f166-48a3-40e8-8b72-2c72ec874eb1/placeholder-400x700.png'
