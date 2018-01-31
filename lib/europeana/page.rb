@@ -262,7 +262,7 @@ module Europeana
     #
     def feed_entry_nav_items(url, max)
       feed_entries(url)[0..(max - 1)].map do |item|
-        link_item(CGI.unescapeHTML(item.title), CGI.unescapeHTML(item.url))
+        link_item(CGI.unescapeHTML(item.title || ''), CGI.unescapeHTML(item.url || ''))
       end
     end
 
