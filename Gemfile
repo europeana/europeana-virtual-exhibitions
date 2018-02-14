@@ -48,7 +48,7 @@ end
 
 group :development, :test, :profiling do
   gem 'dotenv-rails', '~> 2.0'
-  gem 'rubocop', '0.39.0', require: false # only update when Hound does
+  gem 'rubocop', require: false
   gem 'spring-commands-rspec'
 end
 

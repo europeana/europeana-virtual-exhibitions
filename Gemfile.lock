@@ -540,7 +540,7 @@ DEPENDENCIES
   rest-client (>= 1.8.0)
   rspec-activemodel-mocks (~> 1.0)
   rspec-rails (~> 3.0)
-  rubocop (= 0.39.0)
+  rubocop
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   selenium-webdriver
