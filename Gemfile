@@ -12,7 +12,7 @@ gem 'country_select'
 gem 'delayed_job_active_record'
 gem 'dragonfly-s3_data_store'
 gem 'dragonfly-swift_data_store', github: 'europeana/dragonfly-swift-data-store', tag: 'v0.1.0'
-gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', ref: 'ee1338e'
+gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', branch: 'develop'
 gem 'europeana-i18n', github: 'europeana/europeana-i18n-ruby', branch: 'develop'
 gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'
@@ -29,7 +29,7 @@ gem 'stache', github: 'europeana/stache', branch: 'europeana-styleguide' # until
 gem 'therubyracer', platforms: :ruby
 gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
-gem 'europeana-feedback-button', '0.0.4'
+gem 'europeana-feedback-button', '0.0.5'
 gem 'europeana-feeds', '0.0.2'
 
 group :profiling do
