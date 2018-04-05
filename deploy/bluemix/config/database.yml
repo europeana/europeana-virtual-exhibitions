@@ -9,3 +9,4 @@ postgres_url = service_config['credentials']['uri']
 %>
 production:
   url: "<%= postgres_url %>"
+  pool: 32
