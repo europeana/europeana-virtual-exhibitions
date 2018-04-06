@@ -49,7 +49,7 @@ module Europeana
         let(:mustache_data) { Europeana::Elements::Image.new(alchemy_element).to_hash }
 
         it 'has all the required image versions' do
-          expect(mustache_data[:image].keys).to eq([:original, :full, :fullx2, :half, :halfx2, :small, :smallx2, :thumbnail, :thumbnailx2, :thumbnail_png, :facebook, :twitter])
+          expect(mustache_data[:image].keys).to eq([:original, :full, :fullx2, :half, :thumbnail])
         end
 
         it 'has a correctly formatted path for "full" version' do
