@@ -28,4 +28,7 @@ env:
     - FEEDBACK_MAIL_TO="example@example.org"
 services:
   - postgresql
-script: "bundle exec rspec"
+script:
+  - "bundle exec rspec"
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
