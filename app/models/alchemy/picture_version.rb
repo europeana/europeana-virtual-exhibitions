@@ -8,12 +8,8 @@ module Alchemy
     before_destroy :remove_from_store
 
     def self.from_cache(image)
-      record = find_by_signature(image.signature)
-      if record.nil?
-        Alchemy::PictureVersion.new(image: image)
-      else
+      (find_by_signature(image.signature) || new).tap do |record|
         record.image = image
-        record
       end
     end
 
