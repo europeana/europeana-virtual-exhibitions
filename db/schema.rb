@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171207152149) do
+ActiveRecord::Schema.define(version: 20180418151531) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -395,6 +395,5 @@ ActiveRecord::Schema.define(version: 20171207152149) do
 
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
 
-  add_foreign_key "alchemy_dragonfly_signatures", "alchemy_picture_versions", column: "signature", primary_key: "signature"
   add_foreign_key "alchemy_dragonfly_signatures", "alchemy_pictures", column: "picture_id"
 end
