@@ -58,7 +58,6 @@ module Alchemy
           # if type != "gif" && image.ext == 'gif'
           #   options << "-flatten"
           # end
-          image = image.encode(type, options.join(' '))
           render text: image.encode(type, options.join(' ')).data
         end
       end
