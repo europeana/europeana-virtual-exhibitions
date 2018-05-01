@@ -20,7 +20,9 @@ module Europeana
         full: { size: '1600x1600', format: 'jpeg', quality: 85 },
         fullx2: { size: '3200x3200', format: 'jpeg', quality: 85 },
         half: { size: '800x800', format: 'jpeg', quality: 85 },
-        thumbnail: { size: '400x400', format: 'jpeg', quality: 85 }
+        thumbnail: { size: '400x400', format: 'jpeg', quality: 85 },
+        facebook: { size: '1200x630', format: 'jpeg', quality: 85, crop: true, upsample: true },
+        twitter: { size: '750x560', format: 'jpeg', quality: 85, crop: true, upsample: true }
       }.freeze
 
       def versions(name = 'image')
