@@ -361,7 +361,7 @@ module Europeana
 
     def thumbnail(version = :full)
       if chapter_thumbnail&.key?(:image)
-        return full_url(chapter_thumbnail[:image][version][:url])
+        return chapter_thumbnail[:image][version][:url]
       end
       false
     end
