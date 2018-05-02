@@ -30,13 +30,22 @@ module PictureVersionHelper
   end
 
   ##
-  # Looks up the remote url for a Alchemy::PictureVersion, only works for S3DataStore.
+  # Looks up the remote url for a Alchemy::PictureVersion.
   #
   # @param version_picture [Alchemy::PictureVersion]
   def picture_version_url(version)
     if Dragonfly.app(:alchemy_pictures).datastore.is_a?(Dragonfly::S3DataStore)
       Dragonfly.app(:alchemy_pictures).datastore.url_for(version.file_uuid).sub(%r(\Ahttp://), 'https://')
+    else
+      full_url(version.file_uuid)
     end
+  end
+
+  def full_url(file_uuid)
+    host = ENV.fetch('CDN_HOST', ENV.fetch('APP_HOST', 'localhost'))
+    protocol = host == 'localhost' ? 'http' : 'https'
+    port = ENV.fetch('APP_PORT', nil)
+    "#{protocol}://#{host}#{port.nil? ? '' : ':' + port}#{file_uuid}"
   end
 
   #

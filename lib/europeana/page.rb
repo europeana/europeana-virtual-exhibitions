@@ -366,13 +366,6 @@ module Europeana
       false
     end
 
-    def full_url(path)
-      host = ENV.fetch('CDN_HOST', ENV.fetch('APP_HOST', 'localhost'))
-      protocol = host == 'localhost' ? 'http' : 'https'
-      port = ENV.fetch('APP_PORT', nil)
-      "#{protocol}://#{host}#{port.nil? ? '' : ':' + port}#{path}"
-    end
-
     private
 
     def prepend_portal_breadcrumb(crumbs)
