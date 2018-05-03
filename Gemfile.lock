@@ -17,7 +17,7 @@ GIT
 
 GIT
   remote: git://github.com/europeana/europeana-styleguide-ruby.git
-  revision: e5bbda8cf677da13e83bbc7241841ed490404e08
+  revision: ba0e8ac178a7aada2619bd4ee934cd2921238fd6
   branch: develop
   specs:
     europeana-styleguide (0.3.0)
@@ -297,7 +297,7 @@ GEM
       i18n (>= 0.6.4, < 1.0)
     multi_json (1.12.2)
     multipart-post (2.0.0)
-    mustache (1.0.3)
+    mustache (1.0.5)
     netrc (0.11.0)
     newrelic_rpm (4.6.0.338)
     nokogiri (1.8.2)
