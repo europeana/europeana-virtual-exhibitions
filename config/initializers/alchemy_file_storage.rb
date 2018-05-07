@@ -38,7 +38,7 @@ unless Rails.env.test?
       datastore :s3, { root_path: ENV.fetch('S3_IMAGE_PREFIX', '') }.merge(s3_defaults)
     end
     Dragonfly.app(:alchemy_attachments).configure do
-      datastore :s3, { root_path: ENV.fetch('S3_ATTACHEMENT_PREFIX', '') }.merge(s3_defaults)
+      datastore :s3, { root_path: ENV.fetch('S3_ATTACHMENT_PREFIX', '') }.merge(s3_defaults)
     end
   elsif filestorage_provider == 'OpenStack'
 
