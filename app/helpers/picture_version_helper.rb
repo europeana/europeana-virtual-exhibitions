@@ -35,10 +35,18 @@ module PictureVersionHelper
   # @param version_picture [Alchemy::PictureVersion]
   def picture_version_url(version)
     if Dragonfly.app(:alchemy_pictures).datastore.is_a?(Dragonfly::S3DataStore)
-      Dragonfly.app(:alchemy_pictures).datastore.url_for(version.file_uuid).sub(%r(\Ahttp://), 'https://')
+      if ENV.fetch('S3_PUBLIC_URL', false)
+        ENV.fetch('S3_PUBLIC_URL') + '/' + full_path(version.file_uuid)
+      else
+        ENV.fetch('S3_ENDPOINT') + '/' + ENV.fetch('S3_BUCKET') + '/' + full_path(version.file_uuid)
+      end
     else
       full_url(version.file_uuid)
     end
+  end
+
+  def full_path(file_uuid)
+    File.join *[Dragonfly.app(:alchemy_pictures).datastore.root_path, file_uuid].compact
   end
 
   def full_url(file_uuid)
