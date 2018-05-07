@@ -46,7 +46,7 @@ module PictureVersionHelper
   end
 
   def full_path(file_uuid)
-    File.join *[Dragonfly.app(:alchemy_pictures).datastore.root_path, file_uuid].compact
+    File.join(*[Dragonfly.app(:alchemy_pictures).datastore.root_path, file_uuid].compact)
   end
 
   def full_url(file_uuid)
