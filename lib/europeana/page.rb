@@ -361,16 +361,9 @@ module Europeana
 
     def thumbnail(version = :full)
       if chapter_thumbnail&.key?(:image)
-        return full_url(chapter_thumbnail[:image][version][:url])
+        return chapter_thumbnail[:image][version][:url]
       end
       false
-    end
-
-    def full_url(path)
-      host = ENV.fetch('CDN_HOST', ENV.fetch('APP_HOST', 'localhost'))
-      protocol = host == 'localhost' ? 'http' : 'https'
-      port = ENV.fetch('APP_PORT', nil)
-      "#{protocol}://#{host}#{port.nil? ? '' : ':' + port}#{path}"
     end
 
     private
