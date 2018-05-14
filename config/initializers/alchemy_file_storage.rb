@@ -32,7 +32,7 @@ s3_defaults = {
 filestorage_provider = ENV.fetch('FILE_PROVIDER', 'file')
 
 unless Rails.env.test?
-  if filestorage_provider == 'AWS'
+  if filestorage_provider == 'S3'
     Dragonfly.app(:alchemy_pictures).configure do
       plugin :imagemagick
       datastore :s3, { root_path: ENV.fetch('S3_IMAGE_PREFIX', '') }.merge(s3_defaults)
