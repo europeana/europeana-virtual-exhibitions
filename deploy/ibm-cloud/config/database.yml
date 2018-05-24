@@ -1,0 +1,14 @@
+<%
+if ENV.key?('POSTGRES_URI')
+  # Prefer the redis URI from the POSTGRES_URI env var if specified.
+  uri = ENV['POSTGRES_URI']
+elsif ENV.key?('VCAP_SERVICES')
+  services = JSON.parse(ENV['VCAP_SERVICES'])
+  postgres_config = services['compose-for-postgresql']
+  uri = postgres_config.first['credentials']['uri'] unless postgres_config.nil?
+end
+fail 'No Postgres service found in environment.' unless defined?(uri) && uri.present?
+%>
+production:
+  url: "<%= uri %>"
+  pool: 20 # Puma defaults to 16 threads per instance. +4 for leeway.
