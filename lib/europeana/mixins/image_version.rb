@@ -31,11 +31,16 @@ module Europeana
           image = @element.content_by_name(name)
           if image&.essence&.picture.present?
             picture = image.essence.picture
-            VERSIONS.each_with_object({}) do |(version, settings), memo|
-              alchemy_picture_version = picture_version_from_key(picture, version) || picture_version(picture, settings)
-              url = picture_version_url(alchemy_picture_version)
-              memo[version] = { url: url }
+            versions_file_uuids_pairs = Alchemy::PictureVersion.joins("INNER JOIN alchemy_dragonfly_signatures on alchemy_picture_versions.signature = alchemy_dragonfly_signatures.signature").where(alchemy_dragonfly_signatures: {picture_id: picture.id, version_key: VERSIONS.keys}).pluck('alchemy_dragonfly_signatures.version_key', :file_uuid)
+            return_versions = versions_file_uuids_pairs.map { |version_key, file_uuid| [version_key.to_sym, { url: picture_version_url(file_uuid) }] }.to_h
+            puts return_versions.inspect
+            missing_versions = VERSIONS.keys - return_versions.keys
+            VERSIONS.slice(missing_versions).each_with_object(return_versions) do |(version_key, settings), memo|
+              alchemy_picture_version = picture_version(picture, settings)
+              url = picture_version_url(alchemy_picture_version.file_uuid)
+              memo[version_key] = { url: url }
             end
+            return_versions
           else
             false
           end
