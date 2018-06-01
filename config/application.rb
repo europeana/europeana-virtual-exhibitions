@@ -49,9 +49,20 @@ module Exhibitions
 
     # Load Redis config from config/redis.yml, if it exists
     config.cache_store = begin
-      redis_config = Rails.application.config_for(:redis).symbolize_keys
-      fail RuntimeError unless redis_config.present?
-      [:redis_store, redis_config[:url]]
+        redis_config = Rails.application.config_for(:redis).deep_symbolize_keys
+        fail RuntimeError unless redis_config.present?
+
+        opts = {}
+        if redis_config[:url].start_with?('rediss://')
+          opts[:ssl] = :true
+          opts[:scheme] = 'rediss'
+        end
+        if redis_config[:ssl_params]
+          opts[:ssl_params] = {
+            ca_file: redis_config[:ssl_params][:ca_file]
+          }
+        end
+        [:redis_store, redis_config[:url], opts]
     rescue RuntimeError => e
       :null_store
     end
