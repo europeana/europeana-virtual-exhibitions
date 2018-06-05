@@ -1,5 +1,5 @@
 <%
-if ENV.key?('POSTGRES_URI')
+if ENV.key?('POSTGRES_URI') && ENV['POSTGRES_URI'].present?
   # Prefer the redis URI from the POSTGRES_URI env var if specified.
   uri = ENV['POSTGRES_URI']
 elsif ENV.key?('VCAP_SERVICES')

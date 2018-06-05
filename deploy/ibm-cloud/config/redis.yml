@@ -1,5 +1,5 @@
 <%
-if ENV.key?('REDIS_URI')
+if ENV.key?('REDIS_URI') && ENV['REDIS_URI'].present?
   # Prefer the redis URI from the REDIS_URI env var if specified.
   uri = ENV['REDIS_URI']
 elsif ENV.key?('VCAP_SERVICES')
