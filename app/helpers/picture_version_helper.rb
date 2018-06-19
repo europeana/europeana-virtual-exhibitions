@@ -33,15 +33,15 @@ module PictureVersionHelper
   # Looks up the remote url for a Alchemy::PictureVersion.
   #
   # @param version_picture [Alchemy::PictureVersion]
-  def picture_version_url(version)
+  def picture_version_url(file_uuid)
     if Dragonfly.app(:alchemy_pictures).datastore.is_a?(Dragonfly::S3DataStore)
       if ENV.fetch('S3_PUBLIC_URL', false)
-        ENV.fetch('S3_PUBLIC_URL') + '/' + full_path(version.file_uuid)
+        ENV.fetch('S3_PUBLIC_URL') + '/' + full_path(file_uuid)
       else
-        ENV.fetch('S3_ENDPOINT') + '/' + ENV.fetch('S3_BUCKET') + '/' + full_path(version.file_uuid)
+        ENV.fetch('S3_ENDPOINT') + '/' + ENV.fetch('S3_BUCKET') + '/' + full_path(file_uuid)
       end
     else
-      full_url(version.file_uuid)
+      full_url(file_uuid)
     end
   end
 
@@ -65,3 +65,4 @@ module PictureVersionHelper
     Alchemy::PictureVersion.find_by_signature(dragonfly_signature.signature) if dragonfly_signature
   end
 end
+
