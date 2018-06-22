@@ -31,20 +31,17 @@ module Europeana
           image = @element.content_by_name(name)
           if image&.essence&.picture.present?
             picture = image.essence.picture
-            versions_file_uuids_pairs = Alchemy::PictureVersion.joins("INNER JOIN alchemy_dragonfly_signatures on alchemy_picture_versions.signature = alchemy_dragonfly_signatures.signature").where(alchemy_dragonfly_signatures: {picture_id: picture.id, version_key: VERSIONS.keys}).pluck('alchemy_dragonfly_signatures.version_key', :file_uuid)
-            return_versions = versions_file_uuids_pairs.map { |version_key, file_uuid| [version_key.to_sym, { url: picture_version_url(file_uuid) }] }.to_h
-            puts return_versions.inspect
-            missing_versions = VERSIONS.keys - return_versions.keys
-            VERSIONS.slice(missing_versions).each_with_object(return_versions) do |(version_key, settings), memo|
-              alchemy_picture_version = picture_version(picture, settings)
-              url = picture_version_url(alchemy_picture_version.file_uuid)
-              memo[version_key] = { url: url }
-            end
-            return_versions
+            version_uuid_pairs(picture.id).map { |key, uuid| [key.to_sym, { url: picture_version_url(uuid) }] }.to_h
           else
             false
           end
         end
+      end
+
+      def version_uuid_pairs(picture_id)
+        signature_criteria = { picture_id: picture_id, version_key: VERSIONS.keys }
+        Alchemy::PictureVersion.with_signature.where(alchemy_dragonfly_signatures: signature_criteria).
+          pluck('alchemy_dragonfly_signatures.version_key', :file_uuid)
       end
     end
   end
