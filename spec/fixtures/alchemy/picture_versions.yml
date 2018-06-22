@@ -1,0 +1,27 @@
+original_picture_version:
+  signature: 'abcdefg1'
+  file_uuid: 'versions/abcdefg1/image.png'
+
+full_picture_version:
+  signature: 'abcdefg2'
+  file_uuid: 'versions/abcdefg2/image.png'
+
+fullx2_picture_version:
+  signature: 'abcdefg3'
+  file_uuid: 'versions/abcdefg3/image.png'
+
+half_picture_version:
+  signature: 'abcdefg4'
+  file_uuid: 'versions/abcdefg4/image.png'
+
+thumbnail_picture_version:
+  signature: 'abcdefg5'
+  file_uuid: 'versions/abcdefg5/image.png'
+
+facebook_picture_version:
+  signature: 'abcdefg6'
+  file_uuid: 'versions/abcdefg6/image.png'
+
+twitter_picture_version:
+  signature: 'abcdefg7'
+  file_uuid: 'versions/abcdefg7/image.png'
