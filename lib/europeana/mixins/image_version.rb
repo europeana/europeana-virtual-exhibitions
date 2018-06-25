@@ -31,15 +31,26 @@ module Europeana
           image = @element.content_by_name(name)
           if image&.essence&.picture.present?
             picture = image.essence.picture
-            VERSIONS.each_with_object({}) do |(version, settings), memo|
-              alchemy_picture_version = picture_version_from_key(picture, version) || picture_version(picture, settings)
-              url = picture_version_url(alchemy_picture_version)
-              memo[version] = { url: url }
-            end
+            version_uuid_pairs(picture.id).map { |key, uuid| [key.to_sym, { url: picture_version_url(uuid) }] }.to_h
           else
             false
           end
         end
+      end
+
+      ##
+      # Queries the Database for file_uuids of picture versions.
+      # Since the alchemy_picture_versions table doesn't contain version keys,
+      # this method queries by joining it to the alchemy_dragonfly_siganture table which does.
+      # Returns the plucked keys and file_uuids as an array of arrays.
+      # [['key1','file_uuid1'],['key2','file_uuid2'],...]
+      #
+      # @param picture_id [#to_s] The id of the picture whose version's file_uuids will be returned
+      # @return Array<Array<String, String>>
+      def version_uuid_pairs(picture_id)
+        signature_criteria = { picture_id: picture_id, version_key: VERSIONS.keys }
+        Alchemy::PictureVersion.with_signature.where(alchemy_dragonfly_signatures: signature_criteria).
+          pluck('alchemy_dragonfly_signatures.version_key', :file_uuid)
       end
     end
   end

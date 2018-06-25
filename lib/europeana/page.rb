@@ -360,7 +360,7 @@ module Europeana
     end
 
     def thumbnail(version = :full)
-      if chapter_thumbnail&.key?(:image)
+      if chapter_thumbnail&.key?(:image) && chapter_thumbnail[:image].present?
         return chapter_thumbnail[:image][version][:url]
       end
       false
