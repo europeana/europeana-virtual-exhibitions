@@ -1,0 +1,34 @@
+original_signature:
+  picture: picture
+  signature: 'abcdefg1'
+  version_key: 'original'
+
+full_signature:
+  picture: picture
+  signature: 'abcdefg2'
+  version_key: 'full'
+
+fullx2_signature:
+  picture: picture
+  signature: 'abcdefg3'
+  version_key: 'fullx2'
+
+half_signature:
+  picture: picture
+  signature: 'abcdefg4'
+  version_key: 'half'
+
+thumbnail_signature:
+  picture: picture
+  signature: 'abcdefg5'
+  version_key: 'thumbnail'
+
+facebook_signature:
+  picture: picture
+  signature: 'abcdefg6'
+  version_key: 'facebook'
+
+twitter_signature:
+  picture: picture
+  signature: 'abcdefg7'
+  version_key: 'twitter'

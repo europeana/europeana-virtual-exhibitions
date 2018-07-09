@@ -3,6 +3,7 @@
 module Alchemy
   class PictureVersion < ActiveRecord::Base
     has_one :dragonfly_signature, foreign_key: :signature, primary_key: :signature
+    scope :with_signature, -> { joins(:dragonfly_signature) }
     attr_writer :image
 
     before_destroy :remove_from_store
