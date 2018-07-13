@@ -100,7 +100,7 @@ module Alchemy
       end
 
       def format_page(page)
-        return false if !page.present? || page.public == false
+        return false if !page.present? || page.public? == false
         {
           title: page.title,
           url: show_page_url(page.language.language_code, page.urlname)

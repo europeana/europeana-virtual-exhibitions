@@ -1,6 +1,9 @@
 # This migration comes from acts_as_taggable_on_engine (originally 1)
 class ActsAsTaggableOnMigration < ActiveRecord::Migration
   def self.up
+    # inserted by Alchemy CMS upgrader
+    return if table_exists?(:tags)
+
     create_table :tags do |t|
       t.string :name
     end
