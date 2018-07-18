@@ -1,23 +1,29 @@
 text_element:
   name: 'text'
   public: true
+  page: root
 
 richtext_element:
   name: 'text'
   public: true
+  page: root
 
 quote_element:
   name: 'quote'
   public: true
+  page: root
 
 image_element:
   name: 'image'
   public: true
+  page: root
 
 landscape_image_element:
   name: 'image'
   public: true
+  page: root
 
 portrait_image_element:
   name: 'image'
   public: true
+  page: root

@@ -1,6 +1,9 @@
 # This migration comes from acts_as_taggable_on_engine (originally 2)
 class AddMissingUniqueIndices < ActiveRecord::Migration
   def self.up
+    # inserted by Alchemy CMS upgrader
+    return if index_exists?(:tags, :name)
+
     add_index :tags, :name, unique: true
 
     remove_index :taggings, :tag_id

@@ -11,7 +11,7 @@ language_root_page_de:
   lft: 2
   rgt: 15
   title: 'startseite'
-  public: true
+  public_on: <%= Date.today.strftime("%Y-%m-%d") %>
   visible: true
   language_code: 'de'
   language_root: true
@@ -26,7 +26,7 @@ language_root_page_en:
   lft: 16
   rgt: 21
   title: 'startseite'
-  public: true
+  public_on: <%= Date.today.strftime("%Y-%m-%d") %>
   visible: true
   language_code: 'en'
   language_root: true
@@ -41,7 +41,7 @@ language_root_page_fr:
   lft: 22
   rgt: 25
   title: 'startseite'
-  public: true
+  public_on: <%= Date.today.strftime("%Y-%m-%d") %>
   visible: true
   language_code: 'fr'
   language_root: true
@@ -56,7 +56,7 @@ exhibition_page:
   depth: 2
   lft: 3
   rgt: 4
-  public: true
+  public_on: <%= Date.today.strftime("%Y-%m-%d") %>
   visible: true
   language_code: 'de'
   parent: language_root_page_de
@@ -69,7 +69,7 @@ complex_exhibition_root:
   depth: 2
   lft: 5
   rgt: 8
-  public: true
+  public_on: <%= Date.today.strftime("%Y-%m-%d") %>
   visible: true
   language_code: 'de'
   parent: language_root_page_de
@@ -82,7 +82,7 @@ complex_exhibition_child:
   depth: 3
   lft: 6
   rgt: 7
-  public: true
+  public_on: <%= Date.today.strftime("%Y-%m-%d") %>
   visible: false
   language_code: 'de'
   parent: complex_exhibition_root
@@ -96,7 +96,7 @@ english_music_page:
   depth: 2
   lft: 17
   rgt: 18
-  public: true
+  public_on: <%= Date.today.strftime("%Y-%m-%d") %>
   visible: true
   language_code: 'en'
   language: english
@@ -110,7 +110,7 @@ german_music_page:
   depth: 2
   lft: 9
   rgt: 10
-  public: true
+  public_on: <%= Date.today.strftime("%Y-%m-%d") %>
   visible: true
   language_code: 'de'
   language: german
@@ -125,7 +125,7 @@ sample_page_de:
   depth: 2
   lft: 11
   rgt: 12
-  public: true
+  public_on: <%= Date.today.strftime("%Y-%m-%d") %>
   visible: true
   language_code: 'de'
   language: german
@@ -139,7 +139,7 @@ sample_page_en:
   depth: 2
   lft: 19
   rgt: 20
-  public: true
+  public_on: <%= Date.today.strftime("%Y-%m-%d") %>
   visible: true
   language_code: 'en'
   language: english
@@ -153,7 +153,7 @@ sample_page_fr:
   depth: 2
   lft: 23
   rgt: 24
-  public: true
+  public_on: <%= Date.today.strftime("%Y-%m-%d") %>
   visible: true
   language_code: 'fr'
   language: french
