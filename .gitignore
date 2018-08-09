@@ -30,6 +30,14 @@ config/initializers/secret_token.rb
 # Ignore coverage
 /coverage
 
+# Ignore extracted javascript translation files.
+/app/assets/javascripts/i18n-js/*
+
 public/portal/*
+
+# Ignore copmiled assets.
+/public/exhibitions/assets/*
+/public/javascripts/*
+
 
 vendor/bundle/
