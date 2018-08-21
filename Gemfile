@@ -62,7 +62,6 @@ group :test do
   gem 'rspec-activemodel-mocks'
   gem 'shoulda-matchers'
   gem 'simplecov', require: false
-  gem 'selenium-webdriver'
   gem 'phantomjs', require: 'phantomjs/poltergeist'
   gem 'poltergeist'
 end
