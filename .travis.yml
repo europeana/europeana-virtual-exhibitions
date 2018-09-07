@@ -7,8 +7,6 @@ rvm:
 bundler_args: --without development:production:doc:localeapp
 cache:
   bundler: true
-  directories:
-    - "travis_phantomjs"
 before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
   - bundle exec rake db:migrate
