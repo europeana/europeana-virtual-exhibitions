@@ -58,12 +58,12 @@ end
 group :test do
   gem 'capybara'
   gem 'database_cleaner'
+  gem 'geckodriver-helper'
   gem 'rspec-rails'
   gem 'rspec-activemodel-mocks'
   gem 'shoulda-matchers'
   gem 'simplecov', require: false
-  gem 'phantomjs', require: 'phantomjs/poltergeist'
-  gem 'poltergeist'
+  gem 'selenium-webdriver'
 end
 
 group :localeapp do
