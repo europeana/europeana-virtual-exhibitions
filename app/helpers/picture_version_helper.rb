@@ -32,7 +32,7 @@ module PictureVersionHelper
   ##
   # Looks up the remote url for a Alchemy::PictureVersion.
   #
-  # @param version_picture [Alchemy::PictureVersion]
+  # @param file_uuid [String]
   def picture_version_url(file_uuid)
     if Dragonfly.app(:alchemy_pictures).datastore.is_a?(Dragonfly::S3DataStore)
       if ENV.fetch('S3_PUBLIC_URL', false)

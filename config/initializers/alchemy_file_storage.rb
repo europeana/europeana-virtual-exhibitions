@@ -35,8 +35,15 @@ unless Rails.env.test?
   if filestorage_provider == 'S3'
     Dragonfly.app(:alchemy_pictures).configure do
       plugin :imagemagick
+      plugin :svg
+      secret ENV.fetch('DRAGONFLY_SECRET', '')
       datastore :s3, { root_path: ENV.fetch('S3_IMAGE_PREFIX', '') }.merge(s3_defaults)
+      url_format '/exhibitions/pictures/:job/:name.:ext'
     end
+
+    # Mount as middleware
+    Rails.application.middleware.use Dragonfly::Middleware, :alchemy_pictures
+
     Dragonfly.app(:alchemy_attachments).configure do
       datastore :s3, { root_path: ENV.fetch('S3_ATTACHMENT_PREFIX', '') }.merge(s3_defaults)
     end
@@ -62,6 +69,5 @@ unless Rails.env.test?
     Dragonfly.app(:alchemy_attachments).configure do
       datastore :file
     end
-
   end
 end

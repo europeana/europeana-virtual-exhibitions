@@ -1,45 +1,42 @@
 source 'https://rubygems.org'
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.9'
 
-gem 'acts_as_list', '~> 0.7.4' # dependency of a dependency; version 0.7.3 yanked
-gem 'alchemy-devise', git: 'https://github.com/AlchemyCMS/alchemy-devise', ref: '8c0a1e26'
-gem 'alchemy_cms', '~> 3.3.0'
-gem 'clockwork', '~> 1.2'
-gem 'coffee-rails', '~> 4.1.0'
+gem 'alchemy-devise'
+gem 'alchemy_cms'
+gem 'clockwork'
+gem 'coffee-rails'
 gem 'country_select'
 gem 'delayed_job_active_record'
 gem 'dragonfly-s3_data_store'
-gem 'dragonfly-swift_data_store', github: 'europeana/dragonfly-swift-data-store', tag: 'v0.1.0'
-gem 'europeana-styleguide', github: 'europeana/europeana-styleguide-ruby', branch: 'develop'
-gem 'europeana-i18n', github: 'europeana/europeana-i18n-ruby', branch: 'develop'
-gem 'jbuilder', '~> 2.0'
+gem 'dragonfly-swift_data_store', git: 'https://github.com/europeana/dragonfly-swift-data-store.git', tag: 'v0.1.0'
+gem 'europeana-feedback-button'
+gem 'europeana-feeds'
+gem 'europeana-i18n', git: 'https://github.com/europeana/europeana-i18n-ruby.git', branch: 'develop'
+gem 'europeana-styleguide', git: 'https://github.com/europeana/europeana-styleguide-ruby.git', branch: 'develop'
+gem 'jbuilder'
 gem 'jquery-rails'
-gem 'mail', '2.6.6.rc1' # locked pending stable release with fix for https://github.com/mikel/mail/pull/1097
+gem 'mail'
 gem 'nokogiri'
-gem 'pg', '~> 0.21'
-gem 'puma', '~> 3.10'
+gem 'pg', '~> 0.18'
+gem 'puma'
 gem 'rack-plastic'
-gem 'rails_with_relative_url_root', '~> 0.1'
+gem 'rails_with_relative_url_root'
 gem 'redis-rails'
-gem 'rest-client', '>= 1.8.0' # Forced update for security issues
-gem 'sass-rails', '~> 5.0'
-gem 'stache', github: 'europeana/stache', branch: 'europeana-styleguide' # until upstream merges our pull requests
+gem 'rest-client'
+gem 'sass-rails'
+gem 'stache', git: 'https://github.com/europeana/stache.git', branch: 'europeana-styleguide' # until upstream merges our pull requests
 gem 'therubyracer', platforms: :ruby
 gem 'turbolinks'
-gem 'uglifier', '>= 1.3.0'
-gem 'europeana-feedback-button', '0.0.5'
-gem 'europeana-feeds', '0.0.2'
+gem 'uglifier'
 
 group :profiling do
   gem 'stackprof'
 end
 
-
 group :production do
-  gem 'rails_12factor', '~> 0.0.3'
-  gem 'europeana-logging', '~> 0.1.1'
+  gem 'rails_12factor'
+  gem 'europeana-logging'
 end
 
 group :production, :development, :profiling do
@@ -47,33 +44,32 @@ group :production, :development, :profiling do
 end
 
 group :development, :test, :profiling do
-  gem 'dotenv-rails', '~> 2.0'
-  gem 'rubocop', require: false
+  gem 'dotenv-rails'
+  gem 'rubocop', '0.54', require: false
   gem 'spring-commands-rspec'
 end
 
 group :development do
-  gem 'web-console', '~> 2.0'
+  gem 'web-console'
   gem 'byebug'
   gem 'spring'
 end
 
 group :test do
-  gem 'capybara', '~> 2.4'
-  gem 'database_cleaner', '~> 1.3'
-  gem 'rspec-rails', '~> 3.0'
-  gem 'rspec-activemodel-mocks', '~> 1.0'
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'rspec-rails'
+  gem 'rspec-activemodel-mocks'
   gem 'shoulda-matchers'
   gem 'simplecov', require: false
-  gem 'selenium-webdriver'
   gem 'phantomjs', require: 'phantomjs/poltergeist'
   gem 'poltergeist'
 end
 
 group :localeapp do
-  gem 'localeapp', '~> 1.0'
+  gem 'localeapp'
 end
 
 group :doc do
-  gem 'sdoc', '~> 0.4.0'
+  gem 'sdoc'
 end

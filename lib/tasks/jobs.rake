@@ -10,7 +10,7 @@ namespace :jobs do
     end
   end
 
-  namespace :pictures do
+  namespace :picture do
     desc 'Enqueue picture versions jobs to generate Alchemy::PictureVersions'
     task version_jobs: :environment do
       Alchemy::Picture.find_each do |picture|
