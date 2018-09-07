@@ -61,9 +61,9 @@ group :test do
   gem 'geckodriver-helper'
   gem 'rspec-rails'
   gem 'rspec-activemodel-mocks'
+  gem 'selenium-webdriver'
   gem 'shoulda-matchers'
   gem 'simplecov', require: false
-  gem 'selenium-webdriver'
 end
 
 group :localeapp do
