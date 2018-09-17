@@ -5,7 +5,7 @@ RSpec.feature 'Feedback button' do
       context (js ? 'with JS' : 'without JS'), js: js do
         context 'with feedback post location configured' do
           before do
-            Rails.application.config.x.feedback_mail_to = 'feedback@example.com'
+            Europeana::FeedbackButton.mail_to = 'feedback@example.com'
           end
           context 'on a foyer page' do
             it 'is present' do
@@ -25,7 +25,7 @@ RSpec.feature 'Feedback button' do
 
         context 'without feedback post location configured' do
           before do
-            Rails.application.config.x.feedback_mail_to = nil
+            Europeana::FeedbackButton.mail_to = nil
           end
           it 'is not present' do
             visit '/en/exhibitions/startseite'
