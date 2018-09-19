@@ -17,7 +17,7 @@ GIT
 
 GIT
   remote: https://github.com/europeana/europeana-styleguide-ruby.git
-  revision: fe2fc3ce79c53fd454c3c1008bb257eb34b0a8c9
+  revision: 0f58526de767d58a5f31b2f596459d8031e6b7a5
   branch: develop
   specs:
     europeana-styleguide (0.3.0)
@@ -179,7 +179,7 @@ GEM
       dragonfly (~> 1.0)
       nokogiri
     erubis (2.7.0)
-    europeana-feedback-button (0.0.6)
+    europeana-feedback-button (0.0.7)
       rails (>= 4.2.7.1, < 6)
     europeana-feeds (0.0.2)
       feedjira (~> 2.0)
@@ -201,7 +201,7 @@ GEM
       loofah (>= 2.0)
       sax-machine (>= 1.0)
     ffi (1.9.25)
-    fog-aws (3.2.0)
+    fog-aws (3.3.0)
       fog-core (~> 2.1)
       fog-json (~> 1.1)
       fog-xml (~> 0.1)
@@ -214,7 +214,7 @@ GEM
     fog-json (1.2.0)
       fog-core
       multi_json (~> 1.10)
-    fog-openstack (0.3.0)
+    fog-openstack (0.3.1)
       fog-core (~> 2.1.2)
       fog-json (>= 1.0)
       ipaddress (>= 0.8)
@@ -495,7 +495,7 @@ DEPENDENCIES
   dotenv-rails
   dragonfly-s3_data_store
   dragonfly-swift_data_store!
-  europeana-feedback-button (= 0.0.6)
+  europeana-feedback-button (= 0.0.7)
   europeana-feeds
   europeana-i18n!
   europeana-logging
