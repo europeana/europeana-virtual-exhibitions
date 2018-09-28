@@ -21,11 +21,13 @@ class Alchemy::EssenceCredit < ActiveRecord::Base
   #
   # @return [Europeana::Record]
   def europeana_record
-    @europeana_record ||= Europeana::Record.new(europeana_record_id)
+    return @europeana_record if instance_variable_defined?(:@europeana_record)
+    @europeana_record = Europeana::Record.new(europeana_record_id)
   end
 
   def europeana_record_id
-    @europeana_record_id ||= Europeana::Record.id_from_portal_url(url)
+    return @europeana_record_id if instance_variable_defined?(:@europeana_record_id)
+    @europeana_record_id = Europeana::Record.id_from_portal_url(url)
   end
 
   def has_annotation_target?
