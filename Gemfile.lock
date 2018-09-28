@@ -136,6 +136,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.12.2)
+    colorize (0.8.1)
     concurrent-ruby (1.0.5)
     countries (2.1.4)
       i18n_data (~> 0.8.0)
@@ -513,6 +514,7 @@ DEPENDENCIES
   capybara
   clockwork
   coffee-rails
+  colorize
   country_select
   database_cleaner
   delayed_job_active_record

@@ -18,9 +18,9 @@ RSpec.describe Europeana::StoreAnnotationsJob do
       to have_enqueued_job.on_queue('annotations')
   end
 
-  context 'with gallery annotations enabled' do
+  context 'with annotations enabled' do
     before do
-      ENV['EUROPEANA_ANNOTATIONS_API_USER_TOKEN'] = 'fake_token'
+      ENV['EUROPEANA_ANNOTATIONS_API_USER_TOKEN'] = 'annotations_api_user_token'
     end
 
     it 'should fetch existing annotations' do
@@ -50,19 +50,22 @@ RSpec.describe Europeana::StoreAnnotationsJob do
 
       expect(a_request(:post, annotations_api_create_method_url).
         with(query: hash_including(wskey: annotations_api_key, userToken: annotations_api_user_token))).
-        to have_been_made.times(2)
+        to have_been_made.times(3)
       expect(a_request(:post, annotations_api_create_method_url).
         with(
           query: hash_including(wskey: annotations_api_key, userToken: annotations_api_user_token),
-          body: gallery.images.first.annotation.send(:body_params).to_json
-        )).
-        to have_been_made.once
+          body: alchemy_essence_credits(:image_essence_credit).annotation.send(:body_params).to_json
+        )).to have_been_made.once
       expect(a_request(:post, annotations_api_create_method_url).
         with(
           query: hash_including(wskey: annotations_api_key, userToken: annotations_api_user_token),
-          body: gallery.images.last.annotation.send(:body_params).to_json
-        )).
-        to have_been_made.once
+          body: alchemy_essence_credits(:landscape_image_essence_credit).annotation.send(:body_params).to_json
+        )).to have_been_made.once
+      expect(a_request(:post, annotations_api_create_method_url).
+        with(
+          query: hash_including(wskey: annotations_api_key, userToken: annotations_api_user_token),
+          body: alchemy_essence_credits(:portrait_image_essence_credit).annotation.send(:body_params).to_json
+        )).to have_been_made.once
     end
 
     it 'should delete redundant annotations' do

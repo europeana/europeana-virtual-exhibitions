@@ -38,10 +38,10 @@ module Europeana
     end
 
     def create_annotations
-      @exhibition.needed_annotation_targets.each do |annotation_target|
-        next if @exhibition.has_annotation_for_target?(annotation_target)
-        logger.info("Creating annotation linking #{credit.annotation_target_uri} to #{@exhibition.annotation_link_resource_uri}".green.bold)
-        annotation_target.annotation.tap do |annotation|
+      @exhibition.all_annotation_elements.each do |annotation_element|
+        next if @exhibition.has_annotation_for_target?(annotation_element.annotation_target)
+        logger.info("Creating annotation linking #{annotation_element.annotation_target_uri} to #{@exhibition.annotation_link_resource_uri}".green.bold)
+        annotation_element.annotation.tap do |annotation|
           annotation.api_user_token = @exhibition.annotation_api_user_token
           annotation.save
         end
