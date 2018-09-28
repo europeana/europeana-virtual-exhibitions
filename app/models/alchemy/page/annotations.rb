@@ -54,7 +54,7 @@ module Alchemy
       def all_annotation_elements
         @all_annotation_elements ||= begin
           self_and_descendants.published.map do |page|
-            page.credits.select{ |c| c.has_annotation_target? }
+            page.credits.select(&:has_annotation_target?)
           end.flatten
         end
       end

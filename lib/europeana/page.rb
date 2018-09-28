@@ -10,6 +10,8 @@ module Europeana
     delegate :t, to: ::I18n
     delegate :exhibition, to: :page
 
+    attr_reader :page
+
     def initialize(page)
       @page = page
     end
@@ -25,10 +27,6 @@ module Europeana
           }.merge(Europeana::Elements::Base.build(element).to_hash)
         end
       }
-    end
-
-    def page
-      @page
     end
 
     def page_elements

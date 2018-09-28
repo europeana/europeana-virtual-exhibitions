@@ -62,6 +62,6 @@ class Alchemy::EssenceCredit < ActiveRecord::Base
 
   def annotation_link_resource_uri
     # TODO: maybe delegate to each model as opposed to chaining like this. Would require more extensions though.
-    @annotation_link_resource_uri ||= element&.page&.exhibition.annotation_link_resource_uri
+    @annotation_link_resource_uri ||= element&.page&.exhibition&.annotation_link_resource_uri
   end
 end
