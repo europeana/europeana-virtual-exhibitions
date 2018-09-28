@@ -8,6 +8,7 @@ module Europeana
     include LanguageHelper
 
     delegate :t, to: ::I18n
+    delegate :exhibition, to: :page
 
     def initialize(page)
       @page = page
@@ -26,6 +27,10 @@ module Europeana
       }
     end
 
+    def page
+      @page
+    end
+
     def page_elements
       @page_elements ||= @page.elements.published
     end
@@ -35,6 +40,7 @@ module Europeana
     end
 
     def chapter_elements
+      return { present: false } if is_foyer
       {
         present: true,
         items: chapters.map do |page|
@@ -101,14 +107,6 @@ module Europeana
       language_alternatives_tags
     end
 
-    def exhibition
-      @exhibition ||= @page.depth == 1 ? @page : page_and_ancestors.detect { |page| page.depth == 2 }
-    end
-
-    def table_of_contents
-      chapters
-    end
-
     def chapters
       @chapters ||= exhibition.descendants
     end
@@ -147,7 +145,7 @@ module Europeana
     end
 
     ##
-    # All this logic expcept for the exhibition related
+    # All this logic except for the exhibition related
     # elements come from the europeana collection portal.
     # TODO: This should be refactored to reuse rather than duplicate the portal code.
     #
@@ -168,7 +166,7 @@ module Europeana
           }
         },
         {
-          text: exhibition.title,
+          text: is_foyer ? page.title : exhibition.title,
           url: '#',
           is_current: true,
           submenu: {

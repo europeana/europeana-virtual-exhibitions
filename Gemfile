@@ -10,6 +10,7 @@ gem 'country_select'
 gem 'delayed_job_active_record'
 gem 'dragonfly-s3_data_store'
 gem 'dragonfly-swift_data_store', git: 'https://github.com/europeana/dragonfly-swift-data-store.git', tag: 'v0.1.0'
+gem 'europeana-api'
 gem 'europeana-feedback-button', '0.0.7', require: 'europeana/feedback_button'
 gem 'europeana-feeds'
 gem 'europeana-i18n', git: 'https://github.com/europeana/europeana-i18n-ruby.git', branch: 'develop'
@@ -50,9 +51,10 @@ group :development, :test, :profiling do
 end
 
 group :development do
-  gem 'web-console'
   gem 'byebug'
+  gem 'foreman'
   gem 'spring'
+  gem 'web-console'
 end
 
 group :test do
@@ -64,6 +66,7 @@ group :test do
   gem 'selenium-webdriver'
   gem 'shoulda-matchers'
   gem 'simplecov', require: false
+  gem 'webmock'
 end
 
 group :localeapp do

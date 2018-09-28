@@ -1,23 +1,48 @@
-image_content:
+image_picture_content:
   name: 'image'
   essence_type: 'Alchemy::EssencePicture'
   element: image_element
   essence: essence_picture
+  position: 1
 
-landscape_image_content:
+image_credit_content:
+  name: 'image credit'
+  essence_type: 'Alchemy::EssenceCredit'
+  element: image_element
+  essence: image_essence_credit
+  position: 1
+
+landscape_image_picture_content:
   name: 'image'
   essence_type: 'Alchemy::EssencePicture'
   element: landscape_image_element
   essence: essence_landscape_picture
+  position: 1
 
-portrait_image_content:
+landscape_image_credit_content:
+  name: 'image credit'
+  essence_type: 'Alchemy::EssenceCredit'
+  element: landscape_image_element
+  essence: landscape_image_essence_credit
+  position: 1
+
+portrait_image_picture_content:
   name: 'image'
   essence_type: 'Alchemy::EssencePicture'
   element: portrait_image_element
   essence: essence_portrait_picture
+  position: 1
+
+portrait_image_credit_content:
+  name: 'image credit'
+  essence_type: 'Alchemy::EssenceCredit'
+  element: portrait_image_element
+  essence: portrait_image_essence_credit
+  position: 1
 
 rich_text_content:
   name: 'body'
   essence_type: 'Alchemy::EssenceRichtext'
   element: richtext_element
   essence: richtext_essence
+  position: 1
