@@ -10,7 +10,7 @@ gem 'country_select'
 gem 'delayed_job_active_record'
 gem 'dragonfly-s3_data_store'
 gem 'dragonfly-swift_data_store', git: 'https://github.com/europeana/dragonfly-swift-data-store.git', tag: 'v0.1.0'
-gem 'europeana-feedback-button'
+gem 'europeana-feedback-button', '0.0.7', require: 'europeana/feedback_button'
 gem 'europeana-feeds'
 gem 'europeana-i18n', git: 'https://github.com/europeana/europeana-i18n-ruby.git', branch: 'develop'
 gem 'europeana-styleguide', git: 'https://github.com/europeana/europeana-styleguide-ruby.git', branch: 'develop'
@@ -58,12 +58,12 @@ end
 group :test do
   gem 'capybara'
   gem 'database_cleaner'
+  gem 'geckodriver-helper'
   gem 'rspec-rails'
   gem 'rspec-activemodel-mocks'
+  gem 'selenium-webdriver'
   gem 'shoulda-matchers'
   gem 'simplecov', require: false
-  gem 'phantomjs', require: 'phantomjs/poltergeist'
-  gem 'poltergeist'
 end
 
 group :localeapp do
