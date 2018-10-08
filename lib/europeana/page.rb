@@ -55,8 +55,16 @@ module Europeana
       }
     end
 
+    def credit_image
+      return @credit_image if instance_variable_defined?(:@credit_image)
+      return @credit_image = nil if is_foyer
+      credit_image_element = exhibition.self_and_descendants.where(page_layout: 'exhibition_credit_page').first&.elements&.where(name: 'credit_intro').first
+      element = Europeana::Elements::Base.build(credit_image_element)
+      @credits_image = element&.to_hash&.dig(:image, :thumbnail, :url)
+    end
+
     def media_elements
-      @media_elements ||= page_elements.select { |page| %w(image rich_image intro image_compare).include?(page.name) }
+      @media_elements ||= page_elements.select { |element| %w(image rich_image intro image_compare).include?(element.name) }
     end
 
     def media
@@ -75,6 +83,11 @@ module Europeana
         label: chapter_thumbnail[:label] || false,
         image: chapter_thumbnail[:image] || false
       }
+    end
+
+    def chapter_labels
+      return [] unless chapter_thumbnail[:label]
+      chapter_thumbnail[:label].split('|').map(&:strip)
     end
 
     def is_chapter

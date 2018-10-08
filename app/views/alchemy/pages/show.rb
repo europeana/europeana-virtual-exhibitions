@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Alchemy
   module Pages
     class Show < Alchemy::Base
@@ -129,6 +130,22 @@ module Alchemy
 
       def google_analytics_code
         ENV.fetch('GOOGLE_ANALYTICS_CODE', 'UA-123456-1')
+      end
+
+      def as_json
+        {
+          url: page_object.url,
+          credit_image: page_object.credit_image,
+          description: page_object.description,
+          full_image: page_object&.media&.first&.dig(:image, :full, :url),
+          card_image: page_object&.media&.first&.dig(:image, :thumbnail, :url),
+          card_text: page_object.description.truncate(250, separator: ' '),
+          labels: page_object.chapter_labels,
+          lang_code: @page.language_code,
+          title: page_object.title,
+          slug: @page.urlname,
+          depth: @page.depth
+        }.to_json
       end
 
       private
