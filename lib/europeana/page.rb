@@ -58,7 +58,8 @@ module Europeana
     def credit_image
       return @credit_image if instance_variable_defined?(:@credit_image)
       return @credit_image = nil if is_foyer
-      credit_image_element = exhibition.self_and_descendants.where(page_layout: 'exhibition_credit_page').first&.elements&.where(name: 'credit_intro').first
+      credits_page = exhibition.self_and_descendants.where(page_layout: 'exhibition_credit_page').first
+      credit_image_element = credits_page&.elements&.where(name: 'credit_intro')&.first
       element = Europeana::Elements::Base.build(credit_image_element)
       @credits_image = element&.to_hash&.dig(:image, :thumbnail, :url)
     end

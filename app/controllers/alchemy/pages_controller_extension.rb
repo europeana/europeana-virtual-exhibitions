@@ -14,7 +14,7 @@ Alchemy::PagesController.module_exec do
         if @page.contains_feed?
           render action: :show, layout: false, handlers: [:builder]
         else
-          render xml: {error: 'Not found'}, status: 404
+          render xml: { error: 'Not found' }, status: 404
         end
       end
 
