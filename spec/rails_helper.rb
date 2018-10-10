@@ -70,6 +70,11 @@ RSpec.configure do |config|
   config.append_after(:each) do
     DatabaseCleaner.clean_with(:truncation)
   end
+
+
+  config.include Devise::TestHelpers, type: :controller
+  config.include Devise::TestHelpers, type: :view
+
 end
 
 Shoulda::Matchers.configure do |config|
