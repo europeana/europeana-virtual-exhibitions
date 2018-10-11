@@ -39,3 +39,9 @@ complex_exhibition_root_portrait_intro_element:
   public: true
   position: 1
   page: complex_exhibition_root
+
+complex_exhibition_child_portrait_intro_element:
+  name: 'intro'
+  public: true
+  position: 1
+  page: complex_exhibition_child

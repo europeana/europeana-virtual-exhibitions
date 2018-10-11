@@ -87,16 +87,42 @@ RSpec.describe 'alchemy/pages/show.json.mustache' do
       expect(subject['card_image']).not_to be_nil
     end
 
-    context 'when the main image has "tags"' do
-      it 'should have labels' do
+    it 'should have labels' do
         expect(subject['labels'].count).to be_positive
-      end
     end
   end
 
   context 'when it is an exhibition child page' do
     let(:locale_code) { 'de' }
-    let(:page) { alchemy_pages(:complex_exhibition_root) }
+    let(:page) { alchemy_pages(:complex_exhibition_child) }
+    it 'should have the url' do
+      expect(subject['url']).to eq('http://test.host/de/exhibitions/exhibition-root/exhibition-child')
+    end
 
+    it 'should have the title' do
+      expect(subject['title']).to eq('Exhibition child')
+    end
+
+    it 'should have the description' do
+      expect(subject['description']).to eq('Exhibition child')
+    end
+
+    it 'should have the card_text' do
+      expect(subject['card_text']).to eq('Exhibition child')
+    end
+
+    it 'should have the slug' do
+      expect(subject['slug']).to eq('exhibition-root/exhibition-child')
+    end
+
+    it 'should have images' do
+      expect(subject['credit_image']).not_to be_nil
+      expect(subject['full_image']).not_to be_nil
+      expect(subject['card_image']).not_to be_nil
+    end
+
+    it 'should NOT have labels' do
+      expect(subject['labels'].count).to be_zero
+    end
   end
 end

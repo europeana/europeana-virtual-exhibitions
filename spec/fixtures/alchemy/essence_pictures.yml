@@ -22,3 +22,8 @@ complex_exhibition_root_essence_portrait_picture:
   picture: landscape_picture
   caption: 'this is a landscape image'
   title: 'landscape picture'
+
+complex_exhibition_child_essence_portrait_picture:
+  picture: landscape_picture
+  caption: 'this is a landscape image'
+  title: 'landscape picture'

@@ -49,3 +49,10 @@ complex_exhibition_root_image_label_text_content:
     essence: complex_exhibition_image_label_text
     element: complex_exhibition_root_portrait_intro_element
     position: 2
+
+complex_exhibition_child_portrait_intro_element_content:
+  name: 'image'
+  essence_type: 'Alchemy::EssencePicture'
+  element: complex_exhibition_child_portrait_intro_element
+  essence: complex_exhibition_child_essence_portrait_picture
+  position: 1
