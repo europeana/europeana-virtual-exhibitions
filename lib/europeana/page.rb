@@ -60,6 +60,7 @@ module Europeana
       return @credit_image = nil if is_foyer
       credits_page = exhibition.self_and_descendants.where(page_layout: 'exhibition_credit_page').first
       credit_image_element = credits_page&.elements&.where(name: 'credit_intro')&.first
+      return @credit_image = nil unless credit_image_element
       element = Europeana::Elements::Base.build(credit_image_element)
       @credits_image = element&.to_hash&.dig(:image, :thumbnail, :url)
     end

@@ -27,3 +27,15 @@ portrait_image_element:
   name: 'image'
   public: true
   page: root
+
+exhibition_credit_element:
+  name: 'credit_intro'
+  public: true
+  position: 1
+  page: complex_exhibition_credits
+
+complex_exhibition_root_portrait_intro_element:
+  name: 'intro'
+  public: true
+  position: 1
+  page: complex_exhibition_root
