@@ -134,15 +134,15 @@ module Alchemy
 
       def as_json
         {
-          url: page_object.url,
-          credit_image: page_object.credit_image,
-          description: page_object.description,
+          url: page_object&.url,
+          credit_image: page_object&.credit_image,
+          description: page_object&.description,
           full_image: page_object&.media&.first&.dig(:image, :full, :url),
           card_image: page_object&.media&.first&.dig(:image, :thumbnail, :url),
-          card_text: page_object.description.truncate(250, separator: ' '),
-          labels: page_object.chapter_labels,
+          card_text: page_object&.description&.truncate(250, separator: ' '),
+          labels: page_object&.chapter_labels,
           lang_code: @page.language_code,
-          title: page_object.title,
+          title: page_object&.title,
           slug: @page.urlname,
           depth: @page.depth
         }.to_json

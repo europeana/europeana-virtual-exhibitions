@@ -1,26 +1,17 @@
 # frozen_string_literal: true
 
 Alchemy::PagesController.module_exec do
-  ##
-  # Extends the render_page method in order to allow json responses.
-  #
-  def render_page
-    respond_to do |format|
-      format.html do
-        render action: :show, layout: !request.xhr?
-      end
+  alias :render_page_default :render_page
 
-      format.rss do
-        if @page.contains_feed?
-          render action: :show, layout: false, handlers: [:builder]
-        else
-          render xml: { error: 'Not found' }, status: 404
+  def render_page
+    if request.format == Mime::JSON
+      respond_to do |format|
+        format.json do
+          render action: :show, layout: false
         end
       end
-
-      format.json do
-        render action: :show, layout: false
-      end
+    else
+      render_page_default
     end
   end
 end
