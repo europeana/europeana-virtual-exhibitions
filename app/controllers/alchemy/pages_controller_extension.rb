@@ -7,6 +7,7 @@ Alchemy::PagesController.module_exec do
     if request.format == Mime::JSON
       respond_to do |format|
         format.json do
+          @page_object = Europeana::Page.new(@page)
           render action: :show, layout: false
         end
       end

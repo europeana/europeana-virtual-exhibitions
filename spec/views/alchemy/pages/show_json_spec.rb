@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-RSpec.describe 'alchemy/pages/show.json.mustache' do
+RSpec.describe 'alchemy/pages/show.json.jbuilder' do
 
   let(:locale_code) { 'en' }
   let(:page) { alchemy_pages(:language_root_page_en) }
@@ -7,6 +7,7 @@ RSpec.describe 'alchemy/pages/show.json.mustache' do
   before do
     I18n.locale = locale_code
     assign(:page, page)
+    assign(:page_object, Europeana::Page.new(page))
     render
   end
 
