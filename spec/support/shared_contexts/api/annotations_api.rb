@@ -16,7 +16,7 @@ RSpec.shared_context 'Annotations API' do
   before do
     stub_request(:get, annotations_api_search_method_url).
       to_return(status: 200,
-                body: api_responses(:annotations_search),
+                body: api_responses(:annotations_search, target: :hash),
                 headers: { 'Content-Type' => 'application/ld+json' })
 
     stub_request(:post, annotations_api_create_method_url).

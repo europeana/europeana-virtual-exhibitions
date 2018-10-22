@@ -6,6 +6,7 @@ RSpec.describe Europeana::StoreAnnotationsJob do
   let(:exhibition) { alchemy_pages(:complex_exhibition_root) }
 
   before do
+    ENV['EUROPEANA_ANNOTATIONS_API_USER_NAME'] = 'Example Name'
     # Override Annotations API shared context request stub for Hash targets
     stub_request(:get, annotations_api_search_method_url).
       to_return(status: 200,
@@ -30,7 +31,7 @@ RSpec.describe Europeana::StoreAnnotationsJob do
       expected_query = [
         'pageSize=100',
         'profile=standard',
-        'qf=creator_name:"Europeana.eu Exhibition"',
+        'qf=creator_name:Example\ Name',
         'qf=link_relation:isGatheredInto',
         %(qf=link_resource_uri:"https://www.europeana.eu/portal/#{exhibition.language_code}/exhibitions/#{exhibition.urlname}"),
         'qf=motivation:linking',

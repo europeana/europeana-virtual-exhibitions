@@ -32,7 +32,7 @@ module Europeana
       def id_from_portal_url(url)
         uri = URI.parse(url)
         return nil unless %w(http https).include?(uri.scheme)
-        return nil unless uri.host == 'www.europeana.eu' || uri.host == 'europeana.eu'
+        return nil unless %w(www.europeana.eu europeana.eu).include?(uri.host)
         extension = /\.[a-z]+\z/i.match(uri.path)
         return nil unless extension.nil? || extension[0] == '.html'
         match = %r|\A/portal(/[a-z]{2})?/record(#{ID_PATTERN})#{extension}\z|.match(uri.path)

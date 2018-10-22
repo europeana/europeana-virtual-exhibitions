@@ -7,6 +7,10 @@ RSpec.describe Alchemy::Page do
   let(:exhibition_child_page_1) { alchemy_pages(:complex_exhibition_child_one) }
   let(:exhibition_child_page_2) { alchemy_pages(:complex_exhibition_child_two) }
 
+  it 'includes Annotations' do
+    expect(described_class).to include(Alchemy::Page::Annotations)
+  end
+
   describe '#exhibition' do
     context 'when the page is a child page' do
       let(:subject) { exhibition_child_page_1 }

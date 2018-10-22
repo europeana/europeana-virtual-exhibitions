@@ -33,7 +33,7 @@ module Alchemy
       def annotations_search_params
         {
           qf: [
-            'creator_name:"Europeana.eu Exhibition"',
+            "creator_name:#{escape_annotation_query_value(ENV['EUROPEANA_ANNOTATIONS_API_USER_NAME'])}",
             'link_relation:isGatheredInto',
             'motivation:linking',
             %(link_resource_uri:"#{annotation_link_resource_uri}")
@@ -91,16 +91,15 @@ module Alchemy
       end
 
       def store_annotations
-        exhibition = @page.depth == 2 ? @page : @page.self_and_ancestors.detect { |page| page.depth == 2 }
-        StoreAnnotationsJob.perform_later(exhibition.urlname, language_code)
+        Europeana::StoreAnnotationsJob.perform_later(exhibition.urlname, language_code)
       end
 
       def destroy_annotations
-        StoreAnnotationsJob.perform_later(urlname, delete_all: true)
+        Europeana::StoreAnnotationsJob.perform_later(urlname, language_code, delete_all: true)
       end
 
       def destroy_old_annotations
-        StoreAnnotationsJob.perform_later(urlname_was, delete_all: true)
+        Europeana::StoreAnnotationsJob.perform_later(urlname_was, language_code, delete_all: true)
       end
 
       def store_annotations_after_save?
@@ -114,6 +113,10 @@ module Alchemy
       def destroy_annotations_before_save?
         # rails 5.1+ use will_save_change_to_urlname?
         !published_at? && annotate_records? && urlname_changed?
+      end
+
+      def escape_annotation_query_value(value)
+        value.gsub(' ', '\ ')
       end
     end
   end

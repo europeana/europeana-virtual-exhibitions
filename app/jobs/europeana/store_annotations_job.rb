@@ -26,14 +26,16 @@ module Europeana
     protected
 
     def validate_args_to_perform!(urlname, language_code, delete_all:)
-      unless urlname.is_a?(String)
-        fail ArgumentError, "Expected String for exhibition_slug, got #{urlname.class}"
-      end
-      unless language_code.is_a?(String)
-        fail ArgumentError, "Expected String for language_code, got #{language_code.class}"
-      end
+      validate_arg_type(urlname, 'urlname', String)
+      validate_arg_type(language_code, 'language_code', String)
       unless [true, false].include?(delete_all)
         fail ArgumentError, "Expected true or false for delete_all, got #{delete_all.inspect}"
+      end
+    end
+
+    def validate_arg_type(arg_value, arg_name, type)
+      unless arg_value.is_a?(type)
+        fail ArgumentError, "Expected #{type} for #{arg_name}, got #{arg_value.class}"
       end
     end
 
