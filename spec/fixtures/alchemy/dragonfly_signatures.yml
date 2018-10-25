@@ -32,3 +32,73 @@ twitter_signature:
   picture: picture
   signature: 'abcdefg7'
   version_key: 'twitter'
+
+partner_logo_original_signature:
+  picture: partner_logo_picture
+  signature: 'abcdefg8'
+  version_key: 'original'
+
+partner_logo_full_signature:
+  picture: partner_logo_picture
+  signature: 'abcdefg9'
+  version_key: 'full'
+
+partner_logo_fullx2_signature:
+  picture: partner_logo_picture
+  signature: 'abcdefg10'
+  version_key: 'fullx2'
+
+partner_logo_half_signature:
+  picture: partner_logo_picture
+  signature: 'abcdefg11'
+  version_key: 'half'
+
+partner_logo_thumbnail_signature:
+  picture: partner_logo_picture
+  signature: 'abcdefg12'
+  version_key: 'thumbnail'
+
+partner_logo_facebook_signature:
+  picture: partner_logo_picture
+  signature: 'abcdefg13'
+  version_key: 'facebook'
+
+partner_logo_twitter_signature:
+  picture: partner_logo_picture
+  signature: 'abcdefg14'
+  version_key: 'twitter'
+
+landscape_picture_original_signature:
+  picture: landscape_picture_
+  signature: 'abcdefg15'
+  version_key: 'original'
+
+landscape_picture_full_signature:
+  picture: landscape_picture
+  signature: 'abcdefg16'
+  version_key: 'full'
+
+landscape_picture_fullx2_signature:
+  picture: landscape_picture
+  signature: 'abcdefg17'
+  version_key: 'fullx2'
+
+landscape_picture_half_signature:
+  picture: landscape_picture
+  signature: 'abcdefg18'
+  version_key: 'half'
+
+landscape_picture_thumbnail_signature:
+  picture: landscape_picture
+  signature: 'abcdefg19'
+  version_key: 'thumbnail'
+
+landscape_picture_facebook_signature:
+  picture: landscape_picture
+  signature: 'abcdefg20'
+  version_key: 'facebook'
+
+landscape_picture_twitter_signature:
+  picture: landscape_picture
+  signature: 'abcdefg21'
+  version_key: 'twitter'

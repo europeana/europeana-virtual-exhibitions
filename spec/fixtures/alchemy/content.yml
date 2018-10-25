@@ -21,3 +21,38 @@ rich_text_content:
   essence_type: 'Alchemy::EssenceRichtext'
   element: richtext_element
   essence: richtext_essence
+
+credit_intro_body_content:
+  name: 'body'
+  essence_type: 'Alchemy::EssenceRichtext'
+  element: exhibition_credit_element
+  essence: richtext_credit_body_essence
+  position: 1
+
+credit_intro_logo_content:
+  name: 'image'
+  essence_type: 'Alchemy::EssencePicture'
+  element: exhibition_credit_element
+  essence: partner_logo_picture_essence
+  position: 1
+
+complex_exhibition_root_portrait_intro_element_content:
+  name: 'image'
+  essence_type: 'Alchemy::EssencePicture'
+  element: complex_exhibition_root_portrait_intro_element
+  essence: complex_exhibition_root_essence_portrait_picture
+  position: 1
+
+complex_exhibition_root_image_label_text_content:
+    name: 'label'
+    essence_type: 'Alchemy::EssenceText'
+    essence: complex_exhibition_image_label_text
+    element: complex_exhibition_root_portrait_intro_element
+    position: 2
+
+complex_exhibition_child_portrait_intro_element_content:
+  name: 'image'
+  essence_type: 'Alchemy::EssencePicture'
+  element: complex_exhibition_child_portrait_intro_element
+  essence: complex_exhibition_child_essence_portrait_picture
+  position: 1

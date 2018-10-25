@@ -55,8 +55,26 @@ module Europeana
       }
     end
 
+    ##
+    # For an exhibition foyer page, looks for a credits child page and returns a hash
+    # of info about the image attached to the credit image of said page.
+    # For an exhibition child page it will return the same image data by first identifying
+    # the exhibition foyer page which the child page belongs to, then using the same logic as above.
+    # For a language root page no credits image info is returned since many exhibitions are featured
+    # and it would be ambiguous as to which one contains the desired credits.
+    # @return Hash
+    def credit_image
+      return @credit_image if instance_variable_defined?(:@credit_image)
+      return @credit_image = nil if is_foyer
+      credits_page = exhibition.self_and_descendants.where(page_layout: 'exhibition_credit_page').first
+      credit_image_element = credits_page&.elements&.where(name: 'credit_intro')&.first
+      return @credit_image = nil unless credit_image_element
+      element = Europeana::Elements::Base.build(credit_image_element)
+      @credit_image = element&.to_hash&.dig(:image, :thumbnail, :url)
+    end
+
     def media_elements
-      @media_elements ||= page_elements.select { |page| %w(image rich_image intro image_compare).include?(page.name) }
+      @media_elements ||= page_elements.select { |element| %w(image rich_image intro image_compare).include?(element.name) }
     end
 
     def media
@@ -75,6 +93,15 @@ module Europeana
         label: chapter_thumbnail[:label] || false,
         image: chapter_thumbnail[:image] || false
       }
+    end
+
+    ##
+    # Looks for a chapter thumbnail element and if that is present, splits
+    # the labels on the pipe symbol in order to return an array of 'labels'.
+    # @return Array<String>
+    def chapter_labels
+      return [] unless chapter_thumbnail[:label]
+      chapter_thumbnail[:label].split('|').map(&:strip)
     end
 
     def is_chapter
