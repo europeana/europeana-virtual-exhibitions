@@ -2,7 +2,7 @@ root:
   name: 'Root'
   depth: 0
   lft: 1
-  rgt: 27
+  rgt: 28
 
 language_root_page_de:
   name: 'Startrseite'
@@ -10,7 +10,7 @@ language_root_page_de:
   depth: 1
   lft: 2
   rgt: 16
-  title: 'startseite'
+  title: 'Startseite'
   public_on: <%= Date.today.strftime("%Y-%m-%d") %>
   visible: true
   language_code: 'de'
@@ -25,7 +25,7 @@ language_root_page_en:
   depth: 1
   lft: 17
   rgt: 22
-  title: 'startseite'
+  title: 'Foyer'
   public_on: <%= Date.today.strftime("%Y-%m-%d") %>
   visible: true
   language_code: 'en'
@@ -101,13 +101,26 @@ complex_exhibition_child_two:
   parent: complex_exhibition_root
   page_layout: 'exhibition_theme_page'
 
+complex_exhibition_credits:
+  name: 'Exhibition Credit'
+  title: 'Exhibition Credit'
+  urlname: 'exhibition-root/credits'
+  depth: 3
+  lft: 8
+  rgt: 9
+  public_on: <%= Date.today.strftime("%Y-%m-%d") %>
+  visible: true
+  language_code: 'de'
+  parent: complex_exhibition_root
+  page_layout: 'exhibition_credit_page'
+
 english_music_page:
   name: 'music exhibition'
   title: 'music exhibition'
   urlname: 'music-exhibition'
   depth: 2
-  lft: 18
-  rgt: 19
+  lft: 19
+  rgt: 20
   public_on: <%= Date.today.strftime("%Y-%m-%d") %>
   visible: true
   language_code: 'en'
@@ -120,8 +133,8 @@ german_music_page:
   title: 'music exhibition'
   urlname: 'music-exhibition'
   depth: 2
-  lft: 10
-  rgt: 11
+  lft: 11
+  rgt: 12
   public_on: <%= Date.today.strftime("%Y-%m-%d") %>
   visible: true
   language_code: 'de'
@@ -135,8 +148,8 @@ sample_page_de:
   title: 'Beispiel'
   urlname: 'sample'
   depth: 2
-  lft: 12
-  rgt: 13
+  lft: 13
+  rgt: 14
   public_on: <%= Date.today.strftime("%Y-%m-%d") %>
   visible: true
   language_code: 'de'
@@ -149,8 +162,8 @@ sample_page_en:
   title: 'Sample'
   urlname: 'sample'
   depth: 2
-  lft: 20
-  rgt: 21
+  lft: 21
+  rgt: 22
   public_on: <%= Date.today.strftime("%Y-%m-%d") %>
   visible: true
   language_code: 'en'
@@ -163,8 +176,8 @@ sample_page_fr:
   title: 'Sample'
   urlname: 'sample'
   depth: 2
-  lft: 24
-  rgt: 25
+  lft: 25
+  rgt: 26
   public_on: <%= Date.today.strftime("%Y-%m-%d") %>
   visible: true
   language_code: 'fr'

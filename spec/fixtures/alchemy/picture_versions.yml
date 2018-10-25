@@ -25,3 +25,59 @@ facebook_picture_version:
 twitter_picture_version:
   signature: 'abcdefg7'
   file_uuid: 'versions/abcdefg7/image.png'
+
+partner_logo_original_picture_version:
+  signature: 'abcdefg8'
+  file_uuid: 'versions/abcdefg8/image.png'
+
+partner_logo_full_picture_version:
+  signature: 'abcdefg9'
+  file_uuid: 'versions/abcdefg9/image.png'
+
+partner_logo_fullx2_picture_version:
+  signature: 'abcdefg10'
+  file_uuid: 'versions/abcdefg10/image.png'
+
+partner_logo_half_picture_version:
+  signature: 'abcdefg11'
+  file_uuid: 'versions/abcdefg11/image.png'
+
+partner_logo_thumbnail_picture_version:
+  signature: 'abcdefg12'
+  file_uuid: 'versions/abcdefg12/image.png'
+
+partner_logo_facebook_picture_version:
+  signature: 'abcdefg13'
+  file_uuid: 'versions/abcdefg13/image.png'
+
+partner_logo_twitter_picture_version:
+  signature: 'abcdefg14'
+  file_uuid: 'versions/abcdefg14/image.png'
+
+landscape_picture_original_picture_version:
+  signature: 'abcdefg15'
+  file_uuid: 'versions/abcdefg15/image.png'
+
+landscape_picture_full_picture_version:
+  signature: 'abcdefg16'
+  file_uuid: 'versions/abcdefg16/image.png'
+
+landscape_picture_fullx2_picture_version:
+  signature: 'abcdefg17'
+  file_uuid: 'versions/abcdefg17/image.png'
+
+landscape_picture_half_picture_version:
+  signature: 'abcdefg18'
+  file_uuid: 'versions/abcdefg18/image.png'
+
+landscape_picture_thumbnail_picture_version:
+  signature: 'abcdefg19'
+  file_uuid: 'versions/abcdefg19/image.png'
+
+landscape_picture_facebook_picture_version:
+  signature: 'abcdefg20'
+  file_uuid: 'versions/abcdefg20/image.png'
+
+landscape_picture_twitter_picture_version:
+  signature: 'abcdefg21'
+  file_uuid: 'versions/abcdefg21/image.png'
