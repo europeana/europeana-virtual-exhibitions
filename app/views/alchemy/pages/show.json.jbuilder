@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 json.url @page_object&.url
 json.credit_image @page_object&.credit_image
 json.description @page_object&.description

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Alchemy::PagesController.module_exec do
-  alias :render_page_default :render_page
+  alias_method :render_page_default, :render_page
 
   def render_page
     if request.format == Mime::JSON
