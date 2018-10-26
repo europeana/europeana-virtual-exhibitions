@@ -8,6 +8,7 @@ module Alchemy
 
       included do
         after_destroy :destroy_annotations, if: :annotate_records?
+        after_destroy :store_annotations, if: :store_annotations_after_save?
 
         before_save :destroy_old_annotations, if: :destroy_annotations_before_save?
         after_save :store_annotations, if: :store_annotations_after_save?
@@ -60,30 +61,23 @@ module Alchemy
       end
 
       def needed_annotation_targets
-        @needed_annotation_targets ||= all_annotation_elements.map(&:annotation_target)
+        @needed_annotation_targets ||= all_annotation_elements.map(&:annotation_target_uri)
       end
 
       def needs_annotation_for_target?(target)
-        annotation_target_included?(target, needed_annotation_targets)
+        needed_annotation_targets.include?(target)
       end
 
       def needs_annotation?(annotation)
-        needs_annotation_for_target?(annotation.target.with_indifferent_access)
+        needs_annotation_for_target?(annotation.target)
       end
 
       def existing_annotation_targets
-        @existing_annotation_targets ||= annotations.map(&:target).map(&:with_indifferent_access)
+        @existing_annotation_targets ||= annotations.map(&:target)
       end
 
       def has_annotation_for_target?(target)
-        annotation_target_included?(target, existing_annotation_targets)
-      end
-
-      def annotation_target_included?(target, collection)
-        collection.any? do |existing|
-          existing[:source] == target[:source] &&
-            existing[:scope] == target[:scope]
-        end
+        existing_annotation_targets.include?(target)
       end
 
       def annotation_api_user_token
@@ -95,7 +89,7 @@ module Alchemy
       end
 
       def destroy_annotations
-        Europeana::StoreAnnotationsJob.perform_later(urlname, language_code, delete_all: true)
+        Europeana::StoreAnnotationsJob.perform_later(exhibition.urlname, language_code, delete_all: true)
       end
 
       def destroy_old_annotations
@@ -103,16 +97,16 @@ module Alchemy
       end
 
       def store_annotations_after_save?
-        published_at? && annotate_records?
+        exhibition.public? && annotate_records?
       end
 
       def destroy_annotations_after_save?
-        !published_at? && annotate_records?
+        exhibition? && !public? && annotate_records?
       end
 
       def destroy_annotations_before_save?
         # rails 5.1+ use will_save_change_to_urlname?
-        !published_at? && annotate_records? && urlname_changed?
+        exhibition? && !public? && annotate_records? && urlname_changed?
       end
 
       def escape_annotation_query_value(value)

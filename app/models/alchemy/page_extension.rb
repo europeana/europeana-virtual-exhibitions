@@ -10,7 +10,15 @@ Alchemy::Page.module_exec do
   end
 
   def exhibition
-    @exhibition ||= depth == 2 ? self : self_and_ancestors.detect { |page| page.depth == 2 }
+    @exhibition ||= exhibition? ? self : self_and_ancestors.detect { |page| page.depth == 2 }
+  end
+
+  def exhibition?
+    depth == 2
+  end
+
+  def public?
+    public_on <= Time.current && (public_until.blank? || public_until >= Time.current)
   end
 
   def credits

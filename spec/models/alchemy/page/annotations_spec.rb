@@ -125,10 +125,7 @@ RSpec.describe Alchemy::Page::Annotations do
       expect(subject).to be_a(Array)
       expect(subject.count).to be_positive
       subject.each do |array_element|
-        expect(array_element).to be_a(Hash)
-        expect(array_element).to have_key(:scope)
-        expect(array_element).to have_key(:source)
-        expect(array_element).to have_key(:type)
+        expect(array_element).to start_with('http://data.europeana.eu/item/')
       end
     end
   end
@@ -136,13 +133,7 @@ RSpec.describe Alchemy::Page::Annotations do
   describe '#needs_annotation_for_target?' do
     subject { alchemy_pages(:complex_exhibition_root).needs_annotation_for_target?(target) }
     context 'when the target is included in the needed targets' do
-      let(:target) do
-        {
-          :scope=>"http://data.europeana.eu/item/123/abc",
-          :source=>"https://test-exhibitions.example/portal/de/exhibitions/exhibition-root",
-          :type=>"SpecificResource"
-        }
-      end
+      let(:target) { 'http://data.europeana.eu/item/123/abc' }
 
       it 'should be true' do
         expect(subject).to be_truthy
@@ -165,11 +156,12 @@ RSpec.describe Alchemy::Page::Annotations do
   end
 
   describe '#needs_annotation?' do
-    let(:annotation) { double('dummy_annnotaion', target: { a: 'b', c: 'd'} ) }
+    let(:annotation) { double('dummy_annnotation', target: 'target' ) }
     subject { alchemy_pages(:complex_exhibition_root) }
 
     it 'should call needs_annotation_for_target?' do
-      expect(subject).to receive(:needs_annotation_for_target?).with(a: 'b', c: 'd')
+      puts "needed_annotation_targets: #{subject.needed_annotation_targets}"
+      expect(subject).to receive(:needs_annotation_for_target?).with('target')
       subject.needs_annotation?(annotation)
     end
   end
@@ -192,7 +184,6 @@ RSpec.describe Alchemy::Page::Annotations do
     end
 
     it 'should call annotation_target_included?' do
-      expect(subject).to receive(:annotation_target_included?)
       expect(subject).to receive(:existing_annotation_targets) { [] }
       subject.has_annotation_for_target?(target)
     end

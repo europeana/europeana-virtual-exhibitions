@@ -57,15 +57,6 @@ RSpec.describe Europeana::Record do
     end
   end
 
-  describe '.search_api_query_for_record_ids' do
-    subject { described_class.search_api_query_for_record_ids(record_ids) }
-    let(:record_ids) { %w(/123/abc /def/456) }
-
-    it 'constructs an API search query term' do
-      expect(subject).to eq('europeana_id:("/123/abc" OR "/def/456")')
-    end
-  end
-
   describe '#portal_url' do
     it 'should construct portal URL from Europeana ID' do
       expect(subject.portal_url).to eq('https://www.europeana.eu/portal/record/123/abc.html')

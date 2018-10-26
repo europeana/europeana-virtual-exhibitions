@@ -9,6 +9,8 @@ module Europeana
 
     delegate :t, to: ::I18n
     delegate :exhibition, to: :page
+    delegate :exhibition?, to: :page
+    alias_method :is_exhibition, :exhibition?
 
     attr_reader :page
 

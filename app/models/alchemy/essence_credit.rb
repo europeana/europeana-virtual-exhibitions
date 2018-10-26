@@ -38,14 +38,6 @@ class Alchemy::EssenceCredit < ActiveRecord::Base
     @annotation ||= Europeana::Annotation.new(annotation_attributes)
   end
 
-  def annotation_target
-    {
-      'type': 'SpecificResource',
-      'scope': annotation_target_uri,
-      'source': annotation_link_resource_uri
-    }
-  end
-
   def annotation_attributes
     {
       motivation: 'linking',
@@ -56,7 +48,7 @@ class Alchemy::EssenceCredit < ActiveRecord::Base
           id: annotation_target_uri
         }
       },
-      target: annotation_target
+      target: annotation_target_uri
     }
   end
 

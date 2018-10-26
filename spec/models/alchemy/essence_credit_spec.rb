@@ -118,16 +118,6 @@ RSpec.describe Alchemy::EssenceCredit do
       end
     end
 
-    describe '#annotation_target' do
-      it 'should be a hash containing a properly formated annotation target' do
-        target = subject.annotation_target
-        expect(target).to be_a(Hash)
-        expect(target).to have_key(:'type')
-        expect(target).to have_key(:'scope')
-        expect(target).to have_key(:'source')
-      end
-    end
-
     describe '#annotation_attributes' do
       it 'should be a hash containing properly formated annotation attributes' do
         attributes = subject.annotation_attributes
