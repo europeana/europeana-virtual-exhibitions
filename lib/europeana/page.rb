@@ -114,10 +114,6 @@ module Europeana
       @page.depth >= 3
     end
 
-    def is_exhibition
-      @page.depth == 2
-    end
-
     def is_foyer
       @page.depth == 1
     end
