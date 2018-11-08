@@ -16,17 +16,20 @@ quote_element:
 image_element:
   name: 'image'
   public: true
-  page: root
+  position: 1
+  page: complex_exhibition_root
 
 landscape_image_element:
   name: 'image'
   public: true
-  page: root
+  position: 1
+  page: complex_exhibition_child_one
 
 portrait_image_element:
   name: 'image'
   public: true
-  page: root
+  position: 1
+  page: complex_exhibition_child_two
 
 exhibition_credit_element:
   name: 'credit_intro'

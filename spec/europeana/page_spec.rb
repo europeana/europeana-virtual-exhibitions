@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 module Alchemy
   describe 'Show' do
-    let(:basic_exhibition_page) do
-      alchemy_pages(:exhibition_page)
-    end
+    let(:basic_exhibition_page) { alchemy_pages(:exhibition_page) }
 
     describe '#elements' do
       context 'page with only one element' do
@@ -108,7 +106,7 @@ module Alchemy
       end
 
       let(:exhibition_child_page_1) do
-        alchemy_pages(:complex_exhibition_child)
+        alchemy_pages(:complex_exhibition_child_one)
       end
 
       let(:child_page) { Europeana::Page.new(exhibition_child_page_1) }

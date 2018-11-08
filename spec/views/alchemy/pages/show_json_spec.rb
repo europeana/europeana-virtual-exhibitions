@@ -27,7 +27,7 @@ RSpec.describe 'alchemy/pages/show.json.jbuilder' do
 
   context 'when it is a foyer page' do
     it 'should have the url' do
-      expect(subject['url']).to eq('http://test.host/en/exhibitions/startseite')
+      expect(subject['url']).to eq('http://test.host/en/exhibitions/foyer')
     end
 
     it 'should have the title' do
@@ -95,7 +95,7 @@ RSpec.describe 'alchemy/pages/show.json.jbuilder' do
 
   context 'when it is an exhibition child page' do
     let(:locale_code) { 'de' }
-    let(:page) { alchemy_pages(:complex_exhibition_child) }
+    let(:page) { alchemy_pages(:complex_exhibition_child_one) }
     it 'should have the url' do
       expect(subject['url']).to eq('http://test.host/de/exhibitions/exhibition-root/exhibition-child')
     end
