@@ -18,4 +18,13 @@ namespace :jobs do
       end
     end
   end
+
+  namespace :annotations do
+    desc 'Annotate Europeana records which are referenced in credits elements of exhibitions'
+    task store: :environment do
+      Alchemy::Page.published.where(depth: 2).each do |exhibition|
+        Europeana::StoreAnnotationsJob.perform_later(exhibition.urlname, exhibition.language_code)
+      end
+    end
+  end
 end
