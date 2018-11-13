@@ -18,6 +18,7 @@ Alchemy::Page.module_exec do
   end
 
   def public?
+    return false if public_on.nil?
     public_on <= Time.current && (public_until.blank? || public_until >= Time.current)
   end
 
