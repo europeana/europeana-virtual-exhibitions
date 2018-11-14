@@ -97,7 +97,7 @@ module Alchemy
       end
 
       def store_annotations_after_save?
-        exhibition.public? && annotate_records?
+        exhibition&.public? && annotate_records?
       end
 
       def destroy_annotations_after_save?

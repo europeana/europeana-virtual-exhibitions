@@ -83,12 +83,16 @@ module Europeana
       @media_elements ||= page_elements.select { |element| %w(image rich_image intro image_compare).include?(element.name) }
     end
 
-    def media
+    def media(hidden_elements: false)
       media_elements.map do |element|
         element = Europeana::Elements::Base.build(element)
-        next if element.hide_in_credits
+        next if element.hide_in_credits && !hidden_elements
         element.to_hash(include_url: url)
       end
+    end
+
+    def all_media
+      media(hidden_elements: true)
     end
 
     def as_chapter
