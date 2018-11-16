@@ -30,15 +30,15 @@ module Europeana
       # @param url [String] URL to extract from
       # @return [String,nil] Europeana ID, or nil if not a portal URL
       def id_from_portal_url(url)
+        return if url.blank?
         uri = URI.parse(url.strip)
-        return nil unless %w(http https).include?(uri.scheme)
-        return nil unless %w(www.europeana.eu europeana.eu).include?(uri.host)
+        return unless %w(http https).include?(uri.scheme)
+        return unless %w(www.europeana.eu europeana.eu).include?(uri.host)
         extension = /\.[a-z]+\z/i.match(uri.path)
-        return nil unless extension.nil? || extension[0] == '.html'
+        return unless extension.nil? || extension[0] == '.html'
         match = %r|\A/portal(/[a-z]{2})?/record(#{ID_PATTERN})#{extension}\z|.match(uri.path)
         match.nil? ? nil : match[2]
       rescue URI::InvalidURIError
-        nil
       end
 
       # Does the argument look like a Europeana record portal URL?
