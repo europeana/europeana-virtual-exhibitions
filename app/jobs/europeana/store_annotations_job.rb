@@ -40,8 +40,8 @@ module Europeana
     end
 
     def create_annotations
-      @exhibition.all_annotation_elements.each do |element|
-        next if @exhibition.has_annotation_for_target?(element.annotation_target_uri)
+      @exhibition.all_annotation_elements.uniq(&:annotation_target_uri).each do |element|
+        next if @exhibition.has_annotation_for_target?(element.annotation_target_uri) # Don't bother writing existing annotations
         logger.info("Creating annotation linking #{element.annotation_target_uri} to #{@exhibition.annotation_link_resource_uri}".
           green.bold)
         element.annotation.tap do |annotation|

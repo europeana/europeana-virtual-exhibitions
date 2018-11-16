@@ -104,9 +104,10 @@ module Alchemy
         exhibition? && !public? && annotate_records?
       end
 
+      # This check is exclusively for renaming an exhibition level page/slug.
       def destroy_annotations_before_save?
         # rails 5.1+ use will_save_change_to_urlname?
-        exhibition? && !public? && annotate_records? && urlname_changed?
+        exhibition? && annotate_records? && urlname_changed?
       end
 
       def escape_annotation_query_value(value)
