@@ -28,3 +28,12 @@ french:
   default: false
   site: site
 
+sweedish:
+  name: 'Svenska'
+  language_code: 'sv'
+  locale: 'sv'
+  frontpage_name: 'Intro'
+  page_layout: 'index'
+  public: true
+  default: false
+  site: site

@@ -2,7 +2,7 @@ root:
   name: 'Root'
   depth: 0
   lft: 1
-  rgt: 28
+  rgt: 29
 
 language_root_page_de:
   name: 'Startrseite'
@@ -46,6 +46,20 @@ language_root_page_fr:
   language_code: 'fr'
   language_root: true
   language: french
+  parent: root
+  page_layout: 'exhibition_index_page'
+
+language_root_page_sv:
+  name: 'Swedish Foyer'
+  urlname: 'startseite'
+  depth: 1
+  lft: 27
+  rgt: 29
+  title: 'foyer unpublished'
+  visible: false
+  language_code: 'sv'
+  language_root: true
+  language: sweedish
   parent: root
   page_layout: 'exhibition_index_page'
 
