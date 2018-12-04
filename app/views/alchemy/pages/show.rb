@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Alchemy
   module Pages
     class Show < Alchemy::Base

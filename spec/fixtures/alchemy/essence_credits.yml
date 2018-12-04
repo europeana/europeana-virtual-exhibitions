@@ -1,0 +1,20 @@
+image_essence_credit:
+  title: 'image credit'
+  author: 'An Author'
+  institution: 'An Instituition'
+  url: 'http://www.europeana.eu/portal/record/123/abc'
+  license: 'public'
+
+landscape_image_essence_credit:
+  title: 'image credit'
+  author: 'An Author'
+  institution: 'Another Instituition'
+  url: 'http://www.europeana.eu/portal/record/123/def'
+  license: 'CC BY NC SA'
+
+portrait_image_essence_credit:
+  title: 'image credit'
+  author: 'An Author'
+  institution: 'Another Instituition'
+  url: 'http://www.europeana.eu/portal/record/123/ghi'
+  license: 'RS INC'

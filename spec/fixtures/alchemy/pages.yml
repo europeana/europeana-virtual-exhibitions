@@ -2,15 +2,15 @@ root:
   name: 'Root'
   depth: 0
   lft: 1
-  rgt: 26
+  rgt: 28
 
 language_root_page_de:
   name: 'Startrseite'
   urlname: 'startseite'
   depth: 1
   lft: 2
-  rgt: 15
-  title: 'startseite'
+  rgt: 16
+  title: 'Startseite'
   public_on: <%= Date.today.strftime("%Y-%m-%d") %>
   visible: true
   language_code: 'de'
@@ -20,12 +20,12 @@ language_root_page_de:
   page_layout: 'exhibition_index_page'
 
 language_root_page_en:
-  name: 'Startrseite'
-  urlname: 'startseite'
+  name: 'Foyer'
+  urlname: 'foyer'
   depth: 1
-  lft: 16
-  rgt: 21
-  title: 'startseite'
+  lft: 17
+  rgt: 22
+  title: 'Foyer'
   public_on: <%= Date.today.strftime("%Y-%m-%d") %>
   visible: true
   language_code: 'en'
@@ -38,8 +38,8 @@ language_root_page_fr:
   name: 'Startrseite'
   urlname: 'startseite'
   depth: 1
-  lft: 22
-  rgt: 25
+  lft: 23
+  rgt: 26
   title: 'startseite'
   public_on: <%= Date.today.strftime("%Y-%m-%d") %>
   visible: true
@@ -68,14 +68,14 @@ complex_exhibition_root:
   urlname: 'exhibition-root'
   depth: 2
   lft: 5
-  rgt: 8
+  rgt: 9
   public_on: <%= Date.today.strftime("%Y-%m-%d") %>
   visible: true
   language_code: 'de'
   parent: language_root_page_de
   page_layout: 'exhibition_theme_page'
 
-complex_exhibition_child:
+complex_exhibition_child_one:
   name: 'Exhibition child'
   title: 'Exhibition child'
   urlname: 'exhibition-root/exhibition-child'
@@ -88,14 +88,39 @@ complex_exhibition_child:
   parent: complex_exhibition_root
   page_layout: 'exhibition_theme_page'
 
+complex_exhibition_child_two:
+  name: 'Exhibition child'
+  title: 'Exhibition child'
+  urlname: 'exhibition-root/exhibition-child'
+  depth: 3
+  lft: 7
+  rgt: 8
+  public_on: <%= Date.today.strftime("%Y-%m-%d") %>
+  visible: false
+  language_code: 'de'
+  parent: complex_exhibition_root
+  page_layout: 'exhibition_theme_page'
+
+complex_exhibition_credits:
+  name: 'Exhibition Credit'
+  title: 'Exhibition Credit'
+  urlname: 'exhibition-root/credits'
+  depth: 3
+  lft: 8
+  rgt: 9
+  public_on: <%= Date.today.strftime("%Y-%m-%d") %>
+  visible: true
+  language_code: 'de'
+  parent: complex_exhibition_root
+  page_layout: 'exhibition_credit_page'
 
 english_music_page:
   name: 'music exhibition'
   title: 'music exhibition'
   urlname: 'music-exhibition'
   depth: 2
-  lft: 17
-  rgt: 18
+  lft: 19
+  rgt: 20
   public_on: <%= Date.today.strftime("%Y-%m-%d") %>
   visible: true
   language_code: 'en'
@@ -108,8 +133,8 @@ german_music_page:
   title: 'music exhibition'
   urlname: 'music-exhibition'
   depth: 2
-  lft: 9
-  rgt: 10
+  lft: 11
+  rgt: 12
   public_on: <%= Date.today.strftime("%Y-%m-%d") %>
   visible: true
   language_code: 'de'
@@ -123,8 +148,8 @@ sample_page_de:
   title: 'Beispiel'
   urlname: 'sample'
   depth: 2
-  lft: 11
-  rgt: 12
+  lft: 13
+  rgt: 14
   public_on: <%= Date.today.strftime("%Y-%m-%d") %>
   visible: true
   language_code: 'de'
@@ -137,8 +162,8 @@ sample_page_en:
   title: 'Sample'
   urlname: 'sample'
   depth: 2
-  lft: 19
-  rgt: 20
+  lft: 21
+  rgt: 22
   public_on: <%= Date.today.strftime("%Y-%m-%d") %>
   visible: true
   language_code: 'en'
@@ -151,8 +176,8 @@ sample_page_fr:
   title: 'Sample'
   urlname: 'sample'
   depth: 2
-  lft: 23
-  rgt: 24
+  lft: 25
+  rgt: 26
   public_on: <%= Date.today.strftime("%Y-%m-%d") %>
   visible: true
   language_code: 'fr'

@@ -27,7 +27,7 @@ RSpec.feature 'Feedback button' do
           Europeana::FeedbackButton.mail_to = nil
         end
         it 'is not present' do
-          visit '/en/exhibitions/startseite'
+          visit '/en/exhibitions/foyer'
           sleep 1
           expect(page).to_not have_css('#feedback-form')
         end
@@ -59,7 +59,7 @@ RSpec.feature 'Feedback button' do
           Europeana::FeedbackButton.mail_to = nil
         end
         it 'is not present' do
-          visit '/en/exhibitions/startseite'
+          visit '/en/exhibitions/foyer'
           expect(page).to_not have_css('#feedback-form')
         end
       end

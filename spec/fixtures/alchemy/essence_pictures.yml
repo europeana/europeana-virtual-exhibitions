@@ -12,3 +12,18 @@ essence_portrait_picture:
   picture: portrait_picture
   caption: 'this is a portrait image'
   title: 'portrait picture'
+
+partner_logo_picture_essence:
+  picture: partner_logo_picture
+  caption: 'this is a partner logo'
+  title: 'partner logo'
+
+complex_exhibition_root_essence_portrait_picture:
+  picture: landscape_picture
+  caption: 'this is a landscape image'
+  title: 'landscape picture'
+
+complex_exhibition_child_essence_portrait_picture:
+  picture: landscape_picture
+  caption: 'this is a landscape image'
+  title: 'landscape picture'

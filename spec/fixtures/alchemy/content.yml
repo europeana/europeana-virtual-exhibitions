@@ -1,23 +1,83 @@
-image_content:
+image_picture_content:
   name: 'image'
   essence_type: 'Alchemy::EssencePicture'
   element: image_element
   essence: essence_picture
+  position: 1
 
-landscape_image_content:
+image_credit_content:
+  name: 'image credit'
+  essence_type: 'Alchemy::EssenceCredit'
+  element: image_element
+  essence: image_essence_credit
+  position: 1
+
+landscape_image_picture_content:
   name: 'image'
   essence_type: 'Alchemy::EssencePicture'
   element: landscape_image_element
   essence: essence_landscape_picture
+  position: 1
 
-portrait_image_content:
+landscape_image_credit_content:
+  name: 'image credit'
+  essence_type: 'Alchemy::EssenceCredit'
+  element: landscape_image_element
+  essence: landscape_image_essence_credit
+  position: 1
+
+portrait_image_picture_content:
   name: 'image'
   essence_type: 'Alchemy::EssencePicture'
   element: portrait_image_element
   essence: essence_portrait_picture
+  position: 1
+
+portrait_image_credit_content:
+  name: 'image credit'
+  essence_type: 'Alchemy::EssenceCredit'
+  element: portrait_image_element
+  essence: portrait_image_essence_credit
+  position: 1
 
 rich_text_content:
   name: 'body'
   essence_type: 'Alchemy::EssenceRichtext'
   element: richtext_element
   essence: richtext_essence
+  position: 1
+
+credit_intro_body_content:
+  name: 'body'
+  essence_type: 'Alchemy::EssenceRichtext'
+  element: exhibition_credit_element
+  essence: richtext_credit_body_essence
+  position: 1
+
+credit_intro_logo_content:
+  name: 'image'
+  essence_type: 'Alchemy::EssencePicture'
+  element: exhibition_credit_element
+  essence: partner_logo_picture_essence
+  position: 1
+
+complex_exhibition_root_portrait_intro_element_content:
+  name: 'image'
+  essence_type: 'Alchemy::EssencePicture'
+  element: complex_exhibition_root_portrait_intro_element
+  essence: complex_exhibition_root_essence_portrait_picture
+  position: 1
+
+complex_exhibition_root_image_label_text_content:
+    name: 'label'
+    essence_type: 'Alchemy::EssenceText'
+    essence: complex_exhibition_image_label_text
+    element: complex_exhibition_root_portrait_intro_element
+    position: 2
+
+complex_exhibition_child_portrait_intro_element_content:
+  name: 'image'
+  essence_type: 'Alchemy::EssencePicture'
+  element: complex_exhibition_child_portrait_intro_element
+  essence: complex_exhibition_child_essence_portrait_picture
+  position: 1

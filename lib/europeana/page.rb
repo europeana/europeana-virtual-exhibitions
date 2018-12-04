@@ -8,6 +8,11 @@ module Europeana
     include LanguageHelper
 
     delegate :t, to: ::I18n
+    delegate :exhibition, to: :page
+    delegate :exhibition?, to: :page
+    alias_method :is_exhibition, :exhibition?
+
+    attr_reader :page
 
     def initialize(page)
       @page = page
@@ -35,6 +40,7 @@ module Europeana
     end
 
     def chapter_elements
+      return { present: false } if is_foyer
       {
         present: true,
         items: chapters.map do |page|
@@ -55,16 +61,38 @@ module Europeana
       }
     end
 
-    def media_elements
-      @media_elements ||= page_elements.select { |page| %w(image rich_image intro image_compare).include?(page.name) }
+    ##
+    # For an exhibition foyer page, looks for a credits child page and returns a hash
+    # of info about the image attached to the credit image of said page.
+    # For an exhibition child page it will return the same image data by first identifying
+    # the exhibition foyer page which the child page belongs to, then using the same logic as above.
+    # For a language root page no credits image info is returned since many exhibitions are featured
+    # and it would be ambiguous as to which one contains the desired credits.
+    # @return Hash
+    def credit_image
+      return @credit_image if instance_variable_defined?(:@credit_image)
+      return @credit_image = nil if is_foyer
+      credits_page = exhibition.self_and_descendants.where(page_layout: 'exhibition_credit_page').first
+      credit_image_element = credits_page&.elements&.where(name: 'credit_intro')&.first
+      return @credit_image = nil unless credit_image_element
+      element = Europeana::Elements::Base.build(credit_image_element)
+      @credit_image = element&.to_hash&.dig(:image, :thumbnail, :url)
     end
 
-    def media
+    def media_elements
+      @media_elements ||= page_elements.select { |element| %w(image rich_image intro image_compare).include?(element.name) }
+    end
+
+    def media(hidden_elements: false)
       media_elements.map do |element|
         element = Europeana::Elements::Base.build(element)
-        next if element.hide_in_credits
+        next if element.hide_in_credits && !hidden_elements
         element.to_hash(include_url: url)
       end
+    end
+
+    def all_media
+      media(hidden_elements: true)
     end
 
     def as_chapter
@@ -77,12 +105,17 @@ module Europeana
       }
     end
 
-    def is_chapter
-      @page.depth >= 3
+    ##
+    # Looks for a chapter thumbnail element and if that is present, splits
+    # the labels on the pipe symbol in order to return an array of 'labels'.
+    # @return Array<String>
+    def chapter_labels
+      return [] unless chapter_thumbnail[:label]
+      chapter_thumbnail[:label].split('|').map(&:strip)
     end
 
-    def is_exhibition
-      @page.depth == 2
+    def is_chapter
+      @page.depth >= 3
     end
 
     def is_foyer
@@ -99,14 +132,6 @@ module Europeana
 
     def link_tags
       language_alternatives_tags
-    end
-
-    def exhibition
-      @exhibition ||= @page.depth == 1 ? @page : page_and_ancestors.detect { |page| page.depth == 2 }
-    end
-
-    def table_of_contents
-      chapters
     end
 
     def chapters
@@ -147,7 +172,7 @@ module Europeana
     end
 
     ##
-    # All this logic expcept for the exhibition related
+    # All this logic except for the exhibition related
     # elements come from the europeana collection portal.
     # TODO: This should be refactored to reuse rather than duplicate the portal code.
     #
@@ -168,7 +193,7 @@ module Europeana
           }
         },
         {
-          text: exhibition.title,
+          text: is_foyer ? page.title : exhibition.title,
           url: '#',
           is_current: true,
           submenu: {

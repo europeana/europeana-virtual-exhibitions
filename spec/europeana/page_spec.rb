@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 module Alchemy
   describe 'Show' do
-    let(:basic_exhibition_page) do
-      alchemy_pages(:exhibition_page)
-    end
+    let(:basic_exhibition_page) { alchemy_pages(:exhibition_page) }
 
     describe '#elements' do
       context 'page with only one element' do
@@ -92,10 +90,10 @@ module Alchemy
       it 'should have breadcrumbs back to the portal, the index and itself' do
         expect(breadcrumbs.count).to eq(3)
         expect(breadcrumbs[0][:url]).to include('portal')
-        expect(breadcrumbs[0][:title]).to include('Return to Home')
+        expect(breadcrumbs[0][:title]).to include('Zurück zur Startseite')
         expect(breadcrumbs[0][:is_first]).to eq(true)
         expect(breadcrumbs[1][:url]).to include('/de/exhibitions/startseite')
-        expect(breadcrumbs[1][:title]).to include('Exhibitions')
+        expect(breadcrumbs[1][:title]).to include('Ausstellungen')
         expect(breadcrumbs[2][:url]).to include('/de/exhibitions/page-1')
         expect(breadcrumbs[2][:title]).to include('Page 1')
         expect(breadcrumbs[2][:is_last]).to eq(true)
@@ -108,7 +106,7 @@ module Alchemy
       end
 
       let(:exhibition_child_page_1) do
-        alchemy_pages(:complex_exhibition_child)
+        alchemy_pages(:complex_exhibition_child_one)
       end
 
       let(:child_page) { Europeana::Page.new(exhibition_child_page_1) }
@@ -132,10 +130,10 @@ module Alchemy
         it "should have breadcrumbs back to the portal, the index, it's parent and itself" do
           expect(breadcrumbs.count).to eq(4)
           expect(breadcrumbs[0][:url]).to include('portal')
-          expect(breadcrumbs[0][:title]).to include('Return to Home')
+          expect(breadcrumbs[0][:title]).to include('Zurück zur Startseite')
           expect(breadcrumbs[0][:is_first]).to eq(true)
           expect(breadcrumbs[1][:url]).to include('/de/exhibitions/startseite')
-          expect(breadcrumbs[1][:title]).to include('Exhibitions')
+          expect(breadcrumbs[1][:title]).to include('Ausstellungen')
           expect(breadcrumbs[2][:url]).to match(%r{de\/exhibitions\/exhibition-root})
           expect(breadcrumbs[2][:title]).to match(/Exhibition root/)
           expect(breadcrumbs[3][:url]).to match(%r{de\/exhibitions\/exhibition-root\/exhibition-child})

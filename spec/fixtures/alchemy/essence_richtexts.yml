@@ -1,3 +1,11 @@
 richtext_essence:
   body: '<p>This is a headline</p>'
   stripped_body: 'This is a headline'
+
+richtext_description_essence:
+  body: '<p>Throughout the 19th and 20th century artists took many different artistic paths across Europe through movements such as Impressionism and Symbolism. Many artists criticized the artistic establishment for its rigid definitions of what styles of work were (...)'
+  stripped_body: 'Throughout the 19th and 20th century artists took many different artistic paths across Europe through movements such as Impressionism and Symbolism. Many artists criticized the artistic establishment for its rigid definitions of what styles of work were ac (...)'
+
+richtext_credit_body_essence:
+  body: '<p>Texts, research and compilation: Ann Maher and Douglas McCarthy.</p>\r\n<p>This exhibition was created as part of the <a class="external" title="Europeana 280 campaign" href="http://www.europeana.eu/portal/collections/art-history/Europeana280">Europeana 280</a> campaign. </p> <p>All story texts are <a class="external" title="CC BY-SA" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank" data-link-target="blank">CC BY-SA</a>. Images and media licensed individually.</p>\r\n<p>An early Beta release means that this website is in active development and will be updated regularly. It may sometimes be offline. Your feedback will help us improve our site.</p>'
+  stripped_body: 'Texts, research and compilation: Ann Maher and Douglas McCarthy.\r\nThis exhibition was created as part of the Europeana 280 campaign.\r\nAll story texts are CC BY-SA. Images and media licensed individually.\r\nAn early Beta release means that this website is in active development and will be updated regularly. It may sometimes be offline. Your feedback will help us improve our site.'
