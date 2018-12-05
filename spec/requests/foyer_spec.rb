@@ -24,4 +24,11 @@ RSpec.describe 'redirects to the foyer' do
     get('/fr/exhibitions')
     expect(response).to redirect_to('/fr/exhibitions/foyer')
   end
+
+  context 'when a foyer is not published' do
+    it 'redirects GET /sv/exhibitions/foyer to /de/exhibitions/startseite' do
+      get('/sv/exhibitions/startseite')
+      expect(response).to redirect_to('/exhibitions/de/startseite')
+    end
+  end
 end

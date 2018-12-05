@@ -49,7 +49,7 @@ module Alchemy
     # Otherwise it returns nil.
     #
     def default_language_public_language_root
-      Language.default.pages.find_by(language_root: true, public: true)
+      Language.default.pages.published.find_by(language_root: true)
     end
 
     # Returns the language_root page for the first language it will find, where the foyer page is public.
