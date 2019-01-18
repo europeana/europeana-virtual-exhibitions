@@ -178,8 +178,7 @@ module MustacheHelper
       social: {
           facebook: true,
           pinterest: true,
-          twitter: true,
-          googleplus: true
+          twitter: true
       },
       subfooter: {
         items: [
@@ -209,7 +208,6 @@ module MustacheHelper
       facebook: true,
       pinterest: true,
       twitter: true,
-      googleplus: true,
       text: 'Share this Exhibition'
     }
   end
