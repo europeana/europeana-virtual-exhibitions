@@ -17,7 +17,7 @@ GIT
 
 GIT
   remote: https://github.com/europeana/europeana-styleguide-ruby.git
-  revision: 23382349e7cff40a2207547431b3c0ef58dee749
+  revision: 9cb99226af82e7a1a0c271869c9e209c0b100fe1
   branch: develop
   specs:
     europeana-styleguide (0.3.0)
@@ -291,7 +291,7 @@ GEM
     magiclabs-userstamp (3.0)
       actionpack (>= 4.0)
       activerecord (>= 4.0)
-    mail (2.7.1)
+    mail (2.7.0)
       mini_mime (>= 0.1.1)
     mime-types (3.2.2)
       mime-types-data (~> 3.2015)
