@@ -6,7 +6,7 @@ Europeana's Virtual Exhibitions as a Rails app using [Alchemy CMS](https://githu
 
 ## License
 
-Licensed under the EUPL V.1.2.
+Licensed under the EUPL v.1.2.
 
 For full details, see [LICENSE.md](LICENSE.md).
 
