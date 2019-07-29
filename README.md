@@ -32,3 +32,34 @@ For full details, see [LICENSE.md](LICENSE.md).
 * The root URL of the application is /portal/exhibitions
 * Create an admin account at /portal/exhibitions/admin/signup
 * See [Alchemy CMS documentation](http://guides.alchemy-cms.com/) for general guidance on using the CMS.
+
+## Docker
+
+A Dockerfile is included, optimised for small image size, for publication to a
+Docker repository and use in production environments.
+
+### Configure version
+
+```shell
+export VERSION=2.3.0
+```
+
+### Build
+
+```shell
+docker build -t europeana/virtual-exhibitions:${VERSION} .
+```
+
+### Run
+
+```shell
+docker run \
+       -p 8080:80 \
+       --env-file=.env.docker \
+       europeana/virtual-exhibitions:${VERSION}
+```
+
+### Publish
+```shell
+docker push europeana/virtual-exhibitions:${VERSION}
+```
