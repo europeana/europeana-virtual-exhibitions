@@ -17,7 +17,6 @@ uploads/*
 dragonfly/
 
 # Ignore sensitive data
-config/database.yml
 config/newrelic.yml
 config/redis.yml
 config/smtp.yml
@@ -39,5 +38,8 @@ public/portal/*
 /public/exhibitions/assets/*
 /public/javascripts/*
 
-
+# Bundles
 vendor/bundle/
+
+# Docker Compose
+docker-compose.yml
