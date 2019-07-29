@@ -30,7 +30,7 @@ RUN apt-get update && \
 COPY . .
 
 # Precompile assets
-RUN DATABASE_URL=postgres://postgres@localhost/portal \
+RUN DATABASE_URL=postgres://postgres@localhost/virtual_exhibitions \
     SECRET_KEY_BASE=dummy-key \
     RAILS_RELATIVE_URL_ROOT=/portal \
     bundle exec rake assets:precompile
