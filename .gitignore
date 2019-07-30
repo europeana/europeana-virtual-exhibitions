@@ -18,7 +18,6 @@ dragonfly/
 
 # Ignore sensitive data
 config/newrelic.yml
-config/redis.yml
 config/smtp.yml
 config/initializers/secret_token.rb
 
